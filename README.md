@@ -1,9 +1,8 @@
-# saas
+项目目录结构说明
 
 
-echo "# saas" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin git@github.com:devtanjun/saas.git
-git push -u origin master
+
+pmsgw定时发微信客服消息程序
+saas-eureka
+saas-pmsgw-weixin
+sass-gateway
