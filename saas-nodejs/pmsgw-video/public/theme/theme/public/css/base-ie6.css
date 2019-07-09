@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* ie6 */
+body,.radio,label{_font-size:12px}
+.row-fluid .span1,
+.row-fluid .span2,
+.row-fluid .span3,
+.row-fluid .span4,
+.row-fluid .span5,
+.row-fluid .span6,
+.row-fluid .span7,
+.row-fluid .span8,
+.row-fluid .span9,
+.row-fluid .span10,
+.row-fluid .span11,
+.row-fluid .span12{_margin-left:0.25%;_display:inline}
+.row-fluid .span2.well,.row-fluid .span3.thumbnail{_margin-left:0;}
+#leftMenu{_margin-top:0}
+#content{_padding-top:0;_overflow:hidden;}
+.radio input{_width:auto;}
+/*二级菜单*/
+.navbar{_height:41px;}
+/*三级菜单*/
+.nav-list .active a:hover{_background:#0078c3;}
+.nav-list .active ul{_margin:0 -15px;}
+.nav-list .active li{_background:#fff;_padding:5px; _margin-left:10px;}
+.nav-list .active li a{_background:#fff;_color:#08c;_position:relative;}
+.nav-list .active li a:hover{_background:#dbf3ff;color:#08c;}
+.nav-list li.active{_background:transparent;}
+.btn-group .btn{_border-left:1px solid #fff;_border-right:1px solid #fff;_padding:1px 12px 2px;_font-size:12px;}
+.btn-group a.btn{_padding:2px 12px;_font-size:12px;}
+button,button.btn{_font-size:12px;}
+/*列表*/
+.tableConfig th{_border:none;}
+.tableConfig td{_border-top:none;}
+.dataTables_filter label{_margin-top:10px;}
+.dataTables_length select{_position:relative;}
+.dataTables_wrapper.form-inline .DTTT{_padding-top:10px;}
+table.dataTable tr.odd td {_background:#fff;}
+table.dataTable tr.odd td.sorting_1{_background:#f1fdff;}
+table.dataTable tr.even td {_background:#f9f9f9;}
+table.dataTable tr.even td.sorting_1{_background:#e3f3ff;}
+table.dataTable tr.row_selected td{_background-color: #08C;_color: white;}
+.table-striped tbody tr.row_selected td.sorting_1{_background:#0175ae;}
+.pagination .prev a{_border-left:1px solid #ddd;}
+.dataTables_paginate li.active{_display:inline;}
+th label{_font-size:12px; _font-weight:bold;}
+.table-form th{_text-align:right;_font-weight:normal;}
+TABLE.dataTable TR.even.row_selected TD.sorting_1,TABLE.dataTable TR.odd.row_selected TD.sorting_1{_background: #08c}
+/*img*/
+.icon-wrench,.icon-lock,.icon-arrow-down,.icon-remove,.icon-search,.icon-arrow-up{_background:url("../img/glyphicons-halflings-8.png") -360px -144px;_float:left;_width:14px;_height:14px;}
+.icon-wrench{_background-position:-360px -144px;}
+.icon-user {_background:url("../img/glyphicons-halflings-8.png") -168px 0;}
+.add-on .icon-user {_float:left;_width:14px;_height:14px;}
+.icon-lock {_background-position: -287px -24px;}
+.icon-arrow-down {_background-position: -312px -96px;}
+.icon-remove {_background-position: -312px 0;}
+.icon-search {_background-position: -48px 0;}
+.icon-arrow-up {_background-position: -289px -96px;}
+/*登录*/
+.login label{_font-size:12px;}
+.login input{_padding:3px 5px;}
+.saveName input{_width:auto;}
+.login .btn{_left:280px;_border-left:none;}
+.login .thumbnail h1{_font-family: "黑体";}
+/*tab标签*/
+div.tab-pane.active{_border:none;}
+.nav-tabs{_border-bottom:none;_background:#fff url(../img/tabBg-ie6.png) repeat-x left bottom;}
+.nav-tabs .active a{_border-color:#d8d8d8}
+.nav.nav-tabs * li,
+.nav.nav-pills * li,
+.nav.nav-tabs li,
+.nav.nav-pills li{
+  _float: left;
+}
+.nav-tabs li{_margin-bottom:0}
+.nav-tabs li a {
+  _background: #fff;
+  _padding:5px 12px 4px;
+  _margin-right:0;
+  _border-bottom-color:#fff;
+}
+.nav-tabs LI.active a{_padding:5px 12px 5px;_border-bottom-color:#fff;}
+.nav-tabs li a:hover {
+  _border-bottom-color:#eee;
+}
+.tab-content .tab-pane{
+  _background: transparent;
+}
+.nav-tabs li.dropdown-open.active a:hover {
+  color: #555;
+  background-color: #f5f5f5;
+  border-color: #d8d8d8;
+  border-bottom-color:#fff;
+}
+/*配置*/
+.tabGray{_position:relative;}
+.tabGray .pull-right{_position:absolute;_top:0;_right:0}
+.tabGray .pull-right.gray{_right:15px;}
+.tabGray .clearfix .pull-right{_position:static;}
+.tabGray .active a{_position:relative;_border-bottom:#f5f5f5;}
+.tabGray .btn{_height:20px;_padding:2px 12px 1px;}
+.tabGray .nav-tabs li a {
+  _border-bottom-color:#f5f5f5;
+  _margin-right:0;
+}
+.tabGray .nav-tabs li a:hover {
+  _padding:5px 12px;
+  _border-bottom-color:#f5f5f5;
+}
+.selfAdaptingH{_width:95%}
+
+.autoHeight{_padding-top:10px; _margin-top:-10px;}
+.span9.autoHeight{_clear:none;}
+#alertDiv{_position:relative;}
+/*列表里表单宽度重置*/
+table input,.radio input,.checkbox input,input#directAdd,input.btn,input#showSub{_width:auto}
+#samples input.input-small {_width: 90px;}
+/*ztree*/
+.ztree li span.button.level0{_margin-left: -16px;}
+.ztree{_overflow:auto;}
+/*弹出层样式重置*/
+div.DTTT_print_info.modal {_margin-top: -300px;}
+DIV.modal{_text-align:left;}
+#myModal .span4{_width:170px;_overflow:auto}
+h4{_font-family:"黑体"}
+.modal-backdrop {_z-index:3}
+/*由于legend原来的宽度设置width:100%导致出现水平滚动条*/
+legend{_width:auto;_font-family:"黑体"}
+
+.form-horizontal td .controls{_padding-left:0}
+input.icon-user{_background:url(../img/add-icon-8.png) no-repeat right -150px;_border:1px solid #999;}
+input.selectable.icon-user{_background:#eee url(../img/add-icon-8.png) no-repeat right -150px;_border:1px solid #999;}
+input.Gdatepicker,input.Wdate{_background:url(../img/add-icon-8.png) no-repeat right -120px;_border:1px solid #999;}
+input.selectable.Gdatepicker,input.selectable.Wdate{_background:#eee url(../img/add-icon-8.png) no-repeat right -120px;_border:1px solid #999;}
+input.selectable.icon-org{_background:#eee url(../img/add-icon-8.png) no-repeat right -310px;_border:1px solid #999;}
+.span8 .box{_padding:1px;}
+.modal-header .close{_cursor: pointer;}
+.span8 #matrixInfo.box,.span8 .box.ui-droppable{_width:343px;_overflow-x:hidden;}
+.DTTT_button_text.disabled{_background-image:none;_filter: alpha(opacity=65);_cursor: default;}
+.btn{_height:20px;_font-size:12px;}
+header .span2{_height:30px;}
+.breadcrumb{_margin-bottom:10px;}
+#userHead img{_padding:1px;_border:1px solid #ddd;}
+.noreadonlytext{_border:1px solid #ccc;}
+/* mini */
+select.input-mini{_width:64px;}
+/* small */
+select.input-small{_width:94px;}
+/* medium */
+select.input-medium{_width:154px;}
+/* large */
+select.input-large{_width:214px;}
+/* xlarge */
+select.input-xlarge{_width: 274px;}
+/* xxlarge */
+select.input-xxlarge{_width: 404px;}
+.input-xxlarge{_width: 400px;}
+/* xxlarge */
+select.input-xxxlarge{_width: 534px;}
+/* 解决IE6下岗位编辑,分配人员展示区域高度为0的Bug */
+.ui-selectable{_height:85px;}
+/* autoHeight下,按钮看不到 */
+.btn-group,.btn-group .btn {_position:static;}
+/* 弹出窗口下,人员选择器按钮看不到 */
+#selectPeople{_height:540px;_overflow:hidden;}

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>客服消息管理</title>
+<link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/table.css" />
+</head>
+<body>
+	<div class="admin-main">
+		<div class="content-search">
+			<div class="layui-form layui-form-pane">
+				
+				<div class="layui-inline">
+					<label class="layui-form-label">文本</label>
+					<div class="layui-input-inline">
+						<input id="search_message_text" class="layui-input" type="text" />
+					</div>
+				</div>
+				
+				
+				<div class="layui-inline">
+					<button id="btnSearch" class="layui-btn">查询</button>
+				</div>
+
+			</div>
+		</div>
+		<div class="layui-form layui-form-pane">
+			<table id="listTable" lay-filter="test"></table>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../plugins/moment/moment.js"></script>
+	<script type="text/javascript" src="../plugins/moment/moment-timezone.js"></script>
+	<script type="text/javascript" src="../pagejs/base.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/javascript" src="../pagejs/nodejsCustomerTextMessage/list.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	
+</body>
+
+</html>

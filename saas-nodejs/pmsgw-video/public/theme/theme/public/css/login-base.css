@@ -1,0 +1,30 @@
+/***
+Login page
+***/
+
+/* logo page */
+html,body,div,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{padding:0; margin:0;font-family:"\5FAE\8F6F\96C5\9ED1"; color:#333;}
+.login {
+  background-color:transparent!important;
+}
+.login .content {background: url(../img/bg-white-lock.png) repeat;padding:10px;width:380px;}
+.login .content form{padding:10px 30px 20px;}
+.login .content .form-title {
+  font-weight: 300;
+  line-height:50px;
+  font-size:30px;
+  text-align:center;
+  margin-bottom:30px;
+}
+.login .content .form-actions {
+  clear: both;
+  border-top: 1px solid #a99f98;
+  border-bottom:none;
+  margin:80px -10px 10px;
+  padding: 20px 10px 0 30px;
+}
+.login .form-control{height:36px; margin-bottom:20px;}
+.login .content p.help-block {
+  font-size:12px; color:#fff; text-align:center;
+}
+.login .content .input-icon{border-left:none!important}

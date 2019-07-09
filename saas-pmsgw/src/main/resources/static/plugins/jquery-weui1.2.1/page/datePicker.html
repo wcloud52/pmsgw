@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>时间日期插件</title>
+
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+
+</head>
+<body>
+   
+   <div class="weui-panel weui-panel_access bgColorHui">
+        <div class="weui-panel__hd"><h3>日期</h3></div>
+        <div class="weui-panel__hd">
+            <input class="weui-input inputH36bgW" id="startDateTimeId" type="text" readonly placeholder="请选择日期">
+        </div>
+    </div>
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../laydate/laydate.js"></script>
+
+    <script>
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#startDateTimeId', //指定元素
+          type: 'datetime'
+        });
+        //插件学习地址：https://zhidao.baidu.com/question/2122174631660864107.html   和  https://www.layui.com/laydate/
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+html, body, iframe, div, ul, ol, li, th, td, dl, dt, dd, a, input, button, select, textarea, form{font-family:"\5FAE\8F6F\96C5\9ED1"!important;}
+.manager-view {
+	z-index: 10;
+	bottom: 15px;
+	left: 10px;
+	overflow: hidden;
+	/*position: absolute;*/
+	right: 0;
+	width: auto;
+	top: 0px !important;
+}
+
+.manager-view.shenpi {
+	width: 220px;
+	top: 10px;
+}
+
+#frmContent {
+	border: medium none;
+	left: 230px;;
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	bottom: 10px;
+}
+
+html,body,.page-content {
+	height: 100%
+}
+
+.mailList .mailMessage,#mailListAlt .mailMessage {
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+}
+
+.workStationBottom {
+	left: 15px;
+}
+
+.workStationBottom ol {
+	bottom: 0px;
+	height: 17px;
+}
+
+#mytodo .btn-group {
+	margin-top: -5px;
+}
+
+.mailList .mailMessage h5 {
+	line-height: 15px;
+}
+
+.postMeta {
+	padding-top: 2px;
+}
+.widget-footer {
+		bottom: 0px;
+}

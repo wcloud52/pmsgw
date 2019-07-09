@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsWeixinUserCoteMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsWeixinUserCote">
+    <!--
+    @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+    <result column="cote_id" jdbcType="VARCHAR" property="cote_id" />
+    <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
+    <result column="cote_website" jdbcType="VARCHAR" property="cote_website" />
+    <result column="cote_state" jdbcType="VARCHAR" property="cote_state" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    id, openid, nickname, headimgurl, cote_id, cote_name, cote_website, cote_state, create_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_weixin_user_cote
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_weixin_user_cote
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsWeixinUserCote">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_weixin_user_cote (id, openid, nickname, 
+      headimgurl, cote_id, cote_name, 
+      cote_website, cote_state, create_time, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{headimgurl,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
+      #{cote_website,jdbcType=VARCHAR}, #{cote_state,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{modify_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsWeixinUserCote">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_weixin_user_cote
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="headimgurl != null">
+        headimgurl,
+      </if>
+      <if test="cote_id != null">
+        cote_id,
+      </if>
+      <if test="cote_name != null">
+        cote_name,
+      </if>
+      <if test="cote_website != null">
+        cote_website,
+      </if>
+      <if test="cote_state != null">
+        cote_state,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="modify_time != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_website != null">
+        #{cote_website,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null">
+        #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsWeixinUserCote">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_weixin_user_cote
+    <set>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_website != null">
+        cote_website = #{cote_website,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null">
+        cote_state = #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsWeixinUserCote">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_weixin_user_cote
+    set openid = #{openid,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      cote_website = #{cote_website,jdbcType=VARCHAR},
+      cote_state = #{cote_state,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

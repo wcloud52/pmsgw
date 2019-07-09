@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsNewsMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsNews">
+    <!--
+    @mbg.generated
+    -->
+    <id column="news_id" jdbcType="VARCHAR" property="news_id" />
+    <result column="cote_id" jdbcType="VARCHAR" property="cote_id" />
+    <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
+    <result column="news_senderId" jdbcType="VARCHAR" property="news_senderId" />
+    <result column="news_senderName" jdbcType="VARCHAR" property="news_senderName" />
+    <result column="news_sendTime" jdbcType="TIMESTAMP" property="news_sendTime" />
+    <result column="news_imgHref" jdbcType="VARCHAR" property="news_imgHref" />
+    <result column="news_href" jdbcType="VARCHAR" property="news_href" />
+    <result column="news_type" jdbcType="VARCHAR" property="news_type" />
+    <result column="news_title" jdbcType="VARCHAR" property="news_title" />
+    <result column="news_desc" jdbcType="VARCHAR" property="news_desc" />
+    <result column="news_text" jdbcType="VARCHAR" property="news_text" />
+    <result column="news_status" jdbcType="INTEGER" property="news_status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    news_id, cote_id, cote_name, news_senderId, news_senderName, news_sendTime, news_imgHref, 
+    news_href, news_type, news_title, news_desc, news_text, news_status, create_time, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_news
+    where news_id = #{news_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_news
+    where news_id = #{news_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsNews">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_news (news_id, cote_id, cote_name, 
+      news_senderId, news_senderName, news_sendTime, 
+      news_imgHref, news_href, news_type, 
+      news_title, news_desc, news_text, 
+      news_status, create_time, modify_time
+      )
+    values (#{news_id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
+      #{news_senderId,jdbcType=VARCHAR}, #{news_senderName,jdbcType=VARCHAR}, #{news_sendTime,jdbcType=TIMESTAMP}, 
+      #{news_imgHref,jdbcType=VARCHAR}, #{news_href,jdbcType=VARCHAR}, #{news_type,jdbcType=VARCHAR}, 
+      #{news_title,jdbcType=VARCHAR}, #{news_desc,jdbcType=VARCHAR}, #{news_text,jdbcType=VARCHAR}, 
+      #{news_status,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsNews">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_news
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="news_id != null">
+        news_id,
+      </if>
+      <if test="cote_id != null">
+        cote_id,
+      </if>
+      <if test="cote_name != null">
+        cote_name,
+      </if>
+      <if test="news_senderId != null">
+        news_senderId,
+      </if>
+      <if test="news_senderName != null">
+        news_senderName,
+      </if>
+      <if test="news_sendTime != null">
+        news_sendTime,
+      </if>
+      <if test="news_imgHref != null">
+        news_imgHref,
+      </if>
+      <if test="news_href != null">
+        news_href,
+      </if>
+      <if test="news_type != null">
+        news_type,
+      </if>
+      <if test="news_title != null">
+        news_title,
+      </if>
+      <if test="news_desc != null">
+        news_desc,
+      </if>
+      <if test="news_text != null">
+        news_text,
+      </if>
+      <if test="news_status != null">
+        news_status,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="modify_time != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="news_id != null">
+        #{news_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="news_senderId != null">
+        #{news_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="news_senderName != null">
+        #{news_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="news_sendTime != null">
+        #{news_sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="news_imgHref != null">
+        #{news_imgHref,jdbcType=VARCHAR},
+      </if>
+      <if test="news_href != null">
+        #{news_href,jdbcType=VARCHAR},
+      </if>
+      <if test="news_type != null">
+        #{news_type,jdbcType=VARCHAR},
+      </if>
+      <if test="news_title != null">
+        #{news_title,jdbcType=VARCHAR},
+      </if>
+      <if test="news_desc != null">
+        #{news_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="news_text != null">
+        #{news_text,jdbcType=VARCHAR},
+      </if>
+      <if test="news_status != null">
+        #{news_status,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsNews">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_news
+    <set>
+      <if test="cote_id != null">
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="news_senderId != null">
+        news_senderId = #{news_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="news_senderName != null">
+        news_senderName = #{news_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="news_sendTime != null">
+        news_sendTime = #{news_sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="news_imgHref != null">
+        news_imgHref = #{news_imgHref,jdbcType=VARCHAR},
+      </if>
+      <if test="news_href != null">
+        news_href = #{news_href,jdbcType=VARCHAR},
+      </if>
+      <if test="news_type != null">
+        news_type = #{news_type,jdbcType=VARCHAR},
+      </if>
+      <if test="news_title != null">
+        news_title = #{news_title,jdbcType=VARCHAR},
+      </if>
+      <if test="news_desc != null">
+        news_desc = #{news_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="news_text != null">
+        news_text = #{news_text,jdbcType=VARCHAR},
+      </if>
+      <if test="news_status != null">
+        news_status = #{news_status,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where news_id = #{news_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsNews">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_news
+    set cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      news_senderId = #{news_senderId,jdbcType=VARCHAR},
+      news_senderName = #{news_senderName,jdbcType=VARCHAR},
+      news_sendTime = #{news_sendTime,jdbcType=TIMESTAMP},
+      news_imgHref = #{news_imgHref,jdbcType=VARCHAR},
+      news_href = #{news_href,jdbcType=VARCHAR},
+      news_type = #{news_type,jdbcType=VARCHAR},
+      news_title = #{news_title,jdbcType=VARCHAR},
+      news_desc = #{news_desc,jdbcType=VARCHAR},
+      news_text = #{news_text,jdbcType=VARCHAR},
+      news_status = #{news_status,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where news_id = #{news_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

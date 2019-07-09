@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100"><span class='red'>*</span>商品属性名称</th>
+		      <td>
+		      		<input type="text" name="" placeholder="请输入商品属性名称" autocomplete="off" class="layui-input">
+		      </td>
+		    </tr>
+		    
+		    <tr>
+		      <th>备注</th>
+		      <td>  
+		      		<textarea name="desc" placeholder="请输入备注信息" class="layui-textarea"></textarea>
+			  </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">确 定</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery,layer = layui.layer;
+			
+		});
+	</script>
+</body>
+</html>

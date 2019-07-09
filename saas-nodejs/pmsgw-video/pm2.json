@@ -1,0 +1,8 @@
+{
+    "name": "my-server",
+    "script": "/usr/bin/java",
+    "args": [
+    ],
+    "exec_interpreter": "",
+    "exec_mode": "fork"
+}

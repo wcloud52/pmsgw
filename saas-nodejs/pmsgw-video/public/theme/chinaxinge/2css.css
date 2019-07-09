@@ -1,0 +1,112 @@
+body {
+	background-image: url(did1.gif);
+	background-repeat: repeat-x;
+	background-color: #D1EEED;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+a.ss2:link,a.ss2:visited,a.ss2:active  {
+	font-family: "宋体";
+	font-size: 14px;
+	font-weight: normal;
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 20px;
+}
+
+a.ss2:hover {
+	font-family: "宋体";
+	font-size: 14px;
+	font-weight: normal;
+	color: #FF6600;
+	font-weight: bold;
+	text-decoration: underline;
+	line-height: 20px;
+	}
+	
+	a.ss1:link,a.ss1:visited,a.ss1:active  {
+	font-family: "arial";
+	font-size: 14px;
+	font-weight: normal;
+	color: #B5DFF6;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 20px;
+}
+
+a.ss1:visited {
+	font-family: "arial";
+	font-size: 14px;
+	font-weight: bold;
+	color: #FACB9C;
+	text-decoration: none;
+}
+a.ss1:hover {
+	font-family: "arial";
+	font-size: 14px;
+	font-weight: normal;
+	color: #FACB9C;
+	font-weight: bold;
+	text-decoration: underline;
+	line-height: 20px;
+	}
+	a.li2:link {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+a.li2:visited {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+a.li2:hover {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #ff0000;
+	text-decoration: underline;
+}
+a.li2:active {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.sw1 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 17px;
+	color: #666666;
+	text-decoration: none;
+}
+.sw2 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 14px;
+	color: #000000;
+	text-decoration: none;
+}
+	
+
+.big { filter: Shadow(Color=#B3B3B3, Direction=115); font-size: 30px; font-weight: bolder ; font-family: "黑体";}
+
+.kk1 {
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #E4E5E0;
+	border-left-color: #E4E5E0;
+}
+.kk2 {
+	border: 1px solid #DDDDDD;
+}

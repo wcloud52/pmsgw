@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsMatchItemPigeonCollectionExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsMatchItemPigeonCollectionMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsMatchItemPigeonCollectionMapper.Base_Column_List" />
+		from nodejs_match_item_pigeon_collection
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.item_collection_id != null">
+              and item_collection_id = #{queryMap.item_collection_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_id != null">
+              and match_id = #{queryMap.match_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_id != null">
+              and collection_id = #{queryMap.collection_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_ringnum != null">
+              and collection_ringnum = #{queryMap.collection_ringnum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_pigowner != null">
+              and collection_pigowner = #{queryMap.collection_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.item_id != null">
+              and item_id = #{queryMap.item_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.parent_item_id != null">
+              and parent_item_id = #{queryMap.parent_item_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.item_name != null">
+              and item_name = #{queryMap.item_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_match_item_pigeon_collection
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.item_collection_id != null">
+              and item_collection_id = #{queryMap.item_collection_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_id != null">
+              and match_id = #{queryMap.match_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_id != null">
+              and collection_id = #{queryMap.collection_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_ringnum != null">
+              and collection_ringnum = #{queryMap.collection_ringnum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_pigowner != null">
+              and collection_pigowner = #{queryMap.collection_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.item_id != null">
+              and item_id = #{queryMap.item_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.parent_item_id != null">
+              and parent_item_id = #{queryMap.parent_item_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.item_name != null">
+              and item_name = #{queryMap.item_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_match_item_pigeon_collection
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.item_collection_id != null">
+              and item_collection_id = #{queryMap.item_collection_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_id != null">
+              and match_id = #{queryMap.match_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_id != null">
+              and collection_id = #{queryMap.collection_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_ringnum != null">
+              and collection_ringnum = #{queryMap.collection_ringnum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.collection_pigowner != null">
+              and collection_pigowner = #{queryMap.collection_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.item_id != null">
+              and item_id = #{queryMap.item_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.parent_item_id != null">
+              and parent_item_id = #{queryMap.parent_item_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.item_name != null">
+              and item_name = #{queryMap.item_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_match_item_pigeon_collection 
+		(
+		item_collection_id,
+		match_id,
+		cote_id,
+		cote_name,
+		collection_id,
+		collection_ringnum,
+		collection_pigowner,
+		item_id,
+		parent_item_id,
+		item_name,
+		create_time,
+		modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.item_collection_id,jdbcType=VARCHAR},
+			    #{item.match_id,jdbcType=VARCHAR},
+			    #{item.cote_id,jdbcType=VARCHAR},
+			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.collection_id,jdbcType=VARCHAR},
+			    #{item.collection_ringnum,jdbcType=VARCHAR},
+			    #{item.collection_pigowner,jdbcType=VARCHAR},
+			    #{item.item_id,jdbcType=VARCHAR},
+			    #{item.parent_item_id,jdbcType=VARCHAR},
+			    #{item.item_name,jdbcType=VARCHAR},
+			    #{item.create_time,jdbcType=TIMESTAMP},
+			    #{item.modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_match_item_pigeon_collection 
+			<set>
+                <if test="item.match_id != null">
+                  and match_id = #{item.match_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_id != null">
+                  and cote_id = #{item.cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_name != null">
+                  and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.collection_id != null">
+                  and collection_id = #{item.collection_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.collection_ringnum != null">
+                  and collection_ringnum = #{item.collection_ringnum,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.collection_pigowner != null">
+                  and collection_pigowner = #{item.collection_pigowner,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.item_id != null">
+                  and item_id = #{item.item_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.parent_item_id != null">
+                  and parent_item_id = #{item.parent_item_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.item_name != null">
+                  and item_name = #{item.item_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.create_time != null">
+                  and create_time = #{item.create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.modify_time != null">
+                  and modify_time = #{item.modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      item_collection_id=#{item.item_collection_id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

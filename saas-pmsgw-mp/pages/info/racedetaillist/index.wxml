@@ -1,0 +1,35 @@
+<view class='title'>{{race.master.master_text}}</view>
+<view class="search">
+  <view class='search-input-wrap'>
+    <image class='search-icon' src="/image/searchBs.png"></image>
+    <input value='{{inputValue}}' maxlength='60' type="text" class='search-input' placeholder="请输入鸽主" placeholder-class="input-placeholder" confirm-type="search" bindinput="bindKeyInput" bindconfirm="bindSearch" />
+    <image bindtap='clearInput' wx:if='{{inputValue != ""}}' class='search-icon' src="/image/deleteBsStorage.png"></image>
+  </view>
+  <view class='search-btn' bindtap='bindSearch'>搜索</view>
+</view>
+<scroll-view scroll-x scroll-y class='table-wrap'>
+    <view class="table">
+        <view class="tr">
+            <view class="th td-rank">排名</view>
+            <view class="th"> 鸽主</view>
+            <view class="th">足环号</view>
+            <view class="th">空距</view>
+            <view class="th">分速</view>
+             <view class="th">归巢时间</view>
+           
+        </view>
+        <view class="tr" wx:for="{{race.detail}}" wx:key="race.detail">
+        <view class="td td-rank">{{item.rank}}</view>
+            <view class="td"><image class='search-icon' wx:if="{{item.receiver_headimgurl!= null}}" src="{{item.receiver_headimgurl}}"></image>
+            <image class='search-icon' wx:if="{{item.receiver_headimgurl==null}}" src="/image/headPortrait.gif"></image>
+            {{item.pigowner}}</view>
+            <view class="td">{{item.ringnum}}</view>
+           
+            <view class="td">{{item.distence}}</view>
+            <view class="td">{{item.speed}}</view>
+              <view class="td">{{item.cometime}}</view>
+        </view>
+    </view>
+     <button type="primary" class="load-btn" loading="{{moreLoading}}"  data-listKey="race.list"  disabled="{{race.disabled}}" bindtap="loadMoreNews"> 更多 </button>
+</scroll-view>
+<loading hidden="{{loading}}">加载中...</loading>

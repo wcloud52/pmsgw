@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsSysUserMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsSysUser">
+    <!--
+    @mbg.generated
+    -->
+    <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="cote_id" jdbcType="VARCHAR" property="cote_id" />
+    <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
+    <result column="LoginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="UserName" jdbcType="VARCHAR" property="userName" />
+    <result column="UserType" jdbcType="VARCHAR" property="userType" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="Mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+    <result column="Description" jdbcType="VARCHAR" property="description" />
+    <result column="CreatedDatetime" jdbcType="TIMESTAMP" property="createdDatetime" />
+    <result column="UpdatedDatetime" jdbcType="TIMESTAMP" property="updatedDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    Id, cote_id, cote_name, LoginName, Password, UserName, UserType, Email, Mobile, Status, 
+    Description, CreatedDatetime, UpdatedDatetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_sys_user
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_sys_user
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsSysUser">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_sys_user (Id, cote_id, cote_name, 
+      LoginName, Password, UserName, 
+      UserType, Email, Mobile, 
+      Status, Description, CreatedDatetime, 
+      UpdatedDatetime)
+    values (#{id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
+      #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=TIMESTAMP}, 
+      #{updatedDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsSysUser">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="cote_id != null">
+        cote_id,
+      </if>
+      <if test="cote_name != null">
+        cote_name,
+      </if>
+      <if test="loginName != null">
+        LoginName,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="userName != null">
+        UserName,
+      </if>
+      <if test="userType != null">
+        UserType,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="mobile != null">
+        Mobile,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="description != null">
+        Description,
+      </if>
+      <if test="createdDatetime != null">
+        CreatedDatetime,
+      </if>
+      <if test="updatedDatetime != null">
+        UpdatedDatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null">
+        #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDatetime != null">
+        #{updatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsSysUser">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_sys_user
+    <set>
+      <if test="cote_id != null">
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        LoginName = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        UserName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        UserType = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null">
+        CreatedDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDatetime != null">
+        UpdatedDatetime = #{updatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsSysUser">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_sys_user
+    set cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      LoginName = #{loginName,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      UserName = #{userName,jdbcType=VARCHAR},
+      UserType = #{userType,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      Description = #{description,jdbcType=VARCHAR},
+      CreatedDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      UpdatedDatetime = #{updatedDatetime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

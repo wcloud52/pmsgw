@@ -1,0 +1,53 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label">公棚手机号</label>
+			<div class="layui-input-block">
+			    <input type="hidden" id="id" name="id" value="${item.id?if_exists }">
+				<input name="bind_tel"  type="text"  class="layui-input" value="${item.bind_tel?if_exists }">
+			</div>
+		</div>
+		
+	<div class="layui-form-item">
+			<label class="layui-form-label">公棚参赛鸽主姓名</label>
+			<div class="layui-input-block">
+				<input name="bind_name"  type="text"  class="layui-input" value="${item.bind_name?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">公棚鸽主地区</label>
+			<div class="layui-input-block">
+				<input name="bind_address"   type="text"  class="layui-input" value="${item.bind_address?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">俱乐部协会绑定手机</label>
+			<div class="layui-input-block">
+				<input name="club_bind_tel"  type="text"  class="layui-input" value="${item.club_bind_tel?if_exists }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">俱乐部协会绑定鸽主</label>
+			<div class="layui-input-block">
+				<input name="club_bind_name"  type="text"  class="layui-input" value="${item.club_bind_name?if_exists }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">俱乐部协会绑定鸽棚</label>
+			<div class="layui-input-block">
+				<input name="club_bind_loft"  type="text"  class="layui-input" value="${item.club_bind_loft?if_exists }">
+			</div>
+		</div>
+	
+		<div class="layui-form-item">
+			<label class="layui-form-label">俱乐部协会绑定地区</label>
+			<div class="layui-input-block">
+				<input name="club_bind_address"  type="text"  class="layui-input" value="${item.club_bind_address?if_exists }">
+			</div>
+		</div>
+		
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>

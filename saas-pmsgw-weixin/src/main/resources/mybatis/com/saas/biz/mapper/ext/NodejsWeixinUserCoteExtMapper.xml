@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsWeixinUserCoteExtMapper" >
+  <select id="selectByCoteId" resultMap="com.saas.biz.mapper.base.NodejsWeixinUserCoteMapper.BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="com.saas.biz.mapper.base.NodejsWeixinUserCoteMapper.Base_Column_List" />
+    from nodejs_weixin_user_cote
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </select>
+</mapper>

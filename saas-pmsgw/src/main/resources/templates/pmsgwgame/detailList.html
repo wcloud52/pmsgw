@@ -1,0 +1,26 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		<blockquote class="layui-elem-quote">
+	<input id="currentMasterId" name="currentMasterId" type="hidden" value="${ item.id?if_exists  }" />			
+<p>比赛名称：${ item.title?if_exists  }</p>
+<p>司放日期：${ item.data_time?if_exists }</p>
+<p>司放地点：${ item.data_address?if_exists  }</p>
+<p>风向：${ item.data_fengxiang?if_exists  }</p>
+<p>风力：${ item.data_fengli?if_exists  }</p>
+<p>天气：${ item.tq?if_exists  }</p>
+<p>司放地经度：${ item.jd?if_exists  }</p>
+<p>司放地纬度：${ item.wd?if_exists  }</p>
+<p>参赛羽数：${ item.data_num?if_exists  }</p>
+			
+			</blockquote>
+			<fieldset class="layui-elem-field">
+			<legend>成绩列表</legend>
+			<div class="layui-field-box layui-form">
+				<table id="listDetailTable" lay-filter="test" lay-skin="line"></table>
+			</div>
+		</fieldset>
+		
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+<script type="text/javascript" src="../pagejs/pmsgwgame/detaillist.js?v=${.now?string('yyyyMMddHHmmss')}"></script>

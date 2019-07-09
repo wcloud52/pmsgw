@@ -1,0 +1,59 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 轮播图 -->
+  <swiper indicator-dots="{{slider.indicatorDots}}" autoplay="{{slider.autoplay}}" class="banners" interval="{{slider.interval}}" duration="{{slider.duration}}">
+    <block wx:for="{{slider.banner}}" wx:key="slider.banner">
+      <swiper-item class="banner">
+        <image src="{{item.image}}" data-id="{{item.id}}" bindtap="bindViewTap" class="banner-image" width="100%" height="100%" />
+        <text class="banner-title">{{item.title}}</text>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">新闻</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">比赛直播</view>
+    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">英雄榜</view>
+  </view>
+  <view class="{{currentTab == 0 ? 'show':'hidden'}}">
+    <scroll-view>
+      <!-- 资讯列表 -->
+      <view class="news-item-container">
+        <block wx:for="{{news.list}}" wx:key="news.list" wx:for-index="id">
+           <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text> 
+          <navigator wx:else url="/pages/infoDetail/index?Id={{item.id}}">
+          <view class="news-item">
+               <view class="news-item-left">
+              
+                <text class="news-item-title">{{item.title}}</text>
+                <text class="news-item-cotename">{{item.cotename}}</text>
+                <text class="news-item-time">{{item.time}}</text>
+               
+              </view>
+                
+              <view class="news-item-right">
+                <image src="{{item.image}}" class="news-image" />
+              </view> 
+            </view>
+          
+          </navigator>
+        </block>
+        <button type="primary" class="load-btn" loading="{{loading}}" plain="{{news.plain}}"  data-listKey="news.list" bindtap="loadMoreNews"> 更多 </button>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="{{currentTab == 1 ? 'show':'hidden'}}">
+    <scroll-view>
+      
+    <include src="racelist/index.wxml"/>
+    </scroll-view>
+  </view>
+  <view class="{{currentTab == 2 ? 'show':'hidden'}}">
+    <scroll-view>
+      <text>暂无内容3</text>
+    </scroll-view>
+  </view>
+
+
+
+</view>

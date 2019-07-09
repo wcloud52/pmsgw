@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsCustomerTextMessageExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsCustomerTextMessageMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsCustomerTextMessageMapper.Base_Column_List" />
+		from nodejs_customer_text_message
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.message_id != null">
+              and message_id = #{queryMap.message_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderId != null">
+              and message_senderId = #{queryMap.message_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderName != null">
+              and message_senderName = #{queryMap.message_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverId != null">
+              and message_receiverId = #{queryMap.message_receiverId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverName != null">
+              and message_receiverName = #{queryMap.message_receiverName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_sendTime != null">
+              and message_sendTime = #{queryMap.message_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_type != null">
+              and message_type = #{queryMap.message_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_title != null">
+              and message_title = #{queryMap.message_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_text != null">
+              and message_text = #{queryMap.message_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_status != null">
+              and message_status = #{queryMap.message_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.message_create_time != null">
+              and message_create_time = #{queryMap.message_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_modify_time != null">
+              and message_modify_time = #{queryMap.message_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_customer_text_message
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.message_id != null">
+              and message_id = #{queryMap.message_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderId != null">
+              and message_senderId = #{queryMap.message_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderName != null">
+              and message_senderName = #{queryMap.message_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverId != null">
+              and message_receiverId = #{queryMap.message_receiverId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverName != null">
+              and message_receiverName = #{queryMap.message_receiverName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_sendTime != null">
+              and message_sendTime = #{queryMap.message_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_type != null">
+              and message_type = #{queryMap.message_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_title != null">
+              and message_title = #{queryMap.message_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_text != null">
+              and message_text = #{queryMap.message_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_status != null">
+              and message_status = #{queryMap.message_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.message_create_time != null">
+              and message_create_time = #{queryMap.message_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_modify_time != null">
+              and message_modify_time = #{queryMap.message_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_customer_text_message
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.message_id != null">
+              and message_id = #{queryMap.message_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderId != null">
+              and message_senderId = #{queryMap.message_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderName != null">
+              and message_senderName = #{queryMap.message_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverId != null">
+              and message_receiverId = #{queryMap.message_receiverId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverName != null">
+              and message_receiverName = #{queryMap.message_receiverName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_sendTime != null">
+              and message_sendTime = #{queryMap.message_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_type != null">
+              and message_type = #{queryMap.message_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_title != null">
+              and message_title = #{queryMap.message_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_text != null">
+              and message_text = #{queryMap.message_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_status != null">
+              and message_status = #{queryMap.message_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.message_create_time != null">
+              and message_create_time = #{queryMap.message_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_modify_time != null">
+              and message_modify_time = #{queryMap.message_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_customer_text_message 
+		(
+		message_id,
+		message_senderId,
+		message_senderName,
+		message_receiverId,
+		message_receiverName,
+		message_sendTime,
+		message_type,
+		message_title,
+		message_text,
+		message_status,
+		message_create_time,
+		message_modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.message_id,jdbcType=VARCHAR},
+			    #{item.message_senderId,jdbcType=VARCHAR},
+			    #{item.message_senderName,jdbcType=VARCHAR},
+			    #{item.message_receiverId,jdbcType=VARCHAR},
+			    #{item.message_receiverName,jdbcType=VARCHAR},
+			    #{item.message_sendTime,jdbcType=TIMESTAMP},
+			    #{item.message_type,jdbcType=VARCHAR},
+			    #{item.message_title,jdbcType=VARCHAR},
+			    #{item.message_text,jdbcType=VARCHAR},
+			    #{item.message_status,jdbcType=INTEGER},
+			    #{item.message_create_time,jdbcType=TIMESTAMP},
+			    #{item.message_modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_customer_text_message 
+			<set>
+                <if test="item.message_senderId != null">
+                  and message_senderId = #{item.message_senderId,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_senderName != null">
+                  and message_senderName = #{item.message_senderName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_receiverId != null">
+                  and message_receiverId = #{item.message_receiverId,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_receiverName != null">
+                  and message_receiverName = #{item.message_receiverName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_sendTime != null">
+                  and message_sendTime = #{item.message_sendTime,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.message_type != null">
+                  and message_type = #{item.message_type,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_title != null">
+                  and message_title = #{item.message_title,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_text != null">
+                  and message_text = #{item.message_text,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_status != null">
+                  and message_status = #{item.message_status,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.message_create_time != null">
+                  and message_create_time = #{item.message_create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.message_modify_time != null">
+                  and message_modify_time = #{item.message_modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      message_id=#{item.message_id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

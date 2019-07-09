@@ -1,0 +1,44 @@
+<scroll-view class="page_list" scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="refresh">
+
+  <!--上方图片-->
+  <swiper indicator-dots="{{imageimageList}}" autoplay="true" interval="3000" duration="1000">
+    <block wx:for="{{imageimageList}}">
+      <swiper-item class="banner">
+        <image src="{{item.imgHref}}" class="slide-image" style="width:100%; height:100%;" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+<view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">新闻</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">公告</view>
+    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">通知</view>
+  </view>
+<view class = "{{currentTab == 0 ? 'show':'hidden'}}" >
+    <scroll-view>
+      <!--瀑布流列表-->
+  <view wx:for="{{caiItems}}">
+    <view data-detail-href-Id="{{item.detailHrefId}}" class="item" bindtap="onItemClick">
+      <view class="news-item">
+        <view class="title">{{item.title}}</view>
+        <text class="time">{{item.time}}</text>
+        <view class="desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+    </scroll-view>
+  </view>
+  <view class = "{{currentTab == 1 ? 'show':'hidden'}}" >
+    <scroll-view>
+      <text>暂无内容2</text>
+    </scroll-view>
+  </view>
+  <view class = "{{currentTab == 2 ? 'show':'hidden'}}">
+    <scroll-view>
+      <text>暂无内容3</text>
+    </scroll-view>
+  </view>
+
+ 
+
+</scroll-view>
+<loading hidden="{{loading}}">加载中...</loading>

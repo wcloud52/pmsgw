@@ -1,0 +1,30 @@
+<!--user.wxml-->
+
+<view class="container">
+  <view class="user_base_info">
+    <view class="user_avatar">
+        <image src="{{userData.avatar}}"></image>
+    </view>
+    <view class="user_info">
+      <text>
+        昵称：{{userData.nickname}}
+        姓名：{{userData.name}}
+        电话：{{userData.phone}}
+        地址:朝阳区望京悠乐汇A座8011
+      </text>
+    </view>
+  </view>
+
+ <view class="user_addr_manage">
+    <view class="user_addr_title">【鸽子管理】</view>
+    <block wx:for="{{addrDate}}" wx:key="item.id">
+      <view class="user_addr_item">
+          <text class="addr_sub">{{item.ringnum}}</text>
+           <text class="addr_sub">{{item.describe}}</text> 
+          <view class="addr_edit" style="background:url(../../images/edit.png) no-repeat;  width:50rpx;background-position: center;background-size:100%;  " bindtap="editAddr" data-addrid="{{index+1}}"></view>
+      </view> 
+    </block>
+    <navigator url="../edit_addr/edit_addr" >新增鸽子 +</navigator>
+ </view>
+  
+</view>

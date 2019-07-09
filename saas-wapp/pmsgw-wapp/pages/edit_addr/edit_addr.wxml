@@ -1,0 +1,20 @@
+<view class="container edit_wrap">
+<form bindsubmit="submitForm" id="123">
+    <view class="form_group">
+        <text>足环号：</text>
+        <input type="text" placeholder="请输入足环号" placeholder-class="placeholder_style" name="data_name" value="{{data_name}}" />
+    </view>
+    <view class="form_group">
+        <text>备注：</text>
+        <input type="text" placeholder="请输入预约电话" placeholder-class="placeholder_style" name="data_phone" value="{{data_phone}}"/>
+    </view>
+   
+  
+    
+   
+    <button class="save_btn"  formType="submit">保存</button>
+    <toast hidden="{{saveToastHidden}}" bindchange="hideToast">
+    保存成功
+    </toast>
+</form>
+</view>

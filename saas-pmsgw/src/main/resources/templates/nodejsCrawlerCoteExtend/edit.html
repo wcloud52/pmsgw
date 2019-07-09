@@ -1,0 +1,49 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">俱乐部/公棚</label>
+			<div class="layui-input-block" style="margin-left:230px">
+			 
+			 <input id="bind_cote_id" name="bind_cote_id" type="hidden" value="${item.cote_id?if_exists }" /> 
+			    <select id="cote_id" name="cote_id" lay-verify="required" lay-search="" <#if (item.cote_id!"") != "">disabled</#if>>
+			    <option value="">直接选择或搜索选择</option>
+				</select>
+			</div>
+		</div>
+		
+	<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">俱乐部/公棚url</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<input name="cote_web_url"  type="text"  class="layui-input" value="${item.cote_web_url?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">俱乐部/公棚简称</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<input name="cote_short_name"   type="text"  class="layui-input" value="${item.cote_short_name?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">排序号</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<input name="sort_number"  type="text"  class="layui-input" value="${item.sort_number?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">显示状态</label>
+			<div class="layui-input-block" style="margin-left:230px">			
+				<select name="cote_state" lay-verify="required">
+					<option value="0" <#if (item.cote_state!"") == "0">selected="selected"</#if>>不显示0</option>
+                    <option value="1" <#if (item.cote_state!"") == "1">selected="selected"</#if>>显示1</option>             
+				</select>
+				
+			</div>
+		</div>
+		
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+	<script type="text/javascript" src="../pagejs/nodejsCrawlerCoteExtend/edit.js?v=${.now?string('yyyyMMddHHmmss')}"></script>

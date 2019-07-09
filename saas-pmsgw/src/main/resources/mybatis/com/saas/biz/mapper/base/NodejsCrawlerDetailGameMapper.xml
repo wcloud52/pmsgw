@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCrawlerDetailGame" >
+    <id column="detail_id" property="detail_id" jdbcType="VARCHAR" />
+    <result column="cote_id" property="cote_id" jdbcType="VARCHAR" />
+    <result column="cote_name" property="cote_name" jdbcType="VARCHAR" />
+    <result column="cote_state" property="cote_state" jdbcType="VARCHAR" />
+    <result column="master_id" property="master_id" jdbcType="VARCHAR" />
+    <result column="master_text" property="master_text" jdbcType="VARCHAR" />
+    <result column="master_href" property="master_href" jdbcType="VARCHAR" />
+    <result column="master_type" property="master_type" jdbcType="VARCHAR" />
+    <result column="master_website" property="master_website" jdbcType="VARCHAR" />
+    <result column="detail_page" property="detail_page" jdbcType="INTEGER" />
+    <result column="detail_page_index" property="detail_page_index" jdbcType="INTEGER" />
+    <result column="detail_state" property="detail_state" jdbcType="VARCHAR" />
+    <result column="distence" property="distence" jdbcType="VARCHAR" />
+    <result column="ringnum" property="ringnum" jdbcType="VARCHAR" />
+    <result column="pigowner" property="pigowner" jdbcType="VARCHAR" />
+    <result column="cometime" property="cometime" jdbcType="VARCHAR" />
+    <result column="cotenum" property="cotenum" jdbcType="VARCHAR" />
+    <result column="speed" property="speed" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="receiver_openid" property="receiver_openid" jdbcType="VARCHAR" />
+    <result column="receiver_nickname" property="receiver_nickname" jdbcType="VARCHAR" />
+    <result column="receiver_headimgurl" property="receiver_headimgurl" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    detail_id, cote_id, cote_name, cote_state, master_id, master_text, master_href, master_type, 
+    master_website, detail_page, detail_page_index, detail_state, distence, ringnum, 
+    pigowner, cometime, cotenum, speed, rank, receiver_openid, receiver_nickname, receiver_headimgurl, 
+    create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_crawler_detail_game
+    where detail_id = #{detail_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nodejs_crawler_detail_game
+    where detail_id = #{detail_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCrawlerDetailGame" >
+    insert into nodejs_crawler_detail_game (detail_id, cote_id, cote_name, 
+      cote_state, master_id, master_text, 
+      master_href, master_type, master_website, 
+      detail_page, detail_page_index, detail_state, 
+      distence, ringnum, pigowner, 
+      cometime, cotenum, speed, 
+      rank, receiver_openid, receiver_nickname, 
+      receiver_headimgurl, create_time, modify_time
+      )
+    values (#{detail_id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
+      #{cote_state,jdbcType=VARCHAR}, #{master_id,jdbcType=VARCHAR}, #{master_text,jdbcType=VARCHAR}, 
+      #{master_href,jdbcType=VARCHAR}, #{master_type,jdbcType=VARCHAR}, #{master_website,jdbcType=VARCHAR}, 
+      #{detail_page,jdbcType=INTEGER}, #{detail_page_index,jdbcType=INTEGER}, #{detail_state,jdbcType=VARCHAR}, 
+      #{distence,jdbcType=VARCHAR}, #{ringnum,jdbcType=VARCHAR}, #{pigowner,jdbcType=VARCHAR}, 
+      #{cometime,jdbcType=VARCHAR}, #{cotenum,jdbcType=VARCHAR}, #{speed,jdbcType=VARCHAR}, 
+      #{rank,jdbcType=INTEGER}, #{receiver_openid,jdbcType=VARCHAR}, #{receiver_nickname,jdbcType=VARCHAR}, 
+      #{receiver_headimgurl,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCrawlerDetailGame" >
+    insert into nodejs_crawler_detail_game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detail_id != null" >
+        detail_id,
+      </if>
+      <if test="cote_id != null" >
+        cote_id,
+      </if>
+      <if test="cote_name != null" >
+        cote_name,
+      </if>
+      <if test="cote_state != null" >
+        cote_state,
+      </if>
+      <if test="master_id != null" >
+        master_id,
+      </if>
+      <if test="master_text != null" >
+        master_text,
+      </if>
+      <if test="master_href != null" >
+        master_href,
+      </if>
+      <if test="master_type != null" >
+        master_type,
+      </if>
+      <if test="master_website != null" >
+        master_website,
+      </if>
+      <if test="detail_page != null" >
+        detail_page,
+      </if>
+      <if test="detail_page_index != null" >
+        detail_page_index,
+      </if>
+      <if test="detail_state != null" >
+        detail_state,
+      </if>
+      <if test="distence != null" >
+        distence,
+      </if>
+      <if test="ringnum != null" >
+        ringnum,
+      </if>
+      <if test="pigowner != null" >
+        pigowner,
+      </if>
+      <if test="cometime != null" >
+        cometime,
+      </if>
+      <if test="cotenum != null" >
+        cotenum,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="receiver_openid != null" >
+        receiver_openid,
+      </if>
+      <if test="receiver_nickname != null" >
+        receiver_nickname,
+      </if>
+      <if test="receiver_headimgurl != null" >
+        receiver_headimgurl,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detail_id != null" >
+        #{detail_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null" >
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null" >
+        #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="master_id != null" >
+        #{master_id,jdbcType=VARCHAR},
+      </if>
+      <if test="master_text != null" >
+        #{master_text,jdbcType=VARCHAR},
+      </if>
+      <if test="master_href != null" >
+        #{master_href,jdbcType=VARCHAR},
+      </if>
+      <if test="master_type != null" >
+        #{master_type,jdbcType=VARCHAR},
+      </if>
+      <if test="master_website != null" >
+        #{master_website,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_page != null" >
+        #{detail_page,jdbcType=INTEGER},
+      </if>
+      <if test="detail_page_index != null" >
+        #{detail_page_index,jdbcType=INTEGER},
+      </if>
+      <if test="detail_state != null" >
+        #{detail_state,jdbcType=VARCHAR},
+      </if>
+      <if test="distence != null" >
+        #{distence,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null" >
+        #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="cometime != null" >
+        #{cometime,jdbcType=VARCHAR},
+      </if>
+      <if test="cotenum != null" >
+        #{cotenum,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="receiver_openid != null" >
+        #{receiver_openid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_nickname != null" >
+        #{receiver_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_headimgurl != null" >
+        #{receiver_headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCrawlerDetailGame" >
+    update nodejs_crawler_detail_game
+    <set >
+      <if test="cote_id != null" >
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null" >
+        cote_state = #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="master_id != null" >
+        master_id = #{master_id,jdbcType=VARCHAR},
+      </if>
+      <if test="master_text != null" >
+        master_text = #{master_text,jdbcType=VARCHAR},
+      </if>
+      <if test="master_href != null" >
+        master_href = #{master_href,jdbcType=VARCHAR},
+      </if>
+      <if test="master_type != null" >
+        master_type = #{master_type,jdbcType=VARCHAR},
+      </if>
+      <if test="master_website != null" >
+        master_website = #{master_website,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_page != null" >
+        detail_page = #{detail_page,jdbcType=INTEGER},
+      </if>
+      <if test="detail_page_index != null" >
+        detail_page_index = #{detail_page_index,jdbcType=INTEGER},
+      </if>
+      <if test="detail_state != null" >
+        detail_state = #{detail_state,jdbcType=VARCHAR},
+      </if>
+      <if test="distence != null" >
+        distence = #{distence,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null" >
+        ringnum = #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        pigowner = #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="cometime != null" >
+        cometime = #{cometime,jdbcType=VARCHAR},
+      </if>
+      <if test="cotenum != null" >
+        cotenum = #{cotenum,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="receiver_openid != null" >
+        receiver_openid = #{receiver_openid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_nickname != null" >
+        receiver_nickname = #{receiver_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_headimgurl != null" >
+        receiver_headimgurl = #{receiver_headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where detail_id = #{detail_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCrawlerDetailGame" >
+    update nodejs_crawler_detail_game
+    set cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      cote_state = #{cote_state,jdbcType=VARCHAR},
+      master_id = #{master_id,jdbcType=VARCHAR},
+      master_text = #{master_text,jdbcType=VARCHAR},
+      master_href = #{master_href,jdbcType=VARCHAR},
+      master_type = #{master_type,jdbcType=VARCHAR},
+      master_website = #{master_website,jdbcType=VARCHAR},
+      detail_page = #{detail_page,jdbcType=INTEGER},
+      detail_page_index = #{detail_page_index,jdbcType=INTEGER},
+      detail_state = #{detail_state,jdbcType=VARCHAR},
+      distence = #{distence,jdbcType=VARCHAR},
+      ringnum = #{ringnum,jdbcType=VARCHAR},
+      pigowner = #{pigowner,jdbcType=VARCHAR},
+      cometime = #{cometime,jdbcType=VARCHAR},
+      cotenum = #{cotenum,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=INTEGER},
+      receiver_openid = #{receiver_openid,jdbcType=VARCHAR},
+      receiver_nickname = #{receiver_nickname,jdbcType=VARCHAR},
+      receiver_headimgurl = #{receiver_headimgurl,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where detail_id = #{detail_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

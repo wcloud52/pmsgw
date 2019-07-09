@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+	<div class="container">
+		<div class="content-search">
+			<form class="layui-form layui-form-pane" action="">
+				
+				<div class="layui-inline">
+					<label class="layui-form-label">年份</label>
+					<div class="layui-input-inline">
+						<select name="city" lay-verify="">
+						  <option value="0">请选择</option>
+						  <option value="1">2017</option>
+						  <option value="2">2016</option>
+						</select>
+					</div>
+				</div>				
+				<div class="layui-inline"><button class="layui-btn" lay-submit="">查询</button></div>
+			</form>
+		</div>
+
+		<div class="tar mt10">
+			<button class="layui-btn layui-btn-normal layui-btn-small">导出</button>
+		</div>
+
+		<div class="table-list">
+			<table class="layui-table" >
+			  <tbody>
+			    <tr class="member">
+			      <th rowspan="2">月份</th>
+			      <th rowspan="2">会员数量</th>
+			      <th class="tac" colspan="7">AGR等级</th>
+			    </tr> 
+			    <tr class="member">
+					<th>注册会员</th>
+					<th>P1</th>
+					<th>P2</th>
+					<th>P3</th>
+					<th>V1</th>
+					<th>V2</th>
+					<th>V3</th>
+				</tr>
+				<tr>
+					<td>1月</td>
+					<td>200</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>2月</td>
+					<td>200</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+					<td>10</td>
+				</tr>
+			  </tbody>
+			</table>   
+		</div>
+	</div>
+	<div id="table-pages" style="text-align:center"></div>
+	<script type="text/javascript" src="layui/layui.js"></script>
+    <script>
+		layui.use(['jquery', 'laydate','form','layer','laypage'], function(){
+			var $ = layui.jquery,
+			    laydate = layui.laydate,
+			    layer = layui.layer,
+			    laypage = layui.laypage;
+
+
+			// 分页
+			 laypage({
+			    cont: 'table-pages'
+			    ,pages: 2
+			    ,skip: true
+			  });
+
+            // 开始时间及截止时间
+            var start = {
+			   choose: function(datas){
+			      end.min = datas; //开始日选好后，重置结束日的最小日期
+			      end.start = datas //将结束日的初始值设定为开始日
+			    }
+			  };
+			  
+			  var end = {
+			    choose: function(datas){
+			      start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			  };
+
+			$('#start').click(function(){
+				start.elem = this;
+    			laydate(start);
+			});
+
+			$('#end').click(function(){
+				end.elem = this
+    			laydate(end);
+			});
+
+		   
+			
+		});
+	</script>
+</body>
+</html>

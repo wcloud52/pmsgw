@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>规则项定义</title>
+<link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/table.css" />
+</head>
+<body>
+<div class="container">
+<fieldset class="layui-elem-field mt10">
+		  <legend>规则</legend>
+		  <div class="layui-field-box">
+			<form class="layui-form">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">规则名称</label>
+			<div class="layui-input-block">
+			    <input type="hidden" id="id" name="id" value="${item.id?if_exists }">
+			    <input name="name"  type="text"  class="layui-input" value="${item.name?if_exists }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">规则说明</label>
+			<div class="layui-input-block">
+				<input name="description"  type="text"  class="layui-input" value="${item.description?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">规则详情</label>
+			<div class="layui-input-block">
+				<textarea name="detailsMessage"   type="text"  class="layui-textarea" >${item.detailsMessage?if_exists }</textarea>
+			</div>
+		</div>
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+		  </div>
+		</fieldset>
+</div>
+<fieldset class="layui-elem-field mt10">
+		  <legend>规则项管理</legend>
+	<div class="admin-main">
+		
+		<blockquote class="layui-elem-quote" style="margin-bottom: 0px;">
+			
+           <button class="layui-btn" id="btnAdd">新增</button>
+			<button class="layui-btn" id="btnUpdate">修改</button>
+			
+			<button class="layui-btn" id="btnDelete">删除</button>
+			<button class="layui-btn" id="btnView">查看</button>
+		</blockquote>
+
+
+		<div class="layui-form layui-form-pane">
+			<table id="listTable" lay-filter="test"></table>
+		</div>
+
+	</div>
+		</fieldset>
+
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../pagejs/base.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/javascript" src="../pagejs/wapprule/detaillist.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/html" id="toolBarTpl">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+
+</html>

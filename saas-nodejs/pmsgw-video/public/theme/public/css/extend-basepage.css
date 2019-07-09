@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/*错误页面*/
+#errorframe{display:none;}
+.error-div{background:url(../img/error.gif) no-repeat 65px 70px; height:356px; line-height:300px; font-size:35px;padding-left:250px;}
+.modal.fade.in {top:50%;z-index:99999}
+.modal{margin-top:-300px;}
+.modal-header h3{background:#fff;font-size:20px;}
+.modal-body .tab-content{min-height:280px;} 
+.modal-body.icon-loading{display:block; background:url(../img/loadingLarge.gif) no-repeat; width:32px; height:32px; margin:50px auto;padding:0}
+
+/* 弹出层三种默认样式 */
+.modal-small{position:fixed;top:50%;left:50%;width:480px; margin-left:-240px;marin-top:-160px;background-color:#ffffff;border:1px solid #999;border:1px solid rgba(0, 0, 0, 0.3);*border:1px solid #999;/* IE6-7 */-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-webkit-background-clip:padding-box;-moz-background-clip:padding-box;background-clip:padding-box;outline:none;}
+.modal-small.fade{-webkit-transition:opacity .3s linear, top .3s ease-out;-moz-transition:opacity .3s linear, top .3s ease-out;-o-transition:opacity .3s linear, top .3s ease-out;transition:opacity .3s linear, top .3s ease-out;}
+.modal-small.fade.in{top:50%;z-index:99999}
+.modal-small .modal-body{position:relative;overflow-y:auto;max-height:170px;padding:15px;}
+.modal-medium{position:fixed;top:50%;left:50%;width:640px;margin-left:-320px;margin-top:-240px;background-color:#ffffff;border:1px solid #999;border:1px solid rgba(0, 0, 0, 0.3);*border:1px solid #999;/* IE6-7 */-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-moz-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-webkit-background-clip:padding-box;-moz-background-clip:padding-box;background-clip:padding-box;outline:none;}
+.modal-medium.fade{-webkit-transition:opacity .3s linear, top .3s ease-out;-moz-transition:opacity .3s linear, top .3s ease-out;-o-transition:opacity .3s linear, top .3s ease-out;transition:opacity .3s linear, top .3s ease-out;}
+.modal-medium.fade.in{top:50%;z-index:99999}
+.modal-medium .modal-body{position:relative;overflow-y:auto;max-height:330px;padding:15px;}
+.modal-large{position:fixed;top:50%;left:50%;width:800px;margin-left:-400px;margin-top:-300px;background-color:#ffffff;border:1px solid #999;border:1px solid rgba(0, 0, 0, 0.3);*border:1px solid #999;/* IE6-7 */-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);-webkit-background-clip:padding-box;-moz-background-clip:padding-box;background-clip:padding-box;outline:none;}
+.modal-large.fade{-webkit-transition:opacity .3s linear, top .3s ease-out;-moz-transition:opacity .3s linear, top .3s ease-out;-o-transition:opacity .3s linear, top .3s ease-out;transition:opacity .3s linear, top .3s ease-out;}
+.modal-large.fade.in{top:50%;z-index:99999}
+.modal-large .modal-body{position:relative;overflow-y:auto;max-height:450px;padding:15px;}
+.modal-medium.user-info .modal-body{max-height:440px;}
+/*校验提示*/
+.help-block li{color:#b94a48}
+.help-inline{color:#b94a48;font-size:12px;font-weight: normal;padding:0}
+input.error,textarea.error,select.error{border:1px solid #b94a48;color:#b94a48;}

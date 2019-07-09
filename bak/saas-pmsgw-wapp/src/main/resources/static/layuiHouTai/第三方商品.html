@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+	<div class="container">
+		<div class="content-search">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-inline">
+					<label class="layui-form-label">商品名称</label>
+					<div class="layui-input-block">
+						<input  autocomplete="off" class="layui-input" placeholder="请输入商品名称" type="text" placeholder="" />
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">所属第三方</label>
+					<div class="layui-input-block">
+						<input  autocomplete="off" class="layui-input" type="text"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">所属分类</label>
+					<div class="layui-input-inline">
+						<select lay-verify="">
+						  <option value="0">请选择</option>
+						  <option value="1">名牌包包</option>
+						  <option value="2">名牌手表</option>
+						  <option value="3">锦龙春酒业</option>
+						  <option value="4">伍基酵素</option>
+						  <option value="5">韵客翡翠</option>
+						  <option value="6">品牌豪车</option>
+						</select>   
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">所属品牌</label>
+					<div class="layui-input-block">
+						<input  autocomplete="off" class="layui-input" placeholder="请输入所属品牌"  type="text"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">商品状态</label>
+					<div class="layui-input-inline">
+						<select name="city" lay-verify="">
+						  <option value="0">请选择</option>
+						  <option value="1">待上架</option>
+						  <option value="2">已上架</option>
+						  <option value="3">已下架</option>
+						  <option value="4">已售罄</option>
+						</select>   
+					</div>
+				</div>				
+				<div class="layui-inline">
+					<label class="layui-form-label">开始时间</label>
+					<div class="layui-input-inline">
+						<input class="layui-input layui-date" placeholder="开始时间" id="start">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">截止时间</label>
+					<div class="layui-input-inline">
+						<input class="layui-input layui-date" placeholder="结束时间" id="end">
+					</div>
+				</div>
+				<div class="layui-inline"><button class="layui-btn" lay-submit="">查询</button></div>
+			</form>
+		</div>
+
+		<fieldset class="layui-elem-field mt10">
+		  <legend>2016-12-01 至 2016-12-28已售商品统计</legend>
+		  <div class="layui-field-box">
+			<table class="layui-table" lay-skin="nob">
+			  <tbody>
+			    <tr>
+			      <td>商品成本：<span class="price">120000.00</span></td>
+			      <td>成交金额：<span class="price">120000.00</span></td>
+			      <td>成交AGR：12000</td>
+			    </tr>
+			  </tbody>
+			</table>
+		  </div>
+		</fieldset>
+		<div class="tar mt10">
+			<button class="layui-btn layui-btn-normal layui-btn-small">导出</button>
+		</div>
+		<div class="table-list roll-x">
+			<table class="layui-table" lay-skin="line">
+			  <thead>
+			    <tr>
+			      <th colspan="2">商品名称</th>
+			      <th>第三方</th>
+			      <th>所属分类</th>
+			      <th>所属品牌</th>
+			      <th>销售价</th>
+			      <th>AGR</th>
+			      <th>已售数量</th>
+			      <th>库存</th>
+			      <th>发布时间</th>
+			      <th>商品状态</th>
+			      <th>操作</th>
+			    </tr> 
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td width="66" ><a href="javascript:;"  class="a3"><img class="img-cp" src="img/1.jpg" alt=""></a></td>
+			      <td width="300">
+			      	<a href="javascript:;"  class="a3"><div>Apple iPhone 7 128G 红色特别版</div>
+			      	<div class="gray">128G,红色</div></a>
+			      </td>
+			      <td>XXX公司</td>
+			      <td>名牌手表</td>
+			      <td>浪陀</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td>3</td>
+			      <td>20</td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td>待上架</td>
+			      <td> 
+			      	<button class="layui-btn layui-btn-normal layui-btn-small check">审核</button>   	
+			      	<button class="layui-btn layui-btn-danger layui-btn-small a4">删除</button>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td><a href="javascript:;"  class="a3"><img class="img-cp" src="img/1.jpg" alt=""></a></td>
+			      <td>
+			      	<a href="javascript:;"  class="a3"><div>Apple iPhone 7 128G 红色特别版</div>
+			      	<div class="gray">128G,红色</div></a>
+			      </td>
+			      <td>XXX公司</td>
+			      <td>名牌手表</td>
+			      <td>浪陀</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td>3</td>
+			      <td>20</td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td>已上架</td>
+			      <td>
+			      	<button class="layui-btn layui-btn-normal layui-btn-small a2">下架</button>     	
+			      </td>
+			    </tr>
+			    <tr>
+			      <td><a href="javascript:;"  class="a3"><img class="img-cp" src="img/1.jpg" alt=""></a></td>
+			      <td>
+			      	<a href="javascript:;"  class="a3"><div>Apple iPhone 7 128G 红色特别版</div>
+			      	<div class="gray">128G,红色</div></a>
+			      </td>
+			      <td>XXX公司</td>
+			      <td>名牌手表</td>
+			      <td>浪陀</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td>3</td>
+			      <td>20</td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td>已下架</td>
+			      <td>		      	
+			      	<button class="layui-btn layui-btn-danger layui-btn-small a4">删除</button>	
+			      </td>
+			    </tr>
+			    <tr>
+			      <td><a href="javascript:;"  class="a3"><img class="img-cp" src="img/1.jpg" alt=""></a></td>
+			      <td>
+			      	<a href="javascript:;"  class="a3"><div>Apple iPhone 7 128G 红色特别版</div>
+			      	<div class="gray">128G,红色</div></a>
+			      </td>
+			      <td>XXX公司</td>
+			      <td>名牌手表</td>
+			      <td>浪陀</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td>3</td>
+			      <td>20</td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td>已售罄</td>
+			      <td>
+			      	<button class="layui-btn layui-btn-normal layui-btn-small a2">下架</button>	      	
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>   
+		</div>
+	</div>
+	<div id="table-pages" style="text-align:center"></div>
+	<script type="text/javascript" src="layui/layui.js"></script>
+    <script>
+		layui.use(['jquery', 'laydate','form','layer','laypage'], function(){
+			var $ = layui.jquery,
+			    laydate = layui.laydate,
+			    layer = layui.layer,
+			    laypage = layui.laypage;
+
+
+			// 分页
+			 laypage({
+			    cont: 'table-pages'
+			    ,pages: 2
+			    ,skip: true
+			  });
+
+            // 开始时间及截止时间
+            var start = {
+			   choose: function(datas){
+			      end.min = datas; //开始日选好后，重置结束日的最小日期
+			      end.start = datas //将结束日的初始值设定为开始日
+			    }
+			  };
+			  
+			  var end = {
+			    choose: function(datas){
+			      start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			  };
+
+			$('#start').click(function(){
+				start.elem = this;
+    			laydate(start);
+			});
+
+			$('#end').click(function(){
+				end.elem = this
+    			laydate(end);
+			});
+
+		    // 删除操作
+		    $(document).on("click", ".a4", function() {
+			    layer.open({
+			      title:"删除操作"
+				  ,content: '您确认要删除该商品吗？'
+				  ,btn: ['取消', '确认']
+				  ,yes: function(index, layero){
+				       layer.closeAll();
+				  }
+				  ,btn2: function(index, layero){
+				      layer.msg('删除成功！',{time: 1000});
+				  }
+				});
+			});
+
+			// 下架操作
+			$(document).on("click", ".a2", function() {
+			    layer.open({
+			      title:"下架操作"
+				  ,content: '您确认要下架该商品吗？'
+				  ,btn: ['取消', '确认']
+				  ,yes: function(index, layero){
+				       layer.closeAll();
+				  }
+				  ,btn2: function(index, layero){
+				      layer.msg('下架成功！',{time: 1000});
+				  }
+				});
+			});
+
+			// 商品详情
+			$(document).on("click", ".a3", function() {
+			    layer.open({
+			      type:2
+			      ,area:['80%', '90%']
+			      ,title:"商品详情"
+				  ,content: '商品详情2.html'
+				});
+			});
+
+			// 发布商品
+			$(document).on("click", ".check", function() {
+			    layer.open({
+			      type:2
+			      ,area:['80%', '90%']
+			      ,title:"审核商品"
+				  ,content: '审核商品.html'
+				});
+			});
+			
+		});
+	</script>
+</body>
+</html>

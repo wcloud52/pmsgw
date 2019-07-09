@@ -1,0 +1,29 @@
+echo "#############################################################################" 
+echo "abtain the java progress,print the java pid and pidnames"
+var=$(ps -ef | grep java |grep case-3.0| awk -F "[ \t-]+" '{print $2}')
+#var=$(ps -ef | grep java | head -n 8| awk -F '[ \t-]+' '{if($11 == "mongodb" ) print  pidname=$2}')
+echo "the current  saas-case-3.0.0  progress is $var"
+kill -9 $var
+echo "startup a new service"
+nohup java -Duser.timezone=GMT+8 -Dloader.path="../lib/" -jar saas-case-3.0.0-SNAPSHOT.jar --spring.config.location=bootstrap-dev.properties,application-dev.properties>logs/catalina.out 2>&1 &
+
+echo "Sucess start the saas-plareform service"
+cd logs
+ls -l
+echo "#############################################################################"
+tail -f catalina.out
+
+
+
+nohup java -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-0.0.1-SNAPSHOT.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+
+nohup java  -Xms256m -Xmx512m  -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-9911.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+
+
+nohup java  -Xms256m -Xmx512m  -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-9921.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+nohup java  -Xms256m -Xmx512m  -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-9931.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+nohup java  -Xms256m -Xmx512m -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-9941.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+nohup java  -Xms256m -Xmx512m  -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-9951.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+
+nohup java -Duser.timezone=GMT+8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-9999.jar --spring.config.location=bootstrap.properties,application.properties>logs/catalina.out 2>&1 &
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsWeixinUserExtMapper">
+	<insert id="insertByList" parameterType="list">
+		insert into nodejs_weixin_user (openid, nickname, city,
+		country, groupid, headimgurl,
+		language, province, remark,
+		sex, subscribe, subscribe_time,
+		unionid, create_time, modify_time)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			#{item.openid,jdbcType=VARCHAR},
+			#{item.nickname,jdbcType=VARCHAR}, #{item.city,jdbcType=VARCHAR},
+			#{item.country,jdbcType=VARCHAR}, #{item.groupid,jdbcType=INTEGER},
+			#{item.headimgurl,jdbcType=VARCHAR},
+			#{item.language,jdbcType=VARCHAR}, #{item.province,jdbcType=VARCHAR},
+			#{item.remark,jdbcType=VARCHAR},
+			#{item.sex,jdbcType=INTEGER}, #{item.subscribe,jdbcType=BIT},
+			#{item.subscribe_time,jdbcType=BIGINT},
+			#{item.unionid,jdbcType=VARCHAR},
+			#{item.create_time,jdbcType=TIMESTAMP},
+			#{item.modify_time,jdbcType=TIMESTAMP}
+
+			)
+
+		</foreach>
+	</insert>
+
+	<delete id="deleteAll">
+		delete from nodejs_weixin_user
+	</delete>
+
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.WappRuleMasterMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.WappRuleMaster" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="detailsMessage" property="detailsMessage" jdbcType="VARCHAR" />
+    <result column="createdDatetime" property="createdDatetime" jdbcType="TIMESTAMP" />
+    <result column="updateDatetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="createdBy" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updateBy" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, description, detailsMessage, createdDatetime, updateDatetime, createdBy, 
+    updateBy
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wapp_rule_master
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wapp_rule_master
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.WappRuleMaster" >
+    insert into wapp_rule_master (id, name, description, 
+      detailsMessage, createdDatetime, updateDatetime, 
+      createdBy, updateBy)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{detailsMessage,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.WappRuleMaster" >
+    insert into wapp_rule_master
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="detailsMessage != null" >
+        detailsMessage,
+      </if>
+      <if test="createdDatetime != null" >
+        createdDatetime,
+      </if>
+      <if test="updateDatetime != null" >
+        updateDatetime,
+      </if>
+      <if test="createdBy != null" >
+        createdBy,
+      </if>
+      <if test="updateBy != null" >
+        updateBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsMessage != null" >
+        #{detailsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.WappRuleMaster" >
+    update wapp_rule_master
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsMessage != null" >
+        detailsMessage = #{detailsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        createdDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        updateDatetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        updateBy = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.WappRuleMaster" >
+    update wapp_rule_master
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      detailsMessage = #{detailsMessage,jdbcType=VARCHAR},
+      createdDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      updateDatetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      updateBy = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

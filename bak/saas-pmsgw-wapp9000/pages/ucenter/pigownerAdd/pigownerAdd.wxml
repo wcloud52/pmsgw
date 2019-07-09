@@ -1,0 +1,17 @@
+<view class="add-address">
+    <view class="add-form">
+        <view class="form-item">
+            足环号：<input class="input" bindinput="bindinputName"  value="{{pigowner.name}}" auto-focus/>
+        </view>
+        <view class="form-item">
+           备注： <input class="input" bindinput="bindinputDescription" value="{{pigowner.description}}" />
+        </view>
+      
+    </view>
+
+    <view class="btns">
+        <button class="cannel" bindtap="cancelPigowner">取消</button>
+        <button class="save" bindtap="savePigowner">保存</button>
+    </view>
+</view>
+  

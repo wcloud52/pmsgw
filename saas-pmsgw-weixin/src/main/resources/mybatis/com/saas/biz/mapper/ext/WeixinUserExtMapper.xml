@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.WeixinUserExtMapper" >
+<!-- <cache-ref namespace="com.saas.biz.mapper.base.WeixinUserMapper" /> -->
+  <select id="selectListByDynamic" resultMap="com.saas.biz.mapper.base.WeixinUserMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.WeixinUserMapper.Base_Column_List" />
+
+		from weixin_user
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from weixin_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+			
+		</where>
+	</select>
+	 <select id="selectAllList" resultMap="com.saas.biz.mapper.base.WeixinUserMapper.BaseResultMap">
+		select 
+		<include refid="com.saas.biz.mapper.base.WeixinUserMapper.Base_Column_List" />
+		from weixin_user
+	</select>
+	<update id="updateSubscribe">
+    update weixin_user
+    set subscribe =0
+  </update>
+	<insert id="insertByList" parameterType="list">
+		 insert into weixin_user (id, create_time, modify_time, 
+      city, country, groupid, 
+      headimgurl, language, nickname, 
+      openid, province, remark, 
+      sex, subscribe, subscribe_time, 
+      unionid, bind_type, bind_tel, 
+      bind_name, bind_loft, bind_address, 
+      bind_game, bind_address_prov, bind_address_city, 
+      bind_address_dist)
+		   values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(#{item.id,jdbcType=VARCHAR}, #{item.create_time,jdbcType=TIMESTAMP}, #{item.modify_time,jdbcType=TIMESTAMP}, 
+      #{item.city,jdbcType=VARCHAR}, #{item.country,jdbcType=VARCHAR}, #{item.groupid,jdbcType=BIGINT}, 
+      #{item.headimgurl,jdbcType=VARCHAR}, #{item.language,jdbcType=VARCHAR}, #{item.nickname,jdbcType=VARCHAR}, 
+      #{item.openid,jdbcType=VARCHAR}, #{item.province,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, 
+      #{item.sex,jdbcType=INTEGER}, #{item.subscribe,jdbcType=INTEGER}, #{item.subscribe_time,jdbcType=BIGINT}, 
+      #{item.unionid,jdbcType=VARCHAR}, #{item.bind_type,jdbcType=VARCHAR}, #{item.bind_tel,jdbcType=VARCHAR}, 
+      #{item.bind_name,jdbcType=VARCHAR}, #{item.bind_loft,jdbcType=VARCHAR}, #{item.bind_address,jdbcType=VARCHAR}, 
+      #{item.bind_game,jdbcType=VARCHAR}, #{item.bind_address_prov,jdbcType=VARCHAR}, #{item.bind_address_city,jdbcType=VARCHAR}, 
+      #{item.bind_address_dist,jdbcType=VARCHAR})
+      
+		</foreach>
+	</insert>
+	<update id="updateByList" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			update weixin_user
+			<set >
+      <if test="item.create_time != null" >
+        create_time = #{item.create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="item.modify_time != null" >
+        modify_time = #{item.modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="item.city != null" >
+        city = #{item.city,jdbcType=VARCHAR},
+      </if>
+      <if test="item.country != null" >
+        country = #{item.country,jdbcType=VARCHAR},
+      </if>
+      <if test="item.groupid != null" >
+        groupid = #{item.groupid,jdbcType=BIGINT},
+      </if>
+      <if test="item.headimgurl != null" >
+        headimgurl = #{item.headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="item.language != null" >
+        language = #{item.language,jdbcType=VARCHAR},
+      </if>
+      <if test="item.nickname != null" >
+        nickname = #{item.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="item.openid != null" >
+        openid = #{item.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="item.province != null" >
+        province = #{item.province,jdbcType=VARCHAR},
+      </if>
+      <if test="item.remark != null" >
+        remark = #{item.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="item.sex != null" >
+        sex = #{item.sex,jdbcType=INTEGER},
+      </if>
+      <if test="item.subscribe != null" >
+        subscribe = #{item.subscribe,jdbcType=INTEGER},
+      </if>
+      <if test="item.subscribe_time != null" >
+        subscribe_time = #{item.subscribe_time,jdbcType=BIGINT},
+      </if>
+      <if test="item.unionid != null" >
+        unionid = #{item.unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_type != null" >
+        bind_type = #{item.bind_type,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_tel != null" >
+        bind_tel = #{item.bind_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_name != null" >
+        bind_name = #{item.bind_name,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_loft != null" >
+        bind_loft = #{item.bind_loft,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_address != null" >
+        bind_address = #{item.bind_address,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_game != null" >
+        bind_game = #{item.bind_game,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_address_prov != null" >
+        bind_address_prov = #{item.bind_address_prov,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_address_city != null" >
+        bind_address_city = #{item.bind_address_city,jdbcType=VARCHAR},
+      </if>
+      <if test="item.bind_address_dist != null" >
+        bind_address_dist = #{item.bind_address_dist,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{item.id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+</mapper>

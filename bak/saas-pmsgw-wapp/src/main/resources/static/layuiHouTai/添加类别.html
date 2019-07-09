@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100"><span class='red'>*</span>分类名称</th>
+		      <td>
+		        <div style="width:50%">
+		        	<input type="text" name="" placeholder="请输入类别名称" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>英文名称</th>
+		      <td>
+		        <div style="width:50%">
+		        	<input type="text" name="" placeholder="请输入英文名称" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>分类图片</th>
+		      <td>
+		          <div style="width:50%">
+		        	<input type="file" name="file（可随便定义）" class="layui-upload-file">
+		          </div>
+		          <ul id="layer-photos-demo" class="layer-photos-demo mt10">
+					<li><img  layer-src="img/2.jpg" src="img/2.jpg" ><span><i class="layui-icon">&#xe640;</i></span></li>
+				  </ul>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">确 定</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery,layer = layui.layer;
+			layui.upload({
+			  url: '上传接口url'
+			  ,success: function(res){
+			    console.log(res); //上传成功返回值，必须为json格式
+			  }
+			});
+
+			layer.photos({
+			  photos: '#layer-photos-demo'
+			  ,closeBtn: 1
+			  ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			}); 
+		});
+	</script>
+</body>
+</html>

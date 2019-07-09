@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100">用户账号</th>
+		      <td>
+				<div style="width:70%">
+		      		<input type="text" name="" placeholder="请输入用户账号，添加后不允许修改" autocomplete="off" class="layui-input">
+		      	</div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>用户姓名</th>
+		      <td>
+		        <div style="width:70%">
+		      		<input type="text" name="" placeholder="请输入用户姓名" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>手机号码</th>
+		      <td>
+		        <div style="width:70%">
+		        	<input type="text" name="" placeholder="请输入手机号码" maxlength="11" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th style="vertical-align: middle;">账号权限</th>
+		      <td>
+		        <div class="mb10"><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div><label>账号管理</label></div>
+		        <div class="mb10"><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div><label>订单管理</label></div>
+		        <div><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div><label>运营管理</label></div>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">确 定</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form'], function(){
+			
+			
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+	<div class="table-list layui-form">
+		<div class="content-search" style="padding-bottom: 0;    margin-top: 7px;border-bottom: 0;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-inline">
+					<label class="layui-form-label">商品名称</label>
+					<div class="layui-input-block">
+						<input name="date" autocomplete="off" class="layui-input" type="text">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">所属品牌</label>
+					<div class="layui-input-block">
+						<input name="date" autocomplete="off" class="layui-input" type="text">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">第三方</label>
+					<div class="layui-input-block">
+						<input name="date" autocomplete="off" class="layui-input" type="text">
+					</div>
+				</div>
+				<div class="layui-inline"><button class="layui-btn" lay-submit="">查询</button></div>
+			</form>
+		</div>
+		<table class="layui-table" lay-skin="line">
+		  <thead>
+		    <tr>
+		      <th width="30">
+		      	<div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i></div></th>
+		      <th>商品名称</th>
+		      <th>所属分类</th>
+		      <th>所属品牌</th>
+		      <th>第三方</th>
+		      <th>库存</th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		    <tr>
+		      <td><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div></td>
+		      <td>钻石陀飞轮</td>
+		      <td>名牌手表</td>
+		      <td>浪陀</td>
+		      <td>XXX公司</td>
+		      <td>100</td>
+		    </tr>
+		  </tbody>
+		</table>   
+
+	</div>
+	<div id="table-pages" style="text-align:center"></div>
+	<div class="tac mt10"><div class="layui-btn" style=" min-width: 150px;margin: auto;">确 定</div></div>
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','layer','form','laypage'], function(){
+			var $ = layui.jquery,layer = layui.layer,
+			laypage = layui.laypage;
+			// 分页
+			 laypage({
+			    cont: 'table-pages'
+			    ,pages: 100
+			    ,skip: true
+			  });
+		});
+	</script>
+
+</body>
+</html>

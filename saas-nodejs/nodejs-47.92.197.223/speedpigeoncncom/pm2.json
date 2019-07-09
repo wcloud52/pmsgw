@@ -1,0 +1,12 @@
+{
+	"name": "speedpigeoncncom_saas-pmsgw-weixin",
+	"script": "startup.sh speedpigeoncncom_saas-pmsgw-weixin-0.0.1-SNAPSHOT.jar",
+	"args": [],
+	"exec_interpreter": "",
+	"exec_mode": "fork",
+	"watch": false,
+	"log_date_format": "YYYY-MM-DD HH:mm Z",
+	"error_file": "logs/err.log",
+	"out_file": "logs/out.log",
+	"pid_file": "logs/pid.txt"
+}

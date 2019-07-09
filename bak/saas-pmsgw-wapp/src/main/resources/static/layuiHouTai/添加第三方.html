@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100"><span class='red'>*</span>第三方名称</th>
+		      <td><input type="text" name="" placeholder="请输入第三方名称,添加后不允许修改" autocomplete="off" class="layui-input"></td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>法人代表</th>
+		      <td>
+		        <div style="width:30%">
+		        	<input type="text" name="" placeholder="请输入法人代表" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>联系人</th>
+		      <td>
+		        <div style="width:30%">
+		        	<input type="text" name="" placeholder="请输入联系人" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>手机号码</th>
+		      <td>
+		        <div style="width:30%">
+		        	<input type="text" name="" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>联系电话</th>
+		      <td>
+		        <div style="width:30%">
+		        	<input type="text" name="" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>第三方地址</th>
+		      <td>
+		        <div style="" class="region">
+		            <div class="region-list">
+		            	<select name="city" lay-verify="">
+						  <option value="">请选择省份</option>
+						  <option value="1">广东省</option>
+						  <option value="2">湖南省</option>
+						  <option value="3">广西省</option>
+						</select>
+		            </div>
+		        	<div class="region-list">
+			        	<select name="city" lay-verify="">
+						  <option value="">请选择城市</option>
+						  <option value="1">深圳市</option>
+						  <option value="2">东莞市</option>
+						  <option value="3">广州市</option>
+						</select>
+		        	</div>
+		        	<div class="region-list">
+		        	    <select name="city" lay-verify="">
+						  <option value="">请选择区/县</option>
+						  <option value="1">宝安区</option>
+						  <option value="2">龙华区</option>
+						  <option value="3">龙岗区</option>
+						</select>
+		        	</div>
+		        </div>
+		        <div style="width:100%">
+		        	<input type="text" name="" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class="red">*</span>营业执照</th>
+		       <td>
+		          <div style="width:400px">
+		        	<input type="file" name="file" class="layui-upload-file">
+		          </div>
+		          <ul id="layer-photos-demo" class="layer-photos-demo mt10">
+					<li><img  layer-src="img/6.jpg" src="img/6.jpg" ><span><i class="layui-icon">&#xe640;</i></span></li>
+				  </ul>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">确 定</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery,layer = layui.layer;
+			layui.upload({
+			  url: '上传接口url'
+			  ,success: function(res){
+			    console.log(res); //上传成功返回值，必须为json格式
+			  }
+			});
+
+			layer.photos({
+			  photos: '#layer-photos-demo'
+			  ,closeBtn :1
+			  ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			});
+
+		});
+	</script>
+</body>
+</html>

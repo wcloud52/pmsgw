@@ -1,0 +1,107 @@
+<style>
+.layui-upload-img {
+	width: 92px;
+	height: 92px;
+	margin: 0 10px 10px 0;
+}
+</style>
+<div style="margin: 15px;">
+	<form class="layui-form">
+	<div class="layui-form-item">
+			<label class="layui-form-label" style="width: 200px">标题</label>
+			<div class="layui-input-block" style="margin-left: 230px">
+				<input id="news_id" name="news_id" type="hidden" value="${item.news_id?if_exists }" /> 
+				<input id="news_type" name="news_type" type="hidden" value="${item.news_type?if_exists }" /> 
+				<input id="news_imgHref" name="news_imgHref" type="hidden" value="${item.news_imgHref?if_exists }" /> 
+				<input name="news_title" type="text" class="layui-input" value="${item.news_title?if_exists }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width: 200px">摘要</label>
+			<div class="layui-input-block" style="margin-left: 230px">
+				
+					<textarea name="news_desc" class="layui-textarea">${item.news_desc?if_exists }</textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width: 200px">图片</label>
+			<div class="layui-input-block" style="margin-left: 230px">
+				<div class="layui-upload">
+					<button type="button" class="layui-btn" id="btnUploadImg">上传</button>
+					<div class="layui-upload-list">
+						<img class="layui-upload-img" id="imgUpload" src="${item.news_imgHref?if_exists }">
+						<p id="pImgText"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width: 200px">内容</label>
+			<div class="layui-input-block" style="margin-left: 230px">
+               <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
+  ${item.news_text?if_exists }
+</script>
+				<!-- <textarea class="layui-textarea" id="news_text" name="news_text"
+					lay-verify="pattern" style="display: none">  
+                  ${item.news_text?if_exists }
+              </textarea> -->
+			</div>
+		</div>
+		
+
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+  <script type="text/javascript">
+window.UEDITOR_HOME_URL = "/plugins/ueditor1_4_3_3/";
+
+</script>
+
+    <script type="text/javascript" charset="utf-8" src="../plugins/ueditor1_4_3_3/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../plugins/ueditor1_4_3_3/ueditor.all.js"></script>
+    
+ 
+    <script type="text/javascript" src="../plugins/ueditor1_4_3_3/lang/zh-cn/zh-cn.js"></script>
+    	
+         <script type="text/javascript">
+
+window.UEDITOR_CONFIG.serverUrl='/storage/createImg/';
+
+window.UEDITOR_CONFIG.theme='default';
+window.UEDITOR_CONFIG.themePath=window.UEDITOR_HOME_URL+"themes/";
+
+window.UEDITOR_CONFIG.textarea='news_text';
+
+/* 上传图片配置项 */
+window.UEDITOR_CONFIG.imageActionName='/storage/createImg/';
+window.UEDITOR_CONFIG.imageFieldName='upfile';
+window.UEDITOR_CONFIG.imageUrlPrefix='';
+window.UEDITOR_CONFIG.imageAllowFiles=[".png", ".jpg", ".jpeg", ".gif", ".bmp"];
+
+/* 涂鸦图片上传配置项 */
+window.UEDITOR_CONFIG.scrawlActionName='/storage/createImg/';
+window.UEDITOR_CONFIG.scrawlFieldName='upfile';
+window.UEDITOR_CONFIG.scrawlUrlPrefix='';
+
+/* 上传视频配置 */
+window.UEDITOR_CONFIG.videoActionName='/storage/createImg/';
+window.UEDITOR_CONFIG.videoFieldName='upfile';
+window.UEDITOR_CONFIG.videoAllowFiles= [
+    ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+    ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"];
+window.UEDITOR_CONFIG.videoUrlPrefix='';
+
+/* 上传文件配置 */
+window.UEDITOR_CONFIG.fileActionName='/storage/createImg/';
+window.UEDITOR_CONFIG.fileFieldName='upfile';
+window.UEDITOR_CONFIG.fileAllowFiles= [
+	 ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+     ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+     ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
+     ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+     ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"];
+
+window.UEDITOR_CONFIG.zIndex=99999999;
+</script>
+<script type="text/javascript"
+	src="../pagejs/nodejsNews/edit.js?v=${.now?string('yyyyMMddHHmmss')}"></script>

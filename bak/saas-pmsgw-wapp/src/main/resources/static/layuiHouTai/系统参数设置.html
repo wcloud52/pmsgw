@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" >
+		<fieldset class="layui-elem-field layui-field-title mtb10">
+		  <legend>会员机票购买参数设置</legend>
+		</fieldset>
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="150">每天机票可预订数量</th>
+		      <td>
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张 <span class="red">(平台每天最高的机票预订量)</span>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>一次最大预订数量</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+
+		<fieldset class="layui-elem-field layui-field-title mtb10">
+		  <legend>AGR等级每月机票预订数量设置</legend>
+		</fieldset>
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="150">普通会员</th>
+		      <td>
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>p1</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>p2</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>p3</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>v1</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>v2</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>v3</th>
+		      <td>
+		      	
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> 张
+		        
+		      </td>
+		    </tr>
+		  </tbody>
+        </table>
+
+
+		<fieldset class="layui-elem-field layui-field-title mtb10">
+		  <legend>AGR商品抵扣比例</legend>
+		</fieldset>
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="150">AGR : 人民币（元）</th>
+		      <td>
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120"> ：
+		        	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w120">
+		            <span class="red">(该参数将影响AGR的抵扣率，请紧慎操作)</span>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+
+		<fieldset class="layui-elem-field layui-field-title mtb10">
+		  <legend>首页分类推荐</legend>
+		</fieldset>
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="150">首页分类推荐</th>
+		      <td>
+		          <div class="mb10"><input type="checkbox" class="my-checkbox" >名牌手表</div>
+		          <div class="mb10"><input type="checkbox" class="my-checkbox" >名牌包包</div>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+
+		<fieldset class="layui-elem-field layui-field-title mtb10">
+		  <legend>客服热线设置</legend>
+		</fieldset>
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="150">客服热线</th>
+		      <td>
+		          	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input w350">	
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+
+		<div style="margin-left: 195px; margin-bottom: 15px;">	
+			<div class="layui-btn  layui-btn-big" style=" min-width: 150px;">保 存</div>
+		</div>
+	</form>
+	
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form'], function(){
+			var $ = layui.jquery; 
+		});
+	</script>
+</body>
+</html>

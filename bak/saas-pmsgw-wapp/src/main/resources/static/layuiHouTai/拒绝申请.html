@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100"><span class='red'>*</span>拒绝理由：</th>
+		      <td>
+		      	<textarea name="desc" placeholder="请输入拒绝理由" class="layui-textarea"></textarea>
+		      </td>
+		    </tr>
+		    
+		    
+		    
+		    <tr>
+		      <th>商品图片</th>
+		      <td>
+		          <div style="width:30%">
+		        	<input type="file" name="file（可随便定义）" class="layui-upload-file">
+		          </div>
+		          <ul id="layer-photos-demo" class="layer-photos-demo mt10">
+					<li><img  layer-src="img/2.jpg" src="img/2.jpg" ><span><i class="layui-icon">&#xe640;</i></span></li>
+					<li><img  layer-src="img/3.jpg" src="img/3.jpg" ><span><i class="layui-icon">&#xe640;</i></span></li>
+					<li><img  layer-src="img/4.jpg" src="img/4.jpg" ><span><i class="layui-icon">&#xe640;</i></span></li>
+					<li><img  layer-src="img/5.jpg" src="img/5.jpg" ><span><i class="layui-icon">&#xe640;</i></span></li>
+				  </ul>
+		      </td>
+		    </tr>
+
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">提 交</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery
+				,layer = layui.layer
+				,form = layui.form();
+			layui.upload({
+			  url: '上传接口url'
+			  ,success: function(res){
+			    console.log(res); //上传成功返回值，必须为json格式
+			  }
+			});
+
+			layer.photos({
+			  photos: '#layer-photos-demo'
+			  ,closeBtn: 1
+			  ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			}); 
+
+
+			//添加分类
+			$(document).on("click", ".add1", function() {
+			    layer.open({
+			      type:2
+			      ,area:['40%', '40%']
+			      ,title:"添加分类"
+				  ,content: '添加分类.html'
+				});
+			});
+
+			//添加品牌
+			$(document).on("click", ".add2", function() {
+			    layer.open({
+			      type:2
+			      ,area:['40%', '40%']
+			      ,title:"添加品牌"
+				  ,content: '添加品牌.html'
+				});
+			});
+
+			// 删除操作
+		    $(document).on("click", ".del", function() {
+			    layer.open({
+			      title:"删除操作"
+				  ,content: '您确认要删除该属性商品吗？'
+				  ,btn: ['取消', '确认']
+				  ,yes: function(index, layero){
+				       layer.closeAll();
+				  }
+				  ,btn2: function(index, layero){
+				      layer.msg('删除成功！',{time: 1000});
+				  }
+				});
+			});
+		});
+	</script>
+</body>
+</html>

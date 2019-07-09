@@ -1,0 +1,342 @@
+
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+	font-size:12px;
+}
+
+div.dataTables_length select {
+	width: 75px;
+	font-size:12px;
+}
+
+div.dataTables_filter label {
+	float: left;
+}
+
+div.dataTables_info {
+	float:left; padding-left:10px;padding-top:1px;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+table.table thead .sorting { background:#f1f1f1 url('../img/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: #f1f1f1 url('../img/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background:#f1f1f1 url('../img/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background:#f1f1f1 url('../img/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background:#f1f1f1 url('../img/sort_desc_disabled.png') no-repeat center right; }
+/* .dataTable{table-layout:fixed;} */
+.dataTable td{word-wrap:break-word;}
+table.dataTable th:active {
+	outline: none;
+}
+
+/* Scrolling */
+div.dataTables_scrollHead table {
+	margin-bottom: 0 !important;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+div.dataTables_scrollHead table thead tr:last-child th:first-child,
+div.dataTables_scrollHead table thead tr:last-child td:first-child {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.dataTables_scrollBody table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody tbody tr:first-child th,
+div.dataTables_scrollBody tbody tr:first-child td {
+	border-top: none;
+}
+
+div.dataTables_scrollFoot table {
+	border-top: none;
+}
+
+
+
+
+/*
+ * TableTools styles
+ */
+.table tbody tr.row_selected td,
+.table tbody tr.row_selected th {
+	background-color: #08C;
+	color: white;
+}
+
+.table tbody tr.row_selected:hover td,
+.table tbody tr.row_selected:hover th {
+	background-color: #0075b0 !important;
+}
+
+.table-striped tbody tr.row_selected:nth-child(odd) td,
+.table-striped tbody tr.row_selected:nth-child(odd) th {
+	background-color: #017ebc;
+}
+
+table.DTTT_selectable tbody tr {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+div.DTTT .btn {
+	color: #333 !important;
+	font-size: 12px;
+}
+
+div.DTTT .btn:hover {
+	text-decoration: none !important;
+}
+
+
+ul.DTTT_dropdown.dropdown-menu a {
+	color: #333 !important; /* needed only when demo_page.css is included */
+}
+
+ul.DTTT_dropdown.dropdown-menu li:hover a {
+	background-color: #0088cc;
+	color: white !important;
+}
+
+/* TableTools information display */
+div.DTTT_print_info.modal {
+	height: 150px;
+	margin-top: -75px;
+	text-align: center;
+}
+
+div.DTTT_print_info h6 {
+	font-weight: normal;
+	font-size: 28px;
+	line-height: 28px;
+	margin: 1em;
+}
+
+div.DTTT_print_info p {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+
+
+/*
+ * FixedColumns styles
+ */
+div.DTFC_LeftHeadWrapper table,
+div.DTFC_LeftFootWrapper table,
+table.DTFC_Cloned tr.even {
+	background-color: white;
+}
+
+div.DTFC_LeftHeadWrapper table {
+	margin-bottom: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftHeadWrapper table thead tr:last-child th:first-child,
+div.DTFC_LeftHeadWrapper table thead tr:last-child td:first-child {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper tbody tr:first-child th,
+div.DTFC_LeftBodyWrapper tbody tr:first-child td {
+	border-top: none;
+}
+
+div.DTFC_LeftFootWrapper table {
+	border-top: none;
+}
+/*扩展*/
+table.table thead{  background-color: #f1f1f1;}
+table.table thead th{padding-right:20px;}
+.table-striped tbody tr:nth-child(even) .sorting_1{background-color: #e3f3ff;}
+.table-striped tbody tr:nth-child(odd) .sorting_1{background-color: #f1fdff;}
+.table-striped tbody tr:nth-child(even):hover .sorting_1{background-color:#d1ebff;}
+.table-striped tbody tr:nth-child(odd):hover .sorting_1{background-color:#def2ff;}
+.table-striped tbody tr:nth-child(odd).row_selected td.sorting_1{background:#0175ae;}
+.table-striped tbody tr:nth-child(even).row_selected td.sorting_1{background:#017ebc;}
+
+td.dataTables_empty{text-align:center; line-height:30px;}
+.dataTables_processing {position: absolute;top: 50%;left: 50%;width: 250px;height: 30px;margin-left: -125px;margin-top: -15px;padding: 14px 0 2px 0;border: 1px solid #ddd;text-align: center;color: #999;font-size: 14px;background-color: white;}
+tr.row_selected .icon-wrench{background: url("../img/glyphicons-halflings-white.png") -360px -144px;}
+.pagination ul > li > a,
+.pagination ul > li > span {
+ line-height: 15px;
+}
+
+/* 动态表格 */
+table.grid-table thead {
+    background-color: white;
+}
+.DynamicGrid{
+	border-radius: 4px;
+    border: 1px solid #DDD;
+    color: #444;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+/*     padding-top: 4px; */
+/*     margin:0 2%; */
+	position: relative;
+}
+.DynamicGrid .gridNode{
+	margin: 0 20px;
+}
+.DynamicGrid .grid-table .remove-button{
+	margin:0;
+	padding:0;
+	background:none;
+	border:none;
+	visibility:hidden;
+	font: normal 20px Tahoma, Verdana;
+	position: absolute;
+	cursor:pointer;
+	color: #666;
+}
+.cannoteditable.DynamicGrid .remove-button,.add.DynamicGrid .remove-button,.edit.DynamicGrid .remove-button{
+	display:none;
+}
+.DynamicGrid .grid-table .remove-button:hover{
+	color: #B94A48;
+}
+.DynamicGrid .grid-table .grid-action{
+	vertical-align: top;
+	padding:0;
+	width: 15px;
+}
+.DynamicGrid .grid-table tr:hover .remove-button{
+	visibility:visible;
+}
+.DynamicGrid .grid-table{
+	width: 100%;
+}
+.DynamicGrid .grid-table th{
+	font-size: 13px;
+	font-weight: bold;
+}
+.DynamicGrid .grid-table th, .DynamicGrid .grid-table td{
+	text-align: left;
+	line-height: 20px;
+	padding: 4px 5px;
+}
+.DynamicGrid .grid-table td{
+	border-top: 1px solid #DDD;
+}
+.editable.DynamicGrid .grid-table tbody>tr[data-role]{
+	cursor:pointer;
+}
+.DynamicGrid .grid-table tbody>tr[data-role]:hover{
+	background-color: #F9F9F9;
+}
+.DynamicGrid .grid-table tbody>tr[data-role=empty]:hover{
+	background-color: #FFF;
+	cursor:default;
+}
+.DynamicGrid .DynamicGridEditNode{
+	position: relative;
+	background-color: #F9F9F9;
+	padding: 10px;
+	box-shadow:inset 0 6px 6px -6px rgba(0, 0, 0, .1);
+}
+.DynamicGrid .grid-add{
+	margin-top: -10px;
+}
+.DynamicGrid .DynamicGridArr{
+	display: block;
+	border: 1px solid #DDD;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	top: -6px;
+	top: -9px\9;
+	left: 50%;
+	background-color: #F9F9F9;
+	margin-left: -6px;
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865475, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865475, SizingMethod='auto expand')";
+	zoom:1;
+	border-bottom-color: transparent;
+	border-right-color: transparent;
+}
+:root .DynamicGrid .DynamicGridArr{filter:none;top:-6px;}
+.DynamicGrid .grid-add-bar{
+	display:block;
+	bottom: 0;
+	overflow: hidden;
+	height: 12px;
+	font-size: 14px;
+	line-height: 12px;
+	font-family: simsun;
+	color: #999;
+	background-color: #F9F9F9;
+	border-top: 1px solid #DDD;
+	border-radius:0 0 4px 4px;
+	text-align:center;
+}
+.DynamicGrid.add .grid-add-bar{
+	visibility: hidden;
+}
+.DynamicGrid .grid-add-bar:hover{
+	color: #999;
+	background-color: #F5F5F5;
+	text-decoration:none;
+}
+.DynamicGrid .grid-add-bar:active{
+	color: #999;
+	background-color: #F5F5F5;
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,.1) inset;
+	line-height: 14px;
+}
+.DynamicGrid .DynamicGridControls{
+	margin-left:6em;
+}
+.DynamicGridEditNodeContent .form-horizontal .control-group {
+	margin-bottom: 10px;
+}
+.DynamicGridEditNodeContent .form-horizontal .control-group label {
+	float:left;
+	text-align:right;
+	width:8em;
+}
+.DynamicGridEditNodeContent .form-horizontal .control-group .controls {
+	margin-left:6em;
+}
+.DynamicGridEditNodeContent .form-horizontal textarea{
+	width:100%;
+}  

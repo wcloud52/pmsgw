@@ -1,0 +1,7 @@
+{
+    "name": "saas-gateway",
+    "script": "sh st.sh ",
+    "args": [],
+    "exec_interpreter" : "",
+    "exec_mode": "fork"
+}

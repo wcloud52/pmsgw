@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>客服消息管理</title>
+<link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/table.css" />
+<style type="text/css">
+.laytable-cell-1-headimgurl{  /*最后的pic为字段的field*/
+       height: 100%;
+       max-width: 100%;
+   }
+   .layui-table-cell {
+            height: auto;
+            line-height: 48px;
+        }
+</style>
+</head>
+<body>
+	<div class="admin-main">
+		<div class="content-search">
+			<div class="layui-form layui-form-pane">
+				
+				<div class="layui-inline">
+					<label class="layui-form-label">用户openid</label>
+					<div class="layui-input-inline">
+						<input id="search_openid" class="layui-input" type="text" />
+					</div>
+				</div>
+				
+				<div class="layui-inline">
+					<label class="layui-form-label">公棚/俱乐部</label>
+					<div class="layui-input-inline" style="">
+						
+						<select id="search_game_cote" lay-search="">
+							<option value="">全部</option>
+							
+						</select>
+					</div>
+				</div>
+				
+				<div class="layui-inline">
+					<button id="btnSearch" class="layui-btn">查询</button>
+				</div>
+
+			</div>
+		</div>
+		<blockquote class="layui-elem-quote" style="margin-bottom: 0px;">
+			
+			<button class="layui-btn" id="btnSendMessage">发送客服消息</button>
+
+		</blockquote>
+		
+		<div class="layui-form layui-form-pane">
+			<table id="listTable" lay-filter="test"></table>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../plugins/moment/moment.js"></script>
+	<script type="text/javascript" src="../plugins/moment/moment-timezone.js"></script>
+	<script type="text/javascript" src="../pagejs/base.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/javascript" src="../pagejs/nodejsGroupWeixinUserCoteExtend/list.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+		<script type="text/html" id="headimgurlBarTpl">
+ <img src="{{!d.headimgurl?"/images/headPortrait.gif":d.headimgurl}}" style=" width: 48px;height: 48px; "/>
+</script>
+</body>
+
+</html>

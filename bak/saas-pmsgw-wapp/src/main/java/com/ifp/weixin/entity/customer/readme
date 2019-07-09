@@ -1,0 +1,272 @@
+客服接口
+当用户主动发消息给公众号的时候（包括发送信息、点击自定义菜单、订阅事件、扫描二维码事件、支付成功事件、用户维权），微信将会把消息数据推送给开发者，开发者在一段时间内（目前修改为48小时）可以调用客服消息接口，通过POST一个JSON数据包来发送消息给普通用户，在48小时内不限制发送次数。此接口主要用于客服等有人工消息处理环节的功能，方便开发者为用户提供更加优质的服务。
+
+为了帮助公众号使用不同的客服身份服务不同的用户群体，客服接口进行了升级，开发者可以管理客服账号，并设置客服账号的头像和昵称。该能力针对所有拥有客服接口权限的公众号开放。
+
+另外，请开发者注意，本接口中所有使用到media_id的地方，现在都可以使用素材管理中的永久素材media_id了。
+
+目录
+1 客服帐号管理
+1.1 添加客服帐号
+1.2 修改客服帐号
+1.3 删除客服帐号
+1.4 设置客服帐号的头像
+1.5 获取所有客服账号
+1.6 接口的统一参数说明
+2 客服接口-发消息
+客服帐号管理
+
+开发者在根据开发文档的要求完成开发后，使用6.0.2版及以上版本的微信用户在与公众号进行客服沟通，公众号使用不同的客服账号进行回复后，用户可以看到对应的客服头像和昵称。
+
+请注意，必须先在公众平台官网为公众号设置微信号后才能使用该能力。
+
+添加客服帐号
+
+开发者可以通过本接口为公众号添加客服账号，每个公众号最多添加10个客服账号。该接口调用请求如下：
+
+http请求方式: POST
+https://api.weixin.qq.com/customservice/kfaccount/add?access_token=ACCESS_TOKEN
+POST数据示例如下：
+
+{
+     "kf_account" : "test1@test",
+     "nickname" : "客服1",
+     "password" : "pswmd5",
+}
+返回说明（正确时的JSON返回结果）：
+
+{
+     "errcode" : 0,
+     "errmsg" : "ok",
+}
+错误时微信会返回错误码等信息，请根据错误码查询错误信息: 全局返回码说明
+
+修改客服帐号
+
+开发者可以通过本接口为公众号修改客服账号。该接口调用请求如下：
+
+http请求方式: POST
+https://api.weixin.qq.com/customservice/kfaccount/update?access_token=ACCESS_TOKEN
+POST数据示例如下：
+
+{
+     "kf_account" : "test1@test",
+     "nickname" : "客服1",
+     "password" : "pswmd5",
+}
+返回说明（正确时的JSON返回结果）：
+
+{
+     "errcode" : 0,
+     "errmsg" : "ok",
+}
+错误时微信会返回错误码等信息，请根据错误码查询错误信息: 全局返回码说明
+
+删除客服帐号
+
+开发者可以通过该接口为公众号删除客服帐号。该接口调用请求如下：
+
+http请求方式: GET
+https://api.weixin.qq.com/customservice/kfaccount/del?access_token=ACCESS_TOKEN
+POST数据示例如下：
+
+{
+     "kf_account" : "test1@test",
+     "nickname" : "客服1",
+     "password" : "pswmd5",
+}
+返回说明（正确时的JSON返回结果）：
+
+{
+     "errcode" : 0,
+     "errmsg" : "ok",
+}
+错误时微信会返回错误码等信息，请根据错误码查询错误信息: 全局返回码说明
+
+设置客服帐号的头像
+
+开发者可调用本接口来上传图片作为客服人员的头像，头像图片文件必须是jpg格式，推荐使用640*640大小的图片以达到最佳效果。该接口调用请求如下：
+
+http请求方式: POST/FORM
+http://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=ACCESS_TOKEN&kf_account=KFACCOUNT
+调用示例：使用curl命令，用FORM表单方式上传一个多媒体文件，curl命令的具体用法请自行了解
+返回说明（正确时的JSON返回结果）：
+
+{
+     "errcode" : 0,
+     "errmsg" : "ok",
+}
+错误时微信会返回错误码等信息，请根据错误码查询错误信息: 全局返回码说明
+
+获取所有客服账号
+
+开发者通过本接口，获取公众号中所设置的客服基本信息，包括客服工号、客服昵称、客服登录账号。
+
+http请求方式: GET
+https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN
+返回说明（正确时的JSON返回结果）：
+
+{
+    "kf_list": [
+        {
+            "kf_account": "test1@test", 
+            "kf_nick": "ntest1", 
+            "kf_id": "1001"
+            "kf_headimgurl": " http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjfUS8Ym0GSaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
+        }, 
+        {
+            "kf_account": "test2@test", 
+            "kf_nick": "ntest2", 
+            "kf_id": "1002"
+            "kf_headimgurl": " http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjfUS8Ym0GSaLic0FD3vN0V8PILcibEGb2fPfEOmw /0"
+        }, 
+        {
+            "kf_account": "test3@test", 
+            "kf_nick": "ntest3", 
+            "kf_id": "1003"
+            "kf_headimgurl": " http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjfUS8Ym0GSaLic0FD3vN0V8PILcibEGb2fPfEOmw /0"
+        }
+    ]
+}
+错误时微信会返回错误码等信息，请根据错误码查询错误信息: 全局返回码说明
+
+接口的统一参数说明
+
+参数	是否必须	说明
+access_token	是	调用接口凭证
+kf_account	是	完整客服账号，格式为：账号前缀@公众号微信号
+kf_nick	是	客服昵称
+kf_id	是	客服工号
+nickname	是	客服昵称，最长6个汉字或12个英文字符
+password	否	客服账号登录密码，格式为密码明文的32位加密MD5值。该密码仅用于在公众平台官网的多客服功能中使用，若不使用多客服功能，则不必设置密码
+media	是	该参数仅在设置客服头像时出现，是form-data中媒体文件标识，有filename、filelength、content-type等信息
+客服接口-发消息
+
+接口调用请求说明
+
+http请求方式: POST
+https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN
+各消息类型所需的JSON数据包如下：
+
+发送文本消息
+
+{
+    "touser":"OPENID",
+    "msgtype":"text",
+    "text":
+    {
+         "content":"Hello World"
+    }
+}
+发送图片消息
+
+{
+    "touser":"OPENID",
+    "msgtype":"image",
+    "image":
+    {
+      "media_id":"MEDIA_ID"
+    }
+}
+发送语音消息
+
+{
+    "touser":"OPENID",
+    "msgtype":"voice",
+    "voice":
+    {
+      "media_id":"MEDIA_ID"
+    }
+}
+发送视频消息
+
+{
+    "touser":"OPENID",
+    "msgtype":"video",
+    "video":
+    {
+      "media_id":"MEDIA_ID",
+      "thumb_media_id":"MEDIA_ID",
+      "title":"TITLE",
+      "description":"DESCRIPTION"
+    }
+}
+发送音乐消息
+
+{
+    "touser":"OPENID",
+    "msgtype":"music",
+    "music":
+    {
+      "title":"MUSIC_TITLE",
+      "description":"MUSIC_DESCRIPTION",
+      "musicurl":"MUSIC_URL",
+      "hqmusicurl":"HQ_MUSIC_URL",
+      "thumb_media_id":"THUMB_MEDIA_ID" 
+    }
+}
+发送图文消息 图文消息条数限制在10条以内，注意，如果图文数超过10，则将会无响应。
+
+{
+    "touser":"OPENID",
+    "msgtype":"news",
+    "news":{
+        "articles": [
+         {
+             "title":"Happy Day",
+             "description":"Is Really A Happy Day",
+             "url":"URL",
+             "picurl":"PIC_URL"
+         },
+         {
+             "title":"Happy Day",
+             "description":"Is Really A Happy Day",
+             "url":"URL",
+             "picurl":"PIC_URL"
+         }
+         ]
+    }
+}
+发送卡券 {
+
+  "touser":"OPENID", 
+  "wxcard":{              
+           "card_id":"123dsdajkasd231jhksad",
+           "card_ext":"xxxxxxxxxxxxxxxxxxx"             
+            },
+}
+
+请注意，如果需要以某个客服帐号来发消息（在微信6.0.2及以上版本中显示自定义头像），则需在JSON数据包的后半部分加入customservice参数，例如发送文本消息则改为：
+
+{
+    "touser":"OPENID",
+    "msgtype":"text",
+    "text":
+    {
+         "content":"Hello World"
+    },
+    "customservice":
+    {
+         "kf_account": "test1@kftest"
+    }
+}
+
+参数	是否必须	说明
+access_token	是	调用接口凭证
+touser	是	普通用户openid
+msgtype	是	消息类型，文本为text，图片为image，语音为voice，视频消息为video，音乐消息为music，图文消息为news，卡券为wxcard
+content	是	文本消息内容
+media_id	是	发送的图片/语音/视频的媒体ID
+thumb_media_id	是	缩略图的媒体ID
+title	否	图文消息/视频消息/音乐消息的标题
+description	否	图文消息/视频消息/音乐消息的描述
+musicurl	是	音乐链接
+hqmusicurl	是	高品质音乐链接，wifi环境优先使用该链接播放音乐
+url	否	图文消息被点击后跳转的链接
+picurl	否	图文消息的图片链接，支持JPG、PNG格式，较好的效果为大图640*320，小图80*80
+接口返回说明
+
+返回数据示例（正确时的JSON返回结果）：
+
+
+全局返回码说明 使用网页调试工具调试该接口

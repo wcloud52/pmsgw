@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>	
+<title>比赛列表</title>
+<link rel="stylesheet" href="/plugins/jquery-weui1.2.1/css/weui.css">
+<link rel="stylesheet" href="/plugins/jquery-weui1.2.1/css/jquery-weui.css">
+<link rel="stylesheet" href="/plugins/jquery-weui1.2.1/css/style.css?v=123"> 
+
+<link rel="stylesheet" href="/plugins/jquery-weui/css/reset.css" /> 
+<link rel="stylesheet" href="/plugins/jquery-weui/css/flex.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/style.css" />
+
+<script src="/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+<script src="/plugins/jquery-weui1.2.1/js/media.js"></script>
+<style>
+body {
+	background-color: rgba(242, 242, 242, 1);
+	padding: 0 2%;
+}
+</style> 
+</head>
+<body>
+<section class="wrap">
+	 <section class="top-fixed">
+        <div class="flex-box flex-between fs13 p8 top-search" style="background-color: #efeff4">
+          <div class="search-btn-wrap flex-grow-1 pointer">
+            <i class="ico-search"></i>
+            <input type="text" class="" placeholder="搜索您需要的比赛"  id="searchInput"></div></div>
+      </section> 
+	<section class="main">
+	<div id="mainDiv">	
+			<ul v-cloak class="comHeader weui-cells" v-for="item in racelist">
+				<li><a v-bind:href="'myracedetaillist?cote_id='+item.game_cote_id+'&receiver_openid='+item.game_receiver_openid" class="bgf flex-box flex-col-start arrowR">{{item.game_cote_name}}</a>
+				</li>
+				<li>比赛场次:{{item.game_master_id_count}}</li>	
+				<li>最高名次:{{item.game_rank_top}}</li>	
+				<li>参赛羽数:{{item.game_ringnum_count}}</li>			
+			</ul>	
+</div>
+	
+		<div class="weui-loadmore" id="loading">
+			<i class="weui-loading"></i> <span class="weui-loadmore__tips">正在加载</span>
+		</div>
+
+	</section>
+  </section>
+	<script src="/plugins/jquery-weui1.2.1/js/jquery-2.1.4.js"></script>
+	<script src="/plugins/jquery-weui1.2.1/js/jquery-weui.js"></script>
+	<script src="/plugins/jquery-weui1.2.1/js/vue.js"></script>
+<script src="/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+	<script>
+		var loading = false; //状态标记 这个变量主要是用来控制触发次数，官网也有说明，事件可能会触发多次
+		var countPage = 1;//总页数
+		var page = 1;//当前页
+		var pageSize = 8;//每页显示几条
+		//获取数据
+		function init() {
+			vueObj.bindRacelist(page, pageSize);
+			page++;
+		}
+		$(document.body).infinite().on("infinite", function() {
+			$("#loading").css("display", "block");//显示 加载中图标
+			if (loading)
+				return;
+			loading = true;
+			if (page <= countPage) {//如果当前页小于总页面
+				init();
+			} else {
+				$(document.body).destroyInfinite();//到最后一页时，销毁它
+				$("#loading>i").css("display", "none");
+				$("#loading>span").html("到底啦~").css("color", "#BDBDBD");
+			}
+		});
+		$('#searchInput').bind('input propertychange', function() {
+			var text = $("#searchInput").val();
+			vueObj.racelist=[];
+			vueObj.searchInput=text;
+			 countPage = 1;//总页数
+			 page = 1;//当前页
+			 pageSize = 8;//每页显示几条
+			 init();	
+	});
+		var vueObj = new Vue(
+				{
+					el : '#mainDiv',
+					data : {
+						racelist : [],
+						searchInput:""
+					},
+					methods : {
+						bindRacelist : function(page, limit) {
+							var _this = this;
+							$.ajax({
+										url : "/wap/data/myracelist",
+										data : {
+											page : page,
+											limit : limit,
+											sort : "",
+											fuzzyQuery : _this.searchInput
+										},
+										type : 'POST',
+										contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+										dataType : 'json',
+										async : true,
+										success : function(ret) {
+											if (ret.code == 0) {
+												_this.racelist =_this.racelist.concat(ret.data.list);
+												countPage = Math.ceil((ret.data.total)/ pageSize);
+												loading = false;//会多次触发，所以 需要请求完成数据 才能继续触发
+
+												$("#loading").css("display","none");//数据加载完隐藏加载提示
+											} else {
+
+											}
+										},
+										error : function() {
+
+											$.toast("网络超时，请再次尝试失败后联系管理员",
+													"text");
+
+										}
+									});
+						}
+					}
+				});
+		init();
+	</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+apps: [
+
+        { 
+            name: 'saas-pmsgw',
+            script: './startup.bat',
+            watch: false
+        }
+    ]
+}

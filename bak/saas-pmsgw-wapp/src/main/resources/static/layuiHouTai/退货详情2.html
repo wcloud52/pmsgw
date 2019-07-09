@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <div class="schedule clear">
+    	<img src="img/t2.png" alt="">
+    	<ul>
+    		<li><span>买家发起/修改退货</span><p>2017-03-19 17:20:02</p></li>
+			<li><span>卖家处理退货申请</span><p>2017-03-20 17:20:02</p></li>
+    	</ul>
+    </div>
+    
+	<div class="layui-elem-quote">
+		<div class="returns-tit"><strong>请处理退货申请</strong><span>剩于<span class="red">06</span>天<span class="red">06</span>时<span class="red">06</span>分<span class="red">06</span>秒</span></div>
+	    <ol class="returns-hint">
+	    	<li>买家必须先设置好退货地址才可以进行退货操作。</li>
+	    	<li>如果同意申请，系统将发送退货地址信息给买家。</li>
+	    	<li>如果在规定时间内卖家没有操作，系统将默认同意申请并发送退货地址信息给卖家。</li>
+	    	<li>如果拒绝申请，退货申请将关闭。</li>
+	    	<li>如果直接退款给买家，退款将在7天后返还到买家账户，退货申请关闭。</li>
+	    </ol>
+	     <div class="pt10">
+	        <button class="layui-btn layui-btn-normal a3">同意申请，发送退货地址</button>
+	     	<button class="layui-btn layui-btn-normal a1">直接退款</button>
+	     	<button class="layui-btn layui-btn-danger a2">拒绝申请</button>
+	     	<button class="layui-btn" onclick="window.history.go(-1);">　返回　</button>
+	     </div>
+	</div>
+
+	<table class="layui-table info-table">
+	  <tbody>
+	    <tr>
+	      <th class="gray-th">退货信息</th>
+	    </tr> 
+	    <tr>
+	      <td>
+	      	 <ul>
+	      	 	<li><span class="w120">退货编号：</span>DJ23126664458654</li>
+	      	 	<li><span class="w120">申请时间：</span>2016-05-06 17:30:30</li>
+	      	 	<li><span class="w120">退货原因：</span>七天无理由退换货</li>
+	      	 	<li><span class="w120">退货说明：</span>不想要了，快点退货！</li>
+	      	 	<li><span class="w120">图片说明：</span>
+	      	 	    <div id="layer-photos-demo" style="display: inline-block;">
+	      	 	        <img layer-src="img/2.jpg" src="img/2.jpg"  layer-index="0">
+	      	 	        <img layer-src="img/3.jpg" src="img/3.jpg" layer-index="1">
+	      	 	        <img layer-src="img/4.jpg" src="img/4.jpg" layer-index="2">
+	      	 	        <img layer-src="img/5.jpg" src="img/5.jpg" layer-index="3">
+	      	 	    </div>
+	      	 	</li>
+	      	 </ul>
+	      </td>
+	    </tr>
+	    <tr>
+	    	<td>
+	    	   <ul>
+	      	 	<li><span class="w120">联系人：</span>张三</li>
+	      	 	<li><span class="w120">手机号码：</span>13699853485</li>
+	      	 	<li><span class="w120">退货地址：</span>广东省深圳市宝安区留仙一路高新奇工业区三期一栋 3B09</li>
+	      	 	<li><span class="w120">操作时间：</span>2016-06-08 17:30:30</li>
+	      	   </ul>
+	    	</td>
+	    </tr>
+	  </tbody>
+	</table>
+
+	<table class="layui-table info-table">
+	  <tbody>
+	    <tr>
+	      <th class="gray-th">订单信息</th>
+	    </tr> 
+	    <tr>
+	      <td>
+	      	 <ul>
+	      	 	<li><span class="w120">订单编号：</span>ZX2016060899561365</li>
+	      	 	<li><span class="w120">买家ID：</span>8888888</li>
+	      	 	<li><span class="w120">买家姓名：</span>张三</li>
+	      	 	<li><span class="w120">买家手机号码：</span>13699853485</li>
+	      	 	<li><span class="w120">成交金额：</span><span class="price">10000.00</span></li>
+	      	 	<li><span class="w120">成交AGR：</span>5000</li>
+	      	 	<li><span class="w120">交易时间：</span>2016-06-08 17:30:30</li>
+	      	 	<li><span class="w120">备　　注：</span>不要寄韵达</li>
+	      	 </ul>
+	      </td>
+	    </tr>
+	    <tr>
+	    	<td>
+	    	   <ul>
+	      	 	<li><span class="w120">收货人：</span>张三</li>
+	      	 	<li><span class="w120">手机号码：</span>13699853485</li>
+	      	 	<li><span class="w120">收货地址：</span>广东省深圳市宝安区留仙一路高新奇工业区三期一栋 3B09</li>
+	      	   </ul>
+	    	</td>
+	    </tr>
+	  </tbody>
+	</table>
+
+	<table class="layui-table" lay-skin="line">
+			  <thead>
+			    <tr>
+			      <th colspan="2">商品名称</th>
+			      <th>数量</th>
+			      <th>金额</th>
+			      <th>AGR</th>
+			      <th>优惠信息</th>
+			      <th>合计</th>
+			    </tr> 
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td width="66" ><a href="javascript:;"  class="a3"><img class="img-cp" src="img/1.jpg" alt=""></a></td>
+			      <td width="300">
+			      	<a href="javascript:;"  class="a3"><div>Apple iPhone 7 128G 红色特别版</div>
+			      	<div class="gray">128G,红色</div></a>
+			      </td>
+			      <td>1</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td>无</td>
+			      <td><span class="price">10000.00</span></td>
+			    </tr>
+			  </tbody>
+			</table>   
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery,layer = layui.layer;
+			layer.photos({
+			  photos: '#layer-photos-demo'
+			  ,closeBtn: 1
+			  ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			}); 
+
+			// 直接退款
+		$(document).on("click", ".a1", function() {
+		    layer.open({
+		      title:"退款操作"
+			  ,content: '您确认直接退款给买家吗？'
+			  ,btn: ['取消', '确认']
+			  ,yes: function(index, layero){
+			       layer.closeAll();
+			  }
+			  ,btn2: function(index, layero){
+			      layer.msg('退款成功！',{time: 1000});
+			  }
+			});
+		});
+        // 同意申请
+		$(document).on("click", ".a3", function() {
+		    layer.open({
+		      title:"退款操作"
+			  ,content: '您确认同意申请吗？'
+			  ,btn: ['取消', '确认']
+			  ,yes: function(index, layero){
+			       layer.closeAll();
+			  }
+			  ,btn2: function(index, layero){
+			      layer.msg('操作成功！',{time: 1000});
+			  }
+			});
+		});
+
+		// 拒绝申请
+		$(document).on("click", ".a2", function() {
+		    layer.open({
+		      type:2
+		      ,area:['60%', '70%']
+		      ,title:"拒绝申请"
+			  ,content: '拒绝申请.html'
+			});
+		});
+
+
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>平民赛鸽网</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/plugins/jquery-weui/dist/lib/weui.min.css">
+<link rel="stylesheet" href="/plugins/jquery-weui/dist/css/jquery-weui.min.css" />
+
+<link rel="stylesheet" href="/plugins/jquery-weui/css/reset.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/flex.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/style.css" />
+
+
+</head>
+
+<body>
+
+	<div class="weui-tab">
+		<div class="weui-navbar">
+			<a class="weui-navbar__item weui-bar__item--on" href="#tab1" style="font-weight:bold;"> 协会 </a> 
+			<a class="weui-navbar__item" href="#tab2" style="font-weight:bold;"> 公棚 </a>
+
+		</div>
+		<div class="weui-tab__bd">
+			<div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">		
+				
+				<form id="bindClubForm" action="/wap/action/usersave">
+					<div class="weui-cells weui-cells_form">
+						<div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛者手机</label>
+							</div>
+							<div class="weui-cell__bd">
+							<input type="hidden" name="id" value="${openid?if_exists}" /> 
+								<input id="club_bind_tel" name="club_bind_tel" class="weui-input" type="text"  placeholder="请输入参赛者手机" value="${item.club_bind_tel?if_exists }">
+							</div>
+						</div>
+
+                        <div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛者棚号</label>
+							</div>
+							<div class="weui-cell__bd">
+								<input id="club_bind_loft" name="club_bind_loft" class="weui-input" type="text"  placeholder="请输入参赛者棚号" value="${item.club_bind_loft?if_exists }">
+							</div>
+						</div>
+						
+						 <div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛名</label>
+							</div>
+							<div class="weui-cell__bd">
+								<input  id="club_bind_name"  name="club_bind_name"  class="weui-input" type="text"  placeholder="请输入参赛名" value="${item.club_bind_name?if_exists }">
+							</div>
+						</div>
+						
+						 <div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛者地区</label>
+							</div>
+							<div class="weui-cell__bd">
+							<input type="hidden"  id="club_bind_address_prov"  name="club_bind_address_prov" value="${item.club_bind_address_prov?if_exists}" /> 
+							<input type="hidden"  id="club_bind_address_city" name="club_bind_address_city" value="${item.club_bind_address_city?if_exists}" /> 
+							<input type="hidden"  id="club_bind_address_dist" name="club_bind_address_dist" value="${item.club_bind_address_dist?if_exists}" /> 
+							
+							 <input id="club_bind_address" name="club_bind_address" class="weui-input" type="text"  placeholder="请输入参赛者地区" value="${item.club_bind_address?if_exists }">
+							 
+							</div>
+						</div>
+										
+					</div>
+
+					<div style="padding: 10px;">
+						<a  id="btnBindClub" href="javascript:;" class="weui-btn weui-btn_primary">绑 定</a>
+					</div>
+
+
+				</form>
+
+			</div>
+			<div id="tab2" class="weui-tab__bd-item">
+
+
+					<form id="bindLoftForm" action="/wap/action/usersave">
+					<div class="weui-cells weui-cells_form">
+						<div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛者手机</label>
+							</div>
+							<div class="weui-cell__bd">
+							<input type="hidden" name="id" value="${openid?if_exists}" /> 
+								<input id="bind_tel" name="bind_tel" class="weui-input" type="text"  placeholder="请输入参赛者手机" value="${item.bind_tel?if_exists }">
+							</div>
+						</div>
+
+						 <div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛名</label>
+							</div>
+							<div class="weui-cell__bd">
+								<input  id="bind_name"  name="bind_name"  class="weui-input" type="text"  placeholder="请输入参赛名" value="${item.bind_name?if_exists }">
+							</div>
+						</div>
+						
+						 <div class="weui-cell">
+							<div class="weui-cell__hd">
+								<label class="weui-label">参赛者地区</label>
+							</div>
+							<div class="weui-cell__bd">
+							<input type="hidden"  id="bind_address_prov"  name="bind_address_prov" value="${item.bind_address_prov?if_exists}" /> 
+							<input type="hidden"  id="bind_address_city" name="bind_address_city" value="${item.bind_address_city?if_exists}" /> 
+							<input type="hidden"  id="bind_address_dist" name="bind_address_dist" value="${item.bind_address_dist?if_exists}" /> 
+							<input id="bind_address" name="bind_address" class="weui-input" type="text"  placeholder="请输入参赛者地区" value="${item.bind_address?if_exists }">
+							
+							</div>
+						</div>
+										
+					</div>
+
+					<div style="padding: 10px;">
+						<a  id="btnBindLoft" href="javascript:;" class="weui-btn weui-btn_primary">绑 定</a>
+					</div>
+
+
+				</form>
+
+
+			</div>
+
+		</div>
+	</div>
+	<script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+	<script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+	 <script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+	<script src="/plugins/jquery-weui/dist/js/city-picker.min.js"></script>
+	
+	<!-- <script src="/plugins/jquery-weui/dist/js/city-picker.js"></script> -->
+	<script src="/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+	
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+
+			$('.weui-navbar__item').on('click', function() {
+				
+				$(this).addClass('weui-bar__item--on').siblings().removeClass('weui-bar__item--on');
+				var tabId = $(this).attr('href');
+				$('.weui-tab__bd').find(tabId).show().siblings().hide();
+			});
+
+			try
+			{
+				$("#club_bind_address").cityPicker({
+					title : "请选择参赛者地区"
+				});
+			}
+			catch(err){
+				
+				$("#club_bind_address").removeAttr("value");
+				$("#club_bind_address").cityPicker({
+					title : "请选择参赛者地区"
+				});
+				
+			}
+			
+			try
+			{
+				$("#bind_address").cityPicker({
+					title : "请选择参赛者地区"
+				});
+			}
+			catch(err){
+				
+				$("#bind_address").removeAttr("value");
+				$("#bind_address").cityPicker({
+					title : "请选择参赛者地区"
+				});
+			}
+
+			
+			
+			//俱乐部/协会
+			$("#btnBindClub").click(function() {
+
+				// 手机号码
+				var club_bind_tel = $("#club_bind_tel").val().trim();
+				if (club_bind_tel == "" || club_bind_tel == null) {
+					$.toast("请输入手机号码", "text");
+					$("#club_bind_tel").focus();
+					return false;
+				}
+
+				// 鸽主棚号
+				var club_bind_loft = $("#club_bind_loft").val().trim();
+				var patrn = /^[0-9]*$/;
+				if((club_bind_loft == "" || club_bind_loft == null)|| (!patrn.test(club_bind_loft)) ){
+					
+					$.toast("请输入为数字鸽主棚号", "text");
+					$("#club_bind_loft").focus();
+					return false;
+				}
+
+				// 鸽主姓名
+				var club_bind_name = $("#club_bind_name").val().trim();
+				if (club_bind_name == "" || club_bind_name == null) {
+					$.toast("请输入参赛名", "text");
+					$("#club_bind_name").focus();
+					return false;
+				}
+
+				// 鸽主地区
+				var club_bind_address = $("#club_bind_address").val().trim();
+				if (club_bind_address == "" || club_bind_address == null) {
+					$.toast("请输入参赛者地区", "text");
+					$("#club_bind_address").focus();
+					return false;
+				}
+				else
+					{
+					  var currentProvince = club_bind_address.split(" ")[0];
+				      var currentCity = club_bind_address.split(" ")[1];
+				      var currentDistrict= club_bind_address.split(" ")[2];
+				      $("#club_bind_address_prov").val(currentProvince);
+				      $("#club_bind_address_city").val(currentCity);
+				      $("#club_bind_address_dist").val(currentDistrict);
+					}
+
+				//提交表单
+				var bindClubForm = $("#bindClubForm");
+				var data = bindClubForm.serialize(); //表单序列化
+
+				$.ajax({
+					url : bindClubForm.attr("action"),
+					type : 'POST',
+					dataType : 'json',
+					data : data,
+					success : function(data) {
+						if (data.code==0) {
+							
+							 $.toast("绑定用户成功",'test',function(){
+								 $('a[href="#tab2"]').click();
+							}) 
+
+						} else {
+							
+							$.alert(data.message);
+						}
+					},
+					error : function() {
+						$.hideLoading();
+						$.toast("网络超时，请再次尝试失败后联系管理员", "text");
+
+					}
+				});
+
+			});
+				
+			//公棚
+			$("#btnBindLoft").click(function() {
+
+				// 手机号码
+				var bind_tel = $("#bind_tel").val().trim();
+				if (bind_tel == "" || bind_tel == null) {
+					$.toast("请输入手机号码", "text");
+					$("#bind_tel").focus();
+					return false;
+				}
+
+
+				// 鸽主姓名
+				var bind_name = $("#bind_name").val().trim();
+				if (bind_name == "" || bind_name == null) {
+					$.toast("请输入参赛名", "text");
+					$("#bind_name").focus();
+					return false;
+				}
+
+				// 鸽主地区
+				var bind_address = $("#bind_address").val().trim();
+				if (bind_address == "" || bind_address == null) {
+					$.toast("请输入参赛者地区", "text");
+					$("#bind_address").focus();
+					return false;
+				}
+				else
+				{
+				  var currentProvince = bind_address.split(" ")[0];
+			      var currentCity = bind_address.split(" ")[1];
+			      var currentDistrict= bind_address.split(" ")[2];
+			      $("#bind_address_prov").val(currentProvince);
+			      $("#bind_address_city").val(currentCity);
+			      $("#bind_address_dist").val(currentDistrict);
+				}
+				
+				//提交表单
+				var bindLoftForm = $("#bindLoftForm");
+				var data = bindLoftForm.serialize(); //表单序列化
+
+				$.ajax({
+					url : bindLoftForm.attr("action"),
+					type : 'POST',
+					dataType : 'json',
+					data : data,
+					success : function(data) {
+						if (data.code==0) {
+							
+							 $.toast("绑定用户成功",'test',function(){
+								 $('a[href="#tab1"]').click();
+							}) 
+
+						} else {
+							
+							$.alert(data.message);
+						}
+					},
+					error : function() {
+						$.hideLoading();
+						$.toast("网络超时，请再次尝试失败后联系管理员", "text");
+
+					}
+				});
+
+			});
+			
+			
+
+		});
+	</script>
+
+</body>

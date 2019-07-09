@@ -1,0 +1,29 @@
+
+<!--index.wxml-->
+<view class="container">
+  
+  <view class="a-section a-popular" wx:if="{{hotGoods.length > 0}}">
+    <view class="h">
+      <view>
+       
+          <text class="txt">比赛列表</text>
+       
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+        <navigator url="/pages/goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.picUrl}}" background-size="cover"></image>
+          <view class="right">
+            <view class="text">
+              <text class="name">{{item.name}}</text>
+              <text class="desc">{{item.brief}}</text>
+              <text class="price">￥{{item.retailPrice}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  
+</view>

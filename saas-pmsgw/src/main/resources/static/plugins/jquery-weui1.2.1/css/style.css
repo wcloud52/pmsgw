@@ -1,0 +1,107 @@
+/*html,body{
+    font-size: 100px;
+}*/
+
+@media screen and (max-width: 720px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+    [v-cloak] {
+        display: none;
+    }
+    /* * { touch-action: none; } */
+    /*jquery Weui start*/
+    .weui-photo-browser-modal{
+        z-index: 10;  /*图片查看优先级高*/
+    }
+    /*jquery Weui end*/
+    .comHeader{
+        overflow: hidden;
+        box-sizing: border-box;
+        padding:3px 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        position: relative;
+    }
+    .comHeader > li{
+        height: 36px;
+        line-height: 36px;
+        font-size: 14px;
+    }
+    .comHeader .exportBtn{
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        width: 70px;
+        height: 34px;
+        line-height: 34px;
+        font-size: 14px;
+        background-color: rgba(22, 155, 213, 1)
+    }
+    .fontSize12{
+        font-size: 12px;
+    }
+    .imgWH10{
+        width: 10px;
+        height: 10px;
+    }
+    .comRadius8BgW{
+        border-radius: 8px;
+        background-color: #fff;
+        margin-top: 8px;
+    }
+    .textAlignR{
+        text-align: right;
+    }
+    .bgColorHui{
+        background-color: rgba(242, 242, 242, 1);
+    }
+    .inputH36bgW{
+        height: 36px;
+        line-height: 36px;
+        background: #fff;
+        border-radius: 5px;
+        text-indent: 5px;
+    }
+    /*common style  end*/
+
+
+
+    #wrap{
+        overflow-y: scroll;
+    }
+    .floatLInline{
+        float: left;
+        display: inline-block;
+    }
+    .floatRInline{
+        float: right;
+        display: inline-block;
+    }
+    .textAlignR button,.textAlignR a{
+        margin-top:0!important;
+    }
+    #videoWrap{
+        position: fixed;
+        background-color: rgba(0,0,0,.5);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        z-index: 10;
+    }
+    #videoWrap .closeBtn{
+        position: absolute;
+        right: 2%;
+        top: 10px;
+    }
+    #videoWrap #videoDom{
+        width: 100%;
+        height: 200px;
+        position: absolute;
+        top: 50%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: -100px;
+        background-color: #fff;
+    }
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+	<div class="container">
+		<div class="content-search">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-inline">
+					<label class="layui-form-label">退货编号</label>
+					<div class="layui-input-block">
+						<input  autocomplete="off" placeholder="请输入退货编号" class="layui-input" type="text"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">订单编号</label>
+					<div class="layui-input-block">
+						<input  autocomplete="off" placeholder="请输入订单编号" class="layui-input" type="text"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">订单类型</label>
+					<div class="layui-input-inline">
+						<select lay-verify="">
+						  <option value="0">请选择</option>
+						  <option value="1">平台</option>
+						  <option value="2">第三方</option>
+						</select>   
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">退货状态</label>
+					<div class="layui-input-inline">
+						<select lay-verify="">
+						  <option value="0">请选择</option>
+						  <option value="1">待处理</option>
+						  <option value="2">已处理</option>
+						</select>   
+					</div>
+				</div>			
+				<div class="layui-inline">
+					<label class="layui-form-label">开始时间</label>
+					<div class="layui-input-inline">
+						<input class="layui-input layui-date" placeholder="开始时间" id="start">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">截止时间</label>
+					<div class="layui-input-inline">
+						<input class="layui-input layui-date" placeholder="结束时间" id="end">
+					</div>
+				</div>
+				<div class="layui-inline"><button class="layui-btn" lay-submit="">查询</button></div>
+			</form>
+		</div>
+
+		<fieldset class="layui-elem-field mt10">
+		  <legend>2017-04-01 至 2017-04-12 共计：</legend>
+		  <div class="layui-field-box">
+			<table class="layui-table" lay-skin="nob">
+			  <tbody>
+			    <tr>
+			      <td>退货金额：<span class="price">120000.00</span></td>
+			      <td>成交AGR：12000</td>
+			    </tr>
+			  </tbody>
+			</table>
+		  </div>
+		</fieldset>
+		<div class="tar mt10">
+			<button class="layui-btn layui-btn-normal layui-btn-small">导出</button>
+		</div>
+		<div class="table-list roll-x">
+			<table class="layui-table" lay-skin="line">
+			  <thead>
+			    <tr>
+			      
+			      <th>退货编号</th>
+			      <th>商品名称</th>
+			      <th>订单编号</th>
+			      <th>退货金额</th>
+			      <th>退货AGR</th>
+			      <th>会员ID</th>
+			      <th>订单类型</th>
+			      <th>第三方</th>
+			      <th>申请时间</th>
+			      <th>退货状态</th>
+			    </tr> 
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td><a href="退货详情1.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>第三方</td>
+			      <td>XXX公司</td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span class="red">等待卖家处理</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情2.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span class="red">等待卖家处理</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情3.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span class="red">等待买家寄回商品</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情4.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span class="red">等待商家确认收货</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情5.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span>退货失败</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情6.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span >退货成功</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情7.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span >退货失败</span></td>
+			    </tr>
+			    <tr>
+			      <td><a href="退货详情8.html">RT00152100</a></td>
+			      <td><a href="#">名牌手表</a></td>
+			      <td>SW00152100</td>
+			      <td><span class="price">10000.00</span></td>
+			      <td>50000</td>
+			      <td><a href="javascript:;" class="a3">100001</a></td>
+			      <td>平台</td>
+			      <td></td>
+			      <td>2017-05-05 12:00:00</td>
+			      <td><span >退货失败</span></td>
+			    </tr>
+			    
+			  </tbody>
+			</table>   
+		</div>
+	</div>
+	<div id="table-pages" style="text-align:center"></div>
+	<script type="text/javascript" src="layui/layui.js"></script>
+    <script>
+		layui.use(['jquery', 'laydate','form','layer','laypage'], function(){
+			var $ = layui.jquery,
+			    laydate = layui.laydate,
+			    layer = layui.layer,
+			    laypage = layui.laypage;
+
+
+			// 分页
+			 laypage({
+			    cont: 'table-pages'
+			    ,pages: 2
+			    ,skip: true
+			  });
+
+            // 开始时间及截止时间
+            var start = {
+			   choose: function(datas){
+			      end.min = datas; //开始日选好后，重置结束日的最小日期
+			      end.start = datas //将结束日的初始值设定为开始日
+			    }
+			  };
+			  
+			  var end = {
+			    choose: function(datas){
+			      start.max = datas; //结束日选好后，重置开始日的最大日期
+			    }
+			  };
+
+			$('#start').click(function(){
+				start.elem = this;
+    			laydate(start);
+			});
+
+			$('#end').click(function(){
+				end.elem = this
+    			laydate(end);
+			});
+
+
+			// 商品详情
+			$(document).on("click", ".a3", function() {
+			    layer.open({
+			      type:2
+			      ,area:['60%', '80%']
+			      ,title:"会员信息"
+				  ,content: '会员信息.html'
+				});
+			});
+			
+		});
+	</script>
+</body>
+</html>

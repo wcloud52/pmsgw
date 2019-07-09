@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsMpUserExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsMpUserMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsMpUserMapper.Base_Column_List" />
+		from nodejs_mp_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.username != null">
+              and username = #{queryMap.username,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.password != null">
+              and password = #{queryMap.password,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.gender != null">
+              and gender = #{queryMap.gender,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.birthday != null">
+              and birthday = #{queryMap.birthday,jdbcType=DATE }			
+			</if>		
+            <if test="queryMap.last_login_time != null">
+              and last_login_time = #{queryMap.last_login_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.last_login_ip != null">
+              and last_login_ip = #{queryMap.last_login_ip,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.user_level != null">
+              and user_level = #{queryMap.user_level,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.nickname != null">
+              and nickname = #{queryMap.nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.avatar != null">
+              and avatar = #{queryMap.avatar,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.weixin_openid != null">
+              and weixin_openid = #{queryMap.weixin_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.status != null">
+              and status = #{queryMap.status,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.add_time != null">
+              and add_time = #{queryMap.add_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.deleted != null">
+              and deleted = #{queryMap.deleted,jdbcType=BIT }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_mp_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.username != null">
+              and username = #{queryMap.username,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.password != null">
+              and password = #{queryMap.password,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.gender != null">
+              and gender = #{queryMap.gender,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.birthday != null">
+              and birthday = #{queryMap.birthday,jdbcType=DATE }			
+			</if>		
+            <if test="queryMap.last_login_time != null">
+              and last_login_time = #{queryMap.last_login_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.last_login_ip != null">
+              and last_login_ip = #{queryMap.last_login_ip,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.user_level != null">
+              and user_level = #{queryMap.user_level,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.nickname != null">
+              and nickname = #{queryMap.nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.avatar != null">
+              and avatar = #{queryMap.avatar,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.weixin_openid != null">
+              and weixin_openid = #{queryMap.weixin_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.status != null">
+              and status = #{queryMap.status,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.add_time != null">
+              and add_time = #{queryMap.add_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.deleted != null">
+              and deleted = #{queryMap.deleted,jdbcType=BIT }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_mp_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.username != null">
+              and username = #{queryMap.username,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.password != null">
+              and password = #{queryMap.password,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.gender != null">
+              and gender = #{queryMap.gender,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.birthday != null">
+              and birthday = #{queryMap.birthday,jdbcType=DATE }			
+			</if>		
+            <if test="queryMap.last_login_time != null">
+              and last_login_time = #{queryMap.last_login_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.last_login_ip != null">
+              and last_login_ip = #{queryMap.last_login_ip,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.user_level != null">
+              and user_level = #{queryMap.user_level,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.nickname != null">
+              and nickname = #{queryMap.nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.avatar != null">
+              and avatar = #{queryMap.avatar,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.weixin_openid != null">
+              and weixin_openid = #{queryMap.weixin_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.status != null">
+              and status = #{queryMap.status,jdbcType=TINYINT }			
+			</if>		
+            <if test="queryMap.add_time != null">
+              and add_time = #{queryMap.add_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.deleted != null">
+              and deleted = #{queryMap.deleted,jdbcType=BIT }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_mp_user 
+		(
+		id,
+		username,
+		password,
+		gender,
+		birthday,
+		last_login_time,
+		last_login_ip,
+		user_level,
+		nickname,
+		mobile,
+		avatar,
+		weixin_openid,
+		status,
+		add_time,
+		deleted
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.id,jdbcType=INTEGER},
+			    #{item.username,jdbcType=VARCHAR},
+			    #{item.password,jdbcType=VARCHAR},
+			    #{item.gender,jdbcType=TINYINT},
+			    #{item.birthday,jdbcType=DATE},
+			    #{item.last_login_time,jdbcType=TIMESTAMP},
+			    #{item.last_login_ip,jdbcType=VARCHAR},
+			    #{item.user_level,jdbcType=TINYINT},
+			    #{item.nickname,jdbcType=VARCHAR},
+			    #{item.mobile,jdbcType=VARCHAR},
+			    #{item.avatar,jdbcType=VARCHAR},
+			    #{item.weixin_openid,jdbcType=VARCHAR},
+			    #{item.status,jdbcType=TINYINT},
+			    #{item.add_time,jdbcType=TIMESTAMP},
+			    #{item.deleted,jdbcType=BIT}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_mp_user 
+			<set>
+                <if test="item.username != null">
+                  and username = #{item.username,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.password != null">
+                  and password = #{item.password,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.gender != null">
+                  and gender = #{item.gender,jdbcType=TINYINT}			
+			     </if>		
+                <if test="item.birthday != null">
+                  and birthday = #{item.birthday,jdbcType=DATE}			
+			     </if>		
+                <if test="item.last_login_time != null">
+                  and last_login_time = #{item.last_login_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.last_login_ip != null">
+                  and last_login_ip = #{item.last_login_ip,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.user_level != null">
+                  and user_level = #{item.user_level,jdbcType=TINYINT}			
+			     </if>		
+                <if test="item.nickname != null">
+                  and nickname = #{item.nickname,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.mobile != null">
+                  and mobile = #{item.mobile,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.avatar != null">
+                  and avatar = #{item.avatar,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.weixin_openid != null">
+                  and weixin_openid = #{item.weixin_openid,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.status != null">
+                  and status = #{item.status,jdbcType=TINYINT}			
+			     </if>		
+                <if test="item.add_time != null">
+                  and add_time = #{item.add_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.deleted != null">
+                  and deleted = #{item.deleted,jdbcType=BIT}			
+			     </if>		
+			</set>
+			where
+		      id=#{item.id,jdbcType=INTEGER}
+		</foreach>
+	</update>
+	
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.PmsgwGameWhiteListMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.PmsgwGameWhiteList" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="CreatedDatetime" property="createdDatetime" jdbcType="TIMESTAMP" />
+    <result column="UpdatedDatetime" property="updatedDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, Name, CreatedDatetime, UpdatedDatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pmsgw_game_white_list
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pmsgw_game_white_list
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.PmsgwGameWhiteList" >
+    insert into pmsgw_game_white_list (Id, Name, CreatedDatetime, 
+      UpdatedDatetime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=TIMESTAMP}, 
+      #{updatedDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.PmsgwGameWhiteList" >
+    insert into pmsgw_game_white_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="createdDatetime != null" >
+        CreatedDatetime,
+      </if>
+      <if test="updatedDatetime != null" >
+        UpdatedDatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDatetime != null" >
+        #{updatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.PmsgwGameWhiteList" >
+    update pmsgw_game_white_list
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CreatedDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDatetime != null" >
+        UpdatedDatetime = #{updatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.PmsgwGameWhiteList" >
+    update pmsgw_game_white_list
+    set Name = #{name,jdbcType=VARCHAR},
+      CreatedDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      UpdatedDatetime = #{updatedDatetime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

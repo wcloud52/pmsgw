@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.PmsgwGameDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.PmsgwGameDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="masterId" property="masterId" jdbcType="BIGINT" />
+    <result column="masterText" property="masterText" jdbcType="VARCHAR" />
+    <result column="mm" property="mm" jdbcType="VARCHAR" />
+    <result column="raceid" property="raceid" jdbcType="VARCHAR" />
+    <result column="distence" property="distence" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="xmbh" property="xmbh" jdbcType="VARCHAR" />
+    <result column="qh" property="qh" jdbcType="VARCHAR" />
+    <result column="ringnum" property="ringnum" jdbcType="VARCHAR" />
+    <result column="pigowner" property="pigowner" jdbcType="VARCHAR" />
+    <result column="cotenum" property="cotenum" jdbcType="VARCHAR" />
+    <result column="cometime" property="cometime" jdbcType="VARCHAR" />
+    <result column="speed" property="speed" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+    <result column="ReceiverId" property="receiverId" jdbcType="VARCHAR" />
+    <result column="ReceiverName" property="receiverName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, masterId, masterText, mm, raceid, distence, flag, xmbh, qh, ringnum, pigowner, 
+    cotenum, cometime, speed, rank, create_time, modify_time, ReceiverId, ReceiverName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pmsgw_game_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pmsgw_game_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.PmsgwGameDetail" >
+    insert into pmsgw_game_detail (id, masterId, masterText, 
+      mm, raceid, distence, 
+      flag, xmbh, qh, ringnum, 
+      pigowner, cotenum, cometime, 
+      speed, rank, create_time, 
+      modify_time, ReceiverId, ReceiverName
+      )
+    values (#{id,jdbcType=BIGINT}, #{masterId,jdbcType=BIGINT}, #{masterText,jdbcType=VARCHAR}, 
+      #{mm,jdbcType=VARCHAR}, #{raceid,jdbcType=VARCHAR}, #{distence,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=VARCHAR}, #{xmbh,jdbcType=VARCHAR}, #{qh,jdbcType=VARCHAR}, #{ringnum,jdbcType=VARCHAR}, 
+      #{pigowner,jdbcType=VARCHAR}, #{cotenum,jdbcType=VARCHAR}, #{cometime,jdbcType=VARCHAR}, 
+      #{speed,jdbcType=VARCHAR}, #{rank,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{modify_time,jdbcType=TIMESTAMP}, #{receiverId,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.PmsgwGameDetail" >
+    insert into pmsgw_game_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="masterId != null" >
+        masterId,
+      </if>
+      <if test="masterText != null" >
+        masterText,
+      </if>
+      <if test="mm != null" >
+        mm,
+      </if>
+      <if test="raceid != null" >
+        raceid,
+      </if>
+      <if test="distence != null" >
+        distence,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="xmbh != null" >
+        xmbh,
+      </if>
+      <if test="qh != null" >
+        qh,
+      </if>
+      <if test="ringnum != null" >
+        ringnum,
+      </if>
+      <if test="pigowner != null" >
+        pigowner,
+      </if>
+      <if test="cotenum != null" >
+        cotenum,
+      </if>
+      <if test="cometime != null" >
+        cometime,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+      <if test="receiverId != null" >
+        ReceiverId,
+      </if>
+      <if test="receiverName != null" >
+        ReceiverName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="masterId != null" >
+        #{masterId,jdbcType=BIGINT},
+      </if>
+      <if test="masterText != null" >
+        #{masterText,jdbcType=VARCHAR},
+      </if>
+      <if test="mm != null" >
+        #{mm,jdbcType=VARCHAR},
+      </if>
+      <if test="raceid != null" >
+        #{raceid,jdbcType=VARCHAR},
+      </if>
+      <if test="distence != null" >
+        #{distence,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qh != null" >
+        #{qh,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null" >
+        #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="cotenum != null" >
+        #{cotenum,jdbcType=VARCHAR},
+      </if>
+      <if test="cometime != null" >
+        #{cometime,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiverId != null" >
+        #{receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.PmsgwGameDetail" >
+    update pmsgw_game_detail
+    <set >
+      <if test="masterId != null" >
+        masterId = #{masterId,jdbcType=BIGINT},
+      </if>
+      <if test="masterText != null" >
+        masterText = #{masterText,jdbcType=VARCHAR},
+      </if>
+      <if test="mm != null" >
+        mm = #{mm,jdbcType=VARCHAR},
+      </if>
+      <if test="raceid != null" >
+        raceid = #{raceid,jdbcType=VARCHAR},
+      </if>
+      <if test="distence != null" >
+        distence = #{distence,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        xmbh = #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qh != null" >
+        qh = #{qh,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null" >
+        ringnum = #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        pigowner = #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="cotenum != null" >
+        cotenum = #{cotenum,jdbcType=VARCHAR},
+      </if>
+      <if test="cometime != null" >
+        cometime = #{cometime,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiverId != null" >
+        ReceiverId = #{receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        ReceiverName = #{receiverName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.PmsgwGameDetail" >
+    update pmsgw_game_detail
+    set masterId = #{masterId,jdbcType=BIGINT},
+      masterText = #{masterText,jdbcType=VARCHAR},
+      mm = #{mm,jdbcType=VARCHAR},
+      raceid = #{raceid,jdbcType=VARCHAR},
+      distence = #{distence,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      xmbh = #{xmbh,jdbcType=VARCHAR},
+      qh = #{qh,jdbcType=VARCHAR},
+      ringnum = #{ringnum,jdbcType=VARCHAR},
+      pigowner = #{pigowner,jdbcType=VARCHAR},
+      cotenum = #{cotenum,jdbcType=VARCHAR},
+      cometime = #{cometime,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      ReceiverId = #{receiverId,jdbcType=VARCHAR},
+      ReceiverName = #{receiverName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>采集记录</title>
+
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/zepto.js"></script>
+    <script src="../js/media.js"></script>
+
+    <style>
+        body{
+            background-color: rgba(242, 242, 242, 1);
+            padding:0 2%;
+        }
+    </style>
+
+</head>
+<body>
+     
+    <ul id="collect" v-cloak class="comHeader weui-cells">
+        <li>{{unit.utitle}}</li>
+        <li>水位计：{{unit.uwarterL}}</li>
+        <li>时间：{{unit.utime}}</li>
+        <button class="weui-btn weui-btn_primary exportBtn">导出</button>
+    </ul>
+      
+    <div id="list">
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div> 
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div> 
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div> 
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div>
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div>
+            <div class="weui-cell__bd">
+              <p class="fontSize12">2018/6/11 8:30:15</p>
+            </div> 
+            <div class="weui-cell__ft fontSize12">采集：0.356  对应：0.022</div>
+          </div>
+        </div>
+    </div>
+
+    <!--滚动加载-->
+    <div class="weui-loadmore" style="display: none;">
+      <i class="weui-loading"></i>
+      <span class="weui-loadmore__tips">正在加载</span>
+    </div>
+    
+
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/vue.js"></script>
+
+    <script>
+        var Loadmore = {
+            dom:{
+                loading:false
+            },
+            init:function(){
+                this.initLoadmore();
+            },
+            initLoadmore:function(){
+                var dom = this.dom;
+                var data = [
+                        {
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        },{
+                            time:'2018/6/11 8:30:15',
+                            colect:'0.356',
+                            dy:'0.022'
+                        }
+                    ];
+                    
+                $(document.body).infinite().on("infinite",function(){
+                    if(dom.loading){
+                        return;
+                    }
+                    $('.weui-loadmore').show();
+                    dom.loading = true;
+                    setTimeout(function(){
+                        parentDom = $('#list');
+                        Loadmore.loadDom(parentDom,data);
+                        // $('#list').append('<p>我是新加载的内容</p>');  //不要写这个，否则再次记载不显示
+                        // $(document.body).destroyInfinite(); 
+                        dom.loading = false; //销毁滚动插件
+                    },1500);
+                }); //初始化加载滚动插件
+            },
+            loadDom:function(parentDom,data){
+
+                var temp = '';
+                for(var i=0;i<data.length;i++){
+                    temp += '<div class="weui-cells"><div class="weui-cell"><div class="weui-cell__hd"><img class="imgWH10" src="../images/gCircle.png"></div><div class="weui-cell__bd"><p class="fontSize12">'+ data[i].time +'</p></div><div class="weui-cell__ft fontSize12">采集：'+ data[i].colect +'  对应：'+ data[i].dy +'</div></div></div>';
+                }
+                parentDom.append(temp);
+                
+            }
+
+        };
+        $(function(){
+
+            Loadmore.init();
+        })
+
+        new Vue({
+            el:'#collect',
+            data:{
+                unit:{
+                    utitle:'厦门',
+                    uwarterL:'思明区',
+                    utime:"2018/08/24 10:00:00~2018/08/24 10:00:00"
+                }
+            },
+            methods:{
+
+            }
+        });
+
+    </script>
+
+</body>
+</html>

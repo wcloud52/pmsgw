@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.PmsgwGameDetailExtMapper" >
+   <select id="selectListByDynamic" resultMap="com.saas.biz.mapper.base.PmsgwGameDetailMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwGameDetailMapper.Base_Column_List" />
+		from pmsgw_game_detail
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+			
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectListByDynamicCount" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from pmsgw_game_detail
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+			
+		</where>
+	</select>
+	<delete id="deleteByMasterId" parameterType="long" >
+    delete from pmsgw_game_detail
+    where masterId =#{masterId,jdbcType=BIGINT}
+  </delete>
+   <select id="selectListByList" resultMap="com.saas.biz.mapper.base.PmsgwGameDetailMapper.BaseResultMap"
+		parameterType="Object">
+		select *
+		from pmsgw_game_detail
+		
+		WHERE masterId=#{masterId,jdbcType=BIGINT} and
+		rank  IN
+		(
+		<foreach collection="list" item="item"  index="index" separator=",">
+			<if test="item != null">
+				#{item.rank}
+			</if>
+		</foreach>
+		)
+	</select>
+  <select id="selectTopOne" resultMap="com.saas.biz.mapper.base.PmsgwGameDetailMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwGameDetailMapper.Base_Column_List" />
+		from pmsgw_game_detail
+		   where pigowner like '%${pigowner}%'
+	         and IFNULL(flag,'')!='1'
+			ORDER BY rank ASC,create_time ASC
+		
+			LIMIT 1
+		
+	</select>
+	<select id="selectTopMore" resultMap="com.saas.biz.mapper.base.PmsgwGameDetailMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwGameDetailMapper.Base_Column_List" />
+		from pmsgw_game_detail
+		   where pigowner like '${pigowner}%'
+	         and flag='0'
+			ORDER BY rank ASC,create_time ASC
+		
+		
+	</select>
+	<insert id="insertByList" parameterType="list">
+		 insert into pmsgw_game_detail (id, masterId, masterText, mm, 
+      raceid, distence, flag, 
+      xmbh, qh, ringnum, 
+      pigowner, cotenum, cometime, 
+      speed, rank, create_time, 
+      modify_time, ReceiverId, ReceiverName)
+		   values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			
+			(#{item.id,jdbcType=BIGINT}, #{item.masterId,jdbcType=BIGINT}, #{item.masterText,jdbcType=VARCHAR}, #{item.mm,jdbcType=VARCHAR}, 
+      #{item.raceid,jdbcType=VARCHAR}, #{item.distence,jdbcType=VARCHAR}, #{item.flag,jdbcType=VARCHAR}, 
+      #{item.xmbh,jdbcType=VARCHAR}, #{item.qh,jdbcType=VARCHAR}, #{item.ringnum,jdbcType=VARCHAR}, 
+      #{item.pigowner,jdbcType=VARCHAR}, #{item.cotenum,jdbcType=VARCHAR}, #{item.cometime,jdbcType=VARCHAR}, 
+      #{item.speed,jdbcType=VARCHAR}, #{item.rank,jdbcType=INTEGER}, #{item.create_time,jdbcType=TIMESTAMP}, 
+      #{item.modify_time,jdbcType=TIMESTAMP}, #{item.receiverId,jdbcType=VARCHAR}, #{item.receiverName,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+</mapper>

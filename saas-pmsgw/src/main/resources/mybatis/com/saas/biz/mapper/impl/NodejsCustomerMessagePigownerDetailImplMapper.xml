@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.impl.NodejsCustomerMessagePigownerDetailImplMapper">
+    	<select id="selectMapByCoteIdOpenid" resultType="java.util.HashMap" parameterType="Object">
+		SELECT 
+game_ringnum, 
+game_master_id,
+game_master_text,
+game_rank
+FROM nodejs_customer_message_pigowner_detail 
+ 
+ WHERE 
+ game_cote_id =#{game_cote_id,jdbcType=VARCHAR }
+ AND 
+ game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR };
+  
+		</select>
+		
+		<select id="selectGameMapByCoteIdOpenid" resultType="java.util.HashMap" parameterType="Object">
+		SELECT 
+game_ringnum, 
+game_master_id,
+game_master_text,
+game_rank 
+FROM nodejs_customer_message_pigowner_detail 
+ 
+ WHERE 
+ game_cote_id =#{game_cote_id,jdbcType=VARCHAR }
+ AND 
+ game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR };
+		</select>
+		
+		<select id="selectGameRankMapByCoteIdOpenid" resultType="java.util.HashMap" parameterType="Object">
+		SELECT game_ringnum,game_rank
+FROM nodejs_customer_message_pigowner_detail
+ WHERE 
+ (game_cote_id =#{game_cote_id,jdbcType=VARCHAR })
+  AND 
+  (game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR }) 
+   AND 
+  (game_master_id = #{game_master_id,jdbcType=VARCHAR }) 
+  
+		</select>
+		
+</mapper>

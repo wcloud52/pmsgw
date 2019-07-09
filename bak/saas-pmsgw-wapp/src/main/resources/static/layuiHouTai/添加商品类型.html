@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100"><span class='red'>*</span>商品类型名称</th>
+		      <td>
+		      	<div style="width: 30%;">
+		      		<input type="text" name="" placeholder="请输入商品类型名称" autocomplete="off" class="layui-input">
+		      	</div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th><span class='red'>*</span>商品属性</th>
+		      <td>
+		        <div style="width: 30%;">
+		      		<div class="mb10"><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div>颜色</div>
+		      		<div class="mb10"><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div>尺寸</div>
+		      		<div class="mb10"><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div>质材</div>
+		      		<div class="mb10"><input type="checkbox" class="my-checkbox"><div class="layui-unselect layui-form-checkbox" lay-skin=""><i class="layui-icon"></i></div>容量</div>
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>排序</th>
+		      <td>
+			      <div style="width: 30%;">
+		      		<input type="text" name="" placeholder="请输入序号" autocomplete="off" class="layui-input">
+		      	</div>
+			  </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">确 定</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery,layer = layui.layer;
+			
+		});
+	</script>
+</body>
+</html>

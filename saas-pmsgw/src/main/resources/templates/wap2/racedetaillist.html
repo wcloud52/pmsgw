@@ -1,0 +1,157 @@
+
+<!doctype html>
+<html>
+<head>
+<title>比赛成绩列表</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="/plugins/jquery-weui1.2.1/css/weui.css">
+<link rel="stylesheet" href="/plugins/jquery-weui1.2.1/css/jquery-weui.css">
+<link rel="stylesheet" href="/plugins/jquery-weui1.2.1/css/style.css?v=123">
+<link rel="stylesheet" href="/plugins/jquery-weui/css/reset.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/flex.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/style.css" />
+<script src="/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+<script src="/plugins/jquery-weui1.2.1/js/media.js"></script>
+</head>
+<body>
+	 <section class="wrap"> 
+		<section class="top-fixed">
+			<div class="flex-box flex-between fs13 p8 top-search" style="background-color: #efeff4">
+				<a href="racelist" class="flex-box header_left"> <img src="/plugins/jquery-weui/images/header-img1.png" alt="" class="block header_back" style="height: 22px; margin-right: 4px;"> <img src="/plugins/jquery-weui/images/header-img1.png" alt="" class="block header_options" style="height: 22px; margin-right: 4px;">
+				</a>
+				<div class="search-btn-wrap flex-grow-1 pointer">
+					<i class="ico-search"></i> <input type="text" class="" placeholder="搜索您需要的成绩" id="searchInput">
+				</div>
+			</div>
+		</section>
+		<div class="p10 flex-box flex-between member-head" style="padding-top: 55px;">
+			<div class="colf tc fs14 flex-box info">
+				<p class="mr5" style="text-align:left">【${master.cote_name}】${master.master_text}</p>
+                 <input type="hidden" id="req_master_id"  value="${master.master_id}">
+			</div>
+		</div>
+		<section class="main" style="padding-top: 2px;">
+        <div id="mainDiv">	    
+			<ul v-cloak class="comHeader weui-cells" v-for="item in racelist">
+				<li>
+				<a href="" class="p10 bgf flex-box flex-col-start ">
+				<span class="fs20 red">{{item.rank}}</span>&nbsp&nbsp
+				<img v-if="item.receiver_headimgurl" v-bind:src="item.receiver_headimgurl" style=" width: 30px;height: 30px; "/>
+				<img v-if="!item.receiver_headimgurl" src="/images/headPortrait.gif" style=" width: 30px;height: 30px; "/>
+				&nbsp&nbsp
+									<span><i class="mr5"></i>
+									
+									{{item.pigowner}}</span>
+				
+				</a>
+				</li>
+				<li>足环号: {{item.ringnum}}</li>
+				<li>空距: {{item.distence}}</li>
+				<li>分速: {{item.speed}}</li>
+				<li><span style='color: #ff9000;'>归巢时间:{{item.cometime}}</span></li>
+				
+			</ul>
+		
+</div>
+
+	
+		<div class="weui-loadmore" id="loading">
+			<i class="weui-loading"></i> <span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		</section>
+		
+		
+	</section> 
+
+<script src="/plugins/jquery-weui1.2.1/js/jquery-2.1.4.js"></script>
+	<script src="/plugins/jquery-weui1.2.1/js/jquery-weui.js"></script>
+	<script src="/plugins/jquery-weui1.2.1/js/vue.js"></script>
+<script src="/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+	<script>
+		var loading = false; //状态标记 这个变量主要是用来控制触发次数，官网也有说明，事件可能会触发多次
+
+		var countPage = 1;//总页数
+		var page = 1;//当前页
+		var pageSize = 20;//每页显示几条
+		//获取数据
+		function init() {
+
+			vueObj.bindRacelist(page, pageSize);
+			page++;
+		}
+
+		$(document.body).infinite().on("infinite", function() {
+			$("#loading").css("display", "block");//显示 加载中图标
+			  if (loading)
+				return;
+			loading = true;
+			if (page <= countPage) {//如果当前页小于总页面
+				init();
+			} else {
+				$(document.body).destroyInfinite();//到最后一页时，销毁它
+				$("#loading>i").css("display", "none");
+				$("#loading>span").html("到底啦~").css("color", "#BDBDBD");
+			}  
+		});
+		$('#searchInput').bind('input propertychange', function() {
+			var text = $("#searchInput").val();
+			vueObj.racelist=[];
+			vueObj.searchInput=text;
+			 countPage = 1;//总页数
+			 page = 1;//当前页
+			 pageSize = 8;//每页显示几条
+			init();
+		
+	});
+		var vueObj = new Vue(
+				{
+					el : '#mainDiv',
+					data : {
+						racelist : [],
+						searchInput:"",
+						master_id:$("#req_master_id").val()
+					},
+					methods : {
+						bindRacelist : function(page, limit) {
+							var _this = this;
+							$.ajax({
+										url : "/wap/data/racedetaillist",
+										data : {
+											masterId:_this.master_id,
+											page : page,
+											limit : limit,
+											sort : "",
+											fuzzyQuery : _this.searchInput
+										},
+										type : 'POST',
+										contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+										dataType : 'json',
+										async : true,
+										success : function(ret) {
+											if (ret.code == 0) {
+												_this.racelist =_this.racelist.concat(ret.data.list);
+												countPage = Math.ceil((ret.data.total)/ pageSize);
+												loading = false;//会多次触发，所以 需要请求完成数据 才能继续触发
+
+												$("#loading").css("display","none");//数据加载完隐藏加载提示
+											} else {
+
+											}
+										},
+										error : function() {
+
+											$.toast("网络超时，请再次尝试失败后联系管理员",
+													"text");
+
+										}
+									});
+						}
+					}
+				});
+		init();
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+nohup java -jar saas-test-0.0.1-SNAPSHOT.jar --spring.config.location=bootstrap-dev.properties,application-dev.properties >logs/catalina.out 2>&1 &
+
+-Dloader.path="lib/"
+
+
+java -Dfile.encoding=utf-8 -Dloader.path="lib/" -jar saas-pmsgw-0.0.1-SNAPSHOT.jar --spring.config.location=bootstrap.properties,application.properties >logs/catalina.out 2>&1 
+
+
+

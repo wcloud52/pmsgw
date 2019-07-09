@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.WeixinMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.WeixinMessage" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="MessageId" property="messageId" jdbcType="VARCHAR" />
+    <result column="SenderId" property="senderId" jdbcType="VARCHAR" />
+    <result column="SenderName" property="senderName" jdbcType="VARCHAR" />
+    <result column="ReceiverId" property="receiverId" jdbcType="VARCHAR" />
+    <result column="ReceiverName" property="receiverName" jdbcType="VARCHAR" />
+    <result column="SendTime" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="MessageTextId" property="messageTextId" jdbcType="VARCHAR" />
+    <result column="MessageType" property="messageType" jdbcType="VARCHAR" />
+    <result column="MessageTitle" property="messageTitle" jdbcType="VARCHAR" />
+    <result column="MessageText" property="messageText" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="CreatedDatetime" property="createdDatetime" jdbcType="TIMESTAMP" />
+    <result column="ModifyDatetime" property="modifyDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, MessageId, SenderId, SenderName, ReceiverId, ReceiverName, SendTime, MessageTextId, 
+    MessageType, MessageTitle, MessageText, Status, CreatedDatetime, ModifyDatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from weixin_message
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from weixin_message
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.WeixinMessage" >
+    insert into weixin_message (Id, MessageId, SenderId, 
+      SenderName, ReceiverId, ReceiverName, 
+      SendTime, MessageTextId, MessageType, 
+      MessageTitle, MessageText, Status, 
+      CreatedDatetime, ModifyDatetime)
+    values (#{id,jdbcType=INTEGER}, #{messageId,jdbcType=VARCHAR}, #{senderId,jdbcType=VARCHAR}, 
+      #{senderName,jdbcType=VARCHAR}, #{receiverId,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=TIMESTAMP}, #{messageTextId,jdbcType=VARCHAR}, #{messageType,jdbcType=VARCHAR}, 
+      #{messageTitle,jdbcType=VARCHAR}, #{messageText,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createdDatetime,jdbcType=TIMESTAMP}, #{modifyDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.WeixinMessage" >
+    insert into weixin_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="messageId != null" >
+        MessageId,
+      </if>
+      <if test="senderId != null" >
+        SenderId,
+      </if>
+      <if test="senderName != null" >
+        SenderName,
+      </if>
+      <if test="receiverId != null" >
+        ReceiverId,
+      </if>
+      <if test="receiverName != null" >
+        ReceiverName,
+      </if>
+      <if test="sendTime != null" >
+        SendTime,
+      </if>
+      <if test="messageTextId != null" >
+        MessageTextId,
+      </if>
+      <if test="messageType != null" >
+        MessageType,
+      </if>
+      <if test="messageTitle != null" >
+        MessageTitle,
+      </if>
+      <if test="messageText != null" >
+        MessageText,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="createdDatetime != null" >
+        CreatedDatetime,
+      </if>
+      <if test="modifyDatetime != null" >
+        ModifyDatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null" >
+        #{senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="senderName != null" >
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null" >
+        #{receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageTextId != null" >
+        #{messageTextId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageType != null" >
+        #{messageType,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTitle != null" >
+        #{messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messageText != null" >
+        #{messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDatetime != null" >
+        #{modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.WeixinMessage" >
+    update weixin_message
+    <set >
+      <if test="messageId != null" >
+        MessageId = #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null" >
+        SenderId = #{senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="senderName != null" >
+        SenderName = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null" >
+        ReceiverId = #{receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        ReceiverName = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        SendTime = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageTextId != null" >
+        MessageTextId = #{messageTextId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageType != null" >
+        MessageType = #{messageType,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTitle != null" >
+        MessageTitle = #{messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messageText != null" >
+        MessageText = #{messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdDatetime != null" >
+        CreatedDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDatetime != null" >
+        ModifyDatetime = #{modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.WeixinMessage" >
+    update weixin_message
+    set MessageId = #{messageId,jdbcType=VARCHAR},
+      SenderId = #{senderId,jdbcType=VARCHAR},
+      SenderName = #{senderName,jdbcType=VARCHAR},
+      ReceiverId = #{receiverId,jdbcType=VARCHAR},
+      ReceiverName = #{receiverName,jdbcType=VARCHAR},
+      SendTime = #{sendTime,jdbcType=TIMESTAMP},
+      MessageTextId = #{messageTextId,jdbcType=VARCHAR},
+      MessageType = #{messageType,jdbcType=VARCHAR},
+      MessageTitle = #{messageTitle,jdbcType=VARCHAR},
+      MessageText = #{messageText,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      CreatedDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      ModifyDatetime = #{modifyDatetime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,49 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+	   <div class="layui-form-item">
+	   <label class="layui-form-label">模板</label>
+			<div class="layui-input-block">
+			  <textarea class="layui-textarea" rows="6">
+{{first.DATA}}
+比赛名称：{{keyword1.DATA}}
+比赛时间：{{keyword2.DATA}}
+比赛人数：{{keyword3.DATA}}
+{{remark.DATA}}
+			  </textarea>
+			   			
+			</div>
+
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">消息first</label>
+			<div class="layui-input-block">
+			   <textarea name="first"  class="layui-textarea"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛名称keyword1</label>
+			<div class="layui-input-block">
+			  <input type="text" name="keyword1"  class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛时间keyword2</label>
+			<div class="layui-input-block">
+			    <input type="text" name="keyword2"  class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛人数keyword3</label>
+			<div class="layui-input-block">
+			   <input type="text" name="keyword3"  class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">消息remark</label>
+			<div class="layui-input-block">
+			   <textarea name="remark"  class="layui-textarea"  rows="5"></textarea>
+			</div>
+		</div>
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsCustomerGameMessageExtMapper" >
+ <select id="selectListByDynamic" resultMap="com.saas.biz.mapper.base.NodejsCustomerGameMessageMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.NodejsCustomerGameMessageMapper.Base_Column_List" />
+
+		from nodejs_customer_game_message
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_customer_game_message
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="selectByCoteId" resultMap="com.saas.biz.mapper.base.NodejsCustomerGameMessageMapper.BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="com.saas.biz.mapper.base.NodejsCustomerGameMessageMapper.Base_Column_List" />
+    from nodejs_customer_game_message
+    where game_cote_id = #{game_cote_id,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

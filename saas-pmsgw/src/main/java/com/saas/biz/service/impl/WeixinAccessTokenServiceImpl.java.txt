@@ -1,0 +1,25 @@
+package com.saas.biz.service.impl;
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import com.ifp.weixin.entity.AccessToken;
+import com.ifp.weixin.util.WeixinUtil;
+
+@Service
+/*@CacheConfig(cacheNames = "bizServiceMessagesCache")*/
+public class WeixinAccessTokenServiceImpl{
+	
+	@Cacheable( value="weixinAccessTokenCache",key = "'AccessToken'+#appid+#appsecret")
+	public  AccessToken getAccessToken(String appid, String appsecret) {		
+		return WeixinUtil.getAccessToken(appid, appsecret);
+	}
+	public String getToken(String appid, String appsecret) {
+		AccessToken at = getAccessToken(appid, appsecret);
+		if (null != at) {
+			return at.getToken();
+		} else {
+			return null;
+		}
+	}
+}

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>俱乐部/公棚</title>
+<link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/table.css" />
+</head>
+<body>
+	<div class="admin-main">
+		<div class="content-search">
+			<div class="layui-form layui-form-pane">
+
+				<div class="layui-inline">
+					<label class="layui-form-label">公棚Id</label>
+					<div class="layui-input-inline">
+						<input id="search_cote_id" class="layui-input" type="text" />
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">公棚名称</label>
+
+					<div class="layui-input-inline">
+						<input id="search_cote_name" class="layui-input" type="text" />
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">来源</label>
+					<div class="layui-input-inline">
+						<!-- <input id="search_cote_website" class="layui-input" type="text" /> -->
+						<select id="search_cote_website" lay-search="">
+							<option value="">全部</option>
+							<option value="pmsgw_pigeoncn">中国鸽网pmsgw_pigeoncn</option>
+							<option value="pmsgw_aj52zxcom">杭州安捷pmsgw_aj52zxcom</option>
+							<option value="pmsgw_086019com">竞翔网pmsgw_086019com</option>
+							<option value="pmsgw_gexingwang">鸽星网pmsgw_gexingwang</option>
+							<option value="pmsgw_benzinglive">隆飞尔pmsgw_benzinglive</option>
+							<option value="pmsgw_lxcom">山东龙畅pmsgw_lxcom</option>
+							<option value="pmsgw_null">未知</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">状态</label>
+					<div class="layui-input-inline">
+						
+						<select id="search_cote_state" lay-search="">
+							<option value="">全部</option>
+							<option value="0">禁用0</option>
+							<option value="1">启用1</option>
+						
+						</select>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<button id="btnSearch" class="layui-btn">查询</button>
+				</div>
+
+			</div>
+		</div>
+		<blockquote class="layui-elem-quote" style="margin-bottom: 0px;">
+		    <button class="layui-btn" id="btnAdd">新增</button>
+			<button class="layui-btn" id="btnUpdate">修改</button>
+			<button class="layui-btn" id="btnActive">启用</button>
+			<button class="layui-btn" id="btnEnable">禁用</button>		
+		</blockquote>
+		<div class="layui-form layui-form-pane">
+			<table id="listTable" lay-filter="test"></table>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../plugins/moment/moment.js"></script>
+	<script type="text/javascript" src="../plugins/moment/moment-timezone.js"></script>
+	<script type="text/javascript" src="../pagejs/base.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/javascript" src="../pagejs/nodejsCrawlerCote/list.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+
+</body>
+
+</html>

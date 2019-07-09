@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsCustomerMessageExtMapper" >
+  <select id="selectListByDynamic" resultMap="com.saas.biz.mapper.base.NodejsCustomerMessageMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.NodejsCustomerMessageMapper.Base_Column_List" />
+
+		from nodejs_customer_message
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_customer_message
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="selectCountByGamedetailId" resultType="long"
+		parameterType="String">
+		SELECT count(*)
+		from nodejs_customer_message
+		where  game_detail_id = #{game_detail_id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByMessageReceiverId" resultMap="com.saas.biz.mapper.base.NodejsCustomerMessageMapper.BaseResultMap" parameterType="String">
+		select 
+		<include refid="com.saas.biz.mapper.base.NodejsCustomerMessageMapper.Base_Column_List" />
+
+		from nodejs_customer_message
+		where  message_receiverId = #{message_receiverId,jdbcType=VARCHAR}
+		ORDER BY game_create_time DESC
+        LIMIT 100
+	</select>
+	
+	
+	
+</mapper>

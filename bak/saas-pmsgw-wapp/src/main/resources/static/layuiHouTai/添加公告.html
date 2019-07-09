@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="100"><span class="red">*</span>公告标题</th>
+		      <td><input type="text" name="" placeholder="请输入公告标题" autocomplete="off" class="layui-input"></td>
+		    </tr>
+		    <tr>
+		    	<th><span class="red">*</span>公告对象</th>
+		    	<td><span class="mr10"><input type="checkbox" class="my-checkbox" ><label>会员</label></span><span><input type="checkbox" class="my-checkbox" ><label>第三方</label></span></td>
+		    </tr>
+		    <tr>
+		      <th><span class="red">*</span>公告内容</th>
+		       <td>
+		          <textarea name="desc" placeholder="请输入公告内容"  class="layui-textarea"></textarea>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 145px; margin-bottom: 15px;">	
+			<div class="layui-btn" style=" min-width: 150px;">确 定</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form','upload','layer'], function(){
+			var $ = layui.jquery,layer = layui.layer;
+			layui.upload({
+			  url: '上传接口url'
+			  ,success: function(res){
+			    console.log(res); //上传成功返回值，必须为json格式
+			  }
+			});
+
+			layer.photos({
+			  photos: '#layer-photos-demo'
+			  ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			});
+
+			$(document).on("click",".a1",function(){
+				layer.open({
+			      type:2
+			      ,area:['95%', '95%']
+			      ,title:"选择商品"
+				  ,content: '选择商品.html'
+				  ,btn: ['取消', '确认']
+				  ,yes: function(index, layero){
+				       layer.closeAll();
+				  }
+				  ,btn2: function(index, layero){
+				      layer.msg('添加成功！',{time: 1000});
+				  }
+				});
+			});
+		});
+	</script>
+</body>
+</html>

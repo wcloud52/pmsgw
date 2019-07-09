@@ -1,0 +1,96 @@
+<view class="container">
+<view class="ar_coverpath">
+    <image src="../../images/banner1.jpg" mode="aspectFill"></image>
+</view>
+<view class="ar_cont">
+    <text class="ar_cont_h1">华顺德春棚500公里职业赛鸽精英赛</text>
+    <text class="ar_cont_price">比赛时间：2018-06-26 - 2018-06-29  </text>
+    <text>   
+
+
+微信/电话：18911603347  固定电话：022-22907881  图文传真：022-22907882(自动传真)
+    </text>
+    <view class="ar_line"></view>
+    <text class="ar_cont_h1">详情描述</text>
+    <text>
+   华顺德春棚500公里职业赛鸽精英赛规程
+
+一、职业赛鸽精英普通组: 分别为200元组、300元组、500元组、1000元组、2000元组。
+
+30羽以内取一名，奖金85%；30羽以上100羽以下取三名，奖金40%，30%，20%；100羽以上取五名，奖金30%，25%，15%，10%，10% 。
+
+二、职业赛鸽精英十一取一组：分别为200元组、300元组、500元组、1000元组、2000元组，奖金分别为2000元、3000元、5000元、10000元、20000元。
+
+三、职业赛鸽精英二十二取一组：分别为200元组、300元组、500元组、1000元组、2000元组，奖金分别为4000元、6000元、10000元、20000元、40000元。
+
+四、职业赛鸽精英手机大奖赛组：分别为200元华为组、300元苹果组，200元奖华为新款P20手机一部，300元奖新款iPhone X手机一部。
+
+报名满33羽取一名，报名不足33羽取奖金90%，超过33羽不足66羽，第一名奖手机一部第二名取剩余奖金90%，以此类推。
+
+
+
+五、职业赛鸽精英幸运一把抓组：分别为100元组。在101名后（包括101名）名次靠前者取一名，奖金85%。
+
+六、报名截止时间为比赛集鸽当日20:00时。
+
+七、职业赛鸽精英赛注意事项：
+
+（1）凡参加职业赛鸽精英赛人员，参赛鸽必须是自己名下赛鸽，参赛鸽在同一组发生重号报名时参赛鸽主有效，其他人报名无效。
+
+（2）微信转账或银行汇款的鸽友，必须将汇款凭证及明细(环号及组别)通过微信或传真发送至本公棚。
+
+（3）鸽主必须填写清楚环号及组别，在网上登录信息后必须及时核对，如遇鸽友错填漏填，后果鸽主自负，公棚不承担任何责任。
+
+（4）因银行转账存在延时到账现象，本棚以实际到帐时间及信息进行核实，逾期未到账者视为报名无效，款项退回。
+
+（5）谢绝口头报名及电话报名，微信谢绝发送视频及语音，以图片及文字为准。
+
+八、银行汇款及微信转账账号：
+
+中国工商银行  户主姓名：于学军  卡号：6212  2602  0006  6423  050
+
+开户行：中国工商银行北京九龙山翠城支行
+
+中国建设银行  户主姓名：于学军  卡号：6217  0000  1004  5089  680
+
+开户行：中国建设银行北京分行
+
+中国农业银行  户主姓名：于学军  卡号：6228  4800  1842  9721  279
+
+开户行：中国农业银行北京王四营支行
+
+公棚唯一有效收款微信账号：18911603347(华顺德·行云流水)
+    </text>
+    <!-- <button class="ar_book" bindtap="bookTap">立即预定</button> -->
+</view>
+ <view class="ar_cont">
+   
+    <view class="ar_cont_h2">
+    【比赛内容】
+    </view>
+
+    <view class="ar_sevice_item" style="border-top:1px solid #ddd;">
+        <text class="ar_cont_subject">职业赛鸽精英普通组</text>
+        <text class="ar_cont_price">¥100</text>
+        <view class="section_book" bindtap="bookTap" data-aid="{{item.id}}">
+            <text>预约</text>
+        </view>
+    </view>
+
+    <view class="ar_sevice_item">
+        <text class="ar_cont_subject">职业赛鸽精英普通组</text>
+        <text class="ar_cont_price">¥200</text>
+        <view class="section_book" bindtap="bookTap" data-aid="{{item.id}}">
+            <text>预约</text>
+        </view>
+    </view>
+
+    <view class="ar_sevice_item">
+        <text class="ar_cont_subject">职业赛鸽精英普通组</text>
+        <text class="ar_cont_price">¥300</text>
+        <view class="section_book" bindtap="bookTap" data-aid="{{item.id}}">
+            <text>预约</text>
+        </view>
+    </view>
+</view>
+</view>

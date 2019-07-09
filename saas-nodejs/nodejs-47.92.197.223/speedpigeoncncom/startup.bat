@@ -1,0 +1,1 @@
+start java  -Dfile.encoding=utf-8 -Dloader.path="lib/" -jar saas-pmsgw-weixin-0.0.1-SNAPSHOT.jar --spring.config.location=bootstrap.properties,application.properties >logs/catalina.out 2>&1 

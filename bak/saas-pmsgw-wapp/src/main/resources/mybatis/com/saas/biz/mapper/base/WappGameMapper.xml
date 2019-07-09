@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.WappGameMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.WappGame" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ruleMasterId" property="ruleMasterId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="detailsMessage" property="detailsMessage" jdbcType="VARCHAR" />
+    <result column="crawlerUrl" property="crawlerUrl" jdbcType="VARCHAR" />
+    <result column="crawlerType" property="crawlerType" jdbcType="VARCHAR" />
+    <result column="startDatetime" property="startDatetime" jdbcType="TIMESTAMP" />
+    <result column="endDatetime" property="endDatetime" jdbcType="TIMESTAMP" />
+    <result column="createdDatetime" property="createdDatetime" jdbcType="TIMESTAMP" />
+    <result column="updateDatetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="createdBy" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updateBy" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ruleMasterId, name, description, detailsMessage, crawlerUrl, crawlerType, startDatetime, 
+    endDatetime, createdDatetime, updateDatetime, createdBy, updateBy
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wapp_game
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wapp_game
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.WappGame" >
+    insert into wapp_game (id, ruleMasterId, name, 
+      description, detailsMessage, crawlerUrl, 
+      crawlerType, startDatetime, endDatetime, 
+      createdDatetime, updateDatetime, createdBy, 
+      updateBy)
+    values (#{id,jdbcType=VARCHAR}, #{ruleMasterId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{detailsMessage,jdbcType=VARCHAR}, #{crawlerUrl,jdbcType=VARCHAR}, 
+      #{crawlerType,jdbcType=VARCHAR}, #{startDatetime,jdbcType=TIMESTAMP}, #{endDatetime,jdbcType=TIMESTAMP}, 
+      #{createdDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.WappGame" >
+    insert into wapp_game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ruleMasterId != null" >
+        ruleMasterId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="detailsMessage != null" >
+        detailsMessage,
+      </if>
+      <if test="crawlerUrl != null" >
+        crawlerUrl,
+      </if>
+      <if test="crawlerType != null" >
+        crawlerType,
+      </if>
+      <if test="startDatetime != null" >
+        startDatetime,
+      </if>
+      <if test="endDatetime != null" >
+        endDatetime,
+      </if>
+      <if test="createdDatetime != null" >
+        createdDatetime,
+      </if>
+      <if test="updateDatetime != null" >
+        updateDatetime,
+      </if>
+      <if test="createdBy != null" >
+        createdBy,
+      </if>
+      <if test="updateBy != null" >
+        updateBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleMasterId != null" >
+        #{ruleMasterId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsMessage != null" >
+        #{detailsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerUrl != null" >
+        #{crawlerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerType != null" >
+        #{crawlerType,jdbcType=VARCHAR},
+      </if>
+      <if test="startDatetime != null" >
+        #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null" >
+        #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.WappGame" >
+    update wapp_game
+    <set >
+      <if test="ruleMasterId != null" >
+        ruleMasterId = #{ruleMasterId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsMessage != null" >
+        detailsMessage = #{detailsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerUrl != null" >
+        crawlerUrl = #{crawlerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlerType != null" >
+        crawlerType = #{crawlerType,jdbcType=VARCHAR},
+      </if>
+      <if test="startDatetime != null" >
+        startDatetime = #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null" >
+        endDatetime = #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdDatetime != null" >
+        createdDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        updateDatetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        updateBy = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.WappGame" >
+    update wapp_game
+    set ruleMasterId = #{ruleMasterId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      detailsMessage = #{detailsMessage,jdbcType=VARCHAR},
+      crawlerUrl = #{crawlerUrl,jdbcType=VARCHAR},
+      crawlerType = #{crawlerType,jdbcType=VARCHAR},
+      startDatetime = #{startDatetime,jdbcType=TIMESTAMP},
+      endDatetime = #{endDatetime,jdbcType=TIMESTAMP},
+      createdDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      updateDatetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      updateBy = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

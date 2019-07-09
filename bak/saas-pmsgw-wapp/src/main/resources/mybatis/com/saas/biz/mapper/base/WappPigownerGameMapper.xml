@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.WappPigownerGameMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.WappPigownerGame" >
+    <id column="gameId" property="gameId" jdbcType="VARCHAR" />
+    <id column="pigownerId" property="pigownerId" jdbcType="VARCHAR" />
+    <result column="ringnum" property="ringnum" jdbcType="VARCHAR" />
+    <result column="pigowner" property="pigowner" jdbcType="VARCHAR" />
+    <result column="createdDatetime" property="createdDatetime" jdbcType="TIMESTAMP" />
+    <result column="updateDatetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="createdBy" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updateBy" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gameId, pigownerId, ringnum, pigowner, createdDatetime, updateDatetime, createdBy, 
+    updateBy
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.saas.biz.pojo.WappPigownerGameKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from wapp_pigowner_game
+    where gameId = #{gameId,jdbcType=VARCHAR}
+      and pigownerId = #{pigownerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.saas.biz.pojo.WappPigownerGameKey" >
+    delete from wapp_pigowner_game
+    where gameId = #{gameId,jdbcType=VARCHAR}
+      and pigownerId = #{pigownerId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.WappPigownerGame" >
+    insert into wapp_pigowner_game (gameId, pigownerId, ringnum, 
+      pigowner, createdDatetime, updateDatetime, 
+      createdBy, updateBy)
+    values (#{gameId,jdbcType=VARCHAR}, #{pigownerId,jdbcType=VARCHAR}, #{ringnum,jdbcType=VARCHAR}, 
+      #{pigowner,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.WappPigownerGame" >
+    insert into wapp_pigowner_game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gameId != null" >
+        gameId,
+      </if>
+      <if test="pigownerId != null" >
+        pigownerId,
+      </if>
+      <if test="ringnum != null" >
+        ringnum,
+      </if>
+      <if test="pigowner != null" >
+        pigowner,
+      </if>
+      <if test="createdDatetime != null" >
+        createdDatetime,
+      </if>
+      <if test="updateDatetime != null" >
+        updateDatetime,
+      </if>
+      <if test="createdBy != null" >
+        createdBy,
+      </if>
+      <if test="updateBy != null" >
+        updateBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gameId != null" >
+        #{gameId,jdbcType=VARCHAR},
+      </if>
+      <if test="pigownerId != null" >
+        #{pigownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null" >
+        #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.WappPigownerGame" >
+    update wapp_pigowner_game
+    <set >
+      <if test="ringnum != null" >
+        ringnum = #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        pigowner = #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        createdDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        updateDatetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        updateBy = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gameId = #{gameId,jdbcType=VARCHAR}
+      and pigownerId = #{pigownerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.WappPigownerGame" >
+    update wapp_pigowner_game
+    set ringnum = #{ringnum,jdbcType=VARCHAR},
+      pigowner = #{pigowner,jdbcType=VARCHAR},
+      createdDatetime = #{createdDatetime,jdbcType=TIMESTAMP},
+      updateDatetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      updateBy = #{updateBy,jdbcType=VARCHAR}
+    where gameId = #{gameId,jdbcType=VARCHAR}
+      and pigownerId = #{pigownerId,jdbcType=VARCHAR}
+  </update>
+</mapper>

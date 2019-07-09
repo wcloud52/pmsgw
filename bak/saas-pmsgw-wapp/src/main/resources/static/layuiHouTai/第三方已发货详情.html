@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>众创数字资产综合运营管理平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+
+	<fieldset class="layui-elem-field site-demo-button">
+	  <legend>订单信息</legend>
+	  <table class="layui-table layui-table-add" lay-skin="nob">
+	  <tbody>
+	    <tr>
+	      <th width="100" class="pad">订单编号</th>
+	      <td>SW00152100</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">订单类型</th>
+	      <td>第三方</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">订单状态</th>
+	      <td>待发货</td>
+	    </tr>    
+	    <tr>
+	      <th class="pad">交易时间</th>
+	      <td>2017-04-12 17:27:36</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">发货人</th>
+	      <td>XXX公司</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">发货时间</th>
+	      <td>2017-04-12 17:27:36</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">签收时间</th>
+	      <td>2017-04-13 17:27:36</td>
+	  </tr>
+	  </tbody>
+	</table>
+	</fieldset>
+
+	<fieldset class="layui-elem-field site-demo-button">
+	  <legend>第三方信息</legend>
+	  <table class="layui-table layui-table-add" lay-skin="nob">
+	  <tbody>
+	    <tr>
+	      <th width="100" class="pad">第三方名称</th>
+	      <td>XXX公司</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">联系人</th>
+	      <td>李二</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">手机号码</th>
+	      <td>13688888888</td>
+	    </tr>
+	  </tbody>
+	</table>
+	</fieldset>
+
+	<fieldset class="layui-elem-field site-demo-button">
+	  <legend>会员信息</legend>
+	  <table class="layui-table layui-table-add" lay-skin="nob">
+	  <tbody>
+	    <tr>
+	      <th width="100" class="pad">会员ID</th>
+	      <td>10001</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">会员姓名</th>
+	      <td>李四</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">手机号码</th>
+	      <td>13688888888</td>
+	    </tr>
+	  </tbody>
+	</table>
+	</fieldset>
+
+	<fieldset class="layui-elem-field site-demo-button">
+	  <legend>收货地址</legend>
+	  <table class="layui-table layui-table-add" lay-skin="nob">
+	  <tbody>
+	    <tr>
+	      <th width="100" class="pad">收货人</th>
+	      <td>张三</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">手机号码</th>
+	      <td>13644658863</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">收货地址</th>
+	      <td>广东省深圳市宝安区留仙一路高新奇工业园</td>
+	    </tr>
+	  </tbody>
+	</table>
+	</fieldset>
+
+	<fieldset class="layui-elem-field layui-field-title mtb10">
+		<legend>商品信息</legend>
+    </fieldset>
+    <table class="layui-table" lay-skin="line">
+	  <thead>
+	    <tr>
+	      <th colspan="2">商品名称</th>
+	      <th>所属品牌</th>
+	      <th>数量</th>
+	      <th>商品成本</th>
+	      <th>成交金额</th>
+	      <th>成交AGR</th>
+	    </tr> 
+	  </thead>
+	  <tbody>
+	    <tr>
+		<!-- 点击进入前台对应商品页面 -->
+	      <td width="66" class="a3"><a href="" target="blank"><img class="img-cp" src="img/1.jpg" alt=""></a></td>
+	      <td width="300" class="a3">
+	      	<a href=""><div>钻石陀飞轮</div>
+	      		<div class="gray">红色</div></a>
+	      </td>
+	      <td>浪陀</td>
+	      <td>1</td>
+	      <td><span class="price">5000.00</span></td>
+	      <td><span class="price">10000.00</span></td>
+		  <td>50000</td> 
+	    </tr>   
+	  </tbody>
+	</table> 
+
+	<fieldset class="layui-elem-field site-demo-button">
+	  <legend>其它信息</legend>
+	  <table class="layui-table layui-table-add" lay-skin="nob">
+	  <tbody>
+	    <tr>
+	      <th width="100" class="pad">备注</th>
+	      <td>请周末发货！</td>
+	    </tr>
+	  </tbody>
+	</table>
+	</fieldset>
+
+
+	<fieldset class="layui-elem-field site-demo-button">
+	  <legend>快递信息</legend>
+	  <table class="layui-table layui-table-add" lay-skin="nob">
+	  <tbody>
+	    <tr>
+	      <th width="100" class="pad">快递公司</th>
+	      <td>顺丰速递</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">快递单号</th>
+	      <td>10000002110</td>
+	    </tr>
+	    <tr>
+	      <th class="pad">快递动态</th>
+	      <td>
+	      	<p>[深圳市] 快件已在 深圳新宝城 签收 签收照片,感谢您使用中通快递，期待再次为您服务! 2016-09-18 10:55:30</p>
+			<p>[深圳市] 深圳新宝城 的 苏顺荣[18925277941] 正在派件 2016-09-18 08:18:45</p>
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>
+	</fieldset>
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form'], function(){
+			var $ = layui.jquery;
+		});
+	</script>
+
+</body>
+</html>

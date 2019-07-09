@@ -1,0 +1,557 @@
+自定义菜单创建接口
+自定义菜单能够帮助公众号丰富界面，让用户更好更快地理解公众号的功能。开启自定义菜单后，公众号界面如图所示：
+
+菜单.jpg
+请注意：
+
+1、自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。
+2、一级菜单最多4个汉字，二级菜单最多7个汉字，多出来的部分将会以“...”代替。
+3、创建自定义菜单后，由于微信客户端缓存，需要24小时微信客户端才会展现出来。测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果。
+自定义菜单接口可实现多种类型按钮，如下：
+
+1、click：点击推事件
+用户点击click类型按钮后，微信服务器会通过消息接口推送消息类型为event	的结构给开发者（参考消息接口指南），并且带上按钮中开发者填写的key值，开发者可以通过自定义的key值与用户进行交互；
+2、view：跳转URL
+用户点击view类型按钮后，微信客户端将会打开开发者在按钮中填写的网页URL，可与网页授权获取用户基本信息接口结合，获得用户基本信息。
+3、scancode_push：扫码推事件
+用户点击按钮后，微信客户端将调起扫一扫工具，完成扫码操作后显示扫描结果（如果是URL，将进入URL），且会将扫码的结果传给开发者，开发者可以下发消息。
+4、scancode_waitmsg：扫码推事件且弹出“消息接收中”提示框
+用户点击按钮后，微信客户端将调起扫一扫工具，完成扫码操作后，将扫码的结果传给开发者，同时收起扫一扫工具，然后弹出“消息接收中”提示框，随后可能会收到开发者下发的消息。
+5、pic_sysphoto：弹出系统拍照发图
+用户点击按钮后，微信客户端将调起系统相机，完成拍照操作后，会将拍摄的相片发送给开发者，并推送事件给开发者，同时收起系统相机，随后可能会收到开发者下发的消息。
+6、pic_photo_or_album：弹出拍照或者相册发图
+用户点击按钮后，微信客户端将弹出选择器供用户选择“拍照”或者“从手机相册选择”。用户选择后即走其他两种流程。
+7、pic_weixin：弹出微信相册发图器
+用户点击按钮后，微信客户端将调起微信相册，完成选择操作后，将选择的相片发送给开发者的服务器，并推送事件给开发者，同时收起相册，随后可能会收到开发者下发的消息。
+8、location_select：弹出地理位置选择器
+用户点击按钮后，微信客户端将调起地理位置选择工具，完成选择操作后，将选择的地理位置发送给开发者的服务器，同时收起位置选择工具，随后可能会收到开发者下发的消息。
+9、media_id：下发消息（除文本消息）
+用户点击media_id类型按钮后，微信服务器会将开发者填写的永久素材id对应的素材下发给用户，永久素材类型可以是图片、音频、视频、图文消息。请注意：永久素材id必须是在“素材管理/新增永久素材”接口上传后获得的合法id。
+10、view_limited：跳转图文消息URL
+用户点击view_limited类型按钮后，微信客户端将打开开发者在按钮中填写的永久素材id对应的图文消息URL，永久素材类型只支持图文消息。请注意：永久素材id必须是在“素材管理/新增永久素材”接口上传后获得的合法id。
+请注意，3到8的所有事件，仅支持微信iPhone5.4.1以上版本，和Android5.4以上版本的微信用户，旧版本微信用户点击后将没有回应，开发者也不能正常接收到事件推送。9和10，是专门给第三方平台旗下未微信认证（具体而言，是资质认证未通过）的订阅号准备的事件类型，它们是没有事件推送的，能力相对受限，其他类型的公众号不必使用。
+
+接口调用请求说明
+
+http请求方式：POST（请使用https协议） https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN
+
+click和view的请求示例
+
+ {
+     "button":[
+     {	
+          "type":"click",
+          "name":"今日歌曲",
+          "key":"V1001_TODAY_MUSIC"
+      },
+      {
+           "name":"菜单",
+           "sub_button":[
+           {	
+               "type":"view",
+               "name":"搜索",
+               "url":"http://www.soso.com/"
+            },
+            {
+               "type":"view",
+               "name":"视频",
+               "url":"http://v.qq.com/"
+            },
+            {
+               "type":"click",
+               "name":"赞一下我们",
+               "key":"V1001_GOOD"
+            }]
+       }]
+ }
+其他新增按钮类型的请求示例
+
+{
+    "button": [
+        {
+            "name": "扫码", 
+            "sub_button": [
+                {
+                    "type": "scancode_waitmsg", 
+                    "name": "扫码带提示", 
+                    "key": "rselfmenu_0_0", 
+                    "sub_button": [ ]
+                }, 
+                {
+                    "type": "scancode_push", 
+                    "name": "扫码推事件", 
+                    "key": "rselfmenu_0_1", 
+                    "sub_button": [ ]
+                }
+            ]
+        }, 
+        {
+            "name": "发图", 
+            "sub_button": [
+                {
+                    "type": "pic_sysphoto", 
+                    "name": "系统拍照发图", 
+                    "key": "rselfmenu_1_0", 
+                   "sub_button": [ ]
+                 }, 
+                {
+                    "type": "pic_photo_or_album", 
+                    "name": "拍照或者相册发图", 
+                    "key": "rselfmenu_1_1", 
+                    "sub_button": [ ]
+                }, 
+                {
+                    "type": "pic_weixin", 
+                    "name": "微信相册发图", 
+                    "key": "rselfmenu_1_2", 
+                    "sub_button": [ ]
+                }
+            ]
+        }, 
+        {
+            "name": "发送位置", 
+            "type": "location_select", 
+            "key": "rselfmenu_2_0"
+        },
+        {
+           "type": "media_id", 
+           "name": "图片", 
+           "media_id": "MEDIA_ID1"
+        }, 
+        {
+           "type": "view_limited", 
+           "name": "图文消息", 
+           "media_id": "MEDIA_ID2"
+        }
+    ]
+}
+参数说明
+
+参数	是否必须	说明
+button	是	一级菜单数组，个数应为1~3个
+sub_button	否	二级菜单数组，个数应为1~5个
+type	是	菜单的响应动作类型
+name	是	菜单标题，不超过16个字节，子菜单不超过40个字节
+key	click等点击类型必须	菜单KEY值，用于消息接口推送，不超过128字节
+url	view类型必须	网页链接，用户点击菜单可打开链接，不超过256字节
+media_id	media_id类型和view_limited类型必须	调用新增永久素材接口返回的合法media_id
+
+返回结果
+
+正确时的返回JSON数据包如下：
+
+{"errcode":0,"errmsg":"ok"}
+错误时的返回JSON数据包如下（示例为无效菜单名长度）：
+
+{"errcode":40018,"errmsg":"invalid button name size"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+自定义菜单查询接口
+使用接口创建自定义菜单后，开发者还可使用接口查询自定义菜单的结构。
+
+请求说明
+
+http请求方式：GET
+https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN
+返回说明
+
+对应创建接口，正确的Json返回结果:
+{"menu":{"button":[{"type":"click","name":"今日歌曲","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http://www.soso.com/","sub_button":[]},{"type":"view","name":"视频","url":"http://v.qq.com/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]}]}}
+统一返回码说明
+
+使用网页调试工具调试该接口
+
+自定义菜单删除接口
+使用接口创建自定义菜单后，开发者还可使用接口删除当前使用的自定义菜单。
+
+请求说明
+
+http请求方式：GET
+https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN
+返回说明
+
+对应创建接口，正确的Json返回结果:
+{"errcode":0,"errmsg":"ok"}
+统一返回码说明
+
+使用网页调试工具调试该接口
+
+
+自定义菜单事件推送
+用户点击自定义菜单后，微信会把点击事件推送给开发者，请注意，点击菜单弹出子菜单，不会产生上报。请注意，第3个到第8个的所有事件，仅支持微信iPhone5.4.1以上版本，和Android5.4以上版本的微信用户，旧版本微信用户点击后将没有回应，开发者也不能正常接收到事件推送。
+
+目录
+1 点击菜单拉取消息时的事件推送
+2 点击菜单跳转链接时的事件推送
+3 scancode_push：扫码推事件的事件推送
+4 scancode_waitmsg：扫码推事件且弹出“消息接收中”提示框的事件推送
+5 pic_sysphoto：弹出系统拍照发图的事件推送
+6 pic_photo_or_album：弹出拍照或者相册发图的事件推送
+7 pic_weixin：弹出微信相册发图器的事件推送
+8 location_select：弹出地理位置选择器的事件推送
+点击菜单拉取消息时的事件推送
+
+推送XML数据包示例：
+
+<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[FromUser]]></FromUserName>
+<CreateTime>123456789</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[CLICK]]></Event>
+<EventKey><![CDATA[EVENTKEY]]></EventKey>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，CLICK
+EventKey	事件KEY值，与自定义菜单接口中KEY值对应
+
+点击菜单跳转链接时的事件推送
+
+推送XML数据包示例：
+
+<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[FromUser]]></FromUserName>
+<CreateTime>123456789</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[www.qq.com]]></EventKey>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，VIEW
+EventKey	事件KEY值，设置的跳转URL
+
+scancode_push：扫码推事件的事件推送
+
+推送XML数据包示例：
+
+<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>
+<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>
+<CreateTime>1408090502</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[scancode_push]]></Event>
+<EventKey><![CDATA[6]]></EventKey>
+<ScanCodeInfo><ScanType><![CDATA[qrcode]]></ScanType>
+<ScanResult><![CDATA[1]]></ScanResult>
+</ScanCodeInfo>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间（整型）
+MsgType	消息类型，event
+Event	事件类型，scancode_push
+EventKey	事件KEY值，由开发者在创建菜单时设定
+ScanCodeInfo	扫描信息
+ScanType	扫描类型，一般是qrcode
+ScanResult	扫描结果，即二维码对应的字符串信息
+
+scancode_waitmsg：扫码推事件且弹出“消息接收中”提示框的事件推送
+
+推送XML数据包示例：
+
+<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>
+<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>
+<CreateTime>1408090606</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[scancode_waitmsg]]></Event>
+<EventKey><![CDATA[6]]></EventKey>
+<ScanCodeInfo><ScanType><![CDATA[qrcode]]></ScanType>
+<ScanResult><![CDATA[2]]></ScanResult>
+</ScanCodeInfo>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，scancode_waitmsg
+EventKey	事件KEY值，由开发者在创建菜单时设定
+ScanCodeInfo	扫描信息
+ScanType	扫描类型，一般是qrcode
+ScanResult	扫描结果，即二维码对应的字符串信息
+
+pic_sysphoto：弹出系统拍照发图的事件推送
+
+推送XML数据包示例：
+
+<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>
+<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>
+<CreateTime>1408090651</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[pic_sysphoto]]></Event>
+<EventKey><![CDATA[6]]></EventKey>
+<SendPicsInfo><Count>1</Count>
+<PicList><item><PicMd5Sum><![CDATA[1b5f7c23b5bf75682a53e7b6d163e185]]></PicMd5Sum>
+</item>
+</PicList>
+</SendPicsInfo>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，pic_sysphoto
+EventKey	事件KEY值，由开发者在创建菜单时设定
+SendPicsInfo	发送的图片信息
+Count	发送的图片数量
+PicList	图片列表
+PicMd5Sum	图片的MD5值，开发者若需要，可用于验证接收到图片
+
+pic_photo_or_album：弹出拍照或者相册发图的事件推送
+
+推送XML数据包示例：
+
+<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>
+<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>
+<CreateTime>1408090816</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[pic_photo_or_album]]></Event>
+<EventKey><![CDATA[6]]></EventKey>
+<SendPicsInfo><Count>1</Count>
+<PicList><item><PicMd5Sum><![CDATA[5a75aaca956d97be686719218f275c6b]]></PicMd5Sum>
+</item>
+</PicList>
+</SendPicsInfo>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，pic_photo_or_album
+EventKey	事件KEY值，由开发者在创建菜单时设定
+SendPicsInfo	发送的图片信息
+Count	发送的图片数量
+PicList	图片列表
+PicMd5Sum	图片的MD5值，开发者若需要，可用于验证接收到图片
+
+pic_weixin：弹出微信相册发图器的事件推送
+
+推送XML数据包示例：
+
+<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>
+<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>
+<CreateTime>1408090816</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[pic_weixin]]></Event>
+<EventKey><![CDATA[6]]></EventKey>
+<SendPicsInfo><Count>1</Count>
+<PicList><item><PicMd5Sum><![CDATA[5a75aaca956d97be686719218f275c6b]]></PicMd5Sum>
+</item>
+</PicList>
+</SendPicsInfo>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，pic_weixin
+EventKey	事件KEY值，由开发者在创建菜单时设定
+SendPicsInfo	发送的图片信息
+Count	发送的图片数量
+PicList	图片列表
+PicMd5Sum	图片的MD5值，开发者若需要，可用于验证接收到图片
+
+location_select：弹出地理位置选择器的事件推送
+
+推送XML数据包示例：
+
+<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>
+<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>
+<CreateTime>1408091189</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[location_select]]></Event>
+<EventKey><![CDATA[6]]></EventKey>
+<SendLocationInfo><Location_X><![CDATA[23]]></Location_X>
+<Location_Y><![CDATA[113]]></Location_Y>
+<Scale><![CDATA[15]]></Scale>
+<Label><![CDATA[ 广州市海珠区客村艺苑路 106号]]></Label>
+<Poiname><![CDATA[]]></Poiname>
+</SendLocationInfo>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，location_select
+EventKey	事件KEY值，由开发者在创建菜单时设定
+SendLocationInfo	发送的位置信息
+Location_X	X坐标信息
+Location_Y	Y坐标信息
+Scale	精度，可理解为精度或者比例尺、越精细的话 scale越高
+Label	地理位置的字符串信息
+Poiname	朋友圈POI的名字，可能为空
+
+
+
+获取自定义菜单配置接口
+本接口将会提供公众号当前使用的自定义菜单的配置，如果公众号是通过API调用设置的菜单，则返回菜单的开发配置，而如果公众号是在公众平台官网通过网站功能发布菜单，则本接口返回运营者设置的菜单配置。
+
+请注意：
+
+1、第三方平台开发者可以通过本接口，在旗下公众号将业务授权给你后，立即通过本接口检测公众号的自定义菜单配置，并通过接口再次给公众号设置好自动回复规则，以提升公众号运营者的业务体验。
+2、本接口与自定义菜单查询接口的不同之处在于，本接口无论公众号的接口是如何设置的，都能查询到接口，而自定义菜单查询接口则仅能查询到使用API设置的菜单配置。
+3、认证/未认证的服务号/订阅号，以及接口测试号，均拥有该接口权限。
+4、从第三方平台的公众号登录授权机制上来说，该接口从属于消息与菜单权限集。
+5、本接口中返回的mediaID均为临时素材（通过素材管理-获取临时素材接口来获取这些素材），每次接口调用返回的mediaID都是临时的、不同的，在每次接口调用后3天有效，若需永久使用该素材，需使用素材管理接口中的永久素材。
+接口调用请求说明
+
+http请求方式: GET（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token=ACCESS_TOKEN
+返回结果说明
+
+如果公众号是在公众平台官网通过网站功能发布菜单，则本接口返回的自定义菜单配置样例如下：
+
+{ 
+   "is_menu_open": 1, 
+   "selfmenu_info": { 
+       "button": [ 
+           { 
+               "name": "button", 
+               "sub_button": { 
+                   "list": [ 
+                       { 
+                           "type": "view", 
+                           "name": "view_url", 
+                           "url": "http://www.qq.com"
+                       }, 
+                       { 
+                           "type": "news", 
+                           "name": "news", 
+                           "news_info": { 
+                               "list": [ 
+                                   { 
+                                       "title": "MULTI_NEWS", 
+                                       "author": "JIMZHENG", 
+                                       "digest": "text", 
+                                       "show_cover": 0, 
+                                       "cover_url": "http://mmbiz.qpic.cn/mmbiz/GE7et87vE9vicuCibqXsX9GPPLuEtBfXfK0HKuBIa1A1cypS0uY1wickv70iaY1gf3I1DTszuJoS3lAVLvhTcm9sDA/0", 
+                                       "content_url": "http://mp.weixin.qq.com/s?__biz=MjM5ODUwNTM3Ng==&mid=204013432&idx=1&sn=80ce6d9abcb832237bf86c87e50fda15#rd", 
+                                       "source_url": ""
+                                   }, 
+                                   { 
+                                       "title": "MULTI_NEWS1", 
+                                       "author": "JIMZHENG", 
+                                       "digest": "MULTI_NEWS1", 
+                                       "show_cover": 1, 
+                                       "cover_url": "http://mmbiz.qpic.cn/mmbiz/GE7et87vE9vicuCibqXsX9GPPLuEtBfXfKnmnpXYgWmQD5gXUrEApIYBCgvh2yHsu3ic3anDUGtUCHwjiaEC5bicd7A/0", 
+                                       "content_url": "http://mp.weixin.qq.com/s?__biz=MjM5ODUwNTM3Ng==&mid=204013432&idx=2&sn=8226843afb14ecdecb08d9ce46bc1d37#rd", 
+                                       "source_url": ""
+                                   }
+                               ]
+                           }
+                       },
+                       {
+                           "type": "video", 
+                           "name": "video", 
+                           "value": "http://61.182.130.30/vweixinp.tc.qq.com/1007_114bcede9a2244eeb5ab7f76d951df5f.f10.mp4?vkey=77A42D0C2015FBB0A3653D29C571B5F4BBF1D243FBEF17F09C24FF1F2F22E30881BD350E360BC53F&sha=0&save=1"
+                       }, 
+                       { 
+                           "type": "voice",
+                           "name": "voice", 
+                           "value": "nTXe3aghlQ4XYHa0AQPWiQQbFW9RVtaYTLPC1PCQx11qc9UB6CiUPFjdkeEtJicn"
+                       }
+                   ]
+               }
+           }, 
+           { 
+               "type": "text", 
+               "name": "text", 
+               "value": "This is text!"
+           }, 
+           { 
+               "type": "img", 
+               "name": "photo", 
+               "value": "ax5Whs5dsoomJLEppAvftBUuH7CgXCZGFbFJifmbUjnQk_ierMHY99Y5d2Cv14RD"
+           }
+       ]
+   }
+}
+如果公众号是通过API调用设置的菜单，自定义菜单配置样例如下：
+
+{ 
+   "is_menu_open": 1, 
+   "selfmenu_info": { 
+       "button": [ 
+           { 
+               "type": "click", 
+               "name": "今日歌曲", 
+               "key": "V1001_TODAY_MUSIC"
+           }, 
+           { 
+               "name": "菜单", 
+               "sub_button": { 
+                   "list": [ 
+                       { 
+                           "type": "view", 
+                           "name": "搜索", 
+                           "url": "http://www.soso.com/"
+                       }, 
+                       { 
+                           "type": "view", 
+                           "name": "视频", 
+                           "url": "http://v.qq.com/"
+                       }, 
+                       { 
+                           "type": "click", 
+                           "name": "赞一下我们", 
+                           "key": "V1001_GOOD"
+                       }
+                   ]
+               }
+           }
+       ]
+   }
+}
+参数说明
+
+参数	说明
+is_menu_open	菜单是否开启，0代表未开启，1代表开启
+selfmenu_info	菜单信息
+button	菜单按钮
+type	菜单的类型，公众平台官网上能够设置的菜单类型有view（跳转网页）、text（返回文本，下同）、img、photo、video、voice。使用API设置的则有8种，详见《自定义菜单创建接口》
+name	菜单名称
+value、url、key等字段	对于不同的菜单类型，value的值意义不同。官网上设置的自定义菜单：
+Text:保存文字到value； Img、voice：保存mediaID到value； Video：保存视频下载链接到value； News：保存图文消息到news_info； View：保存链接到url。
+
+使用API设置的自定义菜单： click、scancode_push、scancode_waitmsg、pic_sysphoto、pic_photo_or_album、	pic_weixin、location_select：保存值到key；view：保存链接到url
+
+news_info	图文消息的信息
+title	图文消息的标题
+digest	摘要
+author	作者
+show_cover	是否显示封面，0为不显示，1为显示
+cover_url	封面图片的URL
+content_url	正文的URL
+source_url	原文的URL，若置空则无查看原文入口
+

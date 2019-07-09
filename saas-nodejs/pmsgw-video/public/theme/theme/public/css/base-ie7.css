@@ -1,0 +1,14 @@
+/* ie7 */
+.form-horizontal td .controls:first-child {
+  +padding-left:0;
+}
+.row-fluid [class*="span"] {
+    +margin-left: 0.5%;
+  }
+.resources dt .btn-info{+padding-top:80px;}
+.table,.bottom,.table-new{+width:98%; +margin-left:auto; +margin-right:auto;}
+.clearfix.pull-right,
+.btn-group.pull-right,#listUpBtn{+margin-right:1%;}
+.alert-heading,.alert h4{+float:left;}
+#menuContent.menuContent{+width:350px;}
+.dataTables_wrapper.form-inline .top{+margin-left:1%}

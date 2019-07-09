@@ -1,0 +1,119 @@
+
+<!doctype html>
+<html>
+<head>
+<title>比赛成绩列表</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="/plugins/jquery-weui/dist/lib/weui.min.css">
+<link rel="stylesheet" href="/plugins/jquery-weui/dist/css/jquery-weui.min.css" />
+
+<link rel="stylesheet" href="/plugins/jquery-weui/css/reset.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/flex.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/style.css" />
+
+</head>
+<body>
+
+	<section class="wrap">
+
+		<section class="top-fixed">
+
+			<div class="flex-box flex-between fs13 p8 top-search" style="background-color: #efeff4">
+				<a href="racelist" class="flex-box header_left"> <img src="/plugins/jquery-weui/images/header-img1.png" alt="" class="block header_back" style="height: 22px; margin-right: 4px;"> <img src="/plugins/jquery-weui/images/header-img1.png" alt="" class="block header_options" style="height: 22px; margin-right: 4px;">
+
+				</a>
+				<div class="search-btn-wrap flex-grow-1 pointer">
+					<i class="ico-search"></i> <input type="text" class="" placeholder="搜索您需要的成绩" id="searchInput">
+				</div>
+			</div>
+		</section>
+		<div class="p10 flex-box flex-between member-head" style="padding-top: 55px;">
+			<div class="colf tc fs14 flex-box info">
+
+				<p class="mr5">${master.master_text}</p>
+
+			</div>
+
+		</div>
+
+		<section class="main" style="padding-top: 2px;">
+
+			<#list item as item>
+			<ul class="list">
+
+				<li><a href="" class="p10 bgf flex-box flex-col-start ">
+						<div class="p10 flex-grow-0">
+							<span class="fs20 red">${item_index+1}</span>
+						</div>
+
+						<div class="pl10 flex-self-stretch flex-box flex-col flex-between flex-col-stretch hidden">
+							<div>
+								<p class="fs14 col0 single-line ico-addr-user">
+								
+								<img src="${item.receiver_headimgurl!'/images/headPortrait.gif'}" style=" width: 48px;height: 48px; "/>
+									<span><i class="mr5"></i>
+									
+									${item.pigowner}</span>
+								</p>
+								<p class="col9 fs12">足环号: ${item.ringnum}</p>
+								<p class="col9 fs12">空距: ${item.distence}</p>
+								<p class="col9 fs12">分速: ${item.speed}</p>
+							</div>
+							<div class="flex-box flex-between fs13 col3">
+								<p>
+
+									<span class="ora">${item.cometime}</span>
+
+								</p>
+
+							</div>
+						</div>
+
+				</a></li>
+
+
+			</ul>
+			</#list>
+			<!--  -->
+		</section>
+	</section>
+
+	<script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+	<script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+	<script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+	<script src="/plugins/jquery-weui/dist/js/city-picker.min.js"></script>
+	<script src="/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+	<script>
+		$(function() {
+
+			$('#searchInput').bind('input propertychange', function() {
+				var text = $("#searchInput").val();
+				var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+				if (reg.test(text)) {
+					$('.list').each(function() {
+						var $self = $(this);
+						var flag = $self.text().search(text)
+						if (flag > -1) {
+							$self.css("display", "");
+
+						} else {
+							$self.css("display", "none");
+
+						}
+					});
+				} else {
+					$('.list').css("display", "")
+
+				}
+			});
+		});
+	</script>
+</body>
+</html>

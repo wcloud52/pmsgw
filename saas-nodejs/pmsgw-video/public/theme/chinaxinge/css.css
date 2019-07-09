@@ -1,0 +1,130 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.ttt {
+	font-family: "宋体";
+	font-size: 13px;
+	color: #000000;
+	text-decoration: none;
+}
+.zw1 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 17px;
+	color: #09589C;
+	text-decoration: none;
+}
+.zw2 {
+	font-family: "宋体";
+	font-size: 14px;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+	line-height: 26px;
+	padding-top:1px;
+}
+.zw3 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 16px;
+	color: #999999;
+	text-decoration: none;
+}
+a.li1:link {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+}
+a.li1:visited {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+}
+a.li1:hover {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #FFFF00;
+	text-decoration: underline;
+}
+a.li1:active {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+}
+a.li2:link {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+a.li2:visited {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+a.li2:hover {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #ff0000;
+	text-decoration: underline;
+}
+a.li2:active {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.kk {
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #7AB6FF;
+	border-left-color: #7AB6FF;
+}
+a.li3:link {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+a.li3:visited {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+a.li3:hover {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: normal;
+	color: #ff0000;
+	text-decoration: underline;
+}
+a.li3:active {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.font2{
+font-size:12px;
+}

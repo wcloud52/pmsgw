@@ -1,0 +1,26 @@
+#wrapper
+{
+	position: absolute;
+	left: 0px;
+	top: 40px;
+}
+
+#cropper
+{
+	position: absolute;
+	left: 15px;
+	top: 70px;
+	border: medium dashed #0088CC;;
+}
+
+#previewContainer
+{
+	position: absolute;
+	left: 350px;
+	top: 70px;
+}
+
+.preview
+{
+	border: medium dashed #0088CC;;
+}

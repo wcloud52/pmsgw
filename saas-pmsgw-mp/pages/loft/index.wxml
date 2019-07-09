@@ -1,0 +1,278 @@
+<view class="search">
+  <view class='search-input-wrap'>
+    <image class='search-icon' src="/image/searchBs.png"></image>
+    <input value='{{inputValue}}' maxlength='60' type="text" class='search-input' placeholder="请输入赛鸽足环" placeholder-class="input-placeholder" confirm-type="search" bindinput="bindKeyInput" bindconfirm="bindSearch" />
+    <image bindtap='clearInput' wx:if='{{inputValue != ""}}' class='search-icon' src="/image/deleteBsStorage.png"></image>
+  </view>
+  <view class='search-btn' bindtap='bindSearch'>搜索</view>
+</view>
+<scroll-view scroll-x scroll-y class='table-wrap'>
+  <view class='table'>
+    <view class="tr">
+      <view class="th">
+        <view class='th-bottom'>
+          <view>会员编号</view>
+        </view>
+      </view>
+      <view class="th">
+        <view class='th-bottom'>
+          <view>会员名称</view>
+        </view>
+      </view>
+      <view class="th">
+        <view class='th-bottom'>
+          <view>赛鸽足环</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>普环</view>
+        <view class='th-bottom'>
+          <view>200</view>
+          <view>500</view>
+          <view>1000</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>11取1</view>
+        <view class='th-bottom'>
+          <view>500</view>
+          <view>1000</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>33取1</view>
+        <view class='th-bottom'>
+          <view>100</view>
+          <view>300</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>手机</view>
+        <view class='th-bottom'>
+          <view>200</view>
+          <view>300</view>
+          <view>500</view>
+          <view>1000</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-bottom'>
+          <view>合计</view>
+        </view>
+      </view>
+    </view>
+    <block data-item='{{listItem}}' wx:for="{{listData}}" wx:key="{{index}}" wx:for-item="listItem" wx:for-index="idxList">
+      <view class='tr'>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.userCode}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.userName}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.toe}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl' wx:if="{{listItem.a1 == ''}}">
+            <checkbox-group bindchange="a1Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.a1}}" checked="{{listItem.a1c}}"/>
+              </checkbox-group>
+            </view>
+            <view class='pl' wx:elif="{{listItem.a1 != ''}}">{{listItem.a1}}</view>
+          </view>
+
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.a2 == ''}}">
+            <checkbox-group bindchange="a2Change" data-index="{{idxList}}">
+              <checkbox value="{{listItem.a2}}" checked="{{listItem.a2c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.a2 != ''}}">{{listItem.a2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.a3 == ''}}">
+            <checkbox-group bindchange="a3Change" data-index="{{idxList}}">
+              <checkbox value="{{listItem.a3}}" checked="{{listItem.a3c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.a3 != ''}}">{{listItem.a3}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl' wx:if="{{listItem.b1 == ''}}">
+            <checkbox-group bindchange="b1Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.b1}}" checked="{{listItem.b1c}}" />
+              </checkbox-group>
+              
+            </view>
+            <view class='pl' wx:elif="{{listItem.b1 != ''}}">{{listItem.b1}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.b2 == ''}}">
+            <checkbox-group bindchange="b2Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.b2}}" checked="{{listItem.b2c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.b2 != ''}}">{{listItem.b2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl' wx:if="{{listItem.c1 == ''}}">
+            <checkbox-group bindchange="c1Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.c1}}" checked="{{listItem.c1c}}" />
+              </checkbox-group>
+            </view>
+            <view class='pl' wx:elif="{{listItem.c1 != ''}}">{{listItem.c1}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.c2 == ''}}">
+            <checkbox-group bindchange="c2Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.c2}}" checked="{{listItem.c2c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.c2 != ''}}">{{listItem.c2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl' wx:if="{{listItem.d1 == ''}}">
+            <checkbox-group bindchange="d1Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.d1}}" checked="{{listItem.d1c}}" />
+              </checkbox-group>
+            </view>
+            <view class='pl' wx:elif="{{listItem.d1 != ''}}">{{listItem.d1}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.d2 == ''}}">
+            <checkbox-group bindchange="d2Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.d2}}" checked="{{listItem.d2c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.d2 != ''}}">{{listItem.d2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.d3 == ''}}">
+              <checkbox-group bindchange="d3Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.d3}}" checked="{{listItem.d3c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.d3 != ''}}">{{listItem.d3}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view wx:if="{{listItem.d4 == ''}}">
+              <checkbox-group bindchange="d4Change" data-index="{{idxList}}">
+              <checkbox  value="{{listItem.d4}}" checked="{{listItem.d4c}}" />
+              </checkbox-group>
+            </view>
+            <view wx:elif="{{listItem.d4 != ''}}">{{listItem.d4}}</view>
+          </view>
+        </view>
+
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.allMoney}}</view>
+          </view>
+        </view>
+        
+      </view>
+    </block>
+    <view class='tr'>
+      <view class='tf tf-total'>
+        <view class='tf-bottom'>
+          <view>总计</view>
+        </view>
+      </view>
+      <view class='tf '>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{a1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{a2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{a3Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{b1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{b2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{c1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{c2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{d1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{d2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{d3Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{d4Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{allTotal}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<view class='button-wrap'>
+  <button type="default" size="mini" bindtap='clearAllCheck' hover-class="other-button-hover">
+    清除
+  </button>
+  <button type="primary" size="mini" bindtap='saveForm' hover-class="other-button-hover">
+    保存
+  </button>
+</view>

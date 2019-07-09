@@ -1,0 +1,19 @@
+<view class="container">
+    <view class="pigowner-list" wx:if="{{ pigownerList.length > 0 }}">
+        <view class="item" wx:for="{{pigownerList}}" wx:key="id" bindtap="pigownerAddOrUpdate" data-pigowner-id="{{item.id}}">
+           
+            <view class="c">
+                <view class="mobile">足环号：{{item.ringnum}}</view>
+                <view class="address">备注：{{item.description}}</view>
+            </view>
+            <view class="r">
+                <image catchtap="deletePigowner" data-pigowner-id="{{item.id}}" class="del" src="/static/images/del-address.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="empty-view" wx:if="{{ pigownerList.length <= 0 }}">
+      <image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noAddress-26d570cefa.png"></image>
+      <text class="text">我的鸽子在哪里</text>
+    </view>
+    <view class="add-pigowner" bindtap="pigownerAddOrUpdate" data-pigowner-id="0">新建</view>
+</view>

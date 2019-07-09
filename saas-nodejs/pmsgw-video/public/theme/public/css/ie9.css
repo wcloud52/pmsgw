@@ -1,0 +1,8 @@
+/*IE9*/
+.advanced-sear .input-group.date-group{width:100%; margin-left:0}
+.input-group.date-group .form-control {width:44%;}
+.input-group.date-group .input-group-addon{margin:0 -5px;padding:6px 6px 7px;width:12%; min-width:12%;}
+.input-group.date-group .input-group-addon,
+.input-group.date-group .form-control,td>.form-control,textarea.form-control{display: inline-block; }
+/* 光标接触目录，宽度不能自适应 */
+.anchor-point .btn-group-vertical > .btn{width:auto;max-width:auto;}

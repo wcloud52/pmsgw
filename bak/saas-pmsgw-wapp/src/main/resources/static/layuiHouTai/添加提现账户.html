@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+	    <table class="layui-table layui-table-add" lay-skin="line">
+		  <tbody>
+		    <tr>
+		      <th>持卡人</th>
+		      <td>
+		        <div style="width:50%">
+		        	<input type="text" name="" placeholder="请输入持卡人" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>银行卡号</th>
+		      <td>
+		        <div style="width:50%">
+		        	<input type="text" name="" placeholder="请输入银行卡号" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>银行名称</th>
+		      <td>
+		        自动识别
+		      </td>
+		    </tr>
+		    <tr>
+		      <th>支行信息</th>
+		      <td>
+		        <div style="width:50%">
+		        	<input type="text" name="" placeholder="请输入支行信息(选填)" autocomplete="off" class="layui-input">
+		        </div>
+		      </td>
+		    </tr>
+
+
+		   
+		    
+		  </tbody>
+		</table>
+	</form>
+
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form'], function(){
+			var $ = layui.jquery; 
+		});
+	</script>
+</body>
+</html>

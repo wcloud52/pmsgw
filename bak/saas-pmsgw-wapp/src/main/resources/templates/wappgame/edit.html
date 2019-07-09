@@ -1,0 +1,47 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛名称</label>
+			<div class="layui-input-block">
+			    <input type="hidden" id="hiddenruleMasterId" name="hiddenruleMasterId" value="${item.ruleMasterId?if_exists }">
+			     <input type="hidden" id="id" name="id" value="${item.id?if_exists }">
+			    <input name="name"  type="text"  class="layui-input" value="${item.name?if_exists }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛规则</label>
+			<div class="layui-input-block">
+				<select id="ruleMasterId" name="ruleMasterId" lay-verify="">
+					 
+				</select> 
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛说明</label>
+			<div class="layui-input-block">
+				<input name="description"  type="text"  class="layui-input" value="${item.description?if_exists }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">开始时间</label>
+			<div class="layui-input-block">
+				<input name="startDatetime" id="startDatetime"   class="layui-input  layui-date"  lay-verify="date"    value="${(item.startDatetime?string('yyyy-MM-dd'))!}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">结束时间</label>
+			<div class="layui-input-block">
+				<input name="endDatetime"  id="endDatetime"    class="layui-input  layui-date"  lay-verify="date"    value="${(item.endDatetime?string('yyyy-MM-dd'))! }">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">比赛详情</label>
+			<div class="layui-input-block">
+				<textarea name="detailsMessage"   type="text"  class="layui-textarea" value="${item.detailsMessage?if_exists }"></textarea>
+			</div>
+		</div>
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+<script type="text/javascript" src="../pagejs/wappgame/edit.js?v=${.now?string('yyyyMMddHHmmss')}"></script>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsCrawlerCoteExtendMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCrawlerCoteExtend">
+    <!--
+    @mbg.generated
+    -->
+    <id column="cote_id" jdbcType="VARCHAR" property="cote_id" />
+    <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
+    <result column="cote_website" jdbcType="VARCHAR" property="cote_website" />
+    <result column="cote_web_url" jdbcType="VARCHAR" property="cote_web_url" />
+    <result column="cote_short_name" jdbcType="VARCHAR" property="cote_short_name" />
+    <result column="cote_state" jdbcType="VARCHAR" property="cote_state" />
+    <result column="sort_number" jdbcType="INTEGER" property="sort_number" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    cote_id, cote_name, cote_website, cote_web_url, cote_short_name, cote_state, sort_number, 
+    create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_crawler_cote_extend
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_crawler_cote_extend
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCrawlerCoteExtend">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_crawler_cote_extend (cote_id, cote_name, cote_website, 
+      cote_web_url, cote_short_name, cote_state, 
+      sort_number, create_time, modify_time
+      )
+    values (#{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, #{cote_website,jdbcType=VARCHAR}, 
+      #{cote_web_url,jdbcType=VARCHAR}, #{cote_short_name,jdbcType=VARCHAR}, #{cote_state,jdbcType=VARCHAR}, 
+      #{sort_number,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCrawlerCoteExtend">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_crawler_cote_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cote_id != null">
+        cote_id,
+      </if>
+      <if test="cote_name != null">
+        cote_name,
+      </if>
+      <if test="cote_website != null">
+        cote_website,
+      </if>
+      <if test="cote_web_url != null">
+        cote_web_url,
+      </if>
+      <if test="cote_short_name != null">
+        cote_short_name,
+      </if>
+      <if test="cote_state != null">
+        cote_state,
+      </if>
+      <if test="sort_number != null">
+        sort_number,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="modify_time != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cote_id != null">
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_website != null">
+        #{cote_website,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_web_url != null">
+        #{cote_web_url,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_short_name != null">
+        #{cote_short_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null">
+        #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="sort_number != null">
+        #{sort_number,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCrawlerCoteExtend">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_crawler_cote_extend
+    <set>
+      <if test="cote_name != null">
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_website != null">
+        cote_website = #{cote_website,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_web_url != null">
+        cote_web_url = #{cote_web_url,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_short_name != null">
+        cote_short_name = #{cote_short_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null">
+        cote_state = #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="sort_number != null">
+        sort_number = #{sort_number,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCrawlerCoteExtend">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_crawler_cote_extend
+    set cote_name = #{cote_name,jdbcType=VARCHAR},
+      cote_website = #{cote_website,jdbcType=VARCHAR},
+      cote_web_url = #{cote_web_url,jdbcType=VARCHAR},
+      cote_short_name = #{cote_short_name,jdbcType=VARCHAR},
+      cote_state = #{cote_state,jdbcType=VARCHAR},
+      sort_number = #{sort_number,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

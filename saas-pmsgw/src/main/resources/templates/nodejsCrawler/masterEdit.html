@@ -1,0 +1,24 @@
+<style>
+.layui-upload-img {
+	width: 92px;
+	height: 92px;
+	margin: 0 10px 10px 0;
+}
+</style>
+<div style="margin: 15px;">
+	<form class="layui-form">
+	<div class="layui-form-item">
+			<label class="layui-form-label" style="width: 200px">标题</label>
+			<div class="layui-input-block" style="margin-left: 230px">
+				<input id="master_id" name="master_id" type="hidden" value="${item.master_id?if_exists }" /> 
+				<input id="detail_crawler_href" name="detail_crawler_href" type="hidden" value="${item.detail_crawler_href?if_exists }" /> 
+				
+				<input name="master_text" type="text" class="layui-input" value="${item.master_text?if_exists }">
+			</div>
+		</div>
+		
+
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+  

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <form class="layui-form" action="">
+        <!-- 验证手机号码 -->
+	    <table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th class="pad" width="150">已验证手机</th>
+		      <td>137*****116</td>
+		    </tr>
+		    <tr>
+		      <th>验证码</th>
+		      <td>
+		        <div class="verify">
+		        <input type="text" name="" placeholder="请输入验证码" autocomplete="off" class="layui-input w350">
+		        <img class="yzm" src="img/code.png" alt="">
+		        </div>
+		      	</td>
+		    </tr>
+		    <tr>
+		      <th>短信验证码</th>
+		      <td>
+		      <div class="verify">
+		      	<input type="text" name="" placeholder="请输入短信验证码" autocomplete="off" class="layui-input w350">
+		      	<span class="yzm layui-btn layui-btn-normal">获取短信验证码</span>
+		      	<span class="yzm layui-btn layui-btn-gray" style="display: none;">重新发送(120秒)</span>
+		      </div>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 195px; margin-bottom: 15px;">	
+			<button class="layui-btn " style=" min-width: 150px;">下一步</button>
+		</div>
+		<!-- 新手机号码 -->
+		<table class="layui-table layui-table-add" lay-skin="nob">
+		  <tbody>
+		    <tr>
+		      <th width="150">新手机号码</th>
+		      <td><input type="tel" name="" maxlength="11" placeholder="请输入新手机号码" autocomplete="off" class="layui-input w350"></td>
+		    </tr>
+		    <tr>
+		      <th>验证码</th>
+		      <td>
+		        <div class="verify">
+		        <input type="text" name="" placeholder="请输入验证码" autocomplete="off" class="layui-input w350">
+		        <img class="yzm" src="img/code.png" alt="">
+		        </div>
+		      	</td>
+		    </tr>
+		    <tr>
+		      <th>短信验证码</th>
+		      <td>
+		      <div class="verify">
+		      	<input type="text" name="" placeholder="请输入短信验证码" autocomplete="off" class="layui-input w350">
+		      	<span class="yzm layui-btn layui-btn-normal" style="display: none;">获取短信验证码</span>
+		      	<span class="yzm layui-btn layui-btn-gray" >重新发送(120秒)</span>
+		      </div>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div style="margin-left: 195px; margin-bottom: 15px;">	
+			<button class="layui-btn " style=" min-width: 150px;">确定</button>
+		</div>
+	 
+
+		
+	</form>
+	
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script>
+		layui.use(['jquery','form'], function(){
+			var $ = layui.jquery; 
+			
+		});
+
+
+
+	</script>
+</body>
+</html>

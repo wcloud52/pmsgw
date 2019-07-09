@@ -1,0 +1,647 @@
+网页授权获取用户基本信息
+如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。
+
+关于网页授权回调域名的说明
+
+1、在微信公众号请求用户网页授权之前，开发者需要先到公众平台官网中的开发者中心页配置授权回调域名。请注意，这里填写的是域名（是一个字符串），而不是URL，因此请勿加http://等协议头；
+2、授权回调域名配置规范为全域名，比如需要网页授权的域名为：www.qq.com，配置以后此域名下面的页面http://www.qq.com/music.html 、 http://www.qq.com/login.html 都可以进行OAuth2.0鉴权。但http://pay.qq.com 、 http://music.qq.com 、 http://qq.com无法进行OAuth2.0鉴权
+3、如果公众号登录授权给了第三方开发者来进行管理，则不必做任何设置，由第三方代替公众号实现网页授权即可
+关于网页授权的两种scope的区别说明
+
+1、以snsapi_base为scope发起的网页授权，是用来获取进入页面的用户的openid的，并且是静默授权并自动跳转到回调页的。用户感知的就是直接进入了回调页（往往是业务页面）
+2、以snsapi_userinfo为scope发起的网页授权，是用来获取用户的基本信息的。但这种授权需要用户手动同意，并且由于用户同意过，所以无须关注，就可在授权后获取该用户的基本信息。
+3、用户管理类接口中的“获取用户基本信息接口”，是在用户和公众号产生消息交互或关注后事件推送后，才能根据用户OpenID来获取用户基本信息。这个接口，包括其他微信接口，都是需要该用户（即openid）关注了公众号后，才能调用成功的。
+关于网页授权access_token和普通access_token的区别
+
+1、微信网页授权是通过OAuth2.0机制实现的，在用户授权给公众号后，公众号可以获取到一个网页授权特有的接口调用凭证（网页授权access_token），通过网页授权access_token可以进行授权后接口调用，如获取用户基本信息；
+2、其他微信接口，需要通过基础支持中的“获取access_token”接口来获取到的普通access_token调用。
+关于UnionID机制
+
+1、请注意，网页授权获取用户基本信息也遵循UnionID机制。即如果开发者有在多个公众号，或在公众号、移动应用之间统一用户帐号的需求，需要前往微信开放平台（open.weixin.qq.com）绑定公众号后，才可利用UnionID机制来满足上述需求。
+2、UnionID机制的作用说明：如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的unionid来区分用户的唯一性，因为同一用户，对同一个微信开放平台下的不同应用（移动应用、网站应用和公众帐号），unionid是相同的。
+关于特殊场景下的静默授权
+
+1、上面已经提到，对于以snsapi_base为scope的网页授权，就静默授权的，用户无感知；
+2、对于已关注公众号的用户，如果用户从公众号的会话或者自定义菜单进入本公众号的网页授权页，即使是scope为snsapi_userinfo，也是静默授权，用户无感知。
+具体而言，网页授权流程分为四步：
+
+1、引导用户进入授权页面同意授权，获取code
+2、通过code换取网页授权access_token（与基础支持中的access_token不同）
+3、如果需要，开发者可以刷新网页授权access_token，避免过期
+4、通过网页授权access_token和openid获取用户基本信息（支持UnionID机制）
+目录
+1 第一步：用户同意授权，获取code
+2 第二步：通过code换取网页授权access_token
+3 第三步：刷新access_token（如果需要）
+4 第四步：拉取用户信息(需scope为 snsapi_userinfo)
+5 附：检验授权凭证（access_token）是否有效
+第一步：用户同意授权，获取code
+
+在确保微信公众账号拥有授权作用域（scope参数）的权限的前提下（服务号获得高级接口后，默认拥有scope参数中的snsapi_base和snsapi_userinfo），引导关注者打开如下页面：
+
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
+若提示“该链接无法访问”，请检查参数是否填写错误，是否拥有scope参数对应的授权作用域权限。
+参考链接(请在微信客户端中打开此链接体验)
+Scope为snsapi_base
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx520c15f417810387&redirect_uri=http%3A%2F%2Fchong.qq.com%2Fphp%2Findex.php%3Fd%3D%26c%3DwxAdapter%26m%3DmobileDeal%26showwxpaytitle%3D1%26vb2ctag%3D4_2030_5_1194_60&response_type=code&scope=snsapi_base&state=123#wechat_redirect
+Scope为snsapi_userinfo
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+参数说明
+
+参数	是否必须	说明
+appid	是	公众号的唯一标识
+redirect_uri	是	授权后重定向的回调链接地址，请使用urlencode对链接进行处理
+response_type	是	返回类型，请填写code
+scope	是	应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）
+state	否	重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节
+#wechat_redirect	是	无论直接打开还是做页面302重定向时候，必须带此参数
+下图为scope等于snsapi_userinfo时的授权页面：
+
+网页授权
+
+用户同意授权后
+
+如果用户同意授权，页面将跳转至 redirect_uri/?code=CODE&state=STATE。若用户禁止授权，则重定向后不会带上code参数，仅会带上state参数redirect_uri?state=STATE
+
+code说明 ：
+code作为换取access_token的票据，每次用户授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。
+第二步：通过code换取网页授权access_token
+
+首先请注意，这里通过code换取的是一个特殊的网页授权access_token,与基础支持中的access_token（该access_token用于调用其他接口）不同。公众号可通过下述接口来获取网页授权access_token。如果网页授权的作用域为snsapi_base，则本步骤中获取到网页授权access_token的同时，也获取到了openid，snsapi_base式的网页授权流程即到此为止。
+
+请求方法
+
+获取code后，请求以下链接获取access_token： 
+https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+参数说明
+
+参数	是否必须	说明
+appid	是	公众号的唯一标识
+secret	是	公众号的appsecret
+code	是	填写第一步获取的code参数
+grant_type	是	填写为authorization_code
+返回说明
+
+正确时返回的JSON数据包如下：
+
+{
+   "access_token":"ACCESS_TOKEN",
+   "expires_in":7200,
+   "refresh_token":"REFRESH_TOKEN",
+   "openid":"OPENID",
+   "scope":"SCOPE",
+   "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
+}
+参数	描述
+access_token	网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+expires_in	access_token接口调用凭证超时时间，单位（秒）
+refresh_token	用户刷新access_token
+openid	用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
+scope	用户授权的作用域，使用逗号（,）分隔
+unionid	只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。详见：获取用户个人信息（UnionID机制）
+
+错误时微信会返回JSON数据包如下（示例为Code无效错误）:
+
+{"errcode":40029,"errmsg":"invalid code"}
+全局返回码说明
+
+第三步：刷新access_token（如果需要）
+
+由于access_token拥有较短的有效期，当access_token超时后，可以使用refresh_token进行刷新，refresh_token拥有较长的有效期（7天、30天、60天、90天），当refresh_token失效的后，需要用户重新授权。
+
+请求方法
+
+获取第二步的refresh_token后，请求以下链接获取access_token： 
+https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+参数	是否必须	说明
+appid	是	公众号的唯一标识
+grant_type	是	填写为refresh_token
+refresh_token	是	填写通过access_token获取到的refresh_token参数
+返回说明
+
+正确时返回的JSON数据包如下：
+
+{
+   "access_token":"ACCESS_TOKEN",
+   "expires_in":7200,
+   "refresh_token":"REFRESH_TOKEN",
+   "openid":"OPENID",
+   "scope":"SCOPE"
+}
+参数	描述
+access_token	网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+expires_in	access_token接口调用凭证超时时间，单位（秒）
+refresh_token	用户刷新access_token
+openid	用户唯一标识
+scope	用户授权的作用域，使用逗号（,）分隔
+
+错误时微信会返回JSON数据包如下（示例为Code无效错误）:
+
+{"errcode":40029,"errmsg":"invalid code"}
+全局返回码说明
+
+第四步：拉取用户信息(需scope为 snsapi_userinfo)
+
+如果网页授权作用域为snsapi_userinfo，则此时开发者可以通过access_token和openid拉取用户信息了。
+
+请求方法
+
+http：GET（请使用https协议）
+https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+参数说明
+
+参数	描述
+access_token	网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+openid	用户的唯一标识
+lang	返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
+返回说明
+
+正确时返回的JSON数据包如下：
+
+{
+   "openid":" OPENID",
+   " nickname": NICKNAME,
+   "sex":"1",
+   "province":"PROVINCE"
+   "city":"CITY",
+   "country":"COUNTRY",
+    "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46", 
+	"privilege":[
+	"PRIVILEGE1"
+	"PRIVILEGE2"
+    ],
+    "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
+}
+参数	描述
+openid	用户的唯一标识
+nickname	用户昵称
+sex	用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
+province	用户个人资料填写的省份
+city	普通用户个人资料填写的城市
+country	国家，如中国为CN
+headimgurl	用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
+privilege	用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）
+unionid	只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。详见：获取用户个人信息（UnionID机制）
+
+错误时微信会返回JSON数据包如下（示例为openid无效）:
+
+{"errcode":40003,"errmsg":" invalid openid "}
+全局返回码说明
+
+附：检验授权凭证（access_token）是否有效
+
+请求方法
+
+http：GET（请使用https协议）
+https://api.weixin.qq.com/sns/auth?access_token=ACCESS_TOKEN&openid=OPENID
+参数说明
+
+参数	描述
+access_token	网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+openid	用户的唯一标识
+返回说明
+
+正确的Json返回结果：
+
+{ "errcode":0,"errmsg":"ok"}
+错误时的Json返回示例：
+
+{ "errcode":40003,"errmsg":"invalid openid"}
+
+-------------------------------------------------------------------------------------------------------------
+用户分组管理
+开发者可以使用接口，对公众平台的分组进行查询、创建、修改、删除等操作，也可以使用接口在需要时移动用户到某个分组。
+
+目录
+1 创建分组
+2 查询所有分组
+3 查询用户所在分组
+4 修改分组名
+5 移动用户分组
+6 批量移动用户分组
+7 删除分组
+创建分组
+
+一个公众账号，最多支持创建100个分组。
+
+接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/create?access_token=ACCESS_TOKEN
+POST数据格式：json
+POST数据例子：{"group":{"name":"test"}}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+name	分组名字（30个字符以内）
+返回说明 正常时的返回JSON数据包示例：
+
+{
+    "group": {
+        "id": 107, 
+        "name": "test"
+    }
+}
+参数说明
+
+参数	说明
+id	分组id，由微信分配
+name	分组名字，UTF8编码
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+查询所有分组
+
+接口调用请求说明
+
+http请求方式: GET（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/get?access_token=ACCESS_TOKEN
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+返回说明 正常时的返回JSON数据包示例：
+
+{
+    "groups": [
+        {
+            "id": 0, 
+            "name": "未分组", 
+            "count": 72596
+        }, 
+        {
+            "id": 1, 
+            "name": "黑名单", 
+            "count": 36
+        }, 
+        {
+            "id": 2, 
+            "name": "星标组", 
+            "count": 8
+        }, 
+        {
+            "id": 104, 
+            "name": "华东媒", 
+            "count": 4
+        }, 
+        {
+            "id": 106, 
+            "name": "★不测试组★", 
+            "count": 1
+        }
+    ]
+}
+参数说明
+
+参数	说明
+groups	公众平台分组信息列表
+id	分组id，由微信分配
+name	分组名字，UTF8编码
+count	分组内用户数量
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+查询用户所在分组
+
+通过用户的OpenID查询其所在的GroupID。 接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/getid?access_token=ACCESS_TOKEN
+POST数据格式：json
+POST数据例子：{"openid":"od8XIjsmk6QdVTETa9jLtGWA6KBc"}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+openid	用户的OpenID
+返回说明 正常时的返回JSON数据包示例：
+
+{
+    "groupid": 102
+}
+参数说明
+
+参数	说明
+groupid	用户所属的groupid
+错误时的JSON数据包示例（该示例为OpenID无效错误）：
+
+{"errcode":40003,"errmsg":"invalid openid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+修改分组名
+
+接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/update?access_token=ACCESS_TOKEN
+POST数据格式：json
+POST数据例子：{"group":{"id":108,"name":"test2_modify2"}}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+id	分组id，由微信分配
+name	分组名字（30个字符以内）
+返回说明 正常时的返回JSON数据包示例：
+
+{"errcode": 0, "errmsg": "ok"}
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+移动用户分组
+
+接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/members/update?access_token=ACCESS_TOKEN
+POST数据格式：json
+POST数据例子：{"openid":"oDF3iYx0ro3_7jD4HFRDfrjdCM58","to_groupid":108}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+openid	用户唯一标识符
+to_groupid	分组id
+返回说明 正常时的返回JSON数据包示例：
+
+{"errcode": 0, "errmsg": "ok"}
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+
+批量移动用户分组
+
+接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/members/batchupdate?access_token=ACCESS_TOKEN
+POST数据格式：json
+POST数据例子：{"openid_list":["oDF3iYx0ro3_7jD4HFRDfrjdCM58","oDF3iY9FGSSRHom3B-0w5j4jlEyY"],"to_groupid":108}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+openid_list	用户唯一标识符openid的列表（size不能超过50）
+to_groupid	分组id
+返回说明 正常时的返回JSON数据包示例：
+
+{"errcode": 0, "errmsg": "ok"}
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+
+
+删除分组
+
+注意本接口是删除一个用户分组，删除分组后，所有该分组内的用户自动进入默认分组。 接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/groups/delete?access_token=ACCESS_TOKEN
+POST数据格式：json
+POST数据例子：{"group":{"id":108}}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+group	分组
+id	分组的id
+返回说明 正常时的返回JSON数据包示例：
+
+{"errcode": 0, "errmsg": "ok"}
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+-------------------------------------------------------------------------------------------------------------
+设置用户备注名
+设置备注名
+
+开发者可以通过该接口对指定用户设置备注名，该接口暂时开放给微信认证的服务号。 接口调用请求说明
+
+http请求方式: POST（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/user/info/updateremark?access_token=ACCESS_TOKEN
+POST数据格式：JSON
+POST数据例子：
+{
+	"openid":"oDF3iY9ffA-hqb2vVvbr7qxf6A0Q",
+	"remark":"pangzi"
+}
+参数说明
+
+参数	说明
+access_token	调用接口凭证
+openid	用户标识
+remark	新的备注名，长度必须小于30字符
+返回说明 正常时的返回JSON数据包示例：
+
+{
+	"errcode":0,
+	"errmsg":"ok" 
+}
+
+错误时的JSON数据包示例（该示例为AppID无效错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+-------------------------------------------------------------------------------------------------------------
+获取用户基本信息(UnionID机制)
+在关注者与公众号产生消息交互后，公众号可获得关注者的OpenID（加密后的微信号，每个用户对每个公众号的OpenID是唯一的。对于不同公众号，同一用户的openid不同）。公众号可通过本接口来根据OpenID获取用户基本信息，包括昵称、头像、性别、所在城市、语言和关注时间。
+
+请注意，如果开发者有在多个公众号，或在公众号、移动应用之间统一用户帐号的需求，需要前往微信开放平台（open.weixin.qq.com）绑定公众号后，才可利用UnionID机制来满足上述需求。
+
+UnionID机制说明：
+
+开发者可通过OpenID来获取用户基本信息。特别需要注意的是，如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的unionid来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号，用户的unionid是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。
+获取用户基本信息（包括UnionID机制）
+
+开发者可通过OpenID来获取用户基本信息。请使用https协议。
+
+接口调用请求说明
+
+http请求方式: GET
+https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+参数说明
+
+参数	是否必须	说明
+access_token	是	调用接口凭证
+openid	是	普通用户的标识，对当前公众号唯一
+lang	否	返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
+返回说明
+
+正常情况下，微信会返回下述JSON数据包给公众号：
+
+{
+    "subscribe": 1, 
+    "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M", 
+    "nickname": "Band", 
+    "sex": 1, 
+    "language": "zh_CN", 
+    "city": "广州", 
+    "province": "广东", 
+    "country": "中国", 
+    "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0", 
+   "subscribe_time": 1382694957,
+   "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
+   "remark": "",
+   "groupid": 0
+}
+参数说明
+
+参数	说明
+subscribe	用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。
+openid	用户的标识，对当前公众号唯一
+nickname	用户的昵称
+sex	用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
+city	用户所在城市
+country	用户所在国家
+province	用户所在省份
+language	用户的语言，简体中文为zh_CN
+headimgurl	用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
+subscribe_time	用户关注时间，为时间戳。如果用户曾多次关注，则取最后关注时间
+unionid	只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。详见：获取用户个人信息（UnionID机制）
+remark	公众号运营者对粉丝的备注，公众号运营者可在微信公众平台用户管理界面对粉丝添加备注
+groupid	用户所在的分组ID
+错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
+
+{"errcode":40013,"errmsg":"invalid appid"}
+全局返回码说明
+
+使用网页调试工具调试该接口
+-------------------------------------------------------------------------------------------------------------
+获取用户列表
+公众号可通过本接口来获取帐号的关注者列表，关注者列表由一串OpenID（加密后的微信号，每个用户对每个公众号的OpenID是唯一的）组成。一次拉取调用最多拉取10000个关注者的OpenID，可以通过多次拉取的方式来满足需求。
+
+接口调用请求说明
+
+http请求方式: GET（请使用https协议）
+https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID
+参数	是否必须	说明
+access_token	是	调用接口凭证
+next_openid	是	第一个拉取的OPENID，不填默认从头开始拉取
+返回说明
+
+正确时返回JSON数据包：
+
+{"total":2,"count":2,"data":{"openid":["","OPENID1","OPENID2"]},"next_openid":"NEXT_OPENID"}
+参数	说明
+total	关注该公众账号的总用户数
+count	拉取的OPENID个数，最大值为10000
+data	列表数据，OPENID的列表
+next_openid	拉取列表的后一个用户的OPENID
+错误时返回JSON数据包（示例为无效AppID错误）：
+
+{"errcode":40013,"errmsg":"invalid appid"}
+附：关注者数量超过10000时
+
+当公众号关注者数量超过10000时，可通过填写next_openid的值，从而多次拉取列表的方式来满足需求。
+
+具体而言，就是在调用接口时，将上一次调用得到的返回中的next_openid值，作为下一次调用中的next_openid值。
+
+示例如下：
+
+公众账号A拥有23000个关注的人，想通过拉取关注接口获取所有关注的人，那么分别请求url如下：
+https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN 
+返回结果:
+{
+  "total":23000,
+  "count":10000,
+  "data":{"
+     openid":[
+        "OPENID1",
+        "OPENID2",
+        ...,
+        "OPENID10000"
+     ]
+   },
+   "next_openid":"NEXT_OPENID1"
+}
+https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID1
+返回结果:
+{
+   "total":23000,
+   "count":10000,
+   "data":{
+     "openid":[
+       "OPENID10001",
+       "OPENID10002",
+       ...,
+       "OPENID20000"
+     ]
+   },
+   "next_openid":"NEXT_OPENID2"
+}
+https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID2
+返回结果（关注者列表已返回完时，返回next_openid为空）:
+{
+   "total":23000,
+   "count":3000,
+   "data":{"
+       "openid":[
+         "OPENID20001",
+         "OPENID20002",
+         ...,
+         "OPENID23000"
+       ]
+   },
+   "next_openid":" "
+}
+使用网页调试工具调试该接口
+
+----------------------------------------------------------------------------------------------------------
+获取用户地理位置
+开通了上报地理位置接口的公众号，用户在关注后进入公众号会话时，会弹框让用户确认是否允许公众号使用其地理位置。弹框只在关注后出现一次，用户以后可以在公众号详情页面进行操作。
+
+获取用户地理位置
+
+用户同意上报地理位置后，每次进入公众号会话时，都会在进入时上报地理位置，上报地理位置以推送XML数据包到开发者填写的URL来实现。
+
+推送XML数据包示例：
+
+<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[fromUser]]></FromUserName>
+<CreateTime>123456789</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[LOCATION]]></Event>
+<Latitude>23.137466</Latitude>
+<Longitude>113.352425</Longitude>
+<Precision>119.385040</Precision>
+</xml>
+参数说明：
+
+参数	描述
+ToUserName	开发者微信号
+FromUserName	发送方帐号（一个OpenID）
+CreateTime	消息创建时间 （整型）
+MsgType	消息类型，event
+Event	事件类型，LOCATION
+Latitude	地理位置纬度
+Longitude	地理位置经度
+Precision	地理位置精度
+
+----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,13 @@
+
+<scroll-view scroll-x scroll-y class='table-wrap'>
+    <view class="table">
+        <view class="tr">
+            <view class="th">比赛列表</view>
+           
+        </view>
+        <view class="tr" wx:for="{{race.list}}" wx:key="race.list">
+            <view class="td"> <navigator url="/pages/info/racedetaillist/index?masterId={{item.master_id}}" hover-class="navigator-hover">{{item.master_text}}  <view class="race-time">{{item.create_time}}</view></navigator></view>
+            
+        </view>
+    </view>
+</scroll-view>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.NodejsCrawlerCoteMapper" >
+
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCrawlerCote" >
+    <id column="cote_id" property="cote_id" jdbcType="VARCHAR" />
+    <result column="cote_name" property="cote_name" jdbcType="VARCHAR" />
+    <result column="cote_website" property="cote_website" jdbcType="VARCHAR" />
+    <result column="cote_state" property="cote_state" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cote_id, cote_name, cote_website, cote_state, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_crawler_cote
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nodejs_crawler_cote
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCrawlerCote" >
+    insert into nodejs_crawler_cote (cote_id, cote_name, cote_website, 
+      cote_state, create_time, modify_time
+      )
+    values (#{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, #{cote_website,jdbcType=VARCHAR}, 
+      #{cote_state,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCrawlerCote" >
+    insert into nodejs_crawler_cote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cote_id != null" >
+        cote_id,
+      </if>
+      <if test="cote_name != null" >
+        cote_name,
+      </if>
+      <if test="cote_website != null" >
+        cote_website,
+      </if>
+      <if test="cote_state != null" >
+        cote_state,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cote_id != null" >
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_website != null" >
+        #{cote_website,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null" >
+        #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCrawlerCote" >
+    update nodejs_crawler_cote
+    <set >
+      <if test="cote_name != null" >
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_website != null" >
+        cote_website = #{cote_website,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null" >
+        cote_state = #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCrawlerCote" >
+    update nodejs_crawler_cote
+    set cote_name = #{cote_name,jdbcType=VARCHAR},
+      cote_website = #{cote_website,jdbcType=VARCHAR},
+      cote_state = #{cote_state,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where cote_id = #{cote_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

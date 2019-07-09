@@ -1,0 +1,42 @@
+td           { font-size: 12px; color: #000000 }
+.f0          { background-color: #Ffffff }
+.11          { border-left: 1 solid #000000; border-right: 1 solid #000000 }
+.l1          { border-top: 1 solid #008000; border-bottom: 1 solid #008000 }
+.-           { border-top: 1 solid #000000 }
+.xxk3        { background-color: #F8F5F8; color: #000000 }
+.xxk         { background-color: #FF9999 }
+.xxk1        { background-color: #FCD2BC }
+.xxk4        { background-color: #FEEFDE;  }
+.xxk2        { background-color: #FEF4ED; 
+               background-repeat: repeat-y; background-position: left 50% }
+.xxkpg        { background-color: #FEF4ED; border:1px solid #EFCBC3;background-repeat: repeat-y; background-position: left 50% }
+.r1           { border-right-style: solid; border-right-width: 1 }
+
+body         { font-size: 12px; line-height: 120%; color: #000000; background-attachment: fixed }
+a:link       { color: #000000; text-decoration: underline; font-size: 12px }
+a:hover      { text-decoration: none; font-size: 12px; color: #FF0000 }
+a:visited    { text-decoration: underline; color: #000000 }
+.p1          { font-size: 14px;line-height: 20px }
+.p2          { font-size: 14px; line-height: 22px }
+.p3          { font-size: 16px }
+.p4          { font-size: 16px; line-height: 130%; text-indent: 32 }
+.menu        { cursor: hand; color: #FFFFFF }
+.t1          { font-size: 16px; color: #CC0000; font-weight: bold }
+.memo        { font-size: 14px }
+
+
+.table01 {  background-color: #FEE7EF}
+.table_over {  background-color: #FFFFFF}
+.font9 {  font-size: 9pt}
+input        { border: 1 solid #000000 }
+textarea     { border: 2 dotted #FFB3FF }
+.bb {
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 24px;
+	color: #000000;
+	text-decoration: none;
+}
+.pgw {
+	background-color: #FFC7A4;
+}
