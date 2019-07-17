@@ -1,0 +1,27 @@
+<view class='title'>分组</view>
+<view class='sub-title' ><icon type="success" size="28" /></view>
+<view class='sub-title'>华顺德18秋赛100公里分组成功</view>
+<view class='member-info-wrap'>
+  <view class='member-item'>
+    <view>会员编号</view>
+    <view>{{memberNumber}}</view>
+  </view>
+  <view class='member-item'>
+    <view>会员名称</view>
+    <view>{{memberName}}</view>
+  </view>
+</view>
+
+<view class='group-wrap'>
+  <view class='group-item'>
+    <view class='item'>赛鸽足环</view>
+    <view class='item'>小组</view>
+    <view class='item'>大组</view>
+  </view>
+  <view class='group-item' data-item='{{listItem}}' wx:for="{{list}}" wx:key="{{index}}" wx:for-item="listItem" wx:for-index="idxList">
+    <view class='item'>{{listItem.number}}</view>
+    <view class='item'>{{listItem.small}}</view>
+    <view class='item'>{{listItem.big}}</view>
+  </view>
+</view>
+

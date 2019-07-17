@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "参赛查询",
+  "usingComponents": {
+    "Select": "../../Component/select/select"
+  }
+}

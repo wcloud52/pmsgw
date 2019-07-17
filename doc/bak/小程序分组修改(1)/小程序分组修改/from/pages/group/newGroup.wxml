@@ -1,0 +1,38 @@
+<view class='title'>分组</view>
+<view class='sub-title'>华顺德18秋赛100公里</view>
+<view class='sub-title'>距分组结束仅剩：{{countTimeFmt}}</view>
+<view class='member-info-wrap'>
+  <view class='member-item'>
+    <view>会员编号</view>
+    <view>{{memberNumber}}</view>
+  </view>
+  <view class='member-item'>
+    <view>会员名称</view>
+    <view>{{memberName}}</view>
+  </view>
+</view>
+<view class='text'>操作说明：参赛鸽已按照排序自动分组，如需调整，请先将对应的鸽子选为未分组，再进行调整</view>
+<view class='group-wrap'>
+  <view class='group-item'>
+    <view class='item'>赛鸽足环</view>
+    <view class='item'>小组</view>
+    <view class='item'>大组</view>
+  </view>
+  <view class='group-item' data-item='{{listItem}}' wx:for="{{list}}" wx:key="{{index}}" wx:for-item="listItem" wx:for-index="idxList">
+    <view class='item'>{{listItem.number}}</view>
+    <view class='item'>
+    <Select prop-array='{{listItem.smallGroup}}' bind:myevent="getGroup"  data-id="{{listItem.id}}" data-type="small" now-text='{{listItem.small}}'></Select>
+    </view>
+    <view class='item'>
+    <Select prop-array='{{listItem.bigGroup}}' bind:myevent="getGroup"  data-id="{{listItem.id}}" data-type="big" now-text='{{listItem.big}}'></Select>
+    </view>
+  </view>
+</view>
+<view class='button-wrap'>
+<button type="default" size="mini" bindtap='clearAllSelect' hover-class="other-button-hover">
+    清除
+  </button>
+  <button type="primary" size="mini" bindtap='saveForm' hover-class="other-button-hover">
+    提交
+  </button></view>
+

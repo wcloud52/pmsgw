@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分组",
+  "usingComponents": {
+    "Select": "../../Component/group/group"
+  }
+}

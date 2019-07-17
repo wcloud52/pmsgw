@@ -1,0 +1,217 @@
+<!--pages/detail.wxml-->
+<view class='title'>报名详情</view>
+<view class="search select-search ">
+  <view class='search-input-wrap select-wrap'>
+  <Select prop-array='{{selectArray}}'></Select>
+    <input value='{{inputValue}}' maxlength='60' type="text" class='search-input' placeholder="请输入搜索内容" placeholder-class="input-placeholder" confirm-type="search" bindinput="bindKeyInput" bindconfirm="bindSearch" />
+    <image bindtap='clearInput' wx:if='{{inputValue != ""}}' class='search-icon' src="https://images-1255900610.cos.ap-guangzhou.myqcloud.com/source/images/train/deleteBsStorage.png"></image>
+  </view>
+  <view class='search-btn' bindtap='bindSearch'>搜索</view>
+</view>
+<view class='left-title'>华顺德200公里指定赛</view>
+<view class='left-title'>合计：{{allTotal}}</view>
+<scroll-view scroll-x scroll-y class='table-wrap'>
+  <view class='table'>
+    <view class="tr">
+      <view class="th">
+        <view class='th-bottom'>
+          <view>会员编号</view>
+        </view>
+      </view>
+      <view class="th">
+        <view class='th-bottom'>
+          <view>会员名称</view>
+        </view>
+      </view>
+      <view class="th">
+        <view class='th-bottom'>
+          <view>赛鸽足环</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>普环</view>
+        <view class='th-bottom'>
+          <view>200</view>
+          <view>500</view>
+          <view>1000</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>11取1</view>
+        <view class='th-bottom'>
+          <view>500</view>
+          <view>1000</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>33取1</view>
+        <view class='th-bottom'>
+          <view>100</view>
+          <view>300</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-top'>手机</view>
+        <view class='th-bottom'>
+          <view>200</view>
+          <view>300</view>
+          <view>500</view>
+          <view>1000</view>
+        </view>
+      </view>
+      <view class='th'>
+        <view class='th-bottom'>
+          <view>合计</view>
+        </view>
+      </view>
+    </view>
+    <block data-item='{{listItem}}' wx:for="{{listData}}" wx:key="{{index}}" wx:for-item="listItem" wx:for-index="idxList">
+      <view class='tr'>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.userCode}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.userName}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.toe}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl'>{{listItem.a1}}</view>
+          </view>
+
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.a2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.a3}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl'>{{listItem.b1}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.b2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl'>{{listItem.c1}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.c2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view class='pl'>{{listItem.d1}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.d2}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.d3}}</view>
+          </view>
+        </view>
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.d4}}</view>
+          </view>
+        </view>
+
+        <view class='td'>
+          <view class='td-bottom'>
+            <view>{{listItem.allMoney}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class='tr'>
+      <view class='tf tf-total'>
+        <view class='tf-bottom'>
+          <view>总计</view>
+        </view>
+      </view>
+      <view class='tf '>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{a1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{a2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{a3Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{b1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{b2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{c1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{c2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view class='tf-pl'>{{d1Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{d2Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{d3Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{d4Total}}</view>
+        </view>
+      </view>
+      <view class='tf'>
+        <view class='tf-bottom'>
+          <view>{{allTotal}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
