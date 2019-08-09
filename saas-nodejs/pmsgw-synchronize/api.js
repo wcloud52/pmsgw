@@ -1,12 +1,12 @@
-var AppPort = 9990;
+var AppPort = 10099;
 var AppRoot = 'http://localhost:' + AppPort + '/';
 
 module.exports = {
     port: AppPort,
     mysql: {
-        host: '127.0.0.1',
+        host: '115.28.48.136',
         user: 'root',
-        password: '',
+        password: '123',
         database: 'pmsgw_weixin',
         port: 3306,
         multipleStatements: true

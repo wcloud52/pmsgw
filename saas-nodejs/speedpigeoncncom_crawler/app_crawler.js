@@ -33,26 +33,26 @@ router.get('/master', function(req, res, next) {
             var $ = cheerio.load(sres.text);
             var items = [];
 
-            $('.sszbn #xh li a').each(function(idx, element) {
-                var $element = $(element);
-                var cut = moment().format('YYYY-MM-DD');
-                var scut = $($element.next(), 'font').text();
-                if (cut == scut) {
-                    var cote_id = $element.attr('href').match(/RaceID=(\S*)/)[1];
-                    var cote_name = $element.text().replace(' ', '').match(/【(\S*)】/)[1];
-                    var master_number = $element.attr('href').match(/RaceID=(\S*)/)[1];
-                    items.push({
-                        cote_id: cote_id,
-                        cote_name: cote_name,
-                        master_number: master_number,
-                        master_text: $element.text(),
-                        master_href: $element.attr('href'),
-                        master_date: $($element.next(), 'font').text(),
-                        master_website: "pmsgw_pigeoncn",
-                        master_type: "club" //协会/俱乐部
-                    });
-                }
-            });
+            // $('.sszbn #xh li a').each(function(idx, element) {
+            //     var $element = $(element);
+            //     var cut = moment().format('YYYY-MM-DD');
+            //     var scut = $($element.next(), 'font').text();
+            //     if (cut == scut) {
+            //         var cote_id = $element.attr('href').match(/RaceID=(\S*)/)[1];
+            //         var cote_name = $element.text().replace(' ', '').match(/【(\S*)】/)[1];
+            //         var master_number = $element.attr('href').match(/RaceID=(\S*)/)[1];
+            //         items.push({
+            //             cote_id: cote_id,
+            //             cote_name: cote_name,
+            //             master_number: master_number,
+            //             master_text: $element.text(),
+            //             master_href: $element.attr('href'),
+            //             master_date: $($element.next(), 'font').text(),
+            //             master_website: "pmsgw_pigeoncn",
+            //             master_type: "club" //协会/俱乐部
+            //         });
+            //     }
+            // });
 
             $('.sszbn #jlb li a').each(function(idx, element) {
                 var $element = $(element);

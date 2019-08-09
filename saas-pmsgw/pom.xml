@@ -164,7 +164,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				
-				           <!--   <configuration>
+				             <configuration>
 					<fork>true</fork>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -186,7 +186,7 @@
 						</include>        
 					</includes>    
 				 
-				</configuration>       -->   
+				</configuration>
 			 
 			</plugin>
 		</plugins>

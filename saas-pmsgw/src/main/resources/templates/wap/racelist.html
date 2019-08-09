@@ -31,10 +31,10 @@
       
       <div class="weui-panel weui-panel_access">
   <div class="weui-panel__hd">图文组合列表</div>
-  <div class="weui-panel__bd" id="play">
+  <!--<div class="weui-panel__bd" id="play">
   
 
-  </div>
+  </div>-->
  
 </div>
       <section class="main">
@@ -53,7 +53,7 @@
                 <div class="flex-box flex-between fs13 col3">
                   <p>
                   	
-                  	<span class="ora">${item.create_time?string('yyyy-MM-dd hh:mm:ss')}</span>
+                  	<span class="ora">${item.master_date}</span>
                   
                   </p>
                  
@@ -109,6 +109,7 @@ $(function(){
 	});
 	
 	
+/*
 var swfpath = "hsd2";
 var rtmpUrl = 'rtmp://rtmpvideo.pmsgw.com/dazhong/' + swfpath; //控制台开通的APP rtmp地址，必要参数
 var hlsUrl = 'http://hlsvideo.pmsgw.com/dazhong/' + swfpath + '.m3u8';
@@ -116,7 +117,7 @@ var objectPlayer = new aodianPlayer({
     container: 'play', //播放器容器ID，必要参数
     rtmpUrl: rtmpUrl, //控制台开通的APP rtmp地址，必要参数
     hlsUrl: hlsUrl, //控制台开通的APP hls地址，必要参数
-    /* 以下为可选参数*/
+
     width: '100%', //播放器宽度，可用数字、百分比等
     height: '100%', //播放器高度，可用数字、百分比等
     autostart: true, //是否自动播放，默认为false
@@ -124,23 +125,11 @@ var objectPlayer = new aodianPlayer({
     maxbufferlength: '2', //最大视频缓冲时间，默认为2秒。hls不支持！手机端不支持
     stretching: '1', //设置全屏模式,1代表按比例撑满至全屏,2代表铺满全屏,3代表视频原始大小,默认值为1。hls初始设置不支持，手机端不支持
     controlbardisplay: 'enable', //是否显示控制栏，值为：disable、enable默认为disable。
-    //adveDeAddr: '',//封面图片链接
-    //adveWidth: 320,//封面图宽度
-    //adveHeight: 240,//封面图高度
-    //adveReAddr: '',//封面图点击链接
-    //isclickplay: false,//是否单击播放，默认为false
+
     isfullscreen: true //是否双击全屏，默认为true
 });
+*/
 
-/* rtmpUrl与hlsUrl同时存在时播放器优先加载rtmp*/
-/* 以下为Aodian Player支持的事件 */
-/* objectPlayer.startPlay();//播放 */
-/* objectPlayer.pausePlay();//暂停 */
-/* objectPlayer.stopPlay();//停止 hls不支持*/
-/* objectPlayer.closeConnect();//断开连接 */
-/* objectPlayer.setMute(true);//静音或恢复音量，参数为true|false */
-/* objectPlayer.setVolume(volume);//设置音量，参数为0-100数字 */
-/* objectPlayer.setFullScreenMode(1);//设置全屏模式,1代表按比例撑满至全屏,2代表铺满全屏,3代表视频原始大小,默认值为1。手机不支持 */
 
 </script>
 </body>

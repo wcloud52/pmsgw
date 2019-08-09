@@ -2,7 +2,12 @@ node app.js
 pm2 start app.js --watch --name speedpigeoncncom_crawler
 
 
-http://localhost:9990/app_crawler/flashInsert
+http://localhost:10099/app_crawler/flashDelete
+
+
+http://106.13.69.102:10099/app_crawler/flashInsert
+
+http://106.13.69.102:10099/app_crawler/flashDelete
 
 
 

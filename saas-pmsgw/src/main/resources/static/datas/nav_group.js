@@ -17,12 +17,12 @@ var navs = [
 			"icon": "&#xe63c;",
 			"href": "/nodejsPigeonCollection/list.html?type=2"
 		}
-		/*,
+		,
 		 {
 			"title": "指定赛管理",
 			"icon": "&#xe63c;",
 			"href": "/nodejsMatch/list.html"
-		}*/
+		}
 		]
 	},
 {

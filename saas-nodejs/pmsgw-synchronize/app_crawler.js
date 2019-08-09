@@ -49,8 +49,8 @@ function insertGame(master_website, database) {
 
 function deleteGame(database) {
 
-    var sql1 = connection.format(app_sql.deleteMasterGame, [database]);
-    var sql2 = connection.format(app_sql.deleteDetailGame, [database]);
+    var sql1 = connection.format(app_sql.deleteMasterGame, [database, database]);
+    var sql2 = connection.format(app_sql.deleteDetailGame, [database, database]);
 
     connection.query(sql1 + sql2, [], function(results, fields, error) {
         if (error) {

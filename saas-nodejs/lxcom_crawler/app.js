@@ -22,7 +22,7 @@ app.listen(api.port, function() {
     console.log('app is listening at port-' + api.port);
 });
 
-task.startMasterCrawler();
-task.startDetailCrawlerFirst();
-task.startDetailCrawlerSecond();
-task.sendMessage();
+// task.startMasterCrawler();
+// task.startDetailCrawlerFirst();
+// task.startDetailCrawlerSecond();
+// task.sendMessage();

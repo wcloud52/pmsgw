@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.def.mapper.ext.DefMatchExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.def.mapper.base.DefMatchMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.def.mapper.base.DefMatchMapper.Base_Column_List" />
+		from def_match
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.match_id != null">
+              and match_id = #{queryMap.match_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_senderId != null">
+              and match_senderId = #{queryMap.match_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_senderName != null">
+              and match_senderName = #{queryMap.match_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_sendTime != null">
+              and match_sendTime = #{queryMap.match_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.match_type != null">
+              and match_type = #{queryMap.match_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_title != null">
+              and match_title = #{queryMap.match_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_desc != null">
+              and match_desc = #{queryMap.match_desc,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_text != null">
+              and match_text = #{queryMap.match_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_status != null">
+              and match_status = #{queryMap.match_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.collection_count != null">
+              and collection_count = #{queryMap.collection_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.item_count != null">
+              and item_count = #{queryMap.item_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from def_match
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.match_id != null">
+              and match_id = #{queryMap.match_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_senderId != null">
+              and match_senderId = #{queryMap.match_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_senderName != null">
+              and match_senderName = #{queryMap.match_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_sendTime != null">
+              and match_sendTime = #{queryMap.match_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.match_type != null">
+              and match_type = #{queryMap.match_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_title != null">
+              and match_title = #{queryMap.match_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_desc != null">
+              and match_desc = #{queryMap.match_desc,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_text != null">
+              and match_text = #{queryMap.match_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_status != null">
+              and match_status = #{queryMap.match_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.collection_count != null">
+              and collection_count = #{queryMap.collection_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.item_count != null">
+              and item_count = #{queryMap.item_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from def_match
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.match_id != null">
+              and match_id = #{queryMap.match_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_senderId != null">
+              and match_senderId = #{queryMap.match_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_senderName != null">
+              and match_senderName = #{queryMap.match_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_sendTime != null">
+              and match_sendTime = #{queryMap.match_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.match_type != null">
+              and match_type = #{queryMap.match_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_title != null">
+              and match_title = #{queryMap.match_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_desc != null">
+              and match_desc = #{queryMap.match_desc,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_text != null">
+              and match_text = #{queryMap.match_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.match_status != null">
+              and match_status = #{queryMap.match_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.collection_count != null">
+              and collection_count = #{queryMap.collection_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.item_count != null">
+              and item_count = #{queryMap.item_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into def_match 
+		(
+		match_id,
+		cote_id,
+		cote_name,
+		match_senderId,
+		match_senderName,
+		match_sendTime,
+		match_type,
+		match_title,
+		match_desc,
+		match_text,
+		match_status,
+		collection_count,
+		item_count,
+		create_time,
+		modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.match_id,jdbcType=VARCHAR},
+			    #{item.cote_id,jdbcType=VARCHAR},
+			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.match_senderId,jdbcType=VARCHAR},
+			    #{item.match_senderName,jdbcType=VARCHAR},
+			    #{item.match_sendTime,jdbcType=TIMESTAMP},
+			    #{item.match_type,jdbcType=VARCHAR},
+			    #{item.match_title,jdbcType=VARCHAR},
+			    #{item.match_desc,jdbcType=VARCHAR},
+			    #{item.match_text,jdbcType=VARCHAR},
+			    #{item.match_status,jdbcType=INTEGER},
+			    #{item.collection_count,jdbcType=INTEGER},
+			    #{item.item_count,jdbcType=INTEGER},
+			    #{item.create_time,jdbcType=TIMESTAMP},
+			    #{item.modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update def_match 
+			<set>
+                <if test="item.cote_id != null">
+                  and cote_id = #{item.cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_name != null">
+                  and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_senderId != null">
+                  and match_senderId = #{item.match_senderId,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_senderName != null">
+                  and match_senderName = #{item.match_senderName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_sendTime != null">
+                  and match_sendTime = #{item.match_sendTime,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.match_type != null">
+                  and match_type = #{item.match_type,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_title != null">
+                  and match_title = #{item.match_title,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_desc != null">
+                  and match_desc = #{item.match_desc,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_text != null">
+                  and match_text = #{item.match_text,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.match_status != null">
+                  and match_status = #{item.match_status,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.collection_count != null">
+                  and collection_count = #{item.collection_count,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.item_count != null">
+                  and item_count = #{item.item_count,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.create_time != null">
+                  and create_time = #{item.create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.modify_time != null">
+                  and modify_time = #{item.modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      match_id=#{item.match_id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>
