@@ -88,7 +88,7 @@ function crawlerMasterExt(id, coteid, coteName) {
                 if (cut == scut && element.MatchName.length > 0) {
                     items.push({
                         master_number: element.UploadID,
-                        master_text: element.MatchName,
+                        master_text: '【' + coteName + '】' + element.MatchName,
                         master_href: 'http://www.gexingwang.com/app/GxwService/using/ORGMATLST1.ajax?s=' + element.UploadID,
                         master_date: element.StartTime,
                         master_website: "pmsgw_gexingwang",

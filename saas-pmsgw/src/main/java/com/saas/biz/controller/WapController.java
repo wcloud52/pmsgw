@@ -229,6 +229,7 @@ public class WapController {
 	}
 
 	// http://localhost:4000/wap/page/userbind2
+	//http://weixin.pmsgw.com/wap/page/userbind2
 	@RequestMapping(method = RequestMethod.GET, value = "/page/userbind2")
 	public String userInfo2(ModelMap model) throws Exception {
 

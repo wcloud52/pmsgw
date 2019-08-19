@@ -1,6 +1,5 @@
 let sqltext = {
 
-    query_litemall_user: 'select * from litemall_user ',
     //删除当前天之前每个子节点爬取数据
     call_p_delete_nodejs_crawler: 'call p_delete_nodejs_crawler()',
     //删除当前之前主节点发送微信客服消息

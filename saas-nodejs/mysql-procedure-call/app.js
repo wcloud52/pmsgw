@@ -5,10 +5,6 @@ var api = require('./api');
 const db = require('./connection');
 const task = require('./task');
 
-//数据爬取
-var app_litemall_user = require('./app_litemall_user');
-
-app.use('/app_litemall_user', app_litemall_user);
 
 //执行存储过程
 var app_procedure = require('./app_procedure');

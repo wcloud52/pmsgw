@@ -112,12 +112,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
+				<!--<configuration>
 					<fork>true</fork>
-					<!--<source>1.8</source>
-					<target>1.8</target>-->
+					&lt;!&ndash;<source>1.8</source>
+					<target>1.8</target>&ndash;&gt;
 
-					<layout>ZIP</layout>
+				&lt;!&ndash;	<layout>ZIP</layout>
 					<executable>true</executable>
 					<includes>
 
@@ -134,9 +134,9 @@
 							<artifactId>saas-common-core</artifactId>
 						</include>   
 
-					</includes>
+					</includes>&ndash;&gt;
 
-				</configuration>
+				</configuration>-->
 			</plugin>
 		</plugins>
 	</build>

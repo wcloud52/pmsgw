@@ -23,7 +23,7 @@ app.listen(api.port, function() {
 });
 
 
-task.startMasterCrawler();
-task.startDetailCrawlerFirst();
-task.startDetailCrawlerSecond();
-task.sendMessage();
+// task.startMasterCrawler();
+// task.startDetailCrawlerFirst();
+// task.startDetailCrawlerSecond();
+// task.sendMessage();
