@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/>
+	<title>jTopo Demo</title>
+	<meta name="description" content="jTopo免费的基于HTML5 Canvas的网络拓扑、关系图形库">
+	<meta name="keyword" content="jTopo 网络 拓扑 图形库 HTML5 Canvas 免费 关系图形库 javascript topology">	
+
+	
+	<script src="jquery.js"></script>
+
+	<script type="text/javascript" src="jtopo-min.js"></script>
+	
+	
+	<script id='code'>				
+		$(document).ready(function(){					
+			var canvas = document.getElementById('canvas');
+			var stage = new JTopo.Stage(canvas);
+			//显示工具栏
+			//showJTopoToobar(stage);
+
+			var scene = new JTopo.Scene();	
+			scene.translate = false;
+			scene.background = 'bg.jpg';
+			var x1=0;
+			var x2=0;
+			scene.mousedown(function(e){
+				//debugger;
+				console.log('down'+e.x+'-'+e.y);
+				x1=e.x;
+				//console.log(e.x+'-'+e.y);
+				
+			});
+			scene.mouseup(function(e){
+				console.log('up'+e.x+'-'+e.y);
+				if(e.button == 0){
+					//debugger;
+					//console.log(e.translateX+'-'+e.y);
+					x2=e.x;
+				
+
+			       //向左移动
+				   if(x1>x2)
+				   {
+					var n=Math.floor((x1-x2)/120)
+					 gloaby=gloaby+n;
+				   }
+				   else
+				   {
+					var n=Math.floor((x2-x1)/120)
+					 gloaby=gloaby-n;
+				   }
+				   scene.clear();
+			      init(scene,gloaby);
+			      
+				}
+				
+			});
+			// scene.addEventListener("mouseup",function(e){
+            //     var mousePos={ // 鼠标在场景的位置
+            //         x: e.x,
+            //         y: e.y
+            //     };
+			// 	 if(e.button == 0){
+                  
+			// 		scene.removeEventListener("mousemove"); // 解绑事件
+            //     }
+            //     //stage.addNode('sss',mousePos); //添加节点
+            //     //
+				
+            // });
+
+
+			function randomIP(){
+				function num(){ return Math.floor(Math.random()*255);};
+				return num() + '.' + num() + '.' + num()+ '.' + num();
+			}
+			
+			var icons = ['green', 'blue', 'gray'];
+			function node(scene,text,x, y, img){
+				var node = new JTopo.Node(text);
+				var imageIndex = Math.floor(Math.random() * icons.length);
+				node.setImage('' + icons[imageIndex] + '.png', true);
+				node.setLocation(x, y);
+				scene.add(node);
+				if(Math.random() < 0.2){
+					//node.alarm = '1 M';
+				}
+				return node;
+			}				
+			
+			function linkNode(scene,nodeA, nodeZ){
+				var link = new JTopo.Link(nodeA, nodeZ);
+				link.strokeColor = '204,204,204';
+				link.lineWidth = 1;				
+				scene.add(link);
+				return link;
+			}
+			function init(scene,starty)
+			{
+				var nodes = [];
+			for(var i=0; i<5; i++){
+				var row = [];
+				for(var j=0; j<5; j++){
+					var y=j+starty;
+					var n = node(scene,i+'-'+y,20 + j * 120, 20 + i * 120);
+					row.push(n);
+					// if(j>0){
+					// 	linkNode(scene,n, row[j-1]);
+					// 	if(i>0){
+					// 		linkNode(scene,nodes[i-1][j], row[j]);
+					// 	}
+					// }if(i>0 && j == 0){
+					// 	linkNode(scene,nodes[i-1][j], row[j]);
+					// }				
+				}
+				nodes.push(row);
+			}
+			
+			stage.add(scene);
+			}
+			
+			
+            var gloaby=2;
+			$('#btnShow').click(function(){
+			// 	var scene1 = new JTopo.Scene();	
+			// 	scene1.background = 'bg.jpg';
+			// 	scene1.mouseup(function(e){
+			// 	  stage.clear();
+			//        var scene2 = new JTopo.Scene();	
+			//       scene2.background = 'bg.jpg';
+			// 	  init(scene2,gloaby);
+			// 	  gloaby=gloaby+2;
+			// });
+			     //scene.clear();
+				init(scene,0);
+	       });
+		   $('#btnClear').click(function(){
+			  scene.remove();
+	       });
+		   $('#btnMove').click(function(){
+			// stage.clear();
+			// var scene1 = new JTopo.Scene();	
+			//     scene1.background = 'bg.jpg';
+			scene.clear();
+			init(scene,gloaby);
+			gloaby=gloaby+2;
+			//scene.paint();
+	       });
+		});
+	</script>
+  </head>
+
+  <body>
+
+	<center>
+	<div class="wrap_div">
+		<div class="head_nav">
+			<h2 class="logo"><a href="index.html" title="jTopo">jTopo</a></h2>
+			<input type="button" id="btnShow" value="显示">
+			<input type="button" id="btnClear" value="清除">
+			<input type="button" id="btnMove" value="移动">
+		</div>		
+		<div class="head_nav_second">			
+			<ul class="menu" id="nav_menu">
+				
+			</ul>
+		</div>
+		<div class="content">
+		  <div class="left">
+			<ul id="menu">
+				
+			</ul>
+		  </div>
+		  <div class="right">
+				<div id="content">
+					<canvas width="850" height="550" id="canvas"></canvas>	
+					
+				</div>
+		  </div>
+		  <div class="clear"></div>
+		</div>
+	</div>
+	</center>
+	<div class="footer">
+		&nbsp;
+	</div>
+  
+	</body>
+
+</html>

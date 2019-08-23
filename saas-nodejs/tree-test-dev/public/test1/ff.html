@@ -30,18 +30,6 @@
 			var cur_move_row=0;
 			var cur_move_col=0;
 
-			
-
-			var maxMMRow=0;
-			var maxMMCol=0;
-			
-				//当前屏幕最大
-		var maxScreenRow=6;
-		var maxScreenCol=6;
-
-		var cur_max_row=maxScreenRow;
-			var cur_max_col=maxScreenCol;
-
 			//当前鼠标
 			var cur_mouse_start_x=0;
 			var cur_mouse_end_x=0;
@@ -64,7 +52,6 @@
 				   {
 					var n=Math.floor((cur_mouse_start_x-cur_mouse_end_x)/cur_unit)
 					cur_move_col=cur_move_col+n;
-
 				   }
 				   //向右移动
 				   else
@@ -86,21 +73,13 @@
 				   }
 				   if(cur_move_row<=0)
 				   cur_move_row=0;
-
-				
-
 				   if(cur_move_col<=0)
 				   cur_move_col=0;
 
-				//    if((cur_move_col+maxScreenCol<=maxMMCol)&&
-				//    (cur_move_row+maxScreenRow<=maxMMRow)
-				//    )
-				   {
-
 				   scene.clear();
-				   var gMM=getMM();
+				   var gMM=op();
 			      init(scene,cur_move_row,cur_move_col,gMM);
-				}
+				
 				
 			});
 			
@@ -124,30 +103,47 @@
 			}
 			function init(scene,rowy,colx,allMM)
 			{	
-			    for(var i=0+rowy; i<6+rowy; i++){
+			for(var i=0+rowy; i<6+rowy; i++){
 				var row = allMM[i];
 				for(var j=0+colx; j<6+colx; j++){
-					
+					//var mycol=j+colx;
+					//var myrow=i+rowy;
 					//行列
-					if(allMM[i][j]!=0)
 					node(scene,allMM[i][j],20 + (j-colx) * cur_unit, 20 + (i-rowy) * cur_unit);
 								
 				}
-				
-			  }
-			
-			stage.add(scene);
-			
+				//nodes.push(row)
 			}
 			
-		
-			var gMM=getMM();
+			stage.add(scene);
+			//stage.paint();
+			}
+			
+			function init2(scene,rowy,colx)
+			{	
+			for(var i=0; i<5; i++){
+				var row = [];
+				for(var j=0; j<5; j++){
+					var mycol=j+colx;
+					var myrow=i+rowy;
+					//行列
+					node(scene,myrow+'-'+mycol,20 + j * cur_unit, 20 + i * cur_unit);
+								
+				}
+				//nodes.push(row)
+			}
+			
+			stage.add(scene);
+			//stage.paint();
+			}
+
+			var gMM=op();
 			init(scene,cur_move_row,cur_move_col,gMM);
 		
 			$('#btnShow').click(function(){
 			
 				//init(scene,cur_move_row,cur_move_col);
-				getMM();
+				op();
 	       });
 		   $('#btnClear').click(function(){
 			 
@@ -155,9 +151,11 @@
 		   $('#btnMove').click(function(){
 			
 		   });
-		   function getMM()
+		   function op()
 		   {
-	
+		//当前屏幕最大
+		var maxScreenRow=6;
+		var maxScreenCol=6;
 
 
          var curSourceTree=[
@@ -209,8 +207,8 @@
 	   }
 	   
 	   //内存维护最大数组
-		 maxMMRow=maxScreenRow;
-		 maxMMCol=maxScreenCol;
+		var maxMMRow=maxScreenRow;
+		var maxMMCol=maxScreenCol;
 		if(curSourceRow>maxMMRow)
 		{
 			maxMMRow=curSourceRow;
@@ -259,75 +257,17 @@
             {
                jj=jj+spaceCol;//间距
            
-               allMM[i][jj]=curSourceTree[i][j];//+'<a'+i+''+j+'>';
+               allMM[i][jj]=curSourceTree[i][j]+'<a'+i+''+j+'>';
                jj=jj+spaceCol;//间距
            }
           }
 	   }
-
-	//    var newArray = allMM[0].map(function(col, i) {
-	// 	   return allMM.map(function(row) {
-	// 		   return row[i];
-	// 		})
-	// 	});
-	// 	var newArray2=[];
-	// 	for(var ii=0;ii<newArray.length;ii++)
-	// 	{
-	// 		var fff=unique(newArray[ii]);
-	// 		newArray2.push(fff);
-	// 	}
-	// 	console.log(JSON.stringify(newArray2));
-	//    console.log(JSON.stringify(allMM));
-	//    console.log(JSON.stringify(mapTo(newArray2)));
-
-
-	var newArray = mapTo(allMM);
-	console.log(JSON.stringify(newArray));
-
-	for(var ii=0;ii<newArray.length;ii++)
-	{
-		var obj=getWordCnt(newArray[ii]);
-		for(var jj=0;jj<newArray[ii].length;jj++)
-		{
-			
-			var count=obj[newArray[ii][jj]];
-			var v=newArray[ii][jj];
-			for(var kk=0;kk<count;kk++)
-			{
-				newArray[ii][jj+kk]=0;
-			}
-			if(count>maxScreenRow)
-			{
-				newArray[ii][jj+parseInt(maxScreenRow/2)]=v;
-			}
-			else
-			newArray[ii][jj+parseInt(count/2)]=v;
-			jj=jj+count-1 ;
-		}
-	}
-	console.log(JSON.stringify(newArray));
-	   return mapTo(newArray);
+	   
+	   console.log(JSON.stringify(allMM));
+	   return allMM;
 
 	}
-	function mapTo(allMM)
-	{
-		var newArray = allMM[0].map(function(col, i) {
-		   return allMM.map(function(row) {
-			   return row[i];
-			})
-		});
-		return newArray;
-	}
-	
- 	function getWordCnt(arr){ 
-    var obj = {}; 
-	for(var i= 0, l = arr.length; i< l; i++)
-	{ 
-      var item = arr[i]; 
-      obj[item] = (obj[item] +1 ) || 1; 
-    } 
-    return obj; 
-  }
+
 		});
 	</script>
   </head>
