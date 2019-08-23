@@ -99,7 +99,8 @@
 
 				   scene.clear();
 				   var gMM=getMM();
-			      init(scene,cur_move_row,cur_move_col,gMM);
+				  init(scene,cur_move_row,cur_move_col,gMM);
+				  
 				}
 				
 			});
@@ -138,6 +139,64 @@
 			
 			stage.add(scene);
 			
+			var nodes=stage.find('node');
+			var nodeA={};
+			var nodeB={};
+			var nodeC={};
+			var nodeD={};
+			var nodeE={};
+			var nodeF={};
+			var nodeG={};
+			var nodeH={};
+			var nodeI={};
+			for(var ii=0;ii<nodes.length;ii++)
+			{
+				if(nodes[ii].text=="1")
+				{
+					nodeA=nodes[ii];
+				}
+				if(nodes[ii].text=="1-1")
+				{
+					nodeB=nodes[ii];
+				}
+				if(nodes[ii].text=="1-2")
+				{
+					nodeC=nodes[ii];
+				}
+				if(nodes[ii].text=="1-3")
+				{
+					nodeD=nodes[ii];
+				}
+				if(nodes[ii].text=="1-1-1")
+				{
+					nodeE=nodes[ii];
+				}
+				if(nodes[ii].text=="1-1-2")
+				{
+					nodeF=nodes[ii];
+				}
+				if(nodes[ii].text=="1-2-1")
+				{
+					nodeG=nodes[ii];
+				}
+				if(nodes[ii].text=="1-2-2")
+				{
+					nodeH=nodes[ii];
+				}
+			}
+			linkNode(scene,nodeA,nodeB);
+			linkNode(scene,nodeA,nodeC);
+			linkNode(scene,nodeA,nodeD);
+			linkNode(scene,nodeB,nodeE);
+			linkNode(scene,nodeB,nodeF);
+			
+			linkNode(scene,nodeC,nodeG);
+
+			linkNode(scene,nodeC,nodeH);
+
+
+
+
 			}
 			
 		
