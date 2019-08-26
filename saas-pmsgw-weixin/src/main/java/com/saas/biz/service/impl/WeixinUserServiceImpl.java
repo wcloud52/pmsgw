@@ -46,7 +46,7 @@ public class WeixinUserServiceImpl implements WeixinUserService {
 		
 		return weixinUserExtMapper.selectCountByDynamic(paraMap);
 	}
-	 @Cacheable(cacheNames="weixin_user",key="'weixin_user_selectAll'")
+	 @Cacheable(cacheNames="weixin_user",key="'weixin_user_selectAll'",sync = true)
 	@Override
 	public List<WeixinUser> selectAll() {	
 		return weixinUserExtMapper.selectAllList();

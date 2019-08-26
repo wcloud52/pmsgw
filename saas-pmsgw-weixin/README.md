@@ -38,3 +38,47 @@ http://gdgp3.chinaxinge.com/shuju2/201805/20185916130420985.htm
 
 
 http://www.gexingwang.com/page/14.htm
+
+
+
+UPDATE pmsgw_weixin.nodejs_weixin_user_excel a,weixin_user b
+SET 
+  
+ 
+  a.create_time =b.create_time ,
+  a.modify_time =b.modify_time,
+  a.city = b.city,
+  a.country = b.country,
+  a.groupid = b.groupid,
+  a.headimgurl = b.headimgurl,
+  a.language = b.language,
+  a.nickname = b.nickname,
+  a.openid = b.openid,
+  a.province = b.province,
+  a.remark = b.remark,
+  a.sex = b.sex,
+  a.subscribe = b.subscribe,
+  a.subscribe_time = b.subscribe_time,
+  a.unionid = b.unionid,
+  a.bind_type = b.bind_type,
+  a.bind_tel = b.bind_tel,
+  a.bind_name = b.bind_name,
+  a.bind_loft = b.bind_loft,
+  a.bind_address = b.bind_address,
+  a.bind_game = b.bind_game,
+  a.bind_address_prov = b.bind_address_prov,
+  a.bind_address_city = b.bind_address_city,
+  a.bind_address_dist = b.bind_address_dist,
+  a.bind_time = b.bind_time,
+  a.club_bind_tel = b.club_bind_tel,
+  a.club_bind_name = b.club_bind_name,
+  a.club_bind_loft = b.club_bind_loft,
+  a.club_bind_address = b.club_bind_address,
+  a.club_bind_game = b.club_bind_game,
+  a.club_bind_address_prov = b.club_bind_address_prov,
+  a.club_bind_address_city = b.club_bind_address_city,
+  a.club_bind_address_dist = b.club_bind_address_dist,
+  a.club_bind_time = b.club_bind_time
+WHERE a.bind_tel= b.bind_tel;
+
+UPDATE nodejs_weixin_user_excel SET bind_name=excel_bind_name;

@@ -237,7 +237,7 @@ public class WeixinTestController {
 	@Autowired
 	private WeixinUserService weixinUserService;
 
-	@RequestMapping(value = "/test2", method = RequestMethod.POST)
+	@RequestMapping(value = "/getWeixinUserByCache", method = RequestMethod.POST)
 	@ResponseBody
 	public int test2() throws WxErrorException {
 		List<WeixinUser> userList = weixinUserService.selectAll();
