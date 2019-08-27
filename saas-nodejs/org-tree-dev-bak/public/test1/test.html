@@ -16,7 +16,7 @@
 
 
 	<script>
-		//屏幕
+		//内存屏幕
 		function SanbuScreen(cells, startRow, endRow, startCol, endCol) {
 			this.cells = cells;
 			this.startRow = startRow;
@@ -40,9 +40,7 @@
 			this.row = row;
 			this.col = col;
 		}
-		//当前屏幕最大
-		//var maxScreenRow=6;
-		//var maxScreenCol=6;
+		//创建内存屏幕
 		function createMMScreen(sourceTree, maxScreenRow, maxScreenCol, unit) {
 			//获取tree数据源最大行列
 			var curSourceRow = sourceTree.length;
@@ -219,10 +217,84 @@
 
 			stage.add(scene);
 		}
+		function initTree(curSourceTree, screenRow, screenCol,cur_unit)
+		{
+			var initArray = createMMScreen(curSourceTree, screenRow, screenCol, cur_unit);
+			var canvas = document.getElementById('canvas');
+				var stage = new JTopo.Stage(canvas);
+			
+				var scene = new JTopo.Scene();
+				scene.translate = false;
+				scene.background = 'bg.jpg';
+
+					//当前移动行列
+					var cur_move_row = 0;
+				var cur_move_col = 0;
+				//当前屏幕最大
+				var maxScreenRow =screenRow;
+				var maxScreenCol = screenCol;
+
+				var cur_max_row = maxScreenRow;
+				var cur_max_col = maxScreenCol;
+
+				//当前鼠标
+				var cur_mouse_start_x = 0;
+				var cur_mouse_end_x = 0;
+				var cur_mouse_start_y = 0;
+				var cur_mouse_end_y = 0;
+				scene.mousedown(function (e) {
+					cur_mouse_start_x = e.x;
+					cur_mouse_start_y = e.y;
+
+				});
+				scene.mouseup(function (e) {
+					cur_mouse_end_x = e.x;
+					cur_mouse_end_y = e.y;
+					//向左移动
+					if (cur_mouse_start_x > cur_mouse_end_x) {
+						var n = Math.floor((cur_mouse_start_x - cur_mouse_end_x) / cur_unit)					
+							cur_move_col = cur_move_col + n;
+					}
+					//向右移动
+					else {
+						var n = Math.floor((cur_mouse_end_x - cur_mouse_start_x) / cur_unit)
+						cur_move_col = cur_move_col - n;
+					}
+					//向下
+					if (cur_mouse_start_y > cur_mouse_end_y) {
+						var n = Math.floor((cur_mouse_start_y - cur_mouse_end_y) / cur_unit)
+						cur_move_row = cur_move_row + n;
+					}
+					//向右移动
+					else {
+						var n = Math.floor((cur_mouse_end_y - cur_mouse_start_y) / cur_unit)
+						cur_move_row = cur_move_row - n;
+					}
+					if (cur_move_row <= 0)
+						cur_move_row = 0;
+
+					if (cur_move_col <= 0)
+						cur_move_col = 0;
+
+					if (cur_move_col >= initArray.endCol-screenCol)
+						cur_move_col = initArray.endCol-screenCol;
+						
+						if (cur_move_row >= initArray.endRow-screenRow)
+					    cur_move_row = initArray.endRow-screenRow;
+
+
+					scene.clear();
+					
+					init(stage, scene, cur_move_row, cur_move_col, initArray.cells, cur_unit, screenRow, screenCol);
+
+
+				});
+
+				init(stage, scene, 0, 0, initArray.cells, cur_unit, screenRow, screenCol);		
+		}
 		$(document).ready(function () {
 
-			$('#btnMove').click(function () {
-
+			
 				var curSourceTree =
 					[
 						[
@@ -923,98 +995,10 @@
 					]
 					;
 
-				var js = createMMScreen(curSourceTree, 6, 6, 120);
-				console.log(JSON.stringify(js));
 
-				var canvas = document.getElementById('canvas');
-				var stage = new JTopo.Stage(canvas);
-				//stage.width=800;
-				//stage.height=800;
+					initTree(curSourceTree, 6, 4,100);
 
-				var scene = new JTopo.Scene();
-				scene.translate = false;
-				scene.background = 'bg.jpg';
-
-				var cur_unit = 120;
-				//当前移动行列
-				var cur_move_row = 0;
-				var cur_move_col = 0;
-				//当前屏幕最大
-				var maxScreenRow = 6;
-				var maxScreenCol = 6;
-
-				var cur_max_row = maxScreenRow;
-				var cur_max_col = maxScreenCol;
-
-				//当前鼠标
-				var cur_mouse_start_x = 0;
-				var cur_mouse_end_x = 0;
-				var cur_mouse_start_y = 0;
-				var cur_mouse_end_y = 0;
-				scene.mousedown(function (e) {
-
-					console.log('down' + e.x + '-' + e.y);
-					cur_mouse_start_x = e.x;
-					cur_mouse_start_y = e.y;
-
-				});
-				scene.mouseup(function (e) {
-					console.log('up' + e.x + '-' + e.y);
-					cur_mouse_end_x = e.x;
-					cur_mouse_end_y = e.y;
-					//向左移动
-					if (cur_mouse_start_x > cur_mouse_end_x) {
-						var n = Math.floor((cur_mouse_start_x - cur_mouse_end_x) / cur_unit)
-						//if(cur_mouse_start_x<=stage.width)
-						{
-							cur_move_col = cur_move_col + n;
-						}
-						
-
-					}
-					//向右移动
-					else {
-						var n = Math.floor((cur_mouse_end_x - cur_mouse_start_x) / cur_unit)
-						cur_move_col = cur_move_col - n;
-					}
-					//向下
-					if (cur_mouse_start_y > cur_mouse_end_y) {
-						var n = Math.floor((cur_mouse_start_y - cur_mouse_end_y) / cur_unit)
-						cur_move_row = cur_move_row + n;
-					}
-					//向右移动
-					else {
-						var n = Math.floor((cur_mouse_end_y - cur_mouse_start_y) / cur_unit)
-						cur_move_row = cur_move_row - n;
-					}
-					if (cur_move_row <= 0)
-						cur_move_row = 0;
-
-
-
-					if (cur_move_col <= 0)
-						cur_move_col = 0;
-
-					if (cur_move_col >= 6-6)
-						cur_move_col = 6-6;
-						
-						if (cur_move_row >= 34-6)
-					    cur_move_row = 34-6;
-
-
-					scene.clear();
-					//var gMM = getMM();
-					//init(scene, cur_move_row, cur_move_col, gMM);
-
-					init(stage, scene, cur_move_row, cur_move_col, js.cells, 120, 6, 6);
-
-
-				});
-
-
-				init(stage, scene, 0, 0, js.cells, 120, 6, 6);
-
-			});
+		
 
 
 		});
@@ -1046,7 +1030,7 @@
 				</div>
 				<div class="right">
 					<div id="content">
-						<canvas width="640" height="10640" id="canvas"></canvas>
+						<canvas width="440" height="640" id="canvas"></canvas>
 
 					</div>
 				</div>
