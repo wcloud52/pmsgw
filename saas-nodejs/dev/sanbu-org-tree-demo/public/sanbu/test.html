@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+	<title>自研树形脉络图</title>
+	
+
+	<script src="js/jquery.js"></script>
+
+	<script type="text/javascript" src="js/jtopo-min.js"></script>
+
+	<script type="text/javascript" src="test.js"></script>
+
+	<script>
+		var json =
+		{
+			"code": 200,
+			"data": [
+				{
+					"children": [
+						{
+							"children": [
+								{
+									"children": [
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "乐比悠悠",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqyCcvTghZS9Zzkrx75jYZRXhrCvtgr3iaTrEWGlJk2hCQer9JyicbqLJ52vLP6S5LPpAEaBWsvPHw/132",
+											"value": "4523"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "氵寿 Sir",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqWrKLfSImsicjBD333Llgp8b3iajehTPYw5VicquOB3ibp4xKonMJLqhfRaQc4L8lPiatyRBZCKmlAia5Q/132",
+											"value": "4525"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "高阳",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "",
+											"value": "4526"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "拾忆",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+											"value": "4527"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "乐比悠悠",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/65QUzjmcuiaKm3v352buEnSKicYIQzJBtbht9kh3J6RbX3iaDlpKZPFzDp5vgYouyicL3S5EBjbvA7fia8ic7ykZU8MrMBI6iabHYva/132",
+											"value": "30172"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "氵寿 Sir",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erM4smE25uwA43vn3jSSSnoePY4VQjXWJAeFoyxEIZbMsl2cUdtf2TLq0S1rDRHVbibT4LJkbXLeRg/132",
+											"value": "30174"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "高阳",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "",
+											"value": "30175"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "拾忆",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIhH9ACDcvF0CiaWEwibY0tsnknWJ801bBa7XD7fkNu91sSmvol5O6ibQRicYX7Zgd9SpzC8ZCCjy4C0w/132",
+											"value": "30176"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "乐比悠悠",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/ZS5nBgX6HJ2CyjFmuj7VwmwI1JbCfibCkhBcib0ajuicUJDv17fvYqJEACKUfiaaicv3wdrkSa4wjQfWChAysUia8qGQ/132",
+											"value": "30179"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "氵寿 Sir",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI77JMDiaNLQ4GYOlG1tq8ykr2lA2zMYBsOPBnudWcsPuLfGvDqqm9dzr2h9O0fsL7U39jMNUlnRmQ/132",
+											"value": "30181"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "高阳",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "",
+											"value": "30182"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "拾忆",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLcAhSncia8rt9WWHiclviapuHxvG6b0uWFicYtgJPKmdIPtgEdFBbbdSJibuibiapJXXykFl197F6YibbL4Q/132",
+											"value": "30183"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "乐比悠悠",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqyCcvTghZS9Zzkrx75jYZRXhrCvtgr3iaTrEWGlJk2hCQer9JyicbqLJ52vLP6S5LPpAEaBWsvPHw/132",
+											"value": "30185"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "氵寿 Sir",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ4qcLdD8gR0hklMzMz7BtkNpViawHY89f0VAe6sbyfVpmxbTgqVzFp7HmjrEclEyYBAEbnb2Mc4Zw/132",
+											"value": "30187"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "高阳",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "",
+											"value": "30188"
+										},
+										{
+											"children": [],
+											"headimgurl": "",
+											"level": 3,
+											"name": "拾忆",
+											"parent_id": "4524",
+											"read_num": 1,
+											"share_num": 0,
+											"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLcAhSncia8rt9WWHiclviapuHxvG6b0uWFicYtgJPKmdIPtgEdFBbbdSJibuibiapJXXykFl197F6YibbL4Q/132",
+											"value": "30189"
+										}
+									],
+									"headimgurl": "",
+									"level": 2,
+									"name": "00",
+									"parent_id": "4521",
+									"read_num": 2,
+									"share_num": 4,
+									"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+									"value": "4524"
+								},
+								{
+									"children": [],
+									"headimgurl": "",
+									"level": 2,
+									"name": "00",
+									"parent_id": "4521",
+									"read_num": 2,
+									"share_num": 4,
+									"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+									"value": "30173"
+								},
+								{
+									"children": [],
+									"headimgurl": "",
+									"level": 2,
+									"name": "00",
+									"parent_id": "4521",
+									"read_num": 2,
+									"share_num": 4,
+									"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+									"value": "30180"
+								},
+								{
+									"children": [],
+									"headimgurl": "",
+									"level": 2,
+									"name": "00",
+									"parent_id": "4521",
+									"read_num": 2,
+									"share_num": 4,
+									"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+									"value": "30186"
+								}
+							],
+							"headimgurl": "",
+							"level": 1,
+							"name": "00",
+							"parent_id": "0",
+							"read_num": 1,
+							"share_num": 4,
+							"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+							"value": "4521"
+						},
+						{
+							"children": [],
+							"headimgurl": "",
+							"level": 1,
+							"name": "00",
+							"parent_id": "0",
+							"read_num": 1,
+							"share_num": 4,
+							"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+							"value": "30171"
+						},
+						{
+							"children": [],
+							"headimgurl": "",
+							"level": 1,
+							"name": "00",
+							"parent_id": "0",
+							"read_num": 1,
+							"share_num": 4,
+							"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+							"value": "30178"
+						},
+						{
+							"children": [],
+							"headimgurl": "",
+							"level": 1,
+							"name": "00",
+							"parent_id": "0",
+							"read_num": 1,
+							"share_num": 4,
+							"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+							"value": "30184"
+						}
+					],
+					"headimgurl": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+					"name": "00",
+					"parent_id": "",
+					"symbol": "http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELHBolEwibicWaamfy3fjibGESWxl3eKmxxxb5XFtER5XQdqgtjLe7IxzyUG26zmicsn3ScQibtOym5iaqQ/132",
+					"value": "0"
+				}
+			],
+			"msg": "success.200",
+			"url": ""
+		};
+		function treeToPath(tree, path, currentPath) {
+			var currentPath = currentPath || [];
+			var path = path || [];
+
+			for (let i = 0; i < tree.length; i++) {
+				if (i !== 0) {
+					currentPath.pop();
+				}
+
+				currentPath.push(tree[i]);
+
+				if (tree[i].children.length) {
+					treeToPath(tree[i].children, path, currentPath);
+				} else {
+					path.push(currentPath.slice(0));
+				}
+			}
+
+			currentPath.pop();
+
+			return path;
+		}
+		var ff = treeToPath(json.data);
+		//initTree(ff, 60, 4,100);
+		var curSourceTree = ff;
+		var screenRow = 60;
+		var screenCol = 6;
+		var cur_unit = 100;//
+
+		var initArray = createMMScreen(curSourceTree, screenRow, screenCol, cur_unit);
+		var offCanvas = document.createElement("canvas");//离屏canvas 通过代码创建出来的//document.getElementById('canvas');
+		offCanvas.width = screenCol * cur_unit;
+		offCanvas.height = screenRow * cur_unit;
+
+		var stage = new JTopo.Stage(offCanvas);
+
+		var scene = new JTopo.Scene();
+		//scene.translate = false;
+		scene.background = 'js/bg.jpg';
+		stage.add(scene);
+
+		//当前移动行列
+		var cur_move_row = 0;
+		var cur_move_col = 0;
+		//当前屏幕最大
+		var maxScreenRow = screenRow;
+		var maxScreenCol = screenCol;
+
+		var cur_max_row = maxScreenRow;
+		var cur_max_col = maxScreenCol;
+
+		//当前鼠标
+		var cur_mouse_start_x = 0;
+		var cur_mouse_end_x = 0;
+		var cur_mouse_start_y = 0;
+		var cur_mouse_end_y = 0;
+
+
+
+		init(stage, scene, 0, 0, initArray.cells, cur_unit, screenRow, screenCol);
+
+
+
+
+
+		window.onload = function () {
+			var canvas = document.getElementById('canvas');
+			canvas.width = 400;
+			canvas.height = 400;
+			var ctx = canvas.getContext("2d");
+			ctx.clearRect(0, 0, 400, 400);
+			ctx.drawImage(offCanvas, 0, 0, 400, 400, 0, 0, 400, 400);
+			var postx = 0;
+			var postx = 0;
+			var posty = 0;
+			canvas.onmousedown = function (e) {
+				cur_mouse_start_x = e.x;
+				cur_mouse_start_y = e.y;
+				console.log("开始x-" + e.x + "/y-" + e.y);
+			}
+			canvas.onmouseup = function (e) {
+				console.log("结束x-" + e.x + "/y-" + e.y);
+				cur_mouse_end_x = e.x;
+				cur_mouse_end_y = e.y;
+				//向下
+				if (cur_mouse_start_y > cur_mouse_end_y) {
+					var n = cur_mouse_start_y - cur_mouse_end_y;
+					posty = posty + n;
+				}
+				//向上
+				else {
+					var n = cur_mouse_end_y - cur_mouse_start_y;
+					posty = posty - n;
+				}
+				//向左移动
+				if (cur_mouse_start_x > cur_mouse_end_x) {
+					var n = cur_mouse_start_x - cur_mouse_end_x;
+					postx = postx + n;
+				}
+				//向右移动
+				else {
+					var n = cur_mouse_end_x - cur_mouse_start_x;
+					postx = postx - n;
+				}
+				if (posty < 0) {
+					posty = 0;
+				}
+				if (posty > 6000-400) {
+					posty = 6000-400;
+				}
+
+				if (postx < 0) {
+					postx = 0;
+				}
+				if (postx > 600-400) {
+					postx = 600-400;
+				}
+
+				var canvas = document.getElementById('canvas');
+				canvas.width = 400;
+				canvas.height = 400;
+				var ctx = canvas.getContext("2d");
+				ctx.clearRect(0, 0, 400, 400);
+				ctx.drawImage(offCanvas, postx, posty, 400, 400, 0, 0, 400, 400);
+			}
+		};
+
+	</script>
+</head>
+
+<body>
+
+	<center>
+		<div class="wrap_div">
+			<div class="head_nav">
+			
+			</div>
+			<div class="head_nav_second">
+				<ul class="menu" id="nav_menu">
+
+				</ul>
+			</div>
+			<div class="content">
+				<div class="left">
+					<ul id="menu">
+
+					</ul>
+				</div>
+				<div class="right">
+					<div id="content">
+						<canvas width="400" height="400" id="canvas"></canvas>
+
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</center>
+	<div class="footer">
+		&nbsp;
+	</div>
+
+</body>
+
+</html>

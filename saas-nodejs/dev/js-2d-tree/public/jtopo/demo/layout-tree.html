@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/>
+	<title>jTopo Demo</title>
+	<meta name="description" content="jTopo免费的基于HTML5 Canvas的网络拓扑、关系图形库">
+	<meta name="keyword" content="jTopo 网络 拓扑 图形库 HTML5 Canvas 免费 关系图形库 javascript topology">	
+
+	<link rel="stylesheet" type="text/css" href="../css/base.css">
+	<link href="../css/jquery.snippet.min.css" rel="stylesheet">
+	
+	<script src="js/jquery.js"></script>
+
+	
+	<script type="text/javascript" src="js/snippet/jquery.snippet.min.js"></script>
+	
+	<script type="text/javascript" src="js/jtopo-min.js"></script>
+	<script type="text/javascript" src="js/toolbar.js"></script>
+	
+	<script id='code'>						
+		$(document).ready(function(){					
+			var canvas = document.getElementById('canvas');
+			var stage = new JTopo.Stage(canvas);
+			//显示工具栏
+			showJTopoToobar(stage);
+
+			var scene = new JTopo.Scene(stage);	
+			scene.alpha = 1;
+			
+			function addNode(text, color){
+				var node = new JTopo.Node();
+				node.setImage('http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLcAhSncia8rt9WWHiclviapuHxvG6b0uWFicYtgJPKmdIPtgEdFBbbdSJibuibiapJXXykFl197F6YibbL4Q/132?v=1');
+				node.setBound(500, 210, 64, 64); // 同时设置大小及位置
+				//peopleNode.setBound(500, 210, 64, 64); // 同时设置大小及位置
+			//peopleNode.setImage('./img/person.png');
+
+				node.fontColor = '0,0,0';
+				scene.add(node);
+				
+				node.mouseover(function(){
+					this.text = text;
+				});
+				node.mouseout(function(){
+					this.text = null;
+				});
+				return node;
+			}
+			
+			function addLink(nodeA, nodeZ){
+				var link = new JTopo.FlexionalLink(nodeA, nodeZ);
+				link.strokeColor = '204,204,204';
+				link.lineWidth = 1;
+				scene.add(link);
+				return link;
+			}
+			
+			var rootNode = addNode('root', 'gray');
+			
+			var icons = ['green', 'blue', 'red1', 'red2'];
+			for(var i=0; i<icons.length; i++){
+			
+				var node = addNode('second_' + i, icons[i]);	
+				addLink(rootNode, node);			
+				if(i == 0 || i == icons.length - 1){
+					for(var j=0; j<4; j++){
+						var thirdNode = addNode('third_' + j, 'green');
+						addLink(node, thirdNode);
+						
+						// if(j == 3){
+							
+						// 		for(var k=0; k<1000; k++){
+						// 		var kNode = addNode('leaf_' + k, 'gray');
+						// 		addLink(thirdNode, kNode);
+						// 	}
+		
+	
+	
+						
+						//}
+					}
+				}
+			}
+			
+			// 树形布局
+			scene.doLayout(JTopo.layout.TreeLayout('up', 30, 107));
+		});
+	</script>
+  </head>
+
+  <body>
+
+	<center>
+	<div class="wrap_div">
+		<div class="head_nav">
+			<h2 class="logo"><a href="index.html" title="jTopo">jTopo</a></h2>
+		</div>		
+		<div class="head_nav_second">			
+			<ul class="menu" id="nav_menu">
+			
+			</ul>
+		</div>
+		<div class="content">
+		  <div class="left">
+			<ul id="menu">
+			
+			</ul>
+		  </div>
+		  <div class="right">
+				<div id="content">
+					<canvas width="850" height="550" id="canvas"></canvas>	
+					
+				</div>
+		  </div>
+		  <div class="clear"></div>
+		</div>
+	</div>
+	</center>
+	<div class="footer">
+		&nbsp;
+	</div>
+  
+</body>
+
+</html>

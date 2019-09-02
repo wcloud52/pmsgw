@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<title>脉络数据</title>
+	<head th:include="admin/include :: header"></head>
+	<link href="../lib/bootstrap-treetable/bootstrap-treetable.css" rel="stylesheet">
+	<link href="../lib/jquery-ztree/css/metroStyle/metroStyle.css" rel="stylesheet">
+</head>
+<style>
+	.nickname_cls{
+		width:200px;
+		overflow-x: auto !important;
+		text-overflow: initial !important;
+	}
+	.nickname_cls::-webkit-scrollbar {
+		height:8px;
+	}
+	.nickname_cls::-webkit-scrollbar-thumb{
+		background:#ddd;
+	}
+	.nickname_cls::-webkit-scrollbar-track{
+		background:#fff;
+	}        
+</style>
+<body>
+<div>
+	<div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<a href="#" onclick="javascript:history.back(-1);">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					<span>返回xxx</span>
+				</a>
+				<span th:text="${data.title}" style="margin-left: 20px;">文章标题</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<div class="layui-tab" lay-filter="test">
+					<ul class="layui-tab-title">
+						<li class="layui-this" lay-id="11">脉络图</li>
+						<li lay-id="22">文章分析</li>
+						<li lay-id="33">人脉统计xx</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<div class="layui-tab layui-tab-brief" lay-filter="tabBrief">
+								<ul class="layui-tab-title" style="border-bottom-style:hidden">
+									<li class="layui-this">树状图</li>
+									<li>关系列表</li>
+									<li>测试脉络图</li>
+								</ul>
+								<div class="layui-tab-content">
+									<div class="layui-tab-item layui-show" style="position: relative;">
+										<div style="margin: 10px; position: absolute; top: 0px; left: 0px; z-index: 100;">
+											<a class="btn btn-primary btn-rounded btn-sm" onclick="changeTreeDirection();">切换显示方向</a>
+											<a class="btn btn-primary btn-rounded btn-sm" onclick="exprotVenation();">导出</a>
+										</div>
+										<div style="width:100%;height:600px;overflow-y:scroll;" id="tree"></div>
+									</div>
+									<div class="layui-tab-item">
+										<div class="row">
+											<div class="col-sm-12 select-table table-striped">
+												<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+													<a class="btn btn-warning" onclick="exportExcel();">
+														<i class="fa fa-file-excel-o"></i> 导出excel
+													</a>
+												</div>
+												<div class="col-sm-2" style="border-right: 2px solid #F5F5F5;">
+													<div class="input-group">
+														<input type="text" id="key" placeholder="请输入关键字" class="form-control">
+													</div>
+													<ul id="frame" class="ztree" style="width: 100%;overflow-x: auto;height: 600px;"></ul>
+												</div>
+												<div class="col-sm-10">
+													<table id="bootstrap-table" data-mobile-responsive="true"></table>
+												</div>
+											</div>
+											<!--<table id="bootstrap-tree-table" data-mobile-responsive="true"></table>-->
+											<!--<table class="layui-table layui-hidden" id="treeTable" lay-filter="treeTable" lay-skin="line"></table>-->
+										</div>
+									</div>
+									<div class="layui-tab-item">
+
+											<canvas width="840" height="64000" id="canvas"></canvas>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-tab-item">
+							<div class="pic"><div id="sourceAnalysis" style="width: 450px;height: 450px;" ></div></div>
+							<div class="pic"><div id="sexAnalysis" style="width: 450px;height: 450px;"></div></div>
+							<div class="pic"><div id="readAnalysis" style="width: 450px;height: 450px;"></div></div>
+							<div class="pic"><div id="shareAnalysis" style="width: 450px;height: 450px;"></div></div>
+							<div class="pic"><div id="validReadAnalysis" style="width: 450px;height: 450px;"></div></div>
+							<div class="pic"><div id="validShareAnalysis" style="width: 450px;height: 450px;"></div></div>
+							<div id="readHabit" style="width: 100%; height:500px;float:left;"></div>
+							<div id="addressAnalysis"  style="width: 100%; height:500px;float:left;"></div>
+						</div>
+						<div class="layui-tab-item">
+							<div class="container-div">
+								<div class="row">
+									<div class="col-sm-12 select-table table-striped">
+										<iframe width="100%" height="100%" id="iframeDec" scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" allowtransparency="yes"></iframe>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="admin/include :: footer"></div>
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
+<script src="../lib/echarts/china.js"></script>
+<script src="https://oss.513bu.com/static/lib/echarts2/dist/echarts.js?v=6"></script>
+<script type="text/javascript" src="../lib/bootstrap-treetable/bootstrap-treetable.js"></script>
+
+<!--<script src="../js/demo/orgtree-demo/jquery.js"></script>-->
+<script type="text/javascript" src="../js/demo/orgtree-demo/jtopo-min.js"></script>
+<script type="text/javascript" src="../js/demo/orgtree-demo/test2.js"></script>
+<script th:inline="javascript">
+	document.getElementById("tree").oncontextmenu = function(e){
+		return false;
+	}
+	var root = {};
+	var prefix = "../cms";
+	var articleId = [[${data.id}]];
+	var iframeUrl = [[${iframeUrl}]];
+	var allNodeId = 0;
+
+	var editObj=null,treeGrid=null,tableId='treeTable',layer=null,element=null;
+	var chart;
+
+	require.config({
+		paths: {
+			echarts: '../lib/echarts2/dist'
+		}
+	});
+	require(['echarts', 'echarts/chart/tree'], function(ec) {
+		chart = ec.init($("#tree")[0]);
+		chart.showLoading({
+			text: '脉络图正在努力加载中'
+		})
+	})
+	$("#iframeDec").height(document.documentElement.clientHeight + 300);
+
+	//loadTreeData(0, 0);
+	var treeJson={};
+	function loadTreeDataByLevel(nodeLevel, timeout) {
+
+			var postData = commonData;
+			postData.data = {
+				"articleId": articleId,
+				"nodeLevel": nodeLevel
+			};
+			$.ajax({
+				url: prefix + "/article_tree_venation.action",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				type: "POST",
+				async:false,
+				data: JSON.stringify(postData),
+				success: function (result) {
+					var data = result.data;
+
+					if(data == null || data.length == 0){
+						return false;
+					}
+
+					if(nodeLevel == 0){
+						treeJson = data[0];
+					} else if(nodeLevel == 1) {
+						treeJson.children = data;
+					} else{
+						for(var i=0; i < data.length; i++){
+							setTreeDataByLevel(treeJson, data[i], nodeLevel);
+						}
+					}
+
+					nodeLevel++;
+					var time = 0;
+
+					loadTreeDataByLevel(nodeLevel, time);
+				}
+
+			});
+
+	}
+	function treeToPath(tree, path, currentPath) {
+		var currentPath = currentPath || [];
+		var path = path || [];
+
+		for(let i = 0; i < tree.length; i++) {
+			if(i !== 0) {
+				currentPath.pop();
+			}
+
+			currentPath.push(tree[i]);
+
+			if(tree[i].children.length) {
+				treeToPath(tree[i].children, path, currentPath);
+			}else {
+				path.push(currentPath.slice(0));
+			}
+		}
+
+		currentPath.pop();
+
+		return path;
+	}
+	function setTreeDataByLevel(rootData, data, nodeLevel) {
+		if(data == null) return false;
+		if(rootData.value == data.parent_id){
+			rootData.children.push(data);
+			return true;
+		} else {
+			if(rootData.children != null && rootData.children.length > 0){
+				for(var obj of rootData.children){
+					var flag = setTreeDataByLevel(obj, data, nodeLevel);
+					if(flag){
+						return true;
+					}
+				}
+			}
+		}
+
+	}
+
+	layui.use(['jquery','treeGrid','layer','element'], function(){
+		var $=layui.jquery;
+		treeGrid = layui.treeGrid;//很重要
+		layer=layui.layer;
+		element = layui.element;
+		initTreeMap();
+
+		loadTreeDataByLevel(0,0);
+		debugger;
+		var ff=treeToPath([treeJson]);
+		//initTreeTest(ff, 6, 3,100);
+        var curSourceTree = ff;
+        var screenRow = 600;
+        var screenCol = 20;
+        var cur_unit = 100;//
+
+        var initArray = createMMScreen(curSourceTree, screenRow, screenCol, cur_unit);
+        var offCanvas = document.createElement("canvas");//离屏canvas 通过代码创建出来的//document.getElementById('canvas');
+        offCanvas.width = screenCol * cur_unit;
+        offCanvas.height = screenRow * cur_unit;
+
+        var stage = new JTopo.Stage(offCanvas);
+
+        var scene = new JTopo.Scene();
+        //scene.translate = false;
+        scene.background = '../js/demo/orgtree-demo/img/bg.jpg';
+        stage.add(scene);
+
+        //当前移动行列
+        var cur_move_row = 0;
+        var cur_move_col = 0;
+        //当前屏幕最大
+        var maxScreenRow = screenRow;
+        var maxScreenCol = screenCol;
+
+        var cur_max_row = maxScreenRow;
+        var cur_max_col = maxScreenCol;
+
+        //当前鼠标
+        var cur_mouse_start_x = 0;
+        var cur_mouse_end_x = 0;
+        var cur_mouse_start_y = 0;
+        var cur_mouse_end_y = 0;
+
+
+
+        init2(stage, scene, 0, 0, initArray.cells, cur_unit, screenRow, screenCol);
+
+
+
+
+
+        //window.onload = function ()
+        setInterval(function() {
+
+            var canvas = document.getElementById('canvas');
+            //canvas.width = 400;
+            //canvas.height = 400;
+            var ctx = canvas.getContext("2d");
+            //ctx.clearRect(0, 0, 400, 400);
+            //ctx.drawImage(offCanvas, 0, 0, 400, 400, 0, 0, 400, 400);
+
+            ctx.drawImage(offCanvas, 0, 0);
+            var postx = 0;
+            var postx = 0;
+            var posty = 0;
+            canvas.onmousedown = function (e) {
+                cur_mouse_start_x = e.x;
+                cur_mouse_start_y = e.y;
+                console.log("开始x-" + e.x + "/y-" + e.y);
+            }
+            canvas.onmouseup = function (e) {
+                console.log("结束x-" + e.x + "/y-" + e.y);
+                cur_mouse_end_x = e.x;
+                cur_mouse_end_y = e.y;
+                //向下
+                if (cur_mouse_start_y > cur_mouse_end_y) {
+                    var n = cur_mouse_start_y - cur_mouse_end_y;
+                    posty = posty + n;
+                }
+                //向上
+                else {
+                    var n = cur_mouse_end_y - cur_mouse_start_y;
+                    posty = posty - n;
+                }
+                //向左移动
+                if (cur_mouse_start_x > cur_mouse_end_x) {
+                    var n = cur_mouse_start_x - cur_mouse_end_x;
+                    postx = postx + n;
+                }
+                //向右移动
+                else {
+                    var n = cur_mouse_end_x - cur_mouse_start_x;
+                    postx = postx - n;
+                }
+                if (posty < 0) {
+                    posty = 0;
+                }
+                if (posty > 6000-400) {
+                    posty = 6000-400;
+                }
+
+                if (postx < 0) {
+                    postx = 0;
+                }
+                if (postx > 600-400) {
+                    postx = 600-400;
+                }
+
+                var canvas = document.getElementById('canvas');
+                canvas.width = 400;
+                canvas.height = 400;
+                var ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, 400, 400);
+                ctx.drawImage(offCanvas, postx, posty, 400, 400, 0, 0, 400, 400);
+            }
+
+
+
+
+        });
+		/** tab切换 **/
+		element.on('tab(test)', function(data){
+			if(data.index==0){
+			}else if(data.index==1){
+				initAnalysis();
+			}else if(data.index==2){
+				$("#iframeDec").attr("src",iframeUrl);
+			}
+		});
+		element.on('tab(tabBrief)', function(data){
+			if(data.index==0){
+			}else if(data.index==1){
+				initTree();
+				initTable();
+			}
+		});
+	});
+	/** 导出 **/
+	function exportExcel() {
+		var postData = commonData;
+		postData.data = articleId;
+		$.ajax({
+			type : "POST",
+			url :  prefix + "/user_conns_excel.action",
+			data : JSON.stringify(postData),
+			cache : false,
+			timeout : 20000,
+			async : true,
+			dataType : 'json',
+			headers : {
+				Accept : "application/json",
+				"Content-Type" : "application/json"
+			},
+			processData : false,
+			beforeSend : function(XMLHttpRequest) {
+			},
+			success : function(data, textStatus) {
+				if (data.code == 200) {
+					window.open(data.data);
+				} else {
+					$.modal.alert(data.msg, 'error');
+				}
+			},
+			complete : function(XMLHttpRequest, textStatus) {
+			}
+		});
+
+	}
+
+	/** 导出脉络图 **/
+	function exprotVenation() {
+		window.open(prefix + "/exprot_venation_img.do?id=" + articleId);
+	}
+
+	/** 文章分析 **/
+	function initAnalysis() {
+		var postData = commonData;
+		postData.data = {"id":articleId};
+		$.ajax({
+			url: prefix + "/article_analysis.action",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			},
+			type: "POST",
+			data: JSON.stringify(postData),
+			success: function (result) {
+				initSourceAnalysis(result.data);
+				initSexAnalysis(result.data);
+				initShareAnalysis(result.data);
+				initReadAnalysis(result.data);
+				initValidReadAnalysis(result.data);
+				initValidShareAnalysis(result.data);
+				initReadHabit(result.data);
+				initAddressAnalysis(result.data);
+			}
+		});
+	}
+	/** 脉络图-关系列表 **/
+	function initTree() {
+		var postData = commonData;
+		postData.data = {"id":articleId};
+		$.ajax({
+			type: "POST",
+			url: prefix+'/article_list_tree.action',
+			data: JSON.stringify(postData),
+			cache: false,
+			timeout: 20000,
+			async: true,
+			dataType: 'json',
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			},
+			processData: false,
+			beforeSend: function (XMLHttpRequest) {
+			},
+			success: function (data, textStatus) {
+				if (data.code == 200) {
+					data.data.forEach(function(el,idx){
+						if(el.user_num != 0){
+							data.data[idx].name += " ("+data.data[idx].user_num+")";
+						}
+					})
+					var zTreeObj = $.fn.zTree.init($("#frame"), setting, data.data);
+					fuzzySearch('frame','#key',null,true);
+				} else {
+					$.modal.alert(data.msg, 'error');
+				}
+			},
+			complete: function (XMLHttpRequest, textStatus) {
+			}
+		});
+	}
+	var setting = {
+		view : {
+			dblClickExpand : false,//双击节点时，是否自动展开父节点的标识
+			showLine : true,//是否显示节点之间的连线
+			fontCss : {
+				'color' : 'black',
+				'font-weight' : 'bold'
+			},//字体样式函数
+			selectedMulti : true
+		},
+		check : {
+			chkboxType : {
+				"Y" : "s",
+				"N" : "ps"
+			},
+			chkStyle : "checkbox",//复选框类型
+			enable : false
+		},
+		data : {
+			key : { //节点数据
+				name : "nickname",//zTree 节点数据保存节点名称的属性名称。
+			},
+			simpleData : {//简单数据模式
+				enable : true,
+				idKey : "id",
+				pIdKey : "parent_id",
+				rootPId : -1
+			}
+		},
+		callback : {
+			beforeClick: beforeClick,
+		}
+	};
+	function beforeClick(treeId, treeNode, clickFlag) {
+		if(treeNode.all_node_id){
+			allNodeId = treeNode.all_node_id+","+treeNode.id;
+		}else{
+			allNodeId = 0
+		}
+		initTable();
+	}
+	function initTable() {
+		$("#bootstrap-table").bootstrapTable('destroy');
+		var options = {
+			url: prefix+'/article_user_conns.action',
+			exportUrl: prefix + "/export",
+			sortName: "crr.id",
+			modalName: "人脉数据",
+			search: false,
+			showSearch:false,
+			showExport: true,
+			showColumns: false,
+			showToggle:false,
+			showRefresh:false,
+			columns: [
+				{
+					field: 'id',
+					title: 'ID',
+					align: "center",
+					visible: false
+				},
+				{
+					field: 'nickname',
+					title: '昵称',
+					align: 'center',
+					sortable: false
+				},{
+					field: 'headimgurl',
+					title: '人脉头像',
+					width: '100px',
+					formatter: function (value, row, index) {
+						var level = row.client_level;
+						var lab = "<div style='position:relative;'>";
+						if (value) {
+							lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='"+value+"' style='width:40px;height:40px;' class='img-circle'/></a>";
+							if(level==2){
+								lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='../img/type_vip.png' style='position: absolute;left: 0px;width:25px;height:25px;'/></a>";
+							}else if(level==1){
+								lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='../img/type_important.png' style='position: absolute;left: 0px;width:25px;height:25px;'/></a>";
+							}else if(level==0){
+								lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='../img/type_general.png' style='position: absolute;left: 0px;width:25px;height:25px;'/></a>";
+							}
+						}
+						lab += "</div>";
+						return lab;
+					}
+				},{
+					field: 'last_nickname',
+					title: '归属好友(一度)'
+				},{
+					field: 'sex',
+					title: '性别',
+					width: '60px',
+					formatter: function (value, row, index) {
+						var lab = '';
+						if (value == 1) {
+							lab = '<span class="label label-primary">男</span>';
+						} else if(value == 2) {
+							lab = '<span class="label label-warning">女</span>';
+						} else {
+							lab = '<span class="label label-default">未知</span>';
+						}
+						return lab;
+					}
+				},{
+					field: 'address',
+					title: '地区'
+				},{
+					field: 'share_type',
+					title: '来源渠道',
+					formatter: function (value, row, index) {
+						var lab = '';
+						if (value == 1) {
+							lab = '微信群';
+						} else if(value == 2) {
+							lab = '微信好友';
+						} else {
+							lab = '朋友圈';
+						}
+						return lab;
+					}
+				},{
+					field: 'node_level',
+					title: '层级',
+					width: '60px'
+				},{
+					field: 'read_num',
+					title: '阅读次数',
+					width: '70px'
+				},{
+					field: 'read_time',
+					title: '阅读总时长',
+					formatter: function (value, row, index) {
+						return formatSeconds(value);
+					}
+				},{
+					field: 'last_read_time',
+					title: '最近阅读时间',
+					formatter: function (value, row, index) {
+						return timestampToStringTime(row.last_read_time);
+					}
+				},{
+					title: '分享次数(朋友圈/微信好友/微信群)',
+					formatter: function (value, row, index) {
+						return row.share_num_circle+"/"+row.share_num_friend+"/"+row.share_num_group;
+					}
+				},{
+					title: '带来阅读(人数/次数)',
+					width: '85px',
+					formatter: function (value, row, index) {
+						return row.bring_read_people+"/"+row.bring_read_num;
+					}
+				},{
+					field: 'last_share_time',
+					title: '最近转发时间',
+					formatter: function (value, row, index) {
+						if(null==value){
+							return "";
+						}else{
+							return timestampToStringTime(row.last_share_time);
+						}
+					}
+				}],
+			queryParams: function (params) {
+				var result = $.table.queryParams(params);
+				result.params = {
+					articleId: articleId,
+					allNodeId: allNodeId
+				}
+				return result;
+			}
+		};
+		$.table.init(options);
+	}
+	function initTreeList() {
+		var postData = commonData;
+		postData.data = {"id":articleId};
+		var options = {
+			url: prefix+'/article_list_map.action',
+			striped: true,
+			code: "id",
+			parentCode: "parent_id",
+			uniqueId: "id",
+			ajaxParams: JSON.stringify(postData),
+			contentType: "application/json",
+			//toolbar: '#toolbar',
+			method: "POST",
+			columns: [
+				{
+					field: 'id',
+					title: 'ID',
+					align: "center",
+					visible: false
+				},
+				{
+					field: 'nickname',
+					title: '昵称',
+					align: 'center',
+					sortable: false
+				},{
+					field: 'headimgurl',
+					title: '人脉头像',
+					width: '100px',
+					formatter: function (value, row, index) {
+						var level = row.client_level;
+						var lab = "<div style='position:relative;'>";
+						if (value) {
+							lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='"+value+"' style='width:40px;height:40px;' class='img-circle'/></a>";
+							if(level==2){
+								lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='../img/type_vip.png' style='position: absolute;left: 0px;width:25px;height:25px;'/></a>";
+							}else if(level==1){
+								lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='../img/type_important.png' style='position: absolute;left: 0px;width:25px;height:25px;'/></a>";
+							}else if(level==0){
+								lab += "<a href='../crm/client_details.do?wxUserId="+row.wx_user_id+"&id=0' target='_blank'><img src='../img/type_general.png' style='position: absolute;left: 0px;width:25px;height:25px;'/></a>";
+							}
+						}
+						lab += "</div>";
+						return lab;
+					}
+				},{
+					field: 'last_nickname',
+					title: '归属好友(一度)'
+				},{
+					field: 'sex',
+					title: '性别',
+					width: '60px',
+					formatter: function (value, row, index) {
+						var lab = '';
+						if (value == 1) {
+							lab = '<span class="label label-primary">男</span>';
+						} else if(value == 2) {
+							lab = '<span class="label label-warning">女</span>';
+						} else {
+							lab = '<span class="label label-default">未知</span>';
+						}
+						return lab;
+					}
+				},{
+					field: 'address',
+					title: '地区'
+				},{
+					field: 'share_type',
+					title: '来源渠道',
+					formatter: function (value, row, index) {
+						var lab = '';
+						if (value == 1) {
+							lab = '微信群';
+						} else if(value == 2) {
+							lab = '微信好友';
+						} else {
+							lab = '朋友圈';
+						}
+						return lab;
+					}
+				},{
+					field: 'node_level',
+					title: '层级',
+					width: '60px'
+				},{
+					field: 'read_num',
+					title: '阅读次数',
+					width: '70px'
+				},{
+					field: 'read_time',
+					title: '阅读总时长',
+					formatter: function (value, row, index) {
+						return formatSeconds(value);
+					}
+				},{
+					field: 'last_read_time',
+					title: '最近阅读时间',
+					formatter: function (value, row, index) {
+						return timestampToStringTime(row.last_read_time);
+					}
+				},{
+					title: '分享次数(朋友圈/微信好友/微信群)',
+					formatter: function (value, row, index) {
+						return row.share_num_circle+"/"+row.share_num_friend+"/"+row.share_num_group;
+					}
+				},{
+					title: '带来阅读(人数/次数)',
+					width: '85px',
+					formatter: function (value, row, index) {
+						return row.bring_read_people+"/"+row.bring_read_num;
+					}
+				},{
+					field: 'last_share_time',
+					title: '最近转发时间',
+					formatter: function (value, row, index) {
+						if(null==value){
+							return "";
+						}else{
+							return timestampToStringTime(row.last_share_time);
+						}
+					}
+				},
+				{
+					field: 'parent_id',
+					title: '父节点',
+					align: "left",
+					visible: false
+				}],
+			queryParams: function (params) {
+				var result = $.table.queryParams(params);
+				result.params = {
+					id: articleId
+				}
+				return result;
+			},
+			onLoadSuccess: function (data) {
+				$table.treegrid({
+					treeColumn: 2,//指明第几列数据改为树形
+					onChange: function() {
+						$table.bootstrapTable('resetWidth');
+					}
+				});
+			},
+			responseHandler: function(res) {
+				if (res.code == 200) {
+					return { rows: res.data.rows, total: res.data.total };
+				} else {
+					$.modal.alertWarning(res.msg);
+					return { rows: [], total: 0 };
+				}
+			}
+		};
+		$.treeTable.init(options);
+	}
+
+	var optionTree = null;
+	//切换脉络图显示方向
+	function changeTreeDirection() {
+		if(optionTree != null){
+			if(optionTree.series[0].orient === "horizontal"){
+				optionTree.series[0].orient = "vertical";
+			}else{
+				optionTree.series[0].orient = "horizontal";
+			}
+			chart.setOption(optionTree, true);
+		}
+	}
+
+	/** 脉络图-树状图 **/
+	function initTreeMap() {
+		optionTree = {
+			backgroundColor: "#ddd",
+			calculable : false,
+			type : 'scroll',
+			series : [
+				{
+					type:'tree',
+					roam: true,
+					orient: 'horizontal',
+					rootLocation: {x: 100, y: 'center'}, // 根节点位置  {x: 'center',y: 10}
+					nodePadding: 35,
+					layerPadding: 150,
+					symbol: 'circle',
+					symbolSize: 40,
+					initialTreeDepth: 2,
+					itemStyle: {
+						normal: {
+							label: {
+								show: true,
+								position: 'bottom',
+								textStyle: {
+									color: '#333',
+									fontSize: 12,
+									fontWeight:  'bolder'
+								}
+							},
+							lineStyle: {
+								color: '#000',
+								width: 1,
+								type: 'broken'
+							}
+						},
+						emphasis: {
+							label: {
+								show: true
+							}
+						}
+					},
+					data: []
+				}
+			]
+		};
+		require(['echarts', 'echarts/chart/tree'], function(ec) {
+			chart = ec.init($("#tree")[0]);
+			chart.setOption(optionTree);
+			chart.hideLoading();
+			var ecConfig = require('echarts/config');
+			//chart.on(ecConfig.EVENT.CLICK, clickun); //也可以注册其事件hover 、mouseout
+			chart.on("click",function() {
+
+				//chart.off();
+
+				//chart.setoption();
+
+			});
+			chart.on('finished', function () {
+
+
+				console.log("******************end***************");
+			});
+            // var offcanvas =chart.getDom().getElementsByTagName('canvas')[0];
+            //
+            // //$('#tree').hide();
+            // var canvas = document.getElementById("canvas");
+            // canvas.width = offcanvas.width ;
+            // canvas.height = offcanvas.height ;
+            // var ctx = canvas.getContext('2d');
+            //
+            //     /*chart.getRenderedCanvas({
+            //     pixelRatio: 2,
+            //     backgroundColor: '#fff'
+            // });*/
+            // setInterval(function() {
+            //     ctx.drawImage(offcanvas,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
+            // });
+		})
+
+		getTreeData();
+
+		function clickFun(param) {
+			var children = param.data.children;
+			if (children.length > 0) {
+				param.data.newList =  children;
+				param.data.children = [];
+			} else {
+				param.data.children = param.data.newList || [];
+			}
+			chart.refresh(); //一定要refresh，否则不起作用
+		}
+	}
+	var treeRootData = null;
+	function getTreeData() {
+
+		//树按层次加载
+		loadTreeData(0, 0);
+        chart.setOption(optionTree, true);
+		var curjson=[];
+		function loadTreeData(nodeLevel, timeout) {
+			//setTimeout(function () {
+				var postData = commonData;
+				postData.data = {
+					"articleId": articleId,
+					"nodeLevel": nodeLevel
+				};
+				$.ajax({
+					url: prefix + "/article_tree_venation.action",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json"
+					},
+					type: "POST",
+                    async: false,//使用同步的方式,true为异步方式
+					data: JSON.stringify(postData),
+					success: function (result) {
+						var data = result.data;
+						var data1 = JSON.parse(JSON.stringify(data));
+						if(data == null || data.length == 0){
+							return false;
+						}
+
+						if(nodeLevel == 0){
+							treeRootData = data[0];
+                            //curjson=data[0];
+						} else if(nodeLevel == 1) {
+							treeRootData.children = data;
+                           // curjson=data;
+						} else{
+							for(var i=0; i < data.length; i++){
+								setTreeData(treeRootData, data[i], nodeLevel);
+                               // setTreeData(curjson, data[i], nodeLevel);
+
+							}
+						}
+						 //console.log(JSON.stringify(treeRootData))
+
+						optionTree.series[0].data =[treeRootData];
+                        //optionTree.series[0].data.push(treeRootData);
+                        //optionTree.series[0].data.push(treeRootData);
+						//chart.setOption(optionTree, true);
+						nodeLevel++;
+						var time = 0;
+						// if(data.length > 1000){
+						// 	time = 2000;
+						// } else if(data.length > 500){
+						// 	time = 1000;
+						// } else if(data.length > 100){
+						// 	time = 500;
+						// }
+						loadTreeData(nodeLevel, time);
+					}
+
+				});
+			//}, timeout);
+		}
+
+		function setTreeData(rootData, data, nodeLevel) {
+			if(data == null) return false;
+			if(rootData.value == data.parent_id){
+				rootData.children.push(data);
+				return true;
+			} else {
+				if(rootData.children != null && rootData.children.length > 0){
+					for(var obj of rootData.children){
+						var flag = setTreeData(obj, data, nodeLevel);
+						if(flag){
+							return true;
+						}
+					}
+				}
+			}
+
+		}
+
+		/*function setTreeData(data, level, haveSubNode) {
+
+			if(data.level == level){
+				if(data.children != null && data.children.length > 0){
+					data.children = [];
+					haveSubNode = true;
+					return haveSubNode;
+				}
+				return haveSubNode;
+			}
+			if(data.children != null && data.children.length > 0){
+				for(var obj of data.children){
+					haveSubNode = setTreeData(obj, level, haveSubNode);
+				}
+			}
+			return haveSubNode;
+		}*/
+
+	}
+
+	function initSourceAnalysis(data) {
+		var sourceAnalysis = echarts.init(document.getElementById('sourceAnalysis'),'light');
+		option = {
+			title: {
+				text: '渠道分析',
+				subtext: '阅读次数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'horizontal',
+				top: 40,
+				x: 'center',
+				data:['微信群','朋友圈','微信好友']
+			},
+			series: [
+				{
+					name:'渠道分析',
+					type:'pie',
+					radius: ['38%', '52%'],
+					avoidLabelOverlap: false,
+					label: {
+						normal: {
+							formatter: '{b|{b}:}{c} ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								b: {
+									fontSize: 12,
+									lineHeight: 30
+								}
+							}
+						}
+					},
+					data:data.source_analysis
+				}
+			]
+		};
+		sourceAnalysis.setOption(option);
+	}
+	function initSexAnalysis(data) {
+		var sexAnalysis = echarts.init(document.getElementById('sexAnalysis'),'light');
+		option = {
+			title: {
+				text: '男女比例',
+				subtext: '阅读人数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'horizontal',
+				top: 40,
+				x: 'center',
+				data:['男性','女性','未知']
+			},
+			series: [
+				{
+					name:'男女比例',
+					type:'pie',
+					radius: ['38%', '52%'],
+					avoidLabelOverlap: false,
+					label: {
+						normal: {
+							formatter: '{b|{b}:}{c} ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								b: {
+									fontSize: 12,
+									lineHeight: 30
+								}
+							}
+						}
+					},
+					data:data.sex_analysis
+				}
+			]
+		};
+		sexAnalysis.setOption(option);
+	}
+	function initReadAnalysis(data) {
+		var readAnalysis = echarts.init(document.getElementById('readAnalysis'),'light');
+		option = {
+			title: {
+				text: '有效阅读',
+				subtext: '阅读次数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'horizontal',
+				top: 40,
+				x: 'center',
+				data:['有效','无效']
+			},
+			series: [
+				{
+					name:'有效阅读',
+					type:'pie',
+					radius: ['38%', '52%'],
+					avoidLabelOverlap: false,
+					label: {
+						normal: {
+							formatter: '{b|{b}:}{c} ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								b: {
+									fontSize: 12,
+									lineHeight: 30
+								}
+							}
+						}
+					},
+					data:data.read_analysis
+				}
+			]
+		};
+		readAnalysis.setOption(option);
+	}
+	function initValidReadAnalysis(data) {
+		var validReadAnalysis = echarts.init(document.getElementById('validReadAnalysis'),'light');
+		option = {
+			title: {
+				text: '有效阅读',
+				subtext: '阅读人数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'horizontal',
+				top: 40,
+				x: 'center',
+				data:['有效','无效']
+			},
+			series: [
+				{
+					name:'有效阅读',
+					type:'pie',
+					radius: ['38%', '52%'],
+					avoidLabelOverlap: false,
+					label: {
+						normal: {
+							formatter: '{b|{b}:}{c} ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								b: {
+									fontSize: 12,
+									lineHeight: 30
+								}
+							}
+						}
+					},
+					data:data.valid_read_analysis
+				}
+			]
+		};
+		validReadAnalysis.setOption(option);
+	}
+	function initShareAnalysis(data) {
+		var shareAnalysis = echarts.init(document.getElementById('shareAnalysis'),'light');
+		option = {
+			title: {
+				text: '有效转发',
+				subtext: '转发次数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'horizontal',
+				top: 40,
+				x: 'center',
+				data:['有效','无效']
+			},
+			series: [
+				{
+					name:'有效转发',
+					type:'pie',
+					radius: ['38%', '52%'],
+					avoidLabelOverlap: false,
+					label: {
+						normal: {
+							formatter: '{b|{b}:}{c} ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								b: {
+									fontSize: 12,
+									lineHeight: 30
+								}
+							}
+						}
+					},
+					data:data.share_analysis
+				}
+			]
+		};
+		shareAnalysis.setOption(option);
+	}
+	function initValidShareAnalysis(data) {
+		var validShareAnalysis = echarts.init(document.getElementById('validShareAnalysis'),'light');
+		option = {
+			title: {
+				text: '有效转发',
+				subtext: '转发人数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'horizontal',
+				top: 40,
+				x: 'center',
+				data:['有效','无效']
+			},
+			series: [
+				{
+					name:'有效转发',
+					type:'pie',
+					radius: ['38%', '52%'],
+					avoidLabelOverlap: false,
+					label: {
+						normal: {
+							formatter: '{b|{b}:}{c} ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								b: {
+									fontSize: 12,
+									lineHeight: 30
+								}
+							}
+						}
+					},
+					data:data.valid_share_analysis
+				}
+			]
+		};
+		validShareAnalysis.setOption(option);
+	}
+	function initReadHabit(data) {
+		var readHabit = echarts.init(document.getElementById('readHabit'));
+		option = {
+			title: {
+				text: '阅读习惯',
+				subtext: '阅读次数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				}
+			},
+			xAxis: {
+				type: 'category',
+				data: ['06:00', ' ', ' ', '09:00', ' ', ' ', '12:00', ' ', ' ', '15:00', ' ', ' ', '18:00', ' ', ' ', '21:00', ' ', ' ', '00:00', ' ', ' ', '03:00', ' ', ' ', '06:00']
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel:{formatter:'{value} 次'},
+				axisLine:{
+					lineStyle: {
+						color: '#ccc'
+					}
+				}
+			},
+			series: [{
+				data: data.read_habit,
+				type: 'line',
+				smooth: true
+			}]
+		};
+		readHabit.setOption(option);
+	}
+	function initAddressAnalysis(data) {
+		var addressAnalysis = echarts.init(document.getElementById('addressAnalysis'));
+		option = {
+			backgroundColor: '#FFFFFF',
+			title: {
+				text: '地区分布',
+				subtext: '阅读次数',
+				left: 'left',
+				top: 10,
+				textStyle: {
+					color: '#000'
+				},
+				x:'center'
+			},
+			tooltip : {
+				trigger: 'item'
+			},
+
+			//左侧小导航图标
+			visualMap: {
+				show : true,
+				x: 'left',
+				y: 'center',
+				splitList: [
+					{start: 1500, end:99999999},{start: 1000, end: 1500},
+					{start: 300, end: 1000},{start: 200, end: 300},
+					{start: 10, end: 200},{start: 0, end: 10},
+				],
+				color: ['#5475f5', '#9feaa5', '#85daef','#74e2ca', '#e6ac53', '#9fb5ea']
+			},
+
+			//配置属性
+			series: [{
+				name: '数据',
+				type: 'map',
+				mapType: 'china',
+				roam: true,
+				label: {
+					normal: {
+						show: true  //省份名称
+					},
+					emphasis: {
+						show: false
+					}
+				},
+				data:data.address_analysis  //数据
+			}]
+		};
+		//使用制定的配置项和数据显示图表
+		addressAnalysis.setOption(option);
+	}
+
+	function formatSeconds(value) {
+		var secondTime = parseInt(value);// 秒
+		var minuteTime = 0;// 分
+		var hourTime = 0;// 小时
+		if(secondTime > 60) {//如果秒数大于60，将秒数转换成整数
+			//获取分钟，除以60取整数，得到整数分钟
+			minuteTime = parseInt(secondTime / 60);
+			//获取秒数，秒数取佘，得到整数秒数
+			secondTime = parseInt(secondTime % 60);
+			//如果分钟大于60，将分钟转换成小时
+			if(minuteTime > 60) {
+				//获取小时，获取分钟除以60，得到整数小时
+				hourTime = parseInt(minuteTime / 60);
+				//获取小时后取佘的分，获取分钟除以60取佘的分
+				minuteTime = parseInt(minuteTime % 60);
+			}
+		}
+		var result = "" + parseInt(secondTime) + "秒";
+
+		if(minuteTime > 0) {
+			result = "" + parseInt(minuteTime) + "分" + result;
+		}
+		if(hourTime > 0) {
+			result = "" + parseInt(hourTime) + "小时" + result;
+		}
+		return result;
+	}
+</script>
+<script src="https://oss.513bu.com/static/lib/jquery-ztree/js/jquery.ztree.all.min.js"></script>
+<script src="../lib/jquery-ztree/js/jquery.ztree.exhide.js"></script>
+<script src="../lib/jquery-ztree/js/fuzzysearch.js"></script>
+<style>
+	.pic{
+		width:50% !important;
+		height: 500px;
+		float:left;
+	}
+	.layui-table-cell{
+		height: 50px;
+	}
+</style>
+
+</body>
+</html>

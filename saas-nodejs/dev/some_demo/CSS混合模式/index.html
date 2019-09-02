@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+        .a, .b, .c, .d, .e, .f {
+            top: 0;
+            left: 50px;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            animation: move linear 3s infinite;
+            border-radius: 50%;
+            mix-blend-mode: exclusion;
+        }
+
+        .a {
+            background-color: rgb(0, 255, 0);
+            animation-delay: 0s;
+        }
+
+        .b {
+            background-color: rgb(255, 0, 0);
+            animation-delay: -0.5s;
+        }
+
+        .c {
+            background-color: rgb(0, 0, 255);
+            animation-delay: -1s;
+        }
+
+        .d {
+            background-color: rgb(255, 255, 0);
+            animation-delay: -1.5s;
+        }
+
+        .e {
+            background-color: rgb(0, 255, 255);
+            animation-delay: -2s;
+        }
+
+        .f {
+            background-color: rgb(255, 0, 255);
+            animation-delay: -2.5s;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="a"></div>
+    <div class="b"></div>
+    <div class="c"></div>
+    <div class="d"></div>
+    <div class="e"></div>
+    <div class="f"></div>
+    <!--<div class="d"></div>-->
+</div>
+</body>
+</html>

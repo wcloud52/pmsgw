@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+    background: #eeeeee;
+    margin: 0;
+    padding: 0;
+}
+#canvas {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+</style>
+<body>
+    <canvas id='canvas' width='300' height='300'></canvas>
+<script>
+   var canvas = document.getElementById('canvas');
+context = canvas.getContext('2d');
+function drawGrid(color, stepx, stepy) {
+    context.save()
+    context.fillStyle = 'white';
+    console.log(context);
+    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+    context.lineWidth = 0.5;
+    context.strokeStyle = color;
+    for (var i = stepx; i < context.canvas.width; i += stepx) {
+        context.beginPath();
+        context.moveTo(i, 0);
+        context.lineTo(i, context.canvas.height);
+        context.closePath();
+        context.stroke();
+    }
+    for (var j = stepy; j < context.canvas.height; j += stepy) {
+        context.beginPath();
+        context.moveTo(0, j);
+        context.lineTo(context.canvas.width, j);
+        context.closePath();
+        context.stroke();
+    }
+    context.restore();
+}
+drawGrid('#ccc', 50, 50);
+
+
+</script>

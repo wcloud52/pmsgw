@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+    background: #eeeeee;
+    margin: 0;
+    padding: 0;
+}
+#canvas {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+</style>
+<body>
+  dddddd
+<script>
+ let tree = [
+    {
+        
+        name: '1',
+        children: [
+            {
+               
+                name: '1-1',
+                children: [
+                    {name: '1-1-1',children: []},
+                    {name: '1-1-2',children: []}
+                     ]
+            },
+            {
+               
+               name: '1-2',
+               children: [
+                   {name: '1-2-1',children: []},
+                   {name: '1-2-2',children: []}
+                    ]
+           },
+           {
+               
+               name: '1-3',
+               children: [
+                   {name: '1-3-1',children: []},
+                   {name: '1-3-2',children: []}
+                    ]
+           },
+           {
+               
+               name: '1-4',
+               children: [
+                   {name: '1-4-1',children: []},
+                   {name: '1-4-2',children: []},
+                   {name: '1-4-3',children: []},
+                   {name: '1-4-4',children: []},
+                   {name: '1-4-5',children: []},
+                   {name: '1-4-6',children: []},
+                   {name: '1-4-7',children: []},
+                   {name: '1-4-8',children: []}
+                    ]
+           },
+           {
+               
+               name: '1-5',
+               children: [
+                   {name: '1-5-1',children: []},
+                   {name: '1-5-2',children: []}
+                    ]
+           },
+           {
+               
+               name: '1-6',
+               children: [
+                    ]
+           },
+           {
+               
+               name: '1-7',
+               children: [
+                   {name: '1-7-1',children: []},
+                   {name: '1-7-2',children: []},
+                   {name: '1-7-3',children: []},
+                   {name: '1-7-4',children: []},
+                   {name: '1-7-5',children: []},
+                   {name: '1-7-6',children: []},
+                   {name: '1-7-7',children: []},
+                   {name: '1-7-8',children: []},
+                   {name: '1-7-9',children: []},
+                   {name: '1-7-10',children: []},
+                   {name: '1-7-11',children: []},
+                   {name: '1-7-12',children: []}
+
+                    ]
+           },
+           {
+               
+               name: '1-8',
+               children: [
+                    ]
+           },
+           {
+               
+               name: '1-9',
+               children: [
+                   {name: '1-9-1',children: []},
+                   {name: '1-9-2',children: []}
+                    ]
+           },
+           {
+               
+               name: '1-10',
+               children: [
+                   {name: '1-10-1',children: []},
+                   {name: '1-10-2',children: []}
+                    ]
+           }
+        ]
+    }
+       
+];
+
+function treeToPath(tree, path, currentPath) {
+    var currentPath = currentPath || [];
+    var path = path || [];
+
+    for(let i = 0; i < tree.length; i++) {
+        if(i !== 0) {
+            currentPath.pop();
+        }
+
+        currentPath.push(tree[i].name);
+
+        if(tree[i].children.length) {
+            treeToPath(tree[i].children, path, currentPath);
+        }else {
+            path.push(currentPath.slice(0));
+        }
+    }
+
+    currentPath.pop();
+
+    return path;
+}
+
+console.log(treeToPath(tree));
+
+var a=treeToPath(tree);
+
+var b=new Array(); 
+for(var i=0;i<34;i++)
+{
+    b[i]=new Array(); 
+    for(var j=0;j<6;j++)
+    {
+        b[i][j]=0;
+        
+    }
+    //debugger;
+    if(i<a.length)
+    {
+        var jj=0;
+        for(var j=0;j<a[i].length;j++)
+        {
+            jj=jj+1;//间距
+           
+            b[i][jj]=a[i][j]+'<a'+i+''+j+'>';
+            jj=jj+1;//间距
+        }
+    }
+}
+console.log(JSON.stringify(b));
+
+var maxCol=6;
+var maxRow=34;
+var row=6;
+var col=6;
+var curA=new Array(); 
+for(var i=0;i<row;i++)
+{
+    curA[i]=new Array(); 
+    for(var j=0;j<col;j++)
+    {
+        curA[i][j]=b[i][j];
+    }
+}
+console.log(JSON.stringify(curA));
+
+var startRow=3;
+var StartCol=1;
+
+
+if(StartCol+col>=maxCol)
+{
+    StartCol=maxCol-col;
+}
+if(startRow+row>=maxRow)
+{
+    startRow=maxRow-row;
+}
+var curB=new Array(); 
+
+for(var i=0;i<row;i++)
+{
+    curB[i]=new Array(); 
+    for(var j=0;j<col;j++)
+    {
+        curB[i][j]=b[i+startRow][j+StartCol];
+    }
+}
+console.log(JSON.stringify(curB));
+
+debugger;
+
+
+</script>

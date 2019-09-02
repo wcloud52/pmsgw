@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "test": "compile-modules convert foo.js -o test.js",
+    "mjg": "node --experimental-modules foo.mjs"
+  }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta charset="UTF-8">
+  <script>
+   var canvas = document.querySelector('#cavsElem'),//document.createElement('canvas'),
+    context = canvas.getContext('2d'),
+    cw = 800, ch = 500,
+    toggle = true
+
+canvas.width = cw
+canvas.height = ch
+
+function generateNoise(context) {
+  var imageData = context.createImageData(cw, ch),
+  buffer32 = new Uint32Array(imageData.data.buffer),
+  len = buffer32.length,
+  i = 0
+
+  for(; i < len;)
+    buffer32[i++] = ((255 * Math.random())|0) << 24
+
+  context.putImageData(imageData, 0, 0)
+}
+
+;(function loop() {
+  toggle = !toggle
+  if (toggle) {
+    requestAnimationFrame(loop)
+    return
+  }
+  generateNoise(context)
+  requestAnimationFrame(loop)
+})()
+
+//document.body.appendChild(canvas);
+  </script>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+
+    <canvas id="cavsElem">
+        你的浏览器不支持canvas，请升级浏览器
+    </canvas>
+</body>
+</html>
