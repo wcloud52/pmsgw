@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <h1>Hello, world!</h1>
+
+    <canvas id="cavsElem">
+        你的浏览器不支持canvas，请升级浏览器
+    </canvas>
+</body>
+<script>
+    //获得画布
+    var canvas = document.querySelector('#cavsElem');
+    var ctx = canvas.getContext('2d');  //获得上下文
+
+    canvas.width = 900;     //设置标签的属性宽高
+    canvas.height = 600;    //千万不要用 canvas.style.height
+    canvas.style.border = "1px solid #000";
+
+    //绘制三角形
+    ctx.beginPath();        //开始路径
+    ctx.moveTo(100,100);    //三角形，左顶点
+    ctx.lineTo(300, 100);   //右顶点
+    ctx.lineTo(300, 300);   //底部的点
+    ctx.closePath();        //结束路径
+    ctx.stroke();           //描边路径
+</script>
+
+</html>
