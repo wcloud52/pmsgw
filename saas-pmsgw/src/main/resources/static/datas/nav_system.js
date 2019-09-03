@@ -155,7 +155,12 @@ var navs = [
 		"icon": "&#xe63c;",
 		"href": "/nodejsCrawler/masterList.html?database=pmsgw_tangshan"
 	}
-	
+		,
+		{
+			"title": "力联科技",
+			"icon": "&#xe63c;",
+			"href": "/nodejsCrawler/masterList.html?database=pmsgw_2688xg"
+		}
 	]
 }
 ];

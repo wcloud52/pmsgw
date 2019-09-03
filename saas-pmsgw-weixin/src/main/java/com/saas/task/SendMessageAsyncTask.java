@@ -1,10 +1,6 @@
 package com.saas.task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
@@ -48,44 +44,22 @@ public class SendMessageAsyncTask {
 	/*
 	 * 公棚
 	 */
-	private List<CustomerUser> getOpenIdWithLoft(List<WeixinUser> userList, String name) {
+	private List<CustomerUser> getOpenIdWithLoft(Map <String,List<WeixinUser>> map, String name) {
+
+		String newName= name.trim().replace(" ", "").replace("￥", "").replace("$", "").replace("(奖)", "").replace("（奖）", "").replace("(预)", "").replace("（预）", "").replace("*", "").replaceAll("[a-zA-Z]", "");
+		String key =newName;
+		List<WeixinUser> retList=map.get (key);
 		List<CustomerUser> rt = new ArrayList<CustomerUser>();
-		for (WeixinUser user : userList) {
-			String bindName = user.getBind_name();
-			if (StringUtils.isBlank(bindName)) {
-				continue;
-			}
-			String strA = bindName.trim().replace("，", ",").replace(" ", "").replace("￥", "").replace("$", "").replace("(奖)", "").replace("（奖）", "").replace("(预)", "").replace("（预）", "").replace("*", "").replaceAll("[a-zA-Z]", "");
-			String StrB = name.trim().replace(" ", "").replace("￥", "").replace("$", "").replace("(奖)", "").replace("（奖）", "").replace("(预)", "").replace("（预）", "").replace("*", "").replaceAll("[a-zA-Z]", "");
-			if (StringUtils.isBlank(StrB) || StringUtils.isBlank(strA)) {
-				continue;
-			}
-			// 包含,即多用户
-			if (strA.indexOf(",") != -1) {
-				strA = "," + strA + ",";
-				StrB = "," + StrB + ",";
+		if(retList!=null&&retList.size ()>0)
+		{
+			for (WeixinUser user : retList) {
+				String game_pigowner= user.getBind_game ();
+				String game_receiver_openid= user.getOpenid();
+				String game_receiver_nickname= user.getNickname();
+				String game_receiver_headimgurl=user.getHeadimgurl();
+				CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
 
-				if (strA.indexOf(StrB) != -1) {
-
-					String game_pigowner= bindName;
-					String game_receiver_openid= user.getOpenid();
-					String game_receiver_nickname= user.getNickname();
-					String game_receiver_headimgurl=user.getHeadimgurl();
-					CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
-					
-					rt.add(customerUser);
-				}
-			} else {
-				if (strA.equals(StrB)||(strA.length()>=9&&StrB.length()>=9&&strA.substring(0,8).equals(StrB.substring(0,8)))) {
-					
-					String game_pigowner= bindName;
-					String game_receiver_openid= user.getOpenid();
-					String game_receiver_nickname= user.getNickname();
-					String game_receiver_headimgurl=user.getHeadimgurl();
-					CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
-					
-					rt.add(customerUser);
-				}
+				rt.add(customerUser);
 			}
 		}
 		return rt;
@@ -94,52 +68,34 @@ public class SendMessageAsyncTask {
 	/*
 	 * 俱乐部
 	 */
-	private List<CustomerUser> getOpenIdWithClub(List<WeixinUser> userList, String name, String loft) {
-		List<CustomerUser> rt = new ArrayList<CustomerUser>();
-		for (WeixinUser user : userList) {
-			String bindName = user.getBind_name();
-			String bindLoft = user.getClub_bind_loft();// 棚号
-			bindLoft=StringUtils.stripStart(bindLoft, "0");
-			loft=StringUtils.stripStart(loft, "0");
-			if (StringUtils.isBlank(bindName) || StringUtils.isBlank(bindLoft) || StringUtils.isBlank(loft)) {
-				continue;
-			}
-			String strA = bindName.trim().replace("，", ",").replace(" ", "").replace("￥", "").replace("(奖)", "").replace("（奖）", "").replace("(预)", "").replace("（预）", "").replace("$", "").replace("*", "").replaceAll("[a-zA-Z]", "");
-			String StrB = name.trim().replace(" ", "").replace("￥", "").replace("(奖)", "").replace("（奖）", "").replace("(预)", "").replace("（预）", "").replace("$", "").replace("*", "").replaceAll("[a-zA-Z]", "");
-			if (StringUtils.isBlank(StrB) || StringUtils.isBlank(strA)) {
-				continue;
-			}
-			// 包含,即多用户
-			if (strA.indexOf(",") != -1) {
-				strA = "," + strA + ",";
-				StrB = "," + StrB + ",";
+	private List<CustomerUser> getOpenIdWithClub(Map <String,List<WeixinUser>> map, String name, String loft) {
+		String newName = name.trim().replace(" ", "").replace("￥", "").replace("$", "").replace("(奖)", "").replace("（奖）", "").replace("(预)", "").replace("（预）", "").replace("*", "").replaceAll("[a-zA-Z]", "");
+        String newLoft=StringUtils.stripStart(loft, "0");
+        String key=newName+"_"+newLoft;
 
-				if ((strA.indexOf(StrB) != -1) && bindLoft.equals(loft)) {
-					String game_pigowner= bindName;
-					String game_receiver_openid= user.getOpenid();
-					String game_receiver_nickname= user.getNickname();
-					String game_receiver_headimgurl=user.getHeadimgurl();
-					CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
-					
-					rt.add(customerUser);
-				}
-			} else {
-				if (strA.equals(StrB) && bindLoft.equals(loft)) {
-					String game_pigowner= bindName;
-					String game_receiver_openid= user.getOpenid();
-					String game_receiver_nickname= user.getNickname();
-					String game_receiver_headimgurl=user.getHeadimgurl();
-					CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
-					
-					rt.add(customerUser);
-				}
+		List<WeixinUser> retList=map.get (key);
+		List<CustomerUser> rt = new ArrayList<CustomerUser>();
+		if(retList!=null&&retList.size ()>0)
+		{
+			for (WeixinUser user : retList) {
+				String game_pigowner= user.getBind_game ();
+				String game_receiver_openid= user.getOpenid();
+				String game_receiver_nickname= user.getNickname();
+				String game_receiver_headimgurl=user.getHeadimgurl();
+				CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
+
+				rt.add(customerUser);
 			}
 		}
 		return rt;
 	}
 	@Async
 	public void sendResultMessage(List<NodejsCrawlerDetailGame> pmsgwGameDetailList) {
-		List<WeixinUser> userList = weixinUserService.selectAll();
+		//List<WeixinUser> userList = weixinUserService.selectAll();
+		Map <String,List<WeixinUser>> retLoftMap=weixinUserService.selectAllWithMapByLoft ();
+
+		Map <String,List<WeixinUser>> retClubMap=weixinUserService.selectAllWithMapByClub ();
+
 		String resultTemplateId = info.getResultTemplateId();
 		for (NodejsCrawlerDetailGame pmsgwGameDetail : pmsgwGameDetailList) {
 			if (pmsgwGameDetail != null) {
@@ -149,9 +105,9 @@ public class SendMessageAsyncTask {
 
 				List<CustomerUser> openidList = new ArrayList<CustomerUser>();
 				if ("loft".equals(type)) {
-					openidList = getOpenIdWithLoft(userList, name);
+					openidList = getOpenIdWithLoft(retLoftMap, name);
 				} else {
-					openidList = getOpenIdWithClub(userList, name, loft);
+					openidList = getOpenIdWithClub(retClubMap, name, loft);
 				}
 				if (openidList != null && openidList.size() > 0) {
 

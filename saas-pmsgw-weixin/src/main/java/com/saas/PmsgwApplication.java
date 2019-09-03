@@ -34,7 +34,7 @@ import org.springframework.web.client.RestTemplate;
 @MapperScan("com.saas.*.mapper.*")
 @EnableScheduling
 @EnableCaching
-//@EnableEurekaClient
+@EnableEurekaClient
 @EnableAsync
 public class PmsgwApplication {
 
@@ -61,8 +61,8 @@ public class PmsgwApplication {
         // 对每个缓存空间应用不同的配置
         Map<String, RedisCacheConfiguration> configMap = new HashMap<>();
         configMap.put("my-redis-cache1", cacheConfiguration);
-        configMap.put("weixin_user", cacheConfiguration.entryTtl(Duration.ofSeconds(3600)));
-        configMap.put("mobile_user", cacheConfiguration.entryTtl(Duration.ofSeconds(3600)));
+        configMap.put("weixin_user", cacheConfiguration.entryTtl(Duration.ofSeconds(3600*6)));
+        configMap.put("mobile_user", cacheConfiguration.entryTtl(Duration.ofSeconds(3600*6)));
         RedisCacheManager cacheManager = RedisCacheManager.builder(factory)     // 使用自定义的缓存配置初始化一个cacheManager
                 .initialCacheNames(cacheNames)  // 注意这两句的调用顺序，一定要先调用该方法设置初始化的缓存名，再初始化相关的配置
                 .withInitialCacheConfigurations(configMap)

@@ -35,7 +35,7 @@ public class WeixinMessageController {
 			log.debug(WeixinMessageController.class + "/send->" +nodejsCrawlerDetailGameList.size());
 
 		sendMessageAsyncTask.sendResultMessage(nodejsCrawlerDetailGameList);
-		sendMobileMessageAsyncTask.sendResultMessage(nodejsCrawlerDetailGameList);
+		//sendMobileMessageAsyncTask.sendResultMessage(nodejsCrawlerDetailGameList);
 		return "ok";
 	}
 }

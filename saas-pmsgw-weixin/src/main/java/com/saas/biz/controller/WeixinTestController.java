@@ -245,6 +245,14 @@ public class WeixinTestController {
 		return userList.size();
 	}
 
+	@RequestMapping(value = "/getWeixinUserMapByCache", method = RequestMethod.POST)
+	@ResponseBody
+	public int test22() throws WxErrorException {
+		Map <String, List <WeixinUser>> userList = weixinUserService.selectAllWithMapByLoft ();
+
+		return userList.size();
+	}
+
 	@Autowired
 	private SendMessageAsyncTask2 sendMessageAsyncTask2;
 

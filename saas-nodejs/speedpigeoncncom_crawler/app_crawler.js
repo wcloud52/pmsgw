@@ -440,21 +440,10 @@ router.get('/sendMessage', function(req, res, next) {
                 }
                 nodejsCrawlerDetailGameList.push(json);
             });
-            var num = parseInt(nodejsCrawlerDetailGameList.length); //所有记录数
-            var totalPage = 0; //总页数
-            var pageSize = 100; //每页显示行数
-            //总共分几页
-            if (num / pageSize > parseInt(num / pageSize)) {
-                totalPage = parseInt(num / pageSize) + 1;
-            } else {
-                totalPage = parseInt(num / pageSize);
-            }
-            for (var ii = 1; ii <= totalPage; ii++) {
-                var result = [];
-                var start = (ii - 1) * pageSize;
-                var end = start + pageSize;
-                sendMessage(nodejsCrawlerDetailGameList.slice(start, end));
-            }
+
+
+            if (nodejsCrawlerDetailGameList != null && nodejsCrawlerDetailGameList.length > 0)
+                sendMessage(nodejsCrawlerDetailGameList);
         }
     );
     res.send(rrtt);
