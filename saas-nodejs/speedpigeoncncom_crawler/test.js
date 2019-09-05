@@ -2,6 +2,13 @@ var http = require('http');
 var express = require('express');
 var router = express.Router();
 var superagent = require('superagent');
+
+let rabbit = require('./rabbit');
+/**
+ * 创建 RabbitMQ 连接
+ */
+rabbit.createMqConnection();
+
 router.get('/test1', function(req, res, next) {
     var url = 'http://61.164.108.2272/data/json_gp_bsxx_10062_18081602_1h.v2.data';
     testUrl(url).then(function resolve(text) {
@@ -9,6 +16,13 @@ router.get('/test1', function(req, res, next) {
     }, function reject(text) {
         res.send(false);
     });
+
+});
+
+router.get('/test2', function(req, res, next) {
+
+    rabbit.send('ok');
+    res.send(true);
 
 });
 

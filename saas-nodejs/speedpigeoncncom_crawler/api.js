@@ -11,6 +11,15 @@ module.exports = {
         port: 3306,
         multipleStatements: true
     },
+    amqp:
+    {
+      //url:  'amqp://wxme-admin:wxme-admin@192.168.30.41:5672',
+
+      url:  'amqp://admin:admin@106.13.69.102:5672',
+      queueName:'pmsgw_pigeoncn',
+      exchangeName:'pmsgw'
+    },
+
     masterCrawlerUrl: AppRoot + 'app_crawler/master',
     detailCrawlerUrl: AppRoot + 'app_crawler/detail',
     sendMessageUrl: AppRoot + 'app_crawler/sendMessage',
