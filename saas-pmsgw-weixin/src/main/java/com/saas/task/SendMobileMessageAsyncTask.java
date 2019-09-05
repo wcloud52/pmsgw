@@ -69,7 +69,7 @@ public class SendMobileMessageAsyncTask {
 		String smsSign = "大众赛鸽";
 		// 环号{1}获得第{2}名,({3})归巢时间{4}
 		ringnum=StringUtils.removeStart(ringnum,"20");
-		cote_name="唐山南北";
+		cote_name="宝翔公棚";
 		masterText=masterText+"<"+cote_name+">";
 		
 		String suffix = cometime.substring(cometime.lastIndexOf(".") );
@@ -127,7 +127,7 @@ public class SendMobileMessageAsyncTask {
 		int message_status = 0;
 		// 已经存在
 		if (ret != -1) {
-			boolean flag = StringUtils.equals(cote_id, "0151");
+			boolean flag = StringUtils.equals(cote_id, "9398");
 			if (flag) {
 				SmsSingleSenderResult smsRt=sendSms( mobile, masterText, cote_name,  rank, ringnum, cometime);
 				message_status = 1;// 发送成功

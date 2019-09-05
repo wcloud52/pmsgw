@@ -161,6 +161,12 @@ var navs = [
 			"icon": "&#xe63c;",
 			"href": "/nodejsCrawler/masterList.html?database=pmsgw_2688xg"
 		}
+		,
+		{
+			"title": "云南金甫",
+			"icon": "&#xe63c;",
+			"href": "/nodejsCrawler/masterList.html?database=pmsgw_xg1698"
+		}
 	]
 }
 ];
