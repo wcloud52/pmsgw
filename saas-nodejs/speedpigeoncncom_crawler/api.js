@@ -4,6 +4,7 @@ var AppRoot = 'http://localhost:' + AppPort + '/';
 module.exports = {
     port: AppPort,
     mysql: {
+      
         host: '115.28.48.136',
         user: 'root',
         password: '123',
