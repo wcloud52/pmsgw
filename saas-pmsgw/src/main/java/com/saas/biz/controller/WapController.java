@@ -233,7 +233,8 @@ public class WapController {
 	@RequestMapping(method = RequestMethod.GET, value = "/page/userbind2")
 	public String userInfo2(ModelMap model) throws Exception {
 
-		loger.info(wxMpService.getMenuService().menuGet().toJson());
+		return "wap/userbind";
+	/*	loger.info(wxMpService.getMenuService().menuGet().toJson());
 		String openId = "ocSsDwjRXUH_Kn2hCZQN47z6YpnM";
 		WxMpUser wxMpUser = wxMpService.getUserService().userInfo(openId);
 		if (wxMpUser != null && wxMpUser.getSubscribe()) {
@@ -261,7 +262,7 @@ public class WapController {
 		} else {
 			String redirectURL = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI1NDk4NzYzMw==&scene=126#wechat_redirect";
 			return "redirect:" + redirectURL;
-		}
+		}*/
 	}
 
 	@RequestMapping(value = "/redirectToWeixin", method = RequestMethod.GET)

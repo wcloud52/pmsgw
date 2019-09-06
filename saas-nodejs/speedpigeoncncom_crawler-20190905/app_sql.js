@@ -7,6 +7,7 @@ let sqltext = {
         '(SELECT ? master_id,? cote_id,? cote_name,? master_text,? master_href,? master_date,? master_type,? master_website,? create_time,? modify_time)a ',
         'where a.master_href NOT IN (select master_href from nodejs_crawler_master)'
     ].join(' '),
+    updateCrawlerMasterWithData: ['update nodejs_crawler_master set master_date = ?,modify_time = ? where master_href = ? ; '].join(' '),
     updateCrawlerMasterWith: ['update nodejs_crawler_master set detail_href = ?,detail_crawler_total = ?,detail_crawler_href = ?,modify_time = ? where master_href = ? ; ',
         'select master_id from nodejs_crawler_master where master_href = ?;'
     ].join(' '),
@@ -51,7 +52,7 @@ let sqltext = {
     ].join(' '),
     queryGameDetail: [
         'SELECT detail_id,master_id,master_type,master_website,master_href,cote_id,cote_name,cote_state,master_text,detail_page,detail_page_index,detail_state,distence,ringnum,pigowner,cometime,cotenum,speed,rank,create_time,modify_time FROM nodejs_crawler_detail_game',
-        'WHERE detail_state=\'0\'  and cote_state=\'1\'  ORDER BY master_id,rank'
+        'WHERE detail_state=\'0\' ORDER BY master_id,rank LIMIT 100 '
     ].join(' '),
     changeGameDetailState: 'update nodejs_crawler_detail_game set detail_state = ? where detail_id in(?) ; ',
     deleteGameDetail: 'DELETE FROM nodejs_crawler_detail_game WHERE master_id=? AND detail_page=?',

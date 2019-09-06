@@ -45,7 +45,7 @@ public class SendMobileMessageAsyncTask {
 	public void sendResultMessage(List<NodejsCrawlerDetailGame> pmsgwGameDetailList) throws JSONException, HTTPException, IOException {
 		List<NodejsMobileUser> userList = nodejsMobileUserService.selectAll();		
 		for (NodejsCrawlerDetailGame pmsgwGameDetail : pmsgwGameDetailList) {
-			if (pmsgwGameDetail != null&&pmsgwGameDetail.getCote_id().equals("0151")) 
+			if (pmsgwGameDetail != null&&pmsgwGameDetail.getCote_id().equals("9398"))
 			{
 				String name = pmsgwGameDetail.getPigowner();
 				CustomerUser customerUser=getCustomerUser(userList,name);			

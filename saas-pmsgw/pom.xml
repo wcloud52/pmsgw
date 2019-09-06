@@ -184,7 +184,7 @@
 							<groupId>com.saas</groupId>
 							<artifactId>saas-common-core</artifactId>
 						</include>        
-					</includes>    
+					</includes>
 				 
 				</configuration>
 			 
