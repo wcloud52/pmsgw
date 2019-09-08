@@ -46,6 +46,22 @@ public class NodejsMobileUser {
     /**
      * <pre>
      * 
+     * 表字段 : nodejs_mobile_user.short_cote_name
+     * </pre>
+     */
+    private String short_cote_name;
+
+    /**
+     * <pre>
+     * 
+     * 表字段 : nodejs_mobile_user.state
+     * </pre>
+     */
+    private String state;
+
+    /**
+     * <pre>
+     * 
      * 表字段 : nodejs_mobile_user.create_time
      * </pre>
      */
@@ -182,6 +198,56 @@ public class NodejsMobileUser {
      */
     public void setCote_name(String cote_name) {
         this.cote_name = cote_name;
+    }
+
+    /**
+     * <pre>
+     * 获取：
+     * 表字段：nodejs_mobile_user.short_cote_name
+     * </pre>
+     *
+     * @return nodejs_mobile_user.short_cote_name：
+     */
+    public String getShort_cote_name() {
+        return short_cote_name;
+    }
+
+    /**
+     * <pre>
+     * 设置：
+     * 表字段：nodejs_mobile_user.short_cote_name
+     * </pre>
+     *
+     * @param short_cote_name
+     *            nodejs_mobile_user.short_cote_name：
+     */
+    public void setShort_cote_name(String short_cote_name) {
+        this.short_cote_name = short_cote_name;
+    }
+
+    /**
+     * <pre>
+     * 获取：
+     * 表字段：nodejs_mobile_user.state
+     * </pre>
+     *
+     * @return nodejs_mobile_user.state：
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * <pre>
+     * 设置：
+     * 表字段：nodejs_mobile_user.state
+     * </pre>
+     *
+     * @param state
+     *            nodejs_mobile_user.state：
+     */
+    public void setState(String state) {
+        this.state = state;
     }
 
     /**

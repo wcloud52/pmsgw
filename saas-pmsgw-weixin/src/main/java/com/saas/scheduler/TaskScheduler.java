@@ -35,7 +35,7 @@ public class TaskScheduler {
 	@Scheduled(cron="0 0/10 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 * * ?")
 	public void sendGameMessageTask() {
 		log.debug(" >>sendGameMessageTask start....");
-		sendGameMessageAsyncTask.sendGameMessage();
+		//sendGameMessageAsyncTask.sendGameMessage();
 		log.debug(" >>sendGameMessageTask end....");
 	}
 	

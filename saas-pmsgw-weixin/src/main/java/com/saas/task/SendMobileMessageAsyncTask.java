@@ -30,12 +30,16 @@ public class SendMobileMessageAsyncTask {
 	private NodejsCustomerMessageService nodejsCustomerMessageService;
 
 
-	private CustomerUser getCustomerUser(List<NodejsMobileUser> userList, String name) {
+	private CustomerUser getCustomerUser(List<NodejsMobileUser> userList, String name,String coteId) {
 		CustomerUser rt = null;
 		for (NodejsMobileUser user : userList) {
 			String bindName = user.getPigowner();
-			if(name.equals(bindName)||(name.length()>=9&&bindName.length()>=9&&name.substring(0,8).equals(bindName.substring(0,8))))
+			String bindCoteId=user.getCote_id ();
+			if(
+			(name.equals(bindName)||(name.length()>=9&&bindName.length()>=9&&name.substring(0,8).equals(bindName.substring(0,8))))
+			)
 			{
+
 				rt=new CustomerUser(bindName,user.getMobile());
 			}
 		}
@@ -43,12 +47,16 @@ public class SendMobileMessageAsyncTask {
 	}
 	@Async
 	public void sendResultMessage(List<NodejsCrawlerDetailGame> pmsgwGameDetailList) throws JSONException, HTTPException, IOException {
-		List<NodejsMobileUser> userList = nodejsMobileUserService.selectAll();		
+
+		List<NodejsMobileUser> userList = nodejsMobileUserService.selectAll();
 		for (NodejsCrawlerDetailGame pmsgwGameDetail : pmsgwGameDetailList) {
-			if (pmsgwGameDetail != null&&pmsgwGameDetail.getCote_id().equals("9398"))
+			if (pmsgwGameDetail != null)
 			{
+
 				String name = pmsgwGameDetail.getPigowner();
-				CustomerUser customerUser=getCustomerUser(userList,name);			
+				String coteId=pmsgwGameDetail.getCote_id();
+
+				CustomerUser customerUser=getCustomerUser(userList,name,coteId);
 				if (customerUser != null) 
 				{
 					sendResultMessage(pmsgwGameDetail, customerUser);				
@@ -69,7 +77,7 @@ public class SendMobileMessageAsyncTask {
 		String smsSign = "大众赛鸽";
 		// 环号{1}获得第{2}名,({3})归巢时间{4}
 		ringnum=StringUtils.removeStart(ringnum,"20");
-		cote_name="宝翔公棚";
+		cote_name="云南金甫";
 		masterText=masterText+"<"+cote_name+">";
 		
 		String suffix = cometime.substring(cometime.lastIndexOf(".") );
@@ -127,7 +135,7 @@ public class SendMobileMessageAsyncTask {
 		int message_status = 0;
 		// 已经存在
 		if (ret != -1) {
-			boolean flag = StringUtils.equals(cote_id, "9398");
+			boolean flag = StringUtils.equals(cote_id, "152019");
 			if (flag) {
 				SmsSingleSenderResult smsRt=sendSms( mobile, masterText, cote_name,  rank, ringnum, cometime);
 				message_status = 1;// 发送成功

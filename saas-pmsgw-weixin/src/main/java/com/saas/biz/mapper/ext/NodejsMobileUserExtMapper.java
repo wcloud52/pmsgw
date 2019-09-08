@@ -12,29 +12,29 @@ public interface NodejsMobileUserExtMapper extends NodejsMobileUserMapper {
 	 * @param paraMap
 	 * @return
 	 */
-	List<NodejsMobileUser> selectListByDynamic(Map<Object, Object> paraMap);
+	List<NodejsMobileUser> selectListByDynamic(Map <Object, Object> paraMap);
 	/**
 	 * 动态查询总数
 	 * @param paraMap
 	 * @return
 	 */
-	long selectCountByDynamic(Map<Object, Object> paraMap);
+	long selectCountByDynamic(Map <Object, Object> paraMap);
 	/**
 	 * 批量插入
 	 * @param list
 	 * @return
 	 */
-	int insertBatch(List<NodejsMobileUser> list);
+	int insertBatch(List <NodejsMobileUser> list);
 	/**
 	 * 批量更新
 	 * @param list
 	 * @return
 	 */
-	int updateBatch(List<NodejsMobileUser> list);
+	int updateBatch(List <NodejsMobileUser> list);
 	/**
 	 * 动态删除
 	 * @param paraMap
 	 * @return
 	 */
-	int deleteByDynamic(Map<Object, Object> paraMap);
+	int deleteByDynamic(Map <Object, Object> paraMap);
 }
