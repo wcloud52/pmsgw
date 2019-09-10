@@ -43,7 +43,7 @@
 		select 
 		<include refid="com.saas.biz.mapper.base.NodejsCustomerMessageMapper.Base_Column_List" />
 
-		from nodejs_customer_message
+		from nodejs_customer_message_all
 		where  message_receiverId = #{message_receiverId,jdbcType=VARCHAR}
 		ORDER BY game_create_time DESC
         LIMIT 100

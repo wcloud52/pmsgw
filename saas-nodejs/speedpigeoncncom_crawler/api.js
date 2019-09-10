@@ -16,7 +16,7 @@ module.exports = {
     {
       //url:  'amqp://wxme-admin:wxme-admin@192.168.30.41:5672',
 
-      url:  'amqp://admin:admin@106.13.69.102:5672',
+      url:  'amqp://root:123@106.13.69.102:5672',
       queueName:'pmsgw_pigeoncn',
       exchangeName:'pmsgw'
     },

@@ -1,6 +1,7 @@
 /**
  * 山东龙畅赛鸽中心
  * http://221.202.201.120/m/new/sslb.php?uid=102018
+ * http://www.xg1698.com/m/new/sslb.php?uid=102019&cid=1568044567987
  */
 var http = require('http');
 var express = require('express');
@@ -37,7 +38,7 @@ router.get('/master', function(req, res, next) {
 
 
 function crawlerMaster() {
-    var getUrl = 'http://221.202.201.120/m/new/sslb.php?uid=102018';
+    var getUrl = 'http://www.xg1698.com/m/new/sslb.php?uid=102019';
     console.log("crawlerMaster->" + getUrl);
     superagent
         .get(getUrl)
@@ -59,7 +60,7 @@ function crawlerMaster() {
                         //赛事类型
                         var ele3 = 'loft';
                         var cote_name = '山东龙畅赛鸽中心';
-                        var cote_id = '102018';
+                        var cote_id = '102019';
                         ele2 = ele2.replace("index.php", "bycj.php") + '&p=1&s=100&un=&t=&dn';
                         //司放时间
                         var ele4 = $ele.next().next().next().next().text();
@@ -69,7 +70,7 @@ function crawlerMaster() {
                             cote_name: cote_name,
                             master_number: '',
                             master_text: ele1,
-                            master_href: "http://221.202.201.120/m/new/" + ele2,
+                            master_href: "http://www.xg1698.com/m/new/" + ele2,
                             master_date: ele4,
                             master_type: ele3, //协会/俱乐部
                             master_website: "pmsgw_lxcom"
