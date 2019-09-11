@@ -331,7 +331,7 @@ public class WeixinTestController {
 			@RequestParam	String mobile,@RequestParam	String masterText,@RequestParam	String cote_name,@RequestParam	int
 		rank,@RequestParam	String ringnum,@RequestParam	String cometime) throws JSONException, HTTPException, IOException{
 		
-		sendMobileMessageAsyncTask.sendSms(mobile, masterText, cote_name, rank, ringnum, cometime);
+		sendMobileMessageAsyncTask.sendSms(mobile, masterText, cote_name,cote_name, rank, ringnum, cometime);
 		return "OK";
 	}
 	@Autowired

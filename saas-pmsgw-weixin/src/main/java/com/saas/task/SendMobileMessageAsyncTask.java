@@ -33,14 +33,20 @@ public class SendMobileMessageAsyncTask {
 	private CustomerUser getCustomerUser(List<NodejsMobileUser> userList, String name,String coteId) {
 		CustomerUser rt = null;
 		for (NodejsMobileUser user : userList) {
-			String bindName = user.getPigowner();
-			String bindCoteId=user.getCote_id ();
+			//excel上传维护
+			String excelBindName = user.getPigowner();
+			String excelBindCoteId=user.getCote_id ();
+			String excelShortBindName=user.getShort_cote_name();
+			String excelMobile=user.getMobile();
 			if(
-			(name.equals(bindName)||(name.length()>=9&&bindName.length()>=9&&name.substring(0,8).equals(bindName.substring(0,8))))
+					coteId.equals(excelBindCoteId)	&&
+			(
+					name.equals(excelBindName)||(name.length()>=9&&excelBindName.length()>=9&&name.substring(0,8).equals(excelBindName.substring(0,8)))
+			)
 			)
 			{
 
-				rt=new CustomerUser(bindName,user.getMobile());
+				rt=new CustomerUser(excelBindName,excelMobile,excelShortBindName,excelBindCoteId);
 			}
 		}
 		return rt;
@@ -56,6 +62,7 @@ public class SendMobileMessageAsyncTask {
 				String name = pmsgwGameDetail.getPigowner();
 				String coteId=pmsgwGameDetail.getCote_id();
 
+
 				CustomerUser customerUser=getCustomerUser(userList,name,coteId);
 				if (customerUser != null) 
 				{
@@ -64,7 +71,7 @@ public class SendMobileMessageAsyncTask {
 			}
 		}
 	}
-	public SmsSingleSenderResult sendSms(String mobile,String masterText,String cote_name,Integer rank,String ringnum,String cometime) throws JSONException, HTTPException, IOException 
+	public SmsSingleSenderResult sendSms(String mobile,String masterText,String cote_name,String short_cote_name,Integer rank,String ringnum,String cometime) throws JSONException, HTTPException, IOException
 	{
 		// 短信应用SDK AppID
 		int appid = 1400077437; // 1400开头
@@ -77,7 +84,7 @@ public class SendMobileMessageAsyncTask {
 		String smsSign = "大众赛鸽";
 		// 环号{1}获得第{2}名,({3})归巢时间{4}
 		ringnum=StringUtils.removeStart(ringnum,"20");
-		cote_name="云南金甫";
+		cote_name=short_cote_name;
 		masterText=masterText+"<"+cote_name+">";
 		
 		String suffix = cometime.substring(cometime.lastIndexOf(".") );
@@ -105,6 +112,10 @@ public class SendMobileMessageAsyncTask {
         String mobile=customerUser.getGame_mobile();
         String bindName=customerUser.getGame_pigowner();
         String nickname=customerUser.getGame_pigowner();
+
+		String excelCoteId=customerUser.game_cote_id;
+		String excelShortName=customerUser.game_short_cote_name;
+
         String headimgurl="";
 
 		NodejsCustomerMessage weixinMessage = nodejsCustomerMessageService.convert(pmsgwGameDetail);
@@ -135,9 +146,9 @@ public class SendMobileMessageAsyncTask {
 		int message_status = 0;
 		// 已经存在
 		if (ret != -1) {
-			boolean flag = StringUtils.equals(cote_id, "152019");
+			boolean flag = StringUtils.equals(cote_id, excelCoteId);
 			if (flag) {
-				SmsSingleSenderResult smsRt=sendSms( mobile, masterText, cote_name,  rank, ringnum, cometime);
+				SmsSingleSenderResult smsRt=sendSms( mobile, masterText, cote_name,excelShortName,  rank, ringnum, cometime);
 				message_status = 1;// 发送成功
 				nodejsCustomerMessageService.changeStatus(message_id, message_status,JSON.toJSONString(smsRt));
 			} 		
@@ -152,13 +163,17 @@ public class SendMobileMessageAsyncTask {
 	    private String game_pigowner;
 
 	    private String game_mobile;
+		private String game_cote_id;
+
+		private String game_short_cote_name;
 
 	  
-		public CustomerUser(String game_pigowner, String game_mobile) {
+		public CustomerUser(String game_pigowner, String game_mobile,String game_short_cote_name,String game_cote_id) {
 			super();
 			this.game_pigowner = game_pigowner;
 			this.setGame_mobile(game_mobile);
-			
+			this.game_short_cote_name=game_short_cote_name;
+			this.game_cote_id=game_cote_id;
 		}
 
 		public String getGame_pigowner() {
@@ -176,6 +191,21 @@ public class SendMobileMessageAsyncTask {
 		public void setGame_mobile(String game_mobile) {
 			this.game_mobile = game_mobile;
 		}
-        
+
+		public String getGame_short_cote_name() {
+			return game_short_cote_name;
+		}
+
+		public void setGame_short_cote_name(String game_short_cote_name) {
+			this.game_short_cote_name = game_short_cote_name;
+		}
+
+		public String getGame_cote_id() {
+			return game_cote_id;
+		}
+
+		public void setGame_cote_id(String game_cote_id) {
+			this.game_cote_id = game_cote_id;
+		}
 	}
 }
