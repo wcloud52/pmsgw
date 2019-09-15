@@ -4,4 +4,5 @@ import com.saas.biz.pojo.NodejsMobileUser;
 
 public interface NodejsMobileUserService extends BaseService<NodejsMobileUser,String> {
 
+     int deleteByCoteId(String coteId);
 }

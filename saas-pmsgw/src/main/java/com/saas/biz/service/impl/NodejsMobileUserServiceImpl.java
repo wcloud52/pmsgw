@@ -94,17 +94,30 @@ public class NodejsMobileUserServiceImpl implements NodejsMobileUserService {
 	 */
 	@Override
 	public int deleteByIds(List<String> ids) {
-		/*List<QueryNode> nodes = new ArrayList<QueryNode>();
+		List<QueryNode> nodes = new ArrayList<QueryNode>();
 		String idString = StringUtils.collectionToDelimitedString(ids, ",");
-		nodes.add(new QueryNode("id", OpEnum.IN.getName(), idString));
+		nodes.add(new QueryNode("id", OpEnum.IN.getName(), PrependEnum.AND.getName (),idString));
 		int result = DynamicDelete.deleteByDynamic(nodes, new DynamicDeleteSpecification() {
 			@Override
 			public int deleteByDynamic(Map<Object, Object> map) {
 				return implMapper.deleteByDynamic(map);
 			}
 		});
-		return result;*/
-		return  1;
+		return result;
+	}
+	@Override
+	public int deleteByCoteId(String coteId) {
+		List<QueryNode> nodes = new ArrayList<QueryNode>();
+
+		nodes.add(new QueryNode("cote_id", OpEnum.EQUALS.getName(),PrependEnum.AND.getName (), coteId));
+		int result = DynamicDelete.deleteByDynamic(nodes, new DynamicDeleteSpecification() {
+			@Override
+			public int deleteByDynamic(Map<Object, Object> map) {
+				return implMapper.deleteByDynamic(map);
+			}
+		});
+		return result;
+
 	}
 	/**
 	 * 批量插入

@@ -14,11 +14,7 @@ layui.use([ 'upload','element', 'laydate', 'table', 'form', 'fuzzyQuery','layedi
 	var upload = layui.upload;
 	
 	fuzzyQuery.clearQuery();
-	/*var search_typeId = $("#search_typeId").val();
-	var search_typeName =['未知','收鸽','集鸽'];
-	
-	if (search_typeId.length > 0)
-		fuzzyQuery.addEqual("typeId", search_typeId);*/
+
 	var fuzzyQueryJson = fuzzyQuery.getQuery();
 
 	baseOperation.initTable("listTable", "/nodejsMobileUser/list", {
@@ -219,21 +215,21 @@ layui.use([ 'upload','element', 'laydate', 'table', 'form', 'fuzzyQuery','layedi
 	function flashTable() {
 		fuzzyQuery.clearQuery();
 
-		/*var search_typeId = $("#search_typeId").val();
-		if (search_typeId.length > 0)
-			fuzzyQuery.addEqual("typeId", search_typeId);
+		var search_cote_id = $("#search_cote_id").val();
+		if (search_cote_id.length > 0)
+			fuzzyQuery.addEqual("cote_id", search_cote_id);
+		
+		var search_cote_name = $("#search_cote_name").val();
+		if (search_cote_name.length > 0)
+			fuzzyQuery.addLike("cote_name", search_cote_name);
 		
 		var search_pigowner = $("#search_pigowner").val();
 		if (search_pigowner.length > 0)
 			fuzzyQuery.addLike("pigowner", search_pigowner);
 		
-		var search_ringnum = $("#search_ringnum").val();
-		if (search_ringnum.length > 0)
-			fuzzyQuery.addLike("ringnum", search_ringnum);
-		
-		var search_fileName = $("#search_fileName").val();
-		if (search_fileName.length > 0)
-			fuzzyQuery.addLike("fileName", search_fileName);*/
+		var search_mobile = $("#search_mobile").val();
+		if (search_mobile.length > 0)
+			fuzzyQuery.addLike("mobile", search_mobile);
 
 		var fuzzyQueryJson = fuzzyQuery.getQuery();
 		baseOperation.flashTable(JSON.stringify(fuzzyQueryJson), 'listTable', layui);

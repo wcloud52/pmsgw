@@ -104,8 +104,10 @@ public class NodejsMobileUserController {
 
 			long batchNumber = SnGenerator.getLongSn();
 			int sortNumber = 0;
+
+			String coteId="";
 			for (NodejsMobileUser item : list) {
-				String id = SnGenerator.getSn( "T-");
+				String id = SnGenerator.getSn( "");
 				item.setId (id);
 
 				item.setState ("1");
@@ -115,9 +117,11 @@ public class NodejsMobileUserController {
 				item.setModify_time(new Date());
 
 				sortNumber++;
+
+				coteId=item.getCote_id ();
 			}
 
-
+        sv.deleteByCoteId (coteId);
 		int result = sv.insertBatch(list);
 
 		return BaseResponse.ToJsonResult(result);
@@ -125,21 +129,6 @@ public class NodejsMobileUserController {
 
 
 
-	/**
-	 * 删除操作
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value = "/delete/one/{id}", method = RequestMethod.POST)
-	@ResponseBody
-	public BaseResponse<Integer> deleteOperation(@PathVariable String id) {
-		if (log.isDebugEnabled())
-			log.debug(NodejsMobileUserController.class + "/delete/{id}->" + id);
-
-		int result = sv.deleteById(id);
-		return BaseResponse.ToJsonResult(result);
-	}
 
 	/**
 	 * 删除操作
