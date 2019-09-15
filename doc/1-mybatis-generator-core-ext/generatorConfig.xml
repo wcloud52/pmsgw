@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+   <!--  <classPathEntry    location="mysql-connector-java-5.1.26.jar"/> -->
+    <!-- <properties resource="application.properties"/> -->
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+   
+    <plugin type="com.zichan100.biz.ExtImplPlugin"></plugin>
+		<!--去除注释 -->
+		<commentGenerator type="com.zichan100.biz.CommentExtGenerator">
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+       
+	    <!-- jdbc连接信息 -->
+		<!-- 
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/pmsgw_weixin?characterEncoding=UTF-8" userId="root" password="">
+        </jdbcConnection>
+		-->
+		 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://115.28.48.136:3306/pmsgw_weixin?characterEncoding=UTF-8" userId="root" password="123">
+        </jdbcConnection>
+		
+		
+		
+      <!-- 生成bean对象 --> 
+	    <!-- targetProject:指定目标项目路径，使用的是文件系统的绝对路径。 --> 
+        <javaModelGenerator targetPackage="com.saas.biz.pojo" targetProject="src/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+		
+		<!-- 生成用于查询的 xml文件 对象 -->  
+        <sqlMapGenerator targetPackage="com.saas.biz.mapper.base" targetProject="src/resource">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="false"/>
+            <property name="rootClass" value="BaseDaoInf"/>
+        </sqlMapGenerator>
+        
+		<!-- 生成DAO的类文件以及配置文件 java类型 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.saas.biz.mapper.base" targetProject="src/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+	
+		 <!--
+		<table tableName="nodejs_crawler_cote" domainObjectName="NodejsCrawlerCote" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+	
+		
+		<table tableName="nodejs_customer_text_message" domainObjectName="NodejsCustomerTextMessage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+			
+		<table tableName="nodejs_weixin_user_cote" domainObjectName="NodejsWeixinUserCote" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+			<table tableName="nodejs_customer_game_message" domainObjectName="NodejsCustomerGameMessage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		-->
+			 <!--
+		<table tableName="nodejs_mobile_user" domainObjectName="NodejsMobileUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+	
+		<table tableName="nodejs_customer_message_pigowner_detail" domainObjectName="NodejsCustomerMessagePigownerDetail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		
+		
+		
+		
+		<table tableName="nodejs_sys_user" domainObjectName="NodejsSysUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="nodejs_crawler_cote_extend" domainObjectName="NodejsCrawlerCoteExtend" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="nodejs_weixin_user_cote_extend" domainObjectName="NodejsWeixinUserCoteExtend" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="nodejs_news" domainObjectName="NodejsNews" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="nodejs_storage" domainObjectName="NodejsStorage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="nodejs_mp_user" domainObjectName="NodejsMpUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="nodejs_pigeon_collection" domainObjectName="NodejsPigeonCollection" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="nodejs_match" domainObjectName="NodejsMatch" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+			<table tableName="nodejs_match_item" domainObjectName="NodejsMatchItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+			<table tableName="nodejs_match_pigeon_collection" domainObjectName="NodejsMatchPigeonCollection" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+			<table tableName="nodejs_match_item_pigeon_collection" domainObjectName="NodejsMatchItemPigeonCollection" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="nodejs_match_item_pigeon_collection" domainObjectName="NodejsMatchItemPigeonCollection" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+			<table tableName="nodejs_crawler_master_game" domainObjectName="NodejsCrawlerMasterGame" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="def_match" domainObjectName="DefMatch" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		<table tableName="def_match_item" domainObjectName="DefMatchItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		-->
+		<table tableName="nodejs_mobile_user" domainObjectName="NodejsMobileUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+    </context>
+</generatorConfiguration>

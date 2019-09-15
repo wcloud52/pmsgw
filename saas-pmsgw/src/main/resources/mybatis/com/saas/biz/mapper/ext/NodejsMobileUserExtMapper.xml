@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsMobileUserExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsMobileUserMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsMobileUserMapper.Base_Column_List" />
+		from nodejs_mobile_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.pigowner != null">
+              and pigowner = #{queryMap.pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.short_cote_name != null">
+              and short_cote_name = #{queryMap.short_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.state != null">
+              and state = #{queryMap.state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.fileName != null">
+              and fileName = #{queryMap.fileName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.batchNumber != null">
+              and batchNumber = #{queryMap.batchNumber,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.sortNumber != null">
+              and sortNumber = #{queryMap.sortNumber,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_mobile_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.pigowner != null">
+              and pigowner = #{queryMap.pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.short_cote_name != null">
+              and short_cote_name = #{queryMap.short_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.state != null">
+              and state = #{queryMap.state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.fileName != null">
+              and fileName = #{queryMap.fileName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.batchNumber != null">
+              and batchNumber = #{queryMap.batchNumber,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.sortNumber != null">
+              and sortNumber = #{queryMap.sortNumber,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_mobile_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.pigowner != null">
+              and pigowner = #{queryMap.pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.short_cote_name != null">
+              and short_cote_name = #{queryMap.short_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.state != null">
+              and state = #{queryMap.state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.fileName != null">
+              and fileName = #{queryMap.fileName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.batchNumber != null">
+              and batchNumber = #{queryMap.batchNumber,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.sortNumber != null">
+              and sortNumber = #{queryMap.sortNumber,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_mobile_user 
+		(
+		id,
+		pigowner,
+		mobile,
+		cote_id,
+		cote_name,
+		short_cote_name,
+		state,
+		fileName,
+		batchNumber,
+		sortNumber,
+		create_time,
+		modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.id,jdbcType=VARCHAR},
+			    #{item.pigowner,jdbcType=VARCHAR},
+			    #{item.mobile,jdbcType=VARCHAR},
+			    #{item.cote_id,jdbcType=VARCHAR},
+			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.short_cote_name,jdbcType=VARCHAR},
+			    #{item.state,jdbcType=VARCHAR},
+			    #{item.fileName,jdbcType=VARCHAR},
+			    #{item.batchNumber,jdbcType=BIGINT},
+			    #{item.sortNumber,jdbcType=INTEGER},
+			    #{item.create_time,jdbcType=TIMESTAMP},
+			    #{item.modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_mobile_user 
+			<set>
+                <if test="item.pigowner != null">
+                  and pigowner = #{item.pigowner,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.mobile != null">
+                  and mobile = #{item.mobile,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_id != null">
+                  and cote_id = #{item.cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_name != null">
+                  and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.short_cote_name != null">
+                  and short_cote_name = #{item.short_cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.state != null">
+                  and state = #{item.state,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.fileName != null">
+                  and fileName = #{item.fileName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.batchNumber != null">
+                  and batchNumber = #{item.batchNumber,jdbcType=BIGINT}			
+			     </if>		
+                <if test="item.sortNumber != null">
+                  and sortNumber = #{item.sortNumber,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.create_time != null">
+                  and create_time = #{item.create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.modify_time != null">
+                  and modify_time = #{item.modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      id=#{item.id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

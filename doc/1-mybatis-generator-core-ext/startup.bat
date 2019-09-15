@@ -1,0 +1,1 @@
+start java -Xms512m -Xmx1024m -Dfile.encoding=UTF-8 -jar mybatis-generator-core-ext-0.0.1-SNAPSHOT.jar

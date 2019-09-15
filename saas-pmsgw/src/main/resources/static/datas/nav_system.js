@@ -38,11 +38,17 @@ var navs = [
 		}
 	,
 	 {
-		"title": "上传集鸽清单",
-		"icon": "&#xe63c;",
-		"href": "/nodejsPigeonCollection/list.html?type=2"
-	}
-	,
+			"title": "上传集鸽清单",
+			"icon": "&#xe63c;",
+			"href": "/nodejsPigeonCollection/list.html?type=2"
+		}
+		,
+		{
+			"title": "上传公棚电话清单",
+			"icon": "&#xe63c;",
+			"href": "/nodejsMobileUser/list.html"
+		}
+		,
 	 {
 		"title": "指定赛管理",
 		"icon": "&#xe63c;",

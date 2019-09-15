@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+   <!--  <classPathEntry    location="mysql-connector-java-5.1.26.jar"/> -->
+    <!-- <properties resource="application.properties"/> -->
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+   
+    <plugin type="com.zichan100.biz.ExtImplPlugin"></plugin>
+		<!--去除注释  -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+       
+	    <!-- jdbc连接信息 -->
+         <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+		connectionURL="jdbc:mysql://zc100testo.mysql.rds.aliyuncs.com:3306/dds_dev?characterEncoding=UTF-8" userId="dbowner" password="!!!abc123">
+        </jdbcConnection>
+		
+     <!-- 生成bean对象 --> 
+	    <!-- targetProject:指定目标项目路径，使用的是文件系统的绝对路径。 --> 
+        <javaModelGenerator targetPackage="com.zichan100.biz.pojo" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+		
+		<!-- 生成用于查询的 xml文件 对象 -->  
+        <sqlMapGenerator targetPackage="com.zichan100.biz.mapper.base" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="false"/>
+            <property name="rootClass" value="BaseDaoInf"/>
+        </sqlMapGenerator>
+        
+		<!-- 生成DAO的类文件以及配置文件 java类型 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zichan100.biz.mapper.base" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+	
+		
+		<table tableName="biz_channel_flow" domainObjectName="BizChannelFlow" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_channel_flow_charging" domainObjectName="BizChannelFlowCharging" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_channel_info" domainObjectName="BizChannelInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_channel_info_history" domainObjectName="BizChannelIinfoHistory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_merchant_assign" domainObjectName="BizMerchantAssign" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_merchant_assign_stat" domainObjectName="BizMerchantAssignStat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_merchant_info" domainObjectName="BizMerchantInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_merchant_purchase_history" domainObjectName="BizMerchantPurchaseHistory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_merchant_recharge_history" domainObjectName="BizMerchantRechargeHistory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_register_info" domainObjectName="BizRegisterInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_third_log" domainObjectName="BizThirdLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		<table tableName="biz_verify_code" domainObjectName="BizVerifyCode" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 命名规范：使用驼峰命名法 -->
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		
+    </context>
+</generatorConfiguration>
