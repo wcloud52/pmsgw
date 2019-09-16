@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsCustomerMessagePigownerExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsCustomerMessagePigownerMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsCustomerMessagePigownerMapper.Base_Column_List" />
+		from nodejs_customer_message_pigowner
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.openid_coteid != null">
+              and openid_coteid = #{queryMap.openid_coteid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_id != null">
+              and game_cote_id = #{queryMap.game_cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_name != null">
+              and game_cote_name = #{queryMap.game_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_state != null">
+              and game_cote_state = #{queryMap.game_cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_pigowner != null">
+              and game_pigowner = #{queryMap.game_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_rank_top != null">
+              and game_rank_top = #{queryMap.game_rank_top,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_master_id_count != null">
+              and game_master_id_count = #{queryMap.game_master_id_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_ringnum_count != null">
+              and game_ringnum_count = #{queryMap.game_ringnum_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_receiver_openid != null">
+              and game_receiver_openid = #{queryMap.game_receiver_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_nickname != null">
+              and game_receiver_nickname = #{queryMap.game_receiver_nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_headimgurl != null">
+              and game_receiver_headimgurl = #{queryMap.game_receiver_headimgurl,jdbcType=VARCHAR }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_customer_message_pigowner
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.openid_coteid != null">
+              and openid_coteid = #{queryMap.openid_coteid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_id != null">
+              and game_cote_id = #{queryMap.game_cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_name != null">
+              and game_cote_name = #{queryMap.game_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_state != null">
+              and game_cote_state = #{queryMap.game_cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_pigowner != null">
+              and game_pigowner = #{queryMap.game_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_rank_top != null">
+              and game_rank_top = #{queryMap.game_rank_top,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_master_id_count != null">
+              and game_master_id_count = #{queryMap.game_master_id_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_ringnum_count != null">
+              and game_ringnum_count = #{queryMap.game_ringnum_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_receiver_openid != null">
+              and game_receiver_openid = #{queryMap.game_receiver_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_nickname != null">
+              and game_receiver_nickname = #{queryMap.game_receiver_nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_headimgurl != null">
+              and game_receiver_headimgurl = #{queryMap.game_receiver_headimgurl,jdbcType=VARCHAR }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_customer_message_pigowner
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.openid_coteid != null">
+              and openid_coteid = #{queryMap.openid_coteid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_id != null">
+              and game_cote_id = #{queryMap.game_cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_name != null">
+              and game_cote_name = #{queryMap.game_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_state != null">
+              and game_cote_state = #{queryMap.game_cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_pigowner != null">
+              and game_pigowner = #{queryMap.game_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_rank_top != null">
+              and game_rank_top = #{queryMap.game_rank_top,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_master_id_count != null">
+              and game_master_id_count = #{queryMap.game_master_id_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_ringnum_count != null">
+              and game_ringnum_count = #{queryMap.game_ringnum_count,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_receiver_openid != null">
+              and game_receiver_openid = #{queryMap.game_receiver_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_nickname != null">
+              and game_receiver_nickname = #{queryMap.game_receiver_nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_headimgurl != null">
+              and game_receiver_headimgurl = #{queryMap.game_receiver_headimgurl,jdbcType=VARCHAR }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_customer_message_pigowner 
+		(
+		openid_coteid,
+		game_cote_id,
+		game_cote_name,
+		game_cote_state,
+		game_pigowner,
+		game_rank_top,
+		game_master_id_count,
+		game_ringnum_count,
+		game_receiver_openid,
+		game_receiver_nickname,
+		game_receiver_headimgurl
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.openid_coteid,jdbcType=VARCHAR},
+			    #{item.game_cote_id,jdbcType=VARCHAR},
+			    #{item.game_cote_name,jdbcType=VARCHAR},
+			    #{item.game_cote_state,jdbcType=VARCHAR},
+			    #{item.game_pigowner,jdbcType=VARCHAR},
+			    #{item.game_rank_top,jdbcType=INTEGER},
+			    #{item.game_master_id_count,jdbcType=INTEGER},
+			    #{item.game_ringnum_count,jdbcType=INTEGER},
+			    #{item.game_receiver_openid,jdbcType=VARCHAR},
+			    #{item.game_receiver_nickname,jdbcType=VARCHAR},
+			    #{item.game_receiver_headimgurl,jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_customer_message_pigowner 
+			<set>
+                <if test="item.game_cote_id != null">
+                  and game_cote_id = #{item.game_cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cote_name != null">
+                  and game_cote_name = #{item.game_cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cote_state != null">
+                  and game_cote_state = #{item.game_cote_state,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_pigowner != null">
+                  and game_pigowner = #{item.game_pigowner,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_rank_top != null">
+                  and game_rank_top = #{item.game_rank_top,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.game_master_id_count != null">
+                  and game_master_id_count = #{item.game_master_id_count,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.game_ringnum_count != null">
+                  and game_ringnum_count = #{item.game_ringnum_count,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.game_receiver_openid != null">
+                  and game_receiver_openid = #{item.game_receiver_openid,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_receiver_nickname != null">
+                  and game_receiver_nickname = #{item.game_receiver_nickname,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_receiver_headimgurl != null">
+                  and game_receiver_headimgurl = #{item.game_receiver_headimgurl,jdbcType=VARCHAR}			
+			     </if>		
+			</set>
+			where
+		      openid_coteid=#{item.openid_coteid,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

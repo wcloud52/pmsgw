@@ -1,0 +1,111 @@
+<style type="text/css">
+    .rule-table{
+        display: table-cell;
+        border:0px;
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 0px
+    }
+    .rule-table td{
+        display: inline-block;
+        width:60px;
+        height: 25px;
+        padding: 5px;
+    }
+    .rule-table input{
+        display: inline-block;
+        width:43px;
+        margin:0px;
+        padding: 0px;
+    }
+    .rule-table .desc{
+        width: 100px;
+    }
+    .rule-table .border-top{
+        border-top:1px solid black;
+    }
+    .rule-table .border-bottom{
+        border-bottom:1px solid black;
+    }
+    .rule-table .border-left{
+        border-left:1px solid black;
+    }
+    .rule-table .border-right{
+        border-right:1px solid black;
+    }
+
+</style>
+<!--普指页面-->
+<div style="margin: 15px;">
+    <form class="layui-form">
+        <table id="rule-2"  class="rule-table">
+            <tr>
+                <td class="desc border-top border-left"></td>
+                <td class="border-top">1</td>
+                <td class="border-top">2</td>
+                <td class="border-top">3</td>
+                <td class="border-top">4</td>
+                <td class="border-top">5</td>
+                <td class="border-top">6</td>
+                <td class="border-top" style="width: 61px;"></td>
+                <td class="border-top"></td>
+                <td class="border-top border-right"></td>
+            </tr>
+            <tr>
+                <td class="desc border-left border-bottom">档次金额</td>
+                <td class="border-bottom"><input type="text" name="grade_money"></td>
+                <td class="border-bottom"><input type="text" name="grade_money"></td>
+                <td class="border-bottom"><input type="text" name="grade_money"></td>
+                <td class="border-bottom"><input type="text" name="grade_money"></td>
+                <td class="border-bottom"><input type="text" name="grade_money"></td>
+                <td class="border-bottom"><input type="text" name="grade_money"></td>
+                <td class="border-bottom" style="width: 61px;"></td>
+                <td class="border-bottom"></td>
+                <td class="border-bottom border-right"></td>
+            </tr>
+            <tr>
+                <td class="desc border-left"></td>
+                <td>起始名次</td>
+                <td>-</td>
+                <td class="border-right">结束名次</td>
+                <td class="border-right" colspan="6" style="width:410px;">奖金分配</td>
+            </tr>
+            <tr>
+                <td class="desc border-left">第一组</td>
+                <td><input type="text" name="start_rank"></td>
+                <td>-</td>
+                <td class="border-right"><input type="text" name="end_rank"></td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td class="border-right"><input type="text" name="reward">%</td>
+            </tr>
+            <tr>
+                <td class="desc border-left">第二组</td>
+                <td><input type="text" name="start_rank"></td>
+                <td>-</td>
+                <td class="border-right"><input type="text" name="end_rank"></td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td><input type="text" name="reward">%</td>
+                <td class="border-right"><input type="text" name="reward">%</td>
+            </tr>
+            <tr>
+                <td class="desc border-left border-bottom">第三组</td>
+                <td class="border-bottom"><input type="text" name="start_rank"></td>
+                <td class="border-bottom">-</td>
+                <td class="border-bottom border-right">-</td>
+                <td class="border-bottom"><input type="text" name="reward">%</td>
+                <td class="border-bottom"><input type="text" name="reward">%</td>
+                <td class="border-bottom"><input type="text" name="reward">%</td>
+                <td class="border-bottom"><input type="text" name="reward">%</td>
+                <td class="border-bottom"><input type="text" name="reward">%</td>
+                <td class="border-bottom border-right"><input type="text" name="reward">%</td>
+            </tr>
+        </table>
+    </form>
+</div>

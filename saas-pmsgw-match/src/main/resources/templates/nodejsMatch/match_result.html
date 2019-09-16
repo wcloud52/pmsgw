@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>指定赛管理</title>
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/table.css"/>
+    <link rel="stylesheet" href="../css/formSelects-v4.css"/>
+    <style type="text/css">
+        .xl1053130
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:red;
+            font-size:14.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:宋体;
+            mso-generic-font-family:auto;
+            mso-font-charset:134;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl1063130 {
+            padding-top: 1px;
+            padding-right: 1px;
+            padding-left: 1px;
+            mso-ignore: padding;
+            color: windowtext;
+            font-size: 14.0pt;
+            font-weight: 700;
+            font-style: normal;
+            text-decoration: none;
+            font-family: 宋体;
+            mso-generic-font-family: auto;
+            mso-font-charset: 134;
+            mso-number-format: General;
+            text-align: center;
+            vertical-align: bottom;
+            border: 1.0pt solid #C00000;
+            mso-background-source: auto;
+            mso-pattern: auto;
+            white-space: nowrap;
+        }
+        .xl1073130 {
+            padding-top: 1px;
+            padding-right: 1px;
+            padding-left: 1px;
+            mso-ignore: padding;
+            color: windowtext;
+            font-size: 14.0pt;
+            font-weight: 700;
+            font-style: normal;
+            text-decoration: none;
+            font-family: 宋体;
+            mso-generic-font-family: auto;
+            mso-font-charset: 134;
+            mso-number-format: "\@";
+            text-align: center;
+            vertical-align: middle;
+            border: 1.0pt solid #C00000;
+            mso-background-source: auto;
+            mso-pattern: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<div class="admin-main">
+    <table border=0 cellpadding=0 cellspacing=0 width=880 class=xl1053130
+           style='border-collapse:collapse;table-layout:fixed;width:661pt'>
+        <colgroup>
+        <col class=xl1053130 width=54 style='mso-width-source:userset;mso-width-alt:1728;width:41pt'>
+        <col class=xl1053130 width=95 style='mso-width-source:userset;mso-width-alt:3040;width:71pt'>
+        <col class=xl1053130 width=116 style='mso-width-source:userset;mso-width-alt:3712;width:87pt'>
+        <col class=xl1053130 width=285 style='mso-width-source:userset;mso-width-alt:9120;width:214pt'>
+        <col class=xl1053130 width=190 style='mso-width-source:userset;mso-width-alt:6080;width:143pt'>
+        <col class=xl1053130 width=140 style='mso-width-source:userset;mso-width-alt:4480;width:105pt'>
+        </colgroup>
+        <tr height=36 style='height:27.0pt'>
+            <td colspan=6 height=36 class=xl1083130 width=880 style='height:27.0pt;width:661pt'>
+                ${match.match_title}
+            </td>
+        </tr>
+        <#list list as res>
+        <tr height=26 style='height:19.5pt'>
+            <td colspan=6 height=26 class=xl1053130 style='height:19.5pt'>
+                ${res.name}
+            </td>
+        </tr>
+        <tr height=26 style='height:19.5pt'>
+            <td height=26 class=xl1063130 style='height:19.5pt'>名次</td>
+            <td class=xl1073130 style='border-left:none'>比赛名次</td>
+            <td class=xl1073130 style='border-left:none'>鸽主编号</td>
+            <td class=xl1073130 style='border-left:none'>鸽主名称</td>
+            <td class=xl1073130 style='border-left:none'>足环号</td>
+            <td class=xl1063130 style='border-left:none'>奖金</td>
+        </tr>
+        <#list res.list as list>
+            <tr height=26 style='height:19.5pt'>
+                <td height=26 class=xl1063130 style='height:19.5pt;border-top:none'>${list_index+1}</td>
+                <td class=xl1073130 style='border-top:none;border-left:none'>${list.rank}</td>
+                <td class=xl1073130 style='border-top:none;border-left:none'>${list.member_code}</td>
+                <td class=xl1073130 style='border-top:none;border-left:none'>${list.member_name}</td>
+                <td class=xl1073130 style='border-top:none;border-left:none'>${list.pigeon_code}</td>
+                <td class=xl1063130 style='border-top:none;border-left:none'>${list.reward}</td>
+            </tr>
+        </#list>
+        </#list>
+    </table>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+
+<div style="margin: 15px;">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">标题</label>
+            <div class="layui-input-block" style="margin-left: 230px">
+                <input id="match_id" name="match_id" type="hidden" value="${item.match_id?if_exists }"/>
+                <input name="match_title" id="match_title" type="text" class="layui-input" value="${item.match_title?if_exists }">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">俱乐部/公棚名称</label>
+            <div class="layui-input-block" style="margin-left: 230px">
+                <input name="cote_id" id="cote_id" type="hidden" class="layui-input" value="${item.cote_id?if_exists }">
+                <input name="cote_name" id="cote_name" type="text" class="layui-input" value="${item.cote_name?if_exists }">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">内容</label>
+            <div class="layui-input-block" style="margin-left: 230px">
+                <textarea name="match_desc" class="layui-textarea">${item.match_desc?if_exists }</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">上传集鸽信息</label>
+            <div class="layui-input-block" style="margin-left: 230px">
+                <button type="button" class="layui-btn layui-btn-primary" id="btnUpload"><i class="layui-icon"></i>只允许Excel文件</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">指定规则</label>
+            <div class="layui-input-block" style="margin-left: 230px">
+                <select name="rule" id="ruleSelect" xm-select="ruleSelect" xm-select-show-count="11" xm-select-direction="up">
+                    <option value="1" data-rule-temp="1">一把抓</option>
+                    <option value="2" data-rule-temp="2">普指</option>
+                    <option value="3" data-rule-temp="3">11取1</option>
+                    <option value="4" data-rule-temp="3">22取1</option>
+                    <option value="5" data-rule-temp="3">33取1</option>
+                    <option value="6" data-rule-temp="3">55取1</option>
+                    <option value="7" data-rule-temp="3">110取1</option>
+                    <option value="8" data-rule-temp="5">手机</option>
+                    <option value="9" data-rule-temp="6">汽车</option>
+                    <option value="10" data-rule-temp="1">大家乐</option>
+                    <option value="11" data-rule-temp="4">幸运</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 230px">
+            <table class="layui-hide" id="ruleTable" lay-filter="ruleTableTest"></table>
+            </div>
+        </div>
+        <input type="hidden" name="rule">
+        <button lay-filter="edit" lay-submit style="display: none;" id="rule-submit"></button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    var _match_rule='${item.rule?if_exists }';
+    if (_match_rule==''){
+        _match_rule='[]'
+    }
+
+    var match_rule=JSON.parse(_match_rule);
+</script>
+
+<script type="text/javascript" src="../plugins/sheetjs/xlsx.full.min.js"></script>
+<script type="text/javascript"
+        src="../pagejs/nodejsMatch/edit.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+<script type="text/html" id="matchEditBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>

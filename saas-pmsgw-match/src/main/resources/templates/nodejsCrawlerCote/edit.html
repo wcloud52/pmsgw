@@ -1,0 +1,45 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">公棚Id</label>
+			<div class="layui-input-block" style="margin-left:230px">
+			 <input name="cote_id"  type="text"  class="layui-input" value="${item.cote_id?if_exists }">
+			</div>
+		</div>
+		
+	<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">公棚名称</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<input name="cote_name"  type="text"  class="layui-input" value="${item.cote_name?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">来源</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<select name="cote_website" lay-search="" lay-verify="required">
+							<option value="pmsgw_pigeoncn"    <#if (item.cote_website!"") == "pmsgw_pigeoncn">selected="selected"</#if> >中国鸽网pmsgw_pigeoncn</option>
+							<option value="pmsgw_aj52zxcom"   <#if (item.cote_website!"") == "pmsgw_aj52zxcom">selected="selected"</#if> >杭州安捷pmsgw_aj52zxcom</option>
+							<option value="pmsgw_086019com"   <#if (item.cote_website!"") == "pmsgw_086019com">selected="selected"</#if> >竞翔网pmsgw_086019com</option>
+							<option value="pmsgw_gexingwang"  <#if (item.cote_website!"") == "pmsgw_gexingwang">selected="selected"</#if>>鸽星网pmsgw_gexingwang</option>
+							<option value="pmsgw_benzinglive" <#if (item.cote_website!"") == "pmsgw_benzinglive">selected="selected"</#if>>隆飞尔pmsgw_benzinglive</option>
+							<option value="pmsgw_lxcom"       <#if (item.cote_website!"") == "pmsgw_lxcom">selected="selected"</#if> >山东龙畅pmsgw_lxcom</option>
+							<option value="pmsgw_null"        <#if (item.cote_website!"") == "pmsgw_null">selected="selected"</#if> >未知</option>
+						</select>
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">状态</label>
+			<div class="layui-input-block" style="margin-left:230px">			
+				<select name="cote_state" lay-verify="required">
+					<option value="0" <#if (item.cote_state!"") == "0">selected="selected"</#if>>禁用0</option>
+                    <option value="1" <#if (item.cote_state!"") == "1">selected="selected"</#if>>启用1</option>             
+				</select>
+				
+			</div>
+		</div>
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+	

@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsCustomerMessagePigownerDetailExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsCustomerMessagePigownerDetailMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsCustomerMessagePigownerDetailMapper.Base_Column_List" />
+		from nodejs_customer_message_pigowner_detail
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.message_id != null">
+              and message_id = #{queryMap.message_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderId != null">
+              and message_senderId = #{queryMap.message_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderName != null">
+              and message_senderName = #{queryMap.message_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverId != null">
+              and message_receiverId = #{queryMap.message_receiverId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverName != null">
+              and message_receiverName = #{queryMap.message_receiverName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_sendTime != null">
+              and message_sendTime = #{queryMap.message_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_type != null">
+              and message_type = #{queryMap.message_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_title != null">
+              and message_title = #{queryMap.message_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_text != null">
+              and message_text = #{queryMap.message_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_status != null">
+              and message_status = #{queryMap.message_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.message_create_time != null">
+              and message_create_time = #{queryMap.message_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_modify_time != null">
+              and message_modify_time = #{queryMap.message_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.game_detail_id != null">
+              and game_detail_id = #{queryMap.game_detail_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_id != null">
+              and game_cote_id = #{queryMap.game_cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_name != null">
+              and game_cote_name = #{queryMap.game_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_state != null">
+              and game_cote_state = #{queryMap.game_cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_id != null">
+              and game_master_id = #{queryMap.game_master_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_text != null">
+              and game_master_text = #{queryMap.game_master_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_href != null">
+              and game_master_href = #{queryMap.game_master_href,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_type != null">
+              and game_master_type = #{queryMap.game_master_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_website != null">
+              and game_master_website = #{queryMap.game_master_website,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_detail_page != null">
+              and game_detail_page = #{queryMap.game_detail_page,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_detail_page_index != null">
+              and game_detail_page_index = #{queryMap.game_detail_page_index,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_detail_state != null">
+              and game_detail_state = #{queryMap.game_detail_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_distence != null">
+              and game_distence = #{queryMap.game_distence,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_ringnum != null">
+              and game_ringnum = #{queryMap.game_ringnum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_pigowner != null">
+              and game_pigowner = #{queryMap.game_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cometime != null">
+              and game_cometime = #{queryMap.game_cometime,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cotenum != null">
+              and game_cotenum = #{queryMap.game_cotenum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_speed != null">
+              and game_speed = #{queryMap.game_speed,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_rank != null">
+              and game_rank = #{queryMap.game_rank,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_receiver_openid != null">
+              and game_receiver_openid = #{queryMap.game_receiver_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_nickname != null">
+              and game_receiver_nickname = #{queryMap.game_receiver_nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_headimgurl != null">
+              and game_receiver_headimgurl = #{queryMap.game_receiver_headimgurl,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_create_time != null">
+              and game_create_time = #{queryMap.game_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.game_modify_time != null">
+              and game_modify_time = #{queryMap.game_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_customer_message_pigowner_detail
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.message_id != null">
+              and message_id = #{queryMap.message_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderId != null">
+              and message_senderId = #{queryMap.message_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderName != null">
+              and message_senderName = #{queryMap.message_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverId != null">
+              and message_receiverId = #{queryMap.message_receiverId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverName != null">
+              and message_receiverName = #{queryMap.message_receiverName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_sendTime != null">
+              and message_sendTime = #{queryMap.message_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_type != null">
+              and message_type = #{queryMap.message_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_title != null">
+              and message_title = #{queryMap.message_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_text != null">
+              and message_text = #{queryMap.message_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_status != null">
+              and message_status = #{queryMap.message_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.message_create_time != null">
+              and message_create_time = #{queryMap.message_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_modify_time != null">
+              and message_modify_time = #{queryMap.message_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.game_detail_id != null">
+              and game_detail_id = #{queryMap.game_detail_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_id != null">
+              and game_cote_id = #{queryMap.game_cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_name != null">
+              and game_cote_name = #{queryMap.game_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_state != null">
+              and game_cote_state = #{queryMap.game_cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_id != null">
+              and game_master_id = #{queryMap.game_master_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_text != null">
+              and game_master_text = #{queryMap.game_master_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_href != null">
+              and game_master_href = #{queryMap.game_master_href,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_type != null">
+              and game_master_type = #{queryMap.game_master_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_website != null">
+              and game_master_website = #{queryMap.game_master_website,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_detail_page != null">
+              and game_detail_page = #{queryMap.game_detail_page,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_detail_page_index != null">
+              and game_detail_page_index = #{queryMap.game_detail_page_index,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_detail_state != null">
+              and game_detail_state = #{queryMap.game_detail_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_distence != null">
+              and game_distence = #{queryMap.game_distence,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_ringnum != null">
+              and game_ringnum = #{queryMap.game_ringnum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_pigowner != null">
+              and game_pigowner = #{queryMap.game_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cometime != null">
+              and game_cometime = #{queryMap.game_cometime,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cotenum != null">
+              and game_cotenum = #{queryMap.game_cotenum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_speed != null">
+              and game_speed = #{queryMap.game_speed,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_rank != null">
+              and game_rank = #{queryMap.game_rank,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_receiver_openid != null">
+              and game_receiver_openid = #{queryMap.game_receiver_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_nickname != null">
+              and game_receiver_nickname = #{queryMap.game_receiver_nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_headimgurl != null">
+              and game_receiver_headimgurl = #{queryMap.game_receiver_headimgurl,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_create_time != null">
+              and game_create_time = #{queryMap.game_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.game_modify_time != null">
+              and game_modify_time = #{queryMap.game_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_customer_message_pigowner_detail
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.message_id != null">
+              and message_id = #{queryMap.message_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderId != null">
+              and message_senderId = #{queryMap.message_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_senderName != null">
+              and message_senderName = #{queryMap.message_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverId != null">
+              and message_receiverId = #{queryMap.message_receiverId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_receiverName != null">
+              and message_receiverName = #{queryMap.message_receiverName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_sendTime != null">
+              and message_sendTime = #{queryMap.message_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_type != null">
+              and message_type = #{queryMap.message_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_title != null">
+              and message_title = #{queryMap.message_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_text != null">
+              and message_text = #{queryMap.message_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.message_status != null">
+              and message_status = #{queryMap.message_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.message_create_time != null">
+              and message_create_time = #{queryMap.message_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.message_modify_time != null">
+              and message_modify_time = #{queryMap.message_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.game_detail_id != null">
+              and game_detail_id = #{queryMap.game_detail_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_id != null">
+              and game_cote_id = #{queryMap.game_cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_name != null">
+              and game_cote_name = #{queryMap.game_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cote_state != null">
+              and game_cote_state = #{queryMap.game_cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_id != null">
+              and game_master_id = #{queryMap.game_master_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_text != null">
+              and game_master_text = #{queryMap.game_master_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_href != null">
+              and game_master_href = #{queryMap.game_master_href,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_type != null">
+              and game_master_type = #{queryMap.game_master_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_master_website != null">
+              and game_master_website = #{queryMap.game_master_website,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_detail_page != null">
+              and game_detail_page = #{queryMap.game_detail_page,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_detail_page_index != null">
+              and game_detail_page_index = #{queryMap.game_detail_page_index,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_detail_state != null">
+              and game_detail_state = #{queryMap.game_detail_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_distence != null">
+              and game_distence = #{queryMap.game_distence,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_ringnum != null">
+              and game_ringnum = #{queryMap.game_ringnum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_pigowner != null">
+              and game_pigowner = #{queryMap.game_pigowner,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cometime != null">
+              and game_cometime = #{queryMap.game_cometime,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_cotenum != null">
+              and game_cotenum = #{queryMap.game_cotenum,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_speed != null">
+              and game_speed = #{queryMap.game_speed,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_rank != null">
+              and game_rank = #{queryMap.game_rank,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.game_receiver_openid != null">
+              and game_receiver_openid = #{queryMap.game_receiver_openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_nickname != null">
+              and game_receiver_nickname = #{queryMap.game_receiver_nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_receiver_headimgurl != null">
+              and game_receiver_headimgurl = #{queryMap.game_receiver_headimgurl,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.game_create_time != null">
+              and game_create_time = #{queryMap.game_create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.game_modify_time != null">
+              and game_modify_time = #{queryMap.game_modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_customer_message_pigowner_detail 
+		(
+		message_id,
+		message_senderId,
+		message_senderName,
+		message_receiverId,
+		message_receiverName,
+		message_sendTime,
+		message_type,
+		message_title,
+		message_text,
+		message_status,
+		message_create_time,
+		message_modify_time,
+		game_detail_id,
+		game_cote_id,
+		game_cote_name,
+		game_cote_state,
+		game_master_id,
+		game_master_text,
+		game_master_href,
+		game_master_type,
+		game_master_website,
+		game_detail_page,
+		game_detail_page_index,
+		game_detail_state,
+		game_distence,
+		game_ringnum,
+		game_pigowner,
+		game_cometime,
+		game_cotenum,
+		game_speed,
+		game_rank,
+		game_receiver_openid,
+		game_receiver_nickname,
+		game_receiver_headimgurl,
+		game_create_time,
+		game_modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.message_id,jdbcType=VARCHAR},
+			    #{item.message_senderId,jdbcType=VARCHAR},
+			    #{item.message_senderName,jdbcType=VARCHAR},
+			    #{item.message_receiverId,jdbcType=VARCHAR},
+			    #{item.message_receiverName,jdbcType=VARCHAR},
+			    #{item.message_sendTime,jdbcType=TIMESTAMP},
+			    #{item.message_type,jdbcType=VARCHAR},
+			    #{item.message_title,jdbcType=VARCHAR},
+			    #{item.message_text,jdbcType=VARCHAR},
+			    #{item.message_status,jdbcType=INTEGER},
+			    #{item.message_create_time,jdbcType=TIMESTAMP},
+			    #{item.message_modify_time,jdbcType=TIMESTAMP},
+			    #{item.game_detail_id,jdbcType=VARCHAR},
+			    #{item.game_cote_id,jdbcType=VARCHAR},
+			    #{item.game_cote_name,jdbcType=VARCHAR},
+			    #{item.game_cote_state,jdbcType=VARCHAR},
+			    #{item.game_master_id,jdbcType=VARCHAR},
+			    #{item.game_master_text,jdbcType=VARCHAR},
+			    #{item.game_master_href,jdbcType=VARCHAR},
+			    #{item.game_master_type,jdbcType=VARCHAR},
+			    #{item.game_master_website,jdbcType=VARCHAR},
+			    #{item.game_detail_page,jdbcType=INTEGER},
+			    #{item.game_detail_page_index,jdbcType=INTEGER},
+			    #{item.game_detail_state,jdbcType=VARCHAR},
+			    #{item.game_distence,jdbcType=VARCHAR},
+			    #{item.game_ringnum,jdbcType=VARCHAR},
+			    #{item.game_pigowner,jdbcType=VARCHAR},
+			    #{item.game_cometime,jdbcType=VARCHAR},
+			    #{item.game_cotenum,jdbcType=VARCHAR},
+			    #{item.game_speed,jdbcType=VARCHAR},
+			    #{item.game_rank,jdbcType=INTEGER},
+			    #{item.game_receiver_openid,jdbcType=VARCHAR},
+			    #{item.game_receiver_nickname,jdbcType=VARCHAR},
+			    #{item.game_receiver_headimgurl,jdbcType=VARCHAR},
+			    #{item.game_create_time,jdbcType=TIMESTAMP},
+			    #{item.game_modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_customer_message_pigowner_detail 
+			<set>
+                <if test="item.message_senderId != null">
+                  and message_senderId = #{item.message_senderId,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_senderName != null">
+                  and message_senderName = #{item.message_senderName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_receiverId != null">
+                  and message_receiverId = #{item.message_receiverId,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_receiverName != null">
+                  and message_receiverName = #{item.message_receiverName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_sendTime != null">
+                  and message_sendTime = #{item.message_sendTime,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.message_type != null">
+                  and message_type = #{item.message_type,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_title != null">
+                  and message_title = #{item.message_title,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_text != null">
+                  and message_text = #{item.message_text,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.message_status != null">
+                  and message_status = #{item.message_status,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.message_create_time != null">
+                  and message_create_time = #{item.message_create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.message_modify_time != null">
+                  and message_modify_time = #{item.message_modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.game_detail_id != null">
+                  and game_detail_id = #{item.game_detail_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cote_id != null">
+                  and game_cote_id = #{item.game_cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cote_name != null">
+                  and game_cote_name = #{item.game_cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cote_state != null">
+                  and game_cote_state = #{item.game_cote_state,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_master_id != null">
+                  and game_master_id = #{item.game_master_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_master_text != null">
+                  and game_master_text = #{item.game_master_text,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_master_href != null">
+                  and game_master_href = #{item.game_master_href,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_master_type != null">
+                  and game_master_type = #{item.game_master_type,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_master_website != null">
+                  and game_master_website = #{item.game_master_website,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_detail_page != null">
+                  and game_detail_page = #{item.game_detail_page,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.game_detail_page_index != null">
+                  and game_detail_page_index = #{item.game_detail_page_index,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.game_detail_state != null">
+                  and game_detail_state = #{item.game_detail_state,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_distence != null">
+                  and game_distence = #{item.game_distence,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_ringnum != null">
+                  and game_ringnum = #{item.game_ringnum,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_pigowner != null">
+                  and game_pigowner = #{item.game_pigowner,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cometime != null">
+                  and game_cometime = #{item.game_cometime,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_cotenum != null">
+                  and game_cotenum = #{item.game_cotenum,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_speed != null">
+                  and game_speed = #{item.game_speed,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_rank != null">
+                  and game_rank = #{item.game_rank,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.game_receiver_openid != null">
+                  and game_receiver_openid = #{item.game_receiver_openid,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_receiver_nickname != null">
+                  and game_receiver_nickname = #{item.game_receiver_nickname,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_receiver_headimgurl != null">
+                  and game_receiver_headimgurl = #{item.game_receiver_headimgurl,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.game_create_time != null">
+                  and game_create_time = #{item.game_create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.game_modify_time != null">
+                  and game_modify_time = #{item.game_modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      message_id=#{item.message_id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

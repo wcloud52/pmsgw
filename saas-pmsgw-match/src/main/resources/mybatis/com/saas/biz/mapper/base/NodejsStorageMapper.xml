@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsStorageMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsStorage">
+    <!--
+    @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="storageKey" jdbcType="VARCHAR" property="storageKey" />
+    <result column="storageName" jdbcType="VARCHAR" property="storageName" />
+    <result column="storageType" jdbcType="VARCHAR" property="storageType" />
+    <result column="storageSize" jdbcType="INTEGER" property="storageSize" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="add_time" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    id, storageKey, storageName, storageType, storageSize, modified, url, add_time, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_storage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_storage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsStorage">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_storage (id, storageKey, storageName, 
+      storageType, storageSize, modified, 
+      url, add_time, deleted
+      )
+    values (#{id,jdbcType=INTEGER}, #{storageKey,jdbcType=VARCHAR}, #{storageName,jdbcType=VARCHAR}, 
+      #{storageType,jdbcType=VARCHAR}, #{storageSize,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, 
+      #{url,jdbcType=VARCHAR}, #{add_time,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsStorage">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_storage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="storageKey != null">
+        storageKey,
+      </if>
+      <if test="storageName != null">
+        storageName,
+      </if>
+      <if test="storageType != null">
+        storageType,
+      </if>
+      <if test="storageSize != null">
+        storageSize,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="add_time != null">
+        add_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storageKey != null">
+        #{storageKey,jdbcType=VARCHAR},
+      </if>
+      <if test="storageName != null">
+        #{storageName,jdbcType=VARCHAR},
+      </if>
+      <if test="storageType != null">
+        #{storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="storageSize != null">
+        #{storageSize,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="add_time != null">
+        #{add_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsStorage">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_storage
+    <set>
+      <if test="storageKey != null">
+        storageKey = #{storageKey,jdbcType=VARCHAR},
+      </if>
+      <if test="storageName != null">
+        storageName = #{storageName,jdbcType=VARCHAR},
+      </if>
+      <if test="storageType != null">
+        storageType = #{storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="storageSize != null">
+        storageSize = #{storageSize,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="add_time != null">
+        add_time = #{add_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsStorage">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_storage
+    set storageKey = #{storageKey,jdbcType=VARCHAR},
+      storageName = #{storageName,jdbcType=VARCHAR},
+      storageType = #{storageType,jdbcType=VARCHAR},
+      storageSize = #{storageSize,jdbcType=INTEGER},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      url = #{url,jdbcType=VARCHAR},
+      add_time = #{add_time,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

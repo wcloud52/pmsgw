@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsSysUserExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsSysUserMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsSysUserMapper.Base_Column_List" />
+		from nodejs_sys_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and Id = #{queryMap.id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.loginName != null">
+              and LoginName = #{queryMap.loginName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.password != null">
+              and Password = #{queryMap.password,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.userName != null">
+              and UserName = #{queryMap.userName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.userType != null">
+              and UserType = #{queryMap.userType,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.email != null">
+              and Email = #{queryMap.email,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and Mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.status != null">
+              and Status = #{queryMap.status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.description != null">
+              and Description = #{queryMap.description,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.createdDatetime != null">
+              and CreatedDatetime = #{queryMap.createdDatetime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.updatedDatetime != null">
+              and UpdatedDatetime = #{queryMap.updatedDatetime,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_sys_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and Id = #{queryMap.id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.loginName != null">
+              and LoginName = #{queryMap.loginName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.password != null">
+              and Password = #{queryMap.password,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.userName != null">
+              and UserName = #{queryMap.userName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.userType != null">
+              and UserType = #{queryMap.userType,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.email != null">
+              and Email = #{queryMap.email,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and Mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.status != null">
+              and Status = #{queryMap.status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.description != null">
+              and Description = #{queryMap.description,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.createdDatetime != null">
+              and CreatedDatetime = #{queryMap.createdDatetime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.updatedDatetime != null">
+              and UpdatedDatetime = #{queryMap.updatedDatetime,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_sys_user
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and Id = #{queryMap.id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.loginName != null">
+              and LoginName = #{queryMap.loginName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.password != null">
+              and Password = #{queryMap.password,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.userName != null">
+              and UserName = #{queryMap.userName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.userType != null">
+              and UserType = #{queryMap.userType,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.email != null">
+              and Email = #{queryMap.email,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.mobile != null">
+              and Mobile = #{queryMap.mobile,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.status != null">
+              and Status = #{queryMap.status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.description != null">
+              and Description = #{queryMap.description,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.createdDatetime != null">
+              and CreatedDatetime = #{queryMap.createdDatetime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.updatedDatetime != null">
+              and UpdatedDatetime = #{queryMap.updatedDatetime,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_sys_user 
+		(
+		Id,
+		cote_id,
+		cote_name,
+		LoginName,
+		Password,
+		UserName,
+		UserType,
+		Email,
+		Mobile,
+		Status,
+		Description,
+		CreatedDatetime,
+		UpdatedDatetime
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.id,jdbcType=VARCHAR},
+			    #{item.cote_id,jdbcType=VARCHAR},
+			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.loginName,jdbcType=VARCHAR},
+			    #{item.password,jdbcType=VARCHAR},
+			    #{item.userName,jdbcType=VARCHAR},
+			    #{item.userType,jdbcType=VARCHAR},
+			    #{item.email,jdbcType=VARCHAR},
+			    #{item.mobile,jdbcType=VARCHAR},
+			    #{item.status,jdbcType=INTEGER},
+			    #{item.description,jdbcType=VARCHAR},
+			    #{item.createdDatetime,jdbcType=TIMESTAMP},
+			    #{item.updatedDatetime,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_sys_user 
+			<set>
+                <if test="item.cote_id != null">
+                  and cote_id = #{item.cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_name != null">
+                  and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.loginName != null">
+                  and LoginName = #{item.loginName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.password != null">
+                  and Password = #{item.password,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.userName != null">
+                  and UserName = #{item.userName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.userType != null">
+                  and UserType = #{item.userType,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.email != null">
+                  and Email = #{item.email,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.mobile != null">
+                  and Mobile = #{item.mobile,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.status != null">
+                  and Status = #{item.status,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.description != null">
+                  and Description = #{item.description,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.createdDatetime != null">
+                  and CreatedDatetime = #{item.createdDatetime,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.updatedDatetime != null">
+                  and UpdatedDatetime = #{item.updatedDatetime,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      Id=#{item.id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

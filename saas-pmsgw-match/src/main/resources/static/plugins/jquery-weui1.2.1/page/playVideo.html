@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>视频播放</title>
+
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body{
+            background-color: rgba(242, 242, 242, 1);
+            padding:0 2%;
+        }
+    </style>
+</head>
+<body>
+    <div id="browerPic" v-cloak>
+        <ul class="comHeader weui-cells">
+            <li>{{unit.utitle}}</li>
+            <li>水位计：{{unit.uwarterL}}</li>
+            <li>时间：{{unit.utime}}</li>
+            <button class="weui-btn weui-btn_primary exportBtn">导出</button>
+        </ul>
+
+        <div class="list" v-for="(item,index) in imgList">
+            <div class="weui-media-box weui-media-box_text comRadius8BgW">
+                <h4 class="weui-media-box__title">{{item.name}}</h4>
+                <div class="weui-form-preview__item textAlignR">
+                  <label class="weui-form-preview__label">{{item.imgSize}}</label>
+                  <span class="weui-form-preview__value">
+                        <button class="weui-btn weui-btn_mini weui-btn_primary" v-on:click="playVideo(item.url)">播放</button> &nbsp;&nbsp;
+                        <button  class="weui-btn weui-btn_mini weui-btn_primary">下载</button>
+                  </span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="videoWrap">
+            <i class="weui-icon-cancel closeBtn"></i>
+            <div id="videoDom">
+                
+            </div>
+        </div>
+
+    </div>
+    
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/swiper.js"></script>
+    <script type="text/javascript" src="../ckplayer/ckplayer.js" charset="utf-8"></script>
+
+    <script>
+        new Vue({
+            el:'#browerPic',
+            data:{
+                unit:{
+                    utitle:'厦门',
+                    uwarterL:'思明区',
+                    utime:"2018/08/24 10:00:00~2018/08/24 10:00:00"
+                },
+                imgList:[
+                    {
+                        url:'http://47.97.208.28:8081/stream_platform/service/app!ipcPlay.json?sysCode=wd_platform_aliyun_86&userId=0&ipcCode=wdipc201',
+                        name:'wd.mp4',
+                        imgSize:'135KB'
+                    },{
+                        url:'http://ckplayer-video.oss-cn-shanghai.aliyuncs.com/ckplayer-sample/mydream_zh_768-432.mp4',
+                        name:'mydream_zh_768-432.mp4',
+                        imgSize:'136KB'
+                    },{
+                        url:'rtmp://live.hkstv.hk.lxdns.com/live/hks',
+                        name:'rtmp.mp4',
+                        imgSize:'138KB'
+                    }
+                ],
+                browserImg:''
+            },
+            methods:{
+                playVideo:function(url){
+                    console.log(url);
+                    $('#videoWrap').show();
+
+                    $('#videoWrap .closeBtn').click(function(){
+                        $('#videoWrap').hide();
+                    });
+
+                    function playVideoFun(url){
+                        var videoObject = {
+                                container:'#videoDom',
+                                variable:'player',
+                                autoplay:true,
+                                video:url
+                            };
+                            var player=new ckplayer(videoObject);
+                    }
+                    playVideoFun(url);
+
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>滚动加载</title>
+
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+
+</head>
+<body>
+  
+    <div id="list">
+        <div class="weui-cells">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img src=""></div>
+            <div class="weui-cell__bd">
+              <p>标题文字</p>
+            </div>
+            <div class="weui-cell__ft">说明文字</div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><img src=""></div>
+            <div class="weui-cell__bd">
+              <p>标题文字</p>
+            </div>
+            <div class="weui-cell__ft">说明文字</div>
+          </div>
+        </div>
+    </div>
+
+    <div class="weui-loadmore" style="display: none;">
+      <i class="weui-loading"></i>
+      <span class="weui-loadmore__tips">正在加载</span>
+    </div>
+
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/vue.js"></script>
+
+    <script>
+        var Loadmore = {
+            init:function(){
+                this.initLoadmore();
+            },
+            initLoadmore:function(){
+                var loading = false;
+                $(document.body).infinite(100).on("infinite",function(){
+                    if(loading){
+                        return;
+                    }
+                    $('.weui-loadmore').show();
+                    loading = true;
+                    setTimeout(function(){
+                        $('#list').append('<p>我是新加载的内容</p>');
+                        loading = false;
+                        $('.weui-loadmore').hide();
+                        $(document.body).destroyInfinite();  //销毁滚动插件
+                    },1500);
+                }); //初始化加载滚动插件
+            }
+
+        };
+        $(function(){
+            Loadmore.init();
+        })
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsNewsExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsNewsMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsNewsMapper.Base_Column_List" />
+		from nodejs_news
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.news_id != null">
+              and news_id = #{queryMap.news_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_senderId != null">
+              and news_senderId = #{queryMap.news_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_senderName != null">
+              and news_senderName = #{queryMap.news_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_sendTime != null">
+              and news_sendTime = #{queryMap.news_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.news_imgHref != null">
+              and news_imgHref = #{queryMap.news_imgHref,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_href != null">
+              and news_href = #{queryMap.news_href,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_type != null">
+              and news_type = #{queryMap.news_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_title != null">
+              and news_title = #{queryMap.news_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_desc != null">
+              and news_desc = #{queryMap.news_desc,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_text != null">
+              and news_text = #{queryMap.news_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_status != null">
+              and news_status = #{queryMap.news_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_news
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.news_id != null">
+              and news_id = #{queryMap.news_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_senderId != null">
+              and news_senderId = #{queryMap.news_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_senderName != null">
+              and news_senderName = #{queryMap.news_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_sendTime != null">
+              and news_sendTime = #{queryMap.news_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.news_imgHref != null">
+              and news_imgHref = #{queryMap.news_imgHref,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_href != null">
+              and news_href = #{queryMap.news_href,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_type != null">
+              and news_type = #{queryMap.news_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_title != null">
+              and news_title = #{queryMap.news_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_desc != null">
+              and news_desc = #{queryMap.news_desc,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_text != null">
+              and news_text = #{queryMap.news_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_status != null">
+              and news_status = #{queryMap.news_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_news
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.news_id != null">
+              and news_id = #{queryMap.news_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_senderId != null">
+              and news_senderId = #{queryMap.news_senderId,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_senderName != null">
+              and news_senderName = #{queryMap.news_senderName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_sendTime != null">
+              and news_sendTime = #{queryMap.news_sendTime,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.news_imgHref != null">
+              and news_imgHref = #{queryMap.news_imgHref,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_href != null">
+              and news_href = #{queryMap.news_href,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_type != null">
+              and news_type = #{queryMap.news_type,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_title != null">
+              and news_title = #{queryMap.news_title,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_desc != null">
+              and news_desc = #{queryMap.news_desc,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_text != null">
+              and news_text = #{queryMap.news_text,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.news_status != null">
+              and news_status = #{queryMap.news_status,jdbcType=INTEGER }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_news 
+		(
+		news_id,
+		cote_id,
+		cote_name,
+		news_senderId,
+		news_senderName,
+		news_sendTime,
+		news_imgHref,
+		news_href,
+		news_type,
+		news_title,
+		news_desc,
+		news_text,
+		news_status,
+		create_time,
+		modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.news_id,jdbcType=VARCHAR},
+			    #{item.cote_id,jdbcType=VARCHAR},
+			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.news_senderId,jdbcType=VARCHAR},
+			    #{item.news_senderName,jdbcType=VARCHAR},
+			    #{item.news_sendTime,jdbcType=TIMESTAMP},
+			    #{item.news_imgHref,jdbcType=VARCHAR},
+			    #{item.news_href,jdbcType=VARCHAR},
+			    #{item.news_type,jdbcType=VARCHAR},
+			    #{item.news_title,jdbcType=VARCHAR},
+			    #{item.news_desc,jdbcType=VARCHAR},
+			    #{item.news_text,jdbcType=VARCHAR},
+			    #{item.news_status,jdbcType=INTEGER},
+			    #{item.create_time,jdbcType=TIMESTAMP},
+			    #{item.modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_news 
+			<set>
+                <if test="item.cote_id != null">
+                  and cote_id = #{item.cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_name != null">
+                  and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_senderId != null">
+                  and news_senderId = #{item.news_senderId,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_senderName != null">
+                  and news_senderName = #{item.news_senderName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_sendTime != null">
+                  and news_sendTime = #{item.news_sendTime,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.news_imgHref != null">
+                  and news_imgHref = #{item.news_imgHref,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_href != null">
+                  and news_href = #{item.news_href,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_type != null">
+                  and news_type = #{item.news_type,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_title != null">
+                  and news_title = #{item.news_title,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_desc != null">
+                  and news_desc = #{item.news_desc,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_text != null">
+                  and news_text = #{item.news_text,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.news_status != null">
+                  and news_status = #{item.news_status,jdbcType=INTEGER}			
+			     </if>		
+                <if test="item.create_time != null">
+                  and create_time = #{item.create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.modify_time != null">
+                  and modify_time = #{item.modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      news_id=#{item.news_id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
+</mapper>

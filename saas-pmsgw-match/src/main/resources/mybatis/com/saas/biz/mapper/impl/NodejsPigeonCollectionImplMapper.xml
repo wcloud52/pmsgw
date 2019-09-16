@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.impl.NodejsPigeonCollectionImplMapper">
+  <update id="flashNodejsPigeonCollection">
+    UPDATE nodejs_pigeon_collection aa,
+(
+SELECT b.bind_name,b.openid,b.nickname,b.headimgurl,a.cote_id,a.cote_name
+FROM nodejs_weixin_user_cote_extend a,weixin_user b 
+WHERE a.openid=b.openid 
+) bb
+SET aa.openid=bb.openid,aa.nickname=bb.nickname,aa.headimgurl=bb.headimgurl
+WHERE aa.cote_id=bb.cote_id 
+AND 
+aa.pigowner=bb.bind_name
+AND aa.openid IS  NULL;
+  </update>  
+  
+  <select id="selectMapByCoteId" resultType="java.util.HashMap" parameterType="Object">
+  SELECT pigowner,pigowner_mobile,GROUP_CONCAT(DISTINCT ringnum) ringnum 
+    FROM nodejs_pigeon_collection
+ WHERE  cote_id=#{cote_id,jdbcType=VARCHAR}
+ and typeId = #{typeId,jdbcType=VARCHAR }	
+ AND STATUS='0'
+  GROUP BY pigowner,pigowner_mobile
+  
+		</select>
+		 <update id="updateStatusByCoteId">
+    UPDATE nodejs_pigeon_collection 
+    set STATUS='1' 
+    WHERE  cote_id=#{cote_id,jdbcType=VARCHAR}
+    and typeId = #{typeId,jdbcType=VARCHAR }	
+  </update>  
+</mapper>

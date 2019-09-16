@@ -1,0 +1,23 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		<blockquote class="layui-elem-quote">
+	<input id="currentMasterId" name="currentMasterId" type="hidden" value="${ item.master_id?if_exists  }" />	
+	<input type="hidden" id="search_database" value="${database?if_exists }" /> 	
+<p>比赛编号：${ item.master_id?if_exists  }</p>	
+<p>比赛名称：${ item.master_text?if_exists  }</p>
+<p>俱乐部/公棚：${ item.cote_name?if_exists }</p>
+
+<p>参赛羽数：${ item.detail_crawler_total?if_exists  }</p>
+			
+			</blockquote>
+			<fieldset class="layui-elem-field">
+			<legend>成绩列表</legend>
+			<div class="layui-field-box layui-form">
+				<table id="listDetailTable" lay-filter="test" lay-skin="line"></table>
+			</div>
+		</fieldset>
+		
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+<script type="text/javascript" src="../pagejs/nodejsCrawler/detaillist.js?v=${.now?string('yyyyMMddHHmmss')}"></script>

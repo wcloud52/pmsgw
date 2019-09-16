@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://oss.sheetjs.com/js-xlsx/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>JS-XLSX Live Demo</title>
+    <script src="xlsx.full.min.js"></script>
+</head>
+<body>
+
+<input type="file" name="xlfile" id="xlf"> ... or click here to select a file
+
+<textarea id="b64data">... or paste a base64-encoding here</textarea>
+
+<script>
+
+function handleFile(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    var file;
+    var files = evt.target.files;
+
+    if (!files || files.length == 0) return;
+
+    file = files[0];
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        // pre-process data
+        var binary = "";
+        var bytes = new Uint8Array(e.target.result);
+        var length = bytes.byteLength;
+        for (var i = 0; i < length; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+
+        /* read workbook */
+        var wb = XLSX.read(binary, {type: 'binary'});
+
+        /* grab first sheet */
+        var wsname = wb.SheetNames[0];
+        var ws = wb.Sheets[wsname];
+        
+        /* generate HTML */
+        var HTML = XLSX.utils.sheet_to_html(ws);
+        var json=XLSX.utils.sheet_to_json(ws);
+        debugger;
+        console.log(HTML);
+
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+if(xlf.addEventListener) xlf.addEventListener('change', handleFile, false);
+</script>
+
+
+</body></html>

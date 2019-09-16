@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.PmsgwPigownerGameDetailExtMapper" >
+ <select id="selectListByDynamic" resultMap="com.saas.biz.mapper.base.PmsgwPigownerGameDetailMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwPigownerGameDetailMapper.Base_Column_List" />
+
+		from pmsgw_pigowner_game_detail
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from pmsgw_pigowner_game_detail
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="selectByReceiverId" resultMap="com.saas.biz.mapper.base.PmsgwPigownerGameDetailMapper.BaseResultMap"
+		parameterType="String">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwPigownerGameDetailMapper.Base_Column_List" />
+
+		from pmsgw_pigowner_game_detail
+		
+		where receiverId=#{receiverId,jdbcType=VARCHAR}
+		
+			ORDER BY masterId,rank ASC, create_time ASC
+		
+	</select>
+	
+</mapper>

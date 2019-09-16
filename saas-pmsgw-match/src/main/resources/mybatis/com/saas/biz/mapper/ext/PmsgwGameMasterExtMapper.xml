@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.PmsgwGameMasterExtMapper" >
+   <select id="selectListByDynamic" resultMap="com.saas.biz.mapper.base.PmsgwGameMasterMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwGameMasterMapper.Base_Column_List" />
+		from pmsgw_game_master
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectListByDynamicCount" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from pmsgw_game_master
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+	</select>
+	<delete id="deleteByMainhref" parameterType="java.lang.String" >
+    delete from pmsgw_game_master
+    where main_href = #{main_href,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="selectTopOne" resultMap="com.saas.biz.mapper.base.PmsgwGameMasterMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.PmsgwGameMasterMapper.Base_Column_List" />
+		from pmsgw_game_master
+		where main_text like '%${main_text}%'
+			order by create_time desc
+		
+			LIMIT 1
+		
+	</select>
+	
+	
+	<insert id="insertCrawlerMasterFormPmsgw">
+		INSERT INTO pmsgw_game_master
+            (  
+            id,main_text,
+   title_name,
+   title,
+  tq,
+   data_fengli,
+ data_fengxiang,
+ data_address,
+  jd,
+   wd,
+  qh,
+  data_time,
+  website,
+  create_time,
+  modify_time)
+SELECT
+   DATE_FORMAT(RELEASETIME,'%Y%m%d%H%i%S') id, 
+  GAMENAME main_text,
+  GAMENAME title_name,
+  GAMENAME title,
+  
+  WEATHER tq,
+  WINDPOWER data_fengli,
+  WINDDIRECTION data_fengxiang,
+  RPNAME data_address,
+  RPLONGITUDED +RPLONGITUDEM+RPLONGITUDES jd,
+  RPLATITUDED+RPLATITUDEM+RPLATITUDES wd,
+  DISTANCE qh,
+  RELEASETIME data_time,
+  'pmsgw.com' website,
+  RELEASETIME create_time,
+  RELEASETIME modify_time
+FROM server.game
+WHERE DATE_FORMAT(RELEASETIME,'%Y%m%d%H%i%S') NOT IN
+(
+SELECT id FROM pmsgw_game_master
+);
+
+INSERT INTO pmsgw_game_master
+            (  
+            id,main_text,
+   title_name,
+   title,
+  tq,
+   data_fengli,
+ data_fengxiang,
+ data_address,
+  jd,
+   wd,
+  qh,
+  data_time,
+  website,
+  create_time,
+  modify_time)
+SELECT
+   DATE_FORMAT(RELEASETIME,'%Y%m%d%H%i%S') id, 
+  `TRAININGNAME` main_text,
+  TRAININGNAME title_name,
+  TRAININGNAME title,
+  
+  '' tq,
+  '' data_fengli,
+  '' data_fengxiang,
+  `RPNUMBER` data_address,
+  '' jd,
+  '' wd,
+  DISTANCE qh,
+  RELEASETIME data_time,
+  'pmsgw.com' website,
+  RELEASETIME create_time,
+  RELEASETIME modify_time
+FROM server.`training`
+WHERE DATE_FORMAT(RELEASETIME,'%Y%m%d%H%i%S') NOT IN
+(
+SELECT id FROM pmsgw_game_master
+);
+	</insert>
+	
+	<insert id="insertCrawlerDetailFormPmsgw">
+		INSERT INTO pmsgw_game_detail
+            (
+            `id`,
+            masterId,
+rank ,
+  pigowner,
+   cotenum,
+   ringnum,
+   cometime,
+  speed,
+   raceid,
+  create_time,
+   modify_time)
+SELECT
+CONCAT(REPLACE(SPEED,'.','') ,TOTALRANK )+0  id,
+   DATE_FORMAT(RELEASETIME,'%Y%m%d%H%i%S') masterId,
+  TOTALRANK rank ,
+  OWNERNAME pigowner,
+  OWNERADDRESS cotenum,
+  LEGRINGNUMBER ringnum,
+  RETURNTIME cometime,
+  SPEED speed,
+  GROUPNUMBER raceid,
+  NOW() create_time,
+  NOW() modify_time
+FROM server.result
+WHERE CONCAT(REPLACE(SPEED,'.','') ,TOTALRANK )+0  
+NOT IN
+(
+SELECT id FROM pmsgw_game_detail
+)
+
+;
+
+INSERT INTO pmsgw_game_detail
+            (
+            `id`,
+            masterId,
+rank ,
+  pigowner,
+   cotenum,
+   ringnum,
+   cometime,
+  speed,
+   raceid,
+  create_time,
+   modify_time)
+SELECT
+   CONCAT(REPLACE(SPEED,'.','') ,RANK )+0  `id`,
+   DATE_FORMAT(RELEASETIME,'%Y%m%d%H%i%S') masterId,
+  `RANK` rank ,
+  OWNERNAME pigowner,
+  OWNERADDRESS cotenum,
+  LEGRINGNUMBER ringnum,
+  RETURNTIME cometime,
+  SPEED speed,
+  GROUPNUMBER raceid,
+  NOW() create_time,
+  NOW() modify_time
+FROM server.`trainingandpigeon`
+WHERE CONCAT(REPLACE(SPEED,'.','') ,RANK )+0  
+NOT IN
+(
+SELECT id FROM pmsgw_game_detail
+)
+
+;
+	</insert>
+	
+</mapper>

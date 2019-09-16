@@ -1,0 +1,44 @@
+<div style="margin: 15px;">
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">俱乐部/公棚</label>
+			<div class="layui-input-block" style="margin-left:230px">
+			<input id="id" name="id" type="hidden" value="${item.id?if_exists }" /> 
+			 <input id="bind_cote_id" name="bind_cote_id" type="hidden" value="${item.cote_id?if_exists }" /> 
+			    <select id="cote_id" name="cote_id" lay-verify="required" lay-search="" >
+			    <option value="">直接选择或搜索选择</option>
+				</select>
+			</div>
+		</div>
+		
+	<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">登录账户</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<input name="loginName"  type="text"  class="layui-input" value="${item.loginName?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">用户名称</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				<input name="userName"   type="text"  class="layui-input" value="${item.userName?if_exists }">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width:200px">用户类型</label>
+			<div class="layui-input-block" style="margin-left:230px">
+				
+				<select name="userType" lay-verify="required">
+					 <option value="system" <#if (item.userType!"") == "system">selected="selected"</#if>>system</option>
+                    <option value="group" <#if (item.userType!"") == "group">selected="selected"</#if>>group</option>
+                    <option value="user" <#if (item.userType!"") == "user">selected="selected"</#if>>user</option>
+                  
+				</select>
+			</div>
+		</div>
+		
+		<button lay-filter="edit" lay-submit style="display: none;"></button>
+	</form>
+</div>
+	<script type="text/javascript" src="../pagejs/nodejsSysUser/edit.js?v=${.now?string('yyyyMMddHHmmss')}"></script>

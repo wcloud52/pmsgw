@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.NodejsCustomerMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCustomerMessage" >
+    <id column="message_id" property="message_id" jdbcType="VARCHAR" />
+    <result column="message_senderId" property="message_senderId" jdbcType="VARCHAR" />
+    <result column="message_senderName" property="message_senderName" jdbcType="VARCHAR" />
+    <result column="message_receiverId" property="message_receiverId" jdbcType="VARCHAR" />
+    <result column="message_receiverName" property="message_receiverName" jdbcType="VARCHAR" />
+    <result column="message_sendTime" property="message_sendTime" jdbcType="TIMESTAMP" />
+    <result column="message_type" property="message_type" jdbcType="VARCHAR" />
+    <result column="message_title" property="message_title" jdbcType="VARCHAR" />
+    <result column="message_text" property="message_text" jdbcType="VARCHAR" />
+    <result column="message_status" property="message_status" jdbcType="INTEGER" />
+    <result column="message_create_time" property="message_create_time" jdbcType="TIMESTAMP" />
+    <result column="message_modify_time" property="message_modify_time" jdbcType="TIMESTAMP" />
+    <result column="game_detail_id" property="game_detail_id" jdbcType="VARCHAR" />
+    <result column="game_cote_id" property="game_cote_id" jdbcType="VARCHAR" />
+    <result column="game_cote_name" property="game_cote_name" jdbcType="VARCHAR" />
+    <result column="game_cote_state" property="game_cote_state" jdbcType="VARCHAR" />
+    <result column="game_master_id" property="game_master_id" jdbcType="VARCHAR" />
+    <result column="game_master_text" property="game_master_text" jdbcType="VARCHAR" />
+    <result column="game_master_href" property="game_master_href" jdbcType="VARCHAR" />
+    <result column="game_master_type" property="game_master_type" jdbcType="VARCHAR" />
+    <result column="game_master_website" property="game_master_website" jdbcType="VARCHAR" />
+    <result column="game_detail_page" property="game_detail_page" jdbcType="INTEGER" />
+    <result column="game_detail_page_index" property="game_detail_page_index" jdbcType="INTEGER" />
+    <result column="game_detail_state" property="game_detail_state" jdbcType="VARCHAR" />
+    <result column="game_distence" property="game_distence" jdbcType="VARCHAR" />
+    <result column="game_ringnum" property="game_ringnum" jdbcType="VARCHAR" />
+    <result column="game_pigowner" property="game_pigowner" jdbcType="VARCHAR" />
+    <result column="game_cometime" property="game_cometime" jdbcType="VARCHAR" />
+    <result column="game_cotenum" property="game_cotenum" jdbcType="VARCHAR" />
+    <result column="game_speed" property="game_speed" jdbcType="VARCHAR" />
+    <result column="game_rank" property="game_rank" jdbcType="INTEGER" />
+    <result column="game_receiver_openid" property="game_receiver_openid" jdbcType="VARCHAR" />
+    <result column="game_receiver_nickname" property="game_receiver_nickname" jdbcType="VARCHAR" />
+    <result column="game_receiver_headimgurl" property="game_receiver_headimgurl" jdbcType="VARCHAR" />
+    <result column="game_create_time" property="game_create_time" jdbcType="TIMESTAMP" />
+    <result column="game_modify_time" property="game_modify_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    message_id, message_senderId, message_senderName, message_receiverId, message_receiverName, 
+    message_sendTime, message_type, message_title, message_text, message_status, message_create_time, 
+    message_modify_time, game_detail_id, game_cote_id, game_cote_name, game_cote_state, 
+    game_master_id, game_master_text, game_master_href, game_master_type, game_master_website, 
+    game_detail_page, game_detail_page_index, game_detail_state, game_distence, game_ringnum, 
+    game_pigowner, game_cometime, game_cotenum, game_speed, game_rank, game_receiver_openid, 
+    game_receiver_nickname, game_receiver_headimgurl, game_create_time, game_modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_customer_message
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nodejs_customer_message
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCustomerMessage" >
+    insert into nodejs_customer_message (message_id, message_senderId, message_senderName, 
+      message_receiverId, message_receiverName, 
+      message_sendTime, message_type, message_title, 
+      message_text, message_status, message_create_time, 
+      message_modify_time, game_detail_id, 
+      game_cote_id, game_cote_name, game_cote_state, 
+      game_master_id, game_master_text, game_master_href, 
+      game_master_type, game_master_website, 
+      game_detail_page, game_detail_page_index, 
+      game_detail_state, game_distence, game_ringnum, 
+      game_pigowner, game_cometime, game_cotenum, 
+      game_speed, game_rank, game_receiver_openid, 
+      game_receiver_nickname, game_receiver_headimgurl, 
+      game_create_time, game_modify_time)
+    values (#{message_id,jdbcType=VARCHAR}, #{message_senderId,jdbcType=VARCHAR}, #{message_senderName,jdbcType=VARCHAR}, 
+      #{message_receiverId,jdbcType=VARCHAR}, #{message_receiverName,jdbcType=VARCHAR}, 
+      #{message_sendTime,jdbcType=TIMESTAMP}, #{message_type,jdbcType=VARCHAR}, #{message_title,jdbcType=VARCHAR}, 
+      #{message_text,jdbcType=VARCHAR}, #{message_status,jdbcType=INTEGER}, #{message_create_time,jdbcType=TIMESTAMP}, 
+      #{message_modify_time,jdbcType=TIMESTAMP}, #{game_detail_id,jdbcType=VARCHAR}, 
+      #{game_cote_id,jdbcType=VARCHAR}, #{game_cote_name,jdbcType=VARCHAR}, #{game_cote_state,jdbcType=VARCHAR}, 
+      #{game_master_id,jdbcType=VARCHAR}, #{game_master_text,jdbcType=VARCHAR}, #{game_master_href,jdbcType=VARCHAR}, 
+      #{game_master_type,jdbcType=VARCHAR}, #{game_master_website,jdbcType=VARCHAR}, 
+      #{game_detail_page,jdbcType=INTEGER}, #{game_detail_page_index,jdbcType=INTEGER}, 
+      #{game_detail_state,jdbcType=VARCHAR}, #{game_distence,jdbcType=VARCHAR}, #{game_ringnum,jdbcType=VARCHAR}, 
+      #{game_pigowner,jdbcType=VARCHAR}, #{game_cometime,jdbcType=VARCHAR}, #{game_cotenum,jdbcType=VARCHAR}, 
+      #{game_speed,jdbcType=VARCHAR}, #{game_rank,jdbcType=INTEGER}, #{game_receiver_openid,jdbcType=VARCHAR}, 
+      #{game_receiver_nickname,jdbcType=VARCHAR}, #{game_receiver_headimgurl,jdbcType=VARCHAR}, 
+      #{game_create_time,jdbcType=TIMESTAMP}, #{game_modify_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCustomerMessage" >
+    insert into nodejs_customer_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="message_id != null" >
+        message_id,
+      </if>
+      <if test="message_senderId != null" >
+        message_senderId,
+      </if>
+      <if test="message_senderName != null" >
+        message_senderName,
+      </if>
+      <if test="message_receiverId != null" >
+        message_receiverId,
+      </if>
+      <if test="message_receiverName != null" >
+        message_receiverName,
+      </if>
+      <if test="message_sendTime != null" >
+        message_sendTime,
+      </if>
+      <if test="message_type != null" >
+        message_type,
+      </if>
+      <if test="message_title != null" >
+        message_title,
+      </if>
+      <if test="message_text != null" >
+        message_text,
+      </if>
+      <if test="message_status != null" >
+        message_status,
+      </if>
+      <if test="message_create_time != null" >
+        message_create_time,
+      </if>
+      <if test="message_modify_time != null" >
+        message_modify_time,
+      </if>
+      <if test="game_detail_id != null" >
+        game_detail_id,
+      </if>
+      <if test="game_cote_id != null" >
+        game_cote_id,
+      </if>
+      <if test="game_cote_name != null" >
+        game_cote_name,
+      </if>
+      <if test="game_cote_state != null" >
+        game_cote_state,
+      </if>
+      <if test="game_master_id != null" >
+        game_master_id,
+      </if>
+      <if test="game_master_text != null" >
+        game_master_text,
+      </if>
+      <if test="game_master_href != null" >
+        game_master_href,
+      </if>
+      <if test="game_master_type != null" >
+        game_master_type,
+      </if>
+      <if test="game_master_website != null" >
+        game_master_website,
+      </if>
+      <if test="game_detail_page != null" >
+        game_detail_page,
+      </if>
+      <if test="game_detail_page_index != null" >
+        game_detail_page_index,
+      </if>
+      <if test="game_detail_state != null" >
+        game_detail_state,
+      </if>
+      <if test="game_distence != null" >
+        game_distence,
+      </if>
+      <if test="game_ringnum != null" >
+        game_ringnum,
+      </if>
+      <if test="game_pigowner != null" >
+        game_pigowner,
+      </if>
+      <if test="game_cometime != null" >
+        game_cometime,
+      </if>
+      <if test="game_cotenum != null" >
+        game_cotenum,
+      </if>
+      <if test="game_speed != null" >
+        game_speed,
+      </if>
+      <if test="game_rank != null" >
+        game_rank,
+      </if>
+      <if test="game_receiver_openid != null" >
+        game_receiver_openid,
+      </if>
+      <if test="game_receiver_nickname != null" >
+        game_receiver_nickname,
+      </if>
+      <if test="game_receiver_headimgurl != null" >
+        game_receiver_headimgurl,
+      </if>
+      <if test="game_create_time != null" >
+        game_create_time,
+      </if>
+      <if test="game_modify_time != null" >
+        game_modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="message_id != null" >
+        #{message_id,jdbcType=VARCHAR},
+      </if>
+      <if test="message_senderId != null" >
+        #{message_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_senderName != null" >
+        #{message_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverId != null" >
+        #{message_receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverName != null" >
+        #{message_receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_sendTime != null" >
+        #{message_sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_type != null" >
+        #{message_type,jdbcType=VARCHAR},
+      </if>
+      <if test="message_title != null" >
+        #{message_title,jdbcType=VARCHAR},
+      </if>
+      <if test="message_text != null" >
+        #{message_text,jdbcType=VARCHAR},
+      </if>
+      <if test="message_status != null" >
+        #{message_status,jdbcType=INTEGER},
+      </if>
+      <if test="message_create_time != null" >
+        #{message_create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_modify_time != null" >
+        #{message_modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="game_detail_id != null" >
+        #{game_detail_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_id != null" >
+        #{game_cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_name != null" >
+        #{game_cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_state != null" >
+        #{game_cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_id != null" >
+        #{game_master_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_text != null" >
+        #{game_master_text,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_href != null" >
+        #{game_master_href,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_type != null" >
+        #{game_master_type,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_website != null" >
+        #{game_master_website,jdbcType=VARCHAR},
+      </if>
+      <if test="game_detail_page != null" >
+        #{game_detail_page,jdbcType=INTEGER},
+      </if>
+      <if test="game_detail_page_index != null" >
+        #{game_detail_page_index,jdbcType=INTEGER},
+      </if>
+      <if test="game_detail_state != null" >
+        #{game_detail_state,jdbcType=VARCHAR},
+      </if>
+      <if test="game_distence != null" >
+        #{game_distence,jdbcType=VARCHAR},
+      </if>
+      <if test="game_ringnum != null" >
+        #{game_ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="game_pigowner != null" >
+        #{game_pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cometime != null" >
+        #{game_cometime,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cotenum != null" >
+        #{game_cotenum,jdbcType=VARCHAR},
+      </if>
+      <if test="game_speed != null" >
+        #{game_speed,jdbcType=VARCHAR},
+      </if>
+      <if test="game_rank != null" >
+        #{game_rank,jdbcType=INTEGER},
+      </if>
+      <if test="game_receiver_openid != null" >
+        #{game_receiver_openid,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_nickname != null" >
+        #{game_receiver_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_headimgurl != null" >
+        #{game_receiver_headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="game_create_time != null" >
+        #{game_create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="game_modify_time != null" >
+        #{game_modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCustomerMessage" >
+    update nodejs_customer_message
+    <set >
+      <if test="message_senderId != null" >
+        message_senderId = #{message_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_senderName != null" >
+        message_senderName = #{message_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverId != null" >
+        message_receiverId = #{message_receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverName != null" >
+        message_receiverName = #{message_receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_sendTime != null" >
+        message_sendTime = #{message_sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_type != null" >
+        message_type = #{message_type,jdbcType=VARCHAR},
+      </if>
+      <if test="message_title != null" >
+        message_title = #{message_title,jdbcType=VARCHAR},
+      </if>
+      <if test="message_text != null" >
+        message_text = #{message_text,jdbcType=VARCHAR},
+      </if>
+      <if test="message_status != null" >
+        message_status = #{message_status,jdbcType=INTEGER},
+      </if>
+      <if test="message_create_time != null" >
+        message_create_time = #{message_create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_modify_time != null" >
+        message_modify_time = #{message_modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="game_detail_id != null" >
+        game_detail_id = #{game_detail_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_id != null" >
+        game_cote_id = #{game_cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_name != null" >
+        game_cote_name = #{game_cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_state != null" >
+        game_cote_state = #{game_cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_id != null" >
+        game_master_id = #{game_master_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_text != null" >
+        game_master_text = #{game_master_text,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_href != null" >
+        game_master_href = #{game_master_href,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_type != null" >
+        game_master_type = #{game_master_type,jdbcType=VARCHAR},
+      </if>
+      <if test="game_master_website != null" >
+        game_master_website = #{game_master_website,jdbcType=VARCHAR},
+      </if>
+      <if test="game_detail_page != null" >
+        game_detail_page = #{game_detail_page,jdbcType=INTEGER},
+      </if>
+      <if test="game_detail_page_index != null" >
+        game_detail_page_index = #{game_detail_page_index,jdbcType=INTEGER},
+      </if>
+      <if test="game_detail_state != null" >
+        game_detail_state = #{game_detail_state,jdbcType=VARCHAR},
+      </if>
+      <if test="game_distence != null" >
+        game_distence = #{game_distence,jdbcType=VARCHAR},
+      </if>
+      <if test="game_ringnum != null" >
+        game_ringnum = #{game_ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="game_pigowner != null" >
+        game_pigowner = #{game_pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cometime != null" >
+        game_cometime = #{game_cometime,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cotenum != null" >
+        game_cotenum = #{game_cotenum,jdbcType=VARCHAR},
+      </if>
+      <if test="game_speed != null" >
+        game_speed = #{game_speed,jdbcType=VARCHAR},
+      </if>
+      <if test="game_rank != null" >
+        game_rank = #{game_rank,jdbcType=INTEGER},
+      </if>
+      <if test="game_receiver_openid != null" >
+        game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_nickname != null" >
+        game_receiver_nickname = #{game_receiver_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_headimgurl != null" >
+        game_receiver_headimgurl = #{game_receiver_headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="game_create_time != null" >
+        game_create_time = #{game_create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="game_modify_time != null" >
+        game_modify_time = #{game_modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCustomerMessage" >
+    update nodejs_customer_message
+    set message_senderId = #{message_senderId,jdbcType=VARCHAR},
+      message_senderName = #{message_senderName,jdbcType=VARCHAR},
+      message_receiverId = #{message_receiverId,jdbcType=VARCHAR},
+      message_receiverName = #{message_receiverName,jdbcType=VARCHAR},
+      message_sendTime = #{message_sendTime,jdbcType=TIMESTAMP},
+      message_type = #{message_type,jdbcType=VARCHAR},
+      message_title = #{message_title,jdbcType=VARCHAR},
+      message_text = #{message_text,jdbcType=VARCHAR},
+      message_status = #{message_status,jdbcType=INTEGER},
+      message_create_time = #{message_create_time,jdbcType=TIMESTAMP},
+      message_modify_time = #{message_modify_time,jdbcType=TIMESTAMP},
+      game_detail_id = #{game_detail_id,jdbcType=VARCHAR},
+      game_cote_id = #{game_cote_id,jdbcType=VARCHAR},
+      game_cote_name = #{game_cote_name,jdbcType=VARCHAR},
+      game_cote_state = #{game_cote_state,jdbcType=VARCHAR},
+      game_master_id = #{game_master_id,jdbcType=VARCHAR},
+      game_master_text = #{game_master_text,jdbcType=VARCHAR},
+      game_master_href = #{game_master_href,jdbcType=VARCHAR},
+      game_master_type = #{game_master_type,jdbcType=VARCHAR},
+      game_master_website = #{game_master_website,jdbcType=VARCHAR},
+      game_detail_page = #{game_detail_page,jdbcType=INTEGER},
+      game_detail_page_index = #{game_detail_page_index,jdbcType=INTEGER},
+      game_detail_state = #{game_detail_state,jdbcType=VARCHAR},
+      game_distence = #{game_distence,jdbcType=VARCHAR},
+      game_ringnum = #{game_ringnum,jdbcType=VARCHAR},
+      game_pigowner = #{game_pigowner,jdbcType=VARCHAR},
+      game_cometime = #{game_cometime,jdbcType=VARCHAR},
+      game_cotenum = #{game_cotenum,jdbcType=VARCHAR},
+      game_speed = #{game_speed,jdbcType=VARCHAR},
+      game_rank = #{game_rank,jdbcType=INTEGER},
+      game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR},
+      game_receiver_nickname = #{game_receiver_nickname,jdbcType=VARCHAR},
+      game_receiver_headimgurl = #{game_receiver_headimgurl,jdbcType=VARCHAR},
+      game_create_time = #{game_create_time,jdbcType=TIMESTAMP},
+      game_modify_time = #{game_modify_time,jdbcType=TIMESTAMP}
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

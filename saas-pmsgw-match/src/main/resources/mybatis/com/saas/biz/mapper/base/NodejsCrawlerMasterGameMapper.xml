@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCrawlerMasterGame" >
+    <id column="master_id" property="master_id" jdbcType="VARCHAR" />
+    <result column="cote_id" property="cote_id" jdbcType="VARCHAR" />
+    <result column="cote_name" property="cote_name" jdbcType="VARCHAR" />
+    <result column="cote_state" property="cote_state" jdbcType="VARCHAR" />
+    <result column="master_text" property="master_text" jdbcType="VARCHAR" />
+    <result column="master_href" property="master_href" jdbcType="VARCHAR" />
+    <result column="master_date" property="master_date" jdbcType="VARCHAR" />
+    <result column="master_type" property="master_type" jdbcType="VARCHAR" />
+    <result column="master_website" property="master_website" jdbcType="VARCHAR" />
+    <result column="detail_href" property="detail_href" jdbcType="VARCHAR" />
+    <result column="detail_crawler_total" property="detail_crawler_total" jdbcType="VARCHAR" />
+    <result column="detail_crawler_href" property="detail_crawler_href" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    master_id, cote_id, cote_name, cote_state, master_text, master_href, master_date, 
+    master_type, master_website, detail_href, detail_crawler_total, detail_crawler_href, 
+    create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_crawler_master_game
+    where master_id = #{master_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nodejs_crawler_master_game
+    where master_id = #{master_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCrawlerMasterGame" >
+    insert into nodejs_crawler_master_game (master_id, cote_id, cote_name, 
+      cote_state, master_text, master_href, 
+      master_date, master_type, master_website, 
+      detail_href, detail_crawler_total, detail_crawler_href, 
+      create_time, modify_time)
+    values (#{master_id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
+      #{cote_state,jdbcType=VARCHAR}, #{master_text,jdbcType=VARCHAR}, #{master_href,jdbcType=VARCHAR}, 
+      #{master_date,jdbcType=VARCHAR}, #{master_type,jdbcType=VARCHAR}, #{master_website,jdbcType=VARCHAR}, 
+      #{detail_href,jdbcType=VARCHAR}, #{detail_crawler_total,jdbcType=VARCHAR}, #{detail_crawler_href,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCrawlerMasterGame" >
+    insert into nodejs_crawler_master_game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="master_id != null" >
+        master_id,
+      </if>
+      <if test="cote_id != null" >
+        cote_id,
+      </if>
+      <if test="cote_name != null" >
+        cote_name,
+      </if>
+      <if test="cote_state != null" >
+        cote_state,
+      </if>
+      <if test="master_text != null" >
+        master_text,
+      </if>
+      <if test="master_href != null" >
+        master_href,
+      </if>
+      <if test="master_date != null" >
+        master_date,
+      </if>
+      <if test="master_type != null" >
+        master_type,
+      </if>
+      <if test="master_website != null" >
+        master_website,
+      </if>
+      <if test="detail_href != null" >
+        detail_href,
+      </if>
+      <if test="detail_crawler_total != null" >
+        detail_crawler_total,
+      </if>
+      <if test="detail_crawler_href != null" >
+        detail_crawler_href,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="master_id != null" >
+        #{master_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null" >
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null" >
+        #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="master_text != null" >
+        #{master_text,jdbcType=VARCHAR},
+      </if>
+      <if test="master_href != null" >
+        #{master_href,jdbcType=VARCHAR},
+      </if>
+      <if test="master_date != null" >
+        #{master_date,jdbcType=VARCHAR},
+      </if>
+      <if test="master_type != null" >
+        #{master_type,jdbcType=VARCHAR},
+      </if>
+      <if test="master_website != null" >
+        #{master_website,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_href != null" >
+        #{detail_href,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_crawler_total != null" >
+        #{detail_crawler_total,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_crawler_href != null" >
+        #{detail_crawler_href,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCrawlerMasterGame" >
+    update nodejs_crawler_master_game
+    <set >
+      <if test="cote_id != null" >
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_state != null" >
+        cote_state = #{cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="master_text != null" >
+        master_text = #{master_text,jdbcType=VARCHAR},
+      </if>
+      <if test="master_href != null" >
+        master_href = #{master_href,jdbcType=VARCHAR},
+      </if>
+      <if test="master_date != null" >
+        master_date = #{master_date,jdbcType=VARCHAR},
+      </if>
+      <if test="master_type != null" >
+        master_type = #{master_type,jdbcType=VARCHAR},
+      </if>
+      <if test="master_website != null" >
+        master_website = #{master_website,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_href != null" >
+        detail_href = #{detail_href,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_crawler_total != null" >
+        detail_crawler_total = #{detail_crawler_total,jdbcType=VARCHAR},
+      </if>
+      <if test="detail_crawler_href != null" >
+        detail_crawler_href = #{detail_crawler_href,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where master_id = #{master_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCrawlerMasterGame" >
+    update nodejs_crawler_master_game
+    set cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      cote_state = #{cote_state,jdbcType=VARCHAR},
+      master_text = #{master_text,jdbcType=VARCHAR},
+      master_href = #{master_href,jdbcType=VARCHAR},
+      master_date = #{master_date,jdbcType=VARCHAR},
+      master_type = #{master_type,jdbcType=VARCHAR},
+      master_website = #{master_website,jdbcType=VARCHAR},
+      detail_href = #{detail_href,jdbcType=VARCHAR},
+      detail_crawler_total = #{detail_crawler_total,jdbcType=VARCHAR},
+      detail_crawler_href = #{detail_crawler_href,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where master_id = #{master_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

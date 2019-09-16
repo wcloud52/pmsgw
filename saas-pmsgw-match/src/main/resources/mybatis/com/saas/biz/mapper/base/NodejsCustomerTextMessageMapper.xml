@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsCustomerTextMessageMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCustomerTextMessage">
+    <!--
+    @mbg.generated
+    -->
+    <id column="message_id" jdbcType="VARCHAR" property="message_id" />
+    <result column="message_senderId" jdbcType="VARCHAR" property="message_senderId" />
+    <result column="message_senderName" jdbcType="VARCHAR" property="message_senderName" />
+    <result column="message_receiverId" jdbcType="VARCHAR" property="message_receiverId" />
+    <result column="message_receiverName" jdbcType="VARCHAR" property="message_receiverName" />
+    <result column="message_sendTime" jdbcType="TIMESTAMP" property="message_sendTime" />
+    <result column="message_type" jdbcType="VARCHAR" property="message_type" />
+    <result column="message_title" jdbcType="VARCHAR" property="message_title" />
+    <result column="message_text" jdbcType="VARCHAR" property="message_text" />
+    <result column="message_status" jdbcType="INTEGER" property="message_status" />
+    <result column="message_create_time" jdbcType="TIMESTAMP" property="message_create_time" />
+    <result column="message_modify_time" jdbcType="TIMESTAMP" property="message_modify_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    message_id, message_senderId, message_senderName, message_receiverId, message_receiverName, 
+    message_sendTime, message_type, message_title, message_text, message_status, message_create_time, 
+    message_modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_customer_text_message
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_customer_text_message
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCustomerTextMessage">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_customer_text_message (message_id, message_senderId, message_senderName, 
+      message_receiverId, message_receiverName, 
+      message_sendTime, message_type, message_title, 
+      message_text, message_status, message_create_time, 
+      message_modify_time)
+    values (#{message_id,jdbcType=VARCHAR}, #{message_senderId,jdbcType=VARCHAR}, #{message_senderName,jdbcType=VARCHAR}, 
+      #{message_receiverId,jdbcType=VARCHAR}, #{message_receiverName,jdbcType=VARCHAR}, 
+      #{message_sendTime,jdbcType=TIMESTAMP}, #{message_type,jdbcType=VARCHAR}, #{message_title,jdbcType=VARCHAR}, 
+      #{message_text,jdbcType=VARCHAR}, #{message_status,jdbcType=INTEGER}, #{message_create_time,jdbcType=TIMESTAMP}, 
+      #{message_modify_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCustomerTextMessage">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_customer_text_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="message_id != null">
+        message_id,
+      </if>
+      <if test="message_senderId != null">
+        message_senderId,
+      </if>
+      <if test="message_senderName != null">
+        message_senderName,
+      </if>
+      <if test="message_receiverId != null">
+        message_receiverId,
+      </if>
+      <if test="message_receiverName != null">
+        message_receiverName,
+      </if>
+      <if test="message_sendTime != null">
+        message_sendTime,
+      </if>
+      <if test="message_type != null">
+        message_type,
+      </if>
+      <if test="message_title != null">
+        message_title,
+      </if>
+      <if test="message_text != null">
+        message_text,
+      </if>
+      <if test="message_status != null">
+        message_status,
+      </if>
+      <if test="message_create_time != null">
+        message_create_time,
+      </if>
+      <if test="message_modify_time != null">
+        message_modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="message_id != null">
+        #{message_id,jdbcType=VARCHAR},
+      </if>
+      <if test="message_senderId != null">
+        #{message_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_senderName != null">
+        #{message_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverId != null">
+        #{message_receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverName != null">
+        #{message_receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_sendTime != null">
+        #{message_sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_type != null">
+        #{message_type,jdbcType=VARCHAR},
+      </if>
+      <if test="message_title != null">
+        #{message_title,jdbcType=VARCHAR},
+      </if>
+      <if test="message_text != null">
+        #{message_text,jdbcType=VARCHAR},
+      </if>
+      <if test="message_status != null">
+        #{message_status,jdbcType=INTEGER},
+      </if>
+      <if test="message_create_time != null">
+        #{message_create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_modify_time != null">
+        #{message_modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCustomerTextMessage">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_customer_text_message
+    <set>
+      <if test="message_senderId != null">
+        message_senderId = #{message_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_senderName != null">
+        message_senderName = #{message_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverId != null">
+        message_receiverId = #{message_receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="message_receiverName != null">
+        message_receiverName = #{message_receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="message_sendTime != null">
+        message_sendTime = #{message_sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_type != null">
+        message_type = #{message_type,jdbcType=VARCHAR},
+      </if>
+      <if test="message_title != null">
+        message_title = #{message_title,jdbcType=VARCHAR},
+      </if>
+      <if test="message_text != null">
+        message_text = #{message_text,jdbcType=VARCHAR},
+      </if>
+      <if test="message_status != null">
+        message_status = #{message_status,jdbcType=INTEGER},
+      </if>
+      <if test="message_create_time != null">
+        message_create_time = #{message_create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message_modify_time != null">
+        message_modify_time = #{message_modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCustomerTextMessage">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_customer_text_message
+    set message_senderId = #{message_senderId,jdbcType=VARCHAR},
+      message_senderName = #{message_senderName,jdbcType=VARCHAR},
+      message_receiverId = #{message_receiverId,jdbcType=VARCHAR},
+      message_receiverName = #{message_receiverName,jdbcType=VARCHAR},
+      message_sendTime = #{message_sendTime,jdbcType=TIMESTAMP},
+      message_type = #{message_type,jdbcType=VARCHAR},
+      message_title = #{message_title,jdbcType=VARCHAR},
+      message_text = #{message_text,jdbcType=VARCHAR},
+      message_status = #{message_status,jdbcType=INTEGER},
+      message_create_time = #{message_create_time,jdbcType=TIMESTAMP},
+      message_modify_time = #{message_modify_time,jdbcType=TIMESTAMP}
+    where message_id = #{message_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

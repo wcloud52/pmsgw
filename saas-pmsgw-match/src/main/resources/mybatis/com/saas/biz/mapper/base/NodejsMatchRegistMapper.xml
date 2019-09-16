@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.NodejsMatchRegistMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsMatchRegist" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="match_id" property="match_id" jdbcType="VARCHAR" />
+    <result column="member_code" property="member_code" jdbcType="VARCHAR" />
+    <result column="member_name" property="member_name" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="create_user_id" jdbcType="VARCHAR" />
+    <result column="pigeon_code" property="pigeon_code" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+    <result column="cote_id" property="cote_id" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="reward" property="reward" jdbcType="FLOAT" />
+    <result column="regist" property="regist" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, match_id, member_code, member_name, pigeon_code, create_time, create_user_id, modify_time, cote_id, cote_name ,rank,reward ,regist
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_match_regist
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nodejs_match_regist
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsMatchRegist" >
+    insert into nodejs_match_regist (id, match_id, member_code, 
+      member_name, pigeon_code, create_time, create_user_id, modify_time,
+      cote_id, cote_name,rank,reward , regist
+      )
+    values (#{id,jdbcType=VARCHAR}, #{match_id,jdbcType=VARCHAR}, #{member_code,jdbcType=VARCHAR}, 
+      #{member_name,jdbcType=VARCHAR},#{pigeon_code,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{create_user_id,jdbcType=VARCHAR}, #{modify_time,jdbcType=TIMESTAMP},
+      #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR},#{rank,jdbcType=INTEGER}, #{reward,jdbcType=FLOAT}, #{regist,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsMatchRegist" >
+    insert into nodejs_match_regist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="match_id != null" >
+        match_id,
+      </if>
+      <if test="member_code != null" >
+        member_code,
+      </if>
+      <if test="member_name != null" >
+        member_name,
+      </if>
+      <if test="pigeon_code != null" >
+        pigeon_code,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="create_user_id != null" >
+        create_user_id,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+      <if test="cote_id != null" >
+        cote_id,
+      </if>
+      <if test="cote_name != null" >
+        cote_name,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="reward != null" >
+        reward,
+      </if>
+      <if test="regist != null" >
+        regist,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="match_id != null" >
+        #{match_id,jdbcType=VARCHAR},
+      </if>
+      <if test="member_code != null" >
+        #{member_code,jdbcType=VARCHAR},
+      </if>
+      <if test="member_name != null" >
+        #{member_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pigeon_code != null" >
+        #{pigeon_code,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_user_id != null" >
+        #{create_user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cote_id != null" >
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="reward != null" >
+        #{reward,jdbcType=FLOAT},
+      </if>
+      <if test="regist != null" >
+        #{regist,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsMatchRegist" >
+    update nodejs_match_regist
+    <set >
+      <if test="match_id != null" >
+        match_id = #{match_id,jdbcType=VARCHAR},
+      </if>
+      <if test="member_code != null" >
+        member_code = #{member_code,jdbcType=VARCHAR},
+      </if>
+      <if test="member_name != null" >
+        member_name = #{member_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pigeon_code != null" >
+        pigeon_code = #{pigeon_code,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_user_id != null" >
+        create_user_id = #{create_user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cote_id != null" >
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null" >
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="reward != null" >
+        reward = #{reward,jdbcType=FLOAT},
+      </if>
+      <if test="regist != null" >
+        regist = #{regist,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.saas.biz.pojo.NodejsMatchRegist" >
+    update nodejs_match_regist
+    set match_id = #{match_id,jdbcType=VARCHAR},
+      member_code = #{member_code,jdbcType=VARCHAR},
+      member_name = #{member_name,jdbcType=VARCHAR},
+      pigeon_code = #{pigeon_code,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      create_user_id = #{create_user_id,jdbcType=VARCHAR},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=INTEGER},
+      reward = #{reward,jdbcType=FLOAT},
+      regist = #{regist,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsMatchRegist" >
+    update nodejs_match_regist
+    set match_id = #{match_id,jdbcType=VARCHAR},
+      member_code = #{member_code,jdbcType=VARCHAR},
+      member_name = #{member_name,jdbcType=VARCHAR},
+      pigeon_code = #{pigeon_code,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      create_user_id = #{create_user_id,jdbcType=VARCHAR},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+       rank = #{rank,jdbcType=INTEGER},
+      reward = #{reward,jdbcType=FLOAT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

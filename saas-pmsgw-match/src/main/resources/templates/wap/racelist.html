@@ -1,0 +1,147 @@
+
+<!doctype html>
+<html>
+<head>
+	<title>比赛列表</title>
+  	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link rel="stylesheet" href="/plugins/jquery-weui/dist/lib/weui.min.css">
+<link rel="stylesheet" href="/plugins/jquery-weui/dist/css/jquery-weui.min.css" />
+
+<link rel="stylesheet" href="/plugins/jquery-weui/css/reset.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/flex.css" />
+<link rel="stylesheet" href="/plugins/jquery-weui/css/style.css" />
+
+</head>
+<body>
+ 
+<section class="wrap">
+
+	  <section class="top-fixed">
+        <div class="flex-box flex-between fs13 p8 top-search" style="background-color: #efeff4">
+          <div class="search-btn-wrap flex-grow-1 pointer">
+            <i class="ico-search"></i>
+            <input type="text" class="" placeholder="搜索您需要的比赛"  id="searchInput"></div></div>
+      </section> 
+      
+      <div class="weui-panel weui-panel_access">
+  <div class="weui-panel__hd">图文组合列表</div>
+  <div class="weui-panel__bd" id="play">
+  
+
+  </div>
+ 
+</div>
+      <section class="main">
+     
+       <#list item as item>
+        <ul class="list">
+        
+          <li>
+            <a href="racedetaillist?masterId=${item.master_id}" class="p10 bgf flex-box flex-col-start arrowR">
+             
+              <div class="pl10 flex-self-stretch flex-box flex-col flex-between flex-col-stretch hidden">
+	              <div>
+	                <p class="fs14 col0 multi-line">${item.master_text?if_exists}</p>
+	               
+                </div>
+                <div class="flex-box flex-between fs13 col3">
+                  <p>
+                  	
+                  	<span class="ora">${item.create_time?string('yyyy-MM-dd hh:mm:ss')}</span>
+                  
+                  </p>
+                 
+                </div>
+              </div>
+            
+            </a>
+          </li>
+          
+          
+        </ul>
+         </#list>
+        <!--  -->
+      </section>
+  </section>
+
+	<script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+	<script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+	<script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+	<script src="/plugins/jquery-weui/dist/js/city-picker.min.js"></script>
+	<script src="/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.aodianyun.com/static/jquery/jquery-1.7.2.min.js"></script>
+    <!-- jquery地址也可使用您的地址 -->
+    <script type="text/javascript" src="https://cdn.aodianyun.com/lss/aodianplays/player.js"></script>
+	
+	
+<script>
+$(function(){
+	
+	
+	$('#searchInput').bind('input propertychange', function() {
+			var text = $("#searchInput").val();
+			var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+			if (reg.test(text)) {
+				$('.list').each(function() {
+					var $self = $(this);
+					var flag = $self.text().search(text)
+					if (flag > -1) {
+						$self.css("display", "");
+
+					} else {
+						$self.css("display", "none");
+
+					}
+				});
+			} else {
+				$('.list').css("display", "")
+
+			}
+		});
+	});
+	
+	
+var swfpath = "hsd2";
+var rtmpUrl = 'rtmp://rtmpvideo.pmsgw.com/dazhong/' + swfpath; //控制台开通的APP rtmp地址，必要参数
+var hlsUrl = 'http://hlsvideo.pmsgw.com/dazhong/' + swfpath + '.m3u8';
+var objectPlayer = new aodianPlayer({
+    container: 'play', //播放器容器ID，必要参数
+    rtmpUrl: rtmpUrl, //控制台开通的APP rtmp地址，必要参数
+    hlsUrl: hlsUrl, //控制台开通的APP hls地址，必要参数
+    /* 以下为可选参数*/
+    width: '100%', //播放器宽度，可用数字、百分比等
+    height: '100%', //播放器高度，可用数字、百分比等
+    autostart: true, //是否自动播放，默认为false
+    bufferlength: '1', //视频缓冲时间，默认为3秒。hls不支持！手机端不支持
+    maxbufferlength: '2', //最大视频缓冲时间，默认为2秒。hls不支持！手机端不支持
+    stretching: '1', //设置全屏模式,1代表按比例撑满至全屏,2代表铺满全屏,3代表视频原始大小,默认值为1。hls初始设置不支持，手机端不支持
+    controlbardisplay: 'enable', //是否显示控制栏，值为：disable、enable默认为disable。
+    //adveDeAddr: '',//封面图片链接
+    //adveWidth: 320,//封面图宽度
+    //adveHeight: 240,//封面图高度
+    //adveReAddr: '',//封面图点击链接
+    //isclickplay: false,//是否单击播放，默认为false
+    isfullscreen: true //是否双击全屏，默认为true
+});
+
+/* rtmpUrl与hlsUrl同时存在时播放器优先加载rtmp*/
+/* 以下为Aodian Player支持的事件 */
+/* objectPlayer.startPlay();//播放 */
+/* objectPlayer.pausePlay();//暂停 */
+/* objectPlayer.stopPlay();//停止 hls不支持*/
+/* objectPlayer.closeConnect();//断开连接 */
+/* objectPlayer.setMute(true);//静音或恢复音量，参数为true|false */
+/* objectPlayer.setVolume(volume);//设置音量，参数为0-100数字 */
+/* objectPlayer.setFullScreenMode(1);//设置全屏模式,1代表按比例撑满至全屏,2代表铺满全屏,3代表视频原始大小,默认值为1。手机不支持 */
+
+</script>
+</body>
+</html>

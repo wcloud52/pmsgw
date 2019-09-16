@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsPigeonCollectionMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsPigeonCollection">
+    <!--
+    @mbg.generated
+    -->
+    <id column="collection_id" jdbcType="VARCHAR" property="collection_id" />
+    <result column="cote_id" jdbcType="VARCHAR" property="cote_id" />
+    <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
+    <result column="collection_senderId" jdbcType="VARCHAR" property="collection_senderId" />
+    <result column="collection_senderName" jdbcType="VARCHAR" property="collection_senderName" />
+    <result column="collection_sendTime" jdbcType="VARCHAR" property="collection_sendTime" />
+    <result column="ringnum" jdbcType="VARCHAR" property="ringnum" />
+    <result column="pigowner" jdbcType="VARCHAR" property="pigowner" />
+    <result column="pigowner_num" jdbcType="VARCHAR" property="pigowner_num" />
+    <result column="pigowner_mobile" jdbcType="VARCHAR" property="pigowner_mobile" />
+    <result column="pigeon_color" jdbcType="VARCHAR" property="pigeon_color" />
+    <result column="pigeon_ext" jdbcType="VARCHAR" property="pigeon_ext" />
+    <result column="fileName" jdbcType="VARCHAR" property="fileName" />
+    <result column="typeId" jdbcType="VARCHAR" property="typeId" />
+    <result column="typeName" jdbcType="VARCHAR" property="typeName" />
+    <result column="batchNumber" jdbcType="BIGINT" property="batchNumber" />
+    <result column="sortNumber" jdbcType="INTEGER" property="sortNumber" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    collection_id, cote_id, cote_name, collection_senderId, collection_senderName, collection_sendTime, 
+    ringnum, pigowner, pigowner_num, pigowner_mobile, pigeon_color, pigeon_ext, fileName, 
+    typeId, typeName, batchNumber, sortNumber, status, create_time, modify_time, openid, 
+    nickname, headimgurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_pigeon_collection
+    where collection_id = #{collection_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_pigeon_collection
+    where collection_id = #{collection_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsPigeonCollection">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_pigeon_collection (collection_id, cote_id, cote_name, 
+      collection_senderId, collection_senderName, 
+      collection_sendTime, ringnum, pigowner, 
+      pigowner_num, pigowner_mobile, pigeon_color, 
+      pigeon_ext, fileName, typeId, 
+      typeName, batchNumber, sortNumber, 
+      status, create_time, modify_time, 
+      openid, nickname, headimgurl
+      )
+    values (#{collection_id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
+      #{collection_senderId,jdbcType=VARCHAR}, #{collection_senderName,jdbcType=VARCHAR}, 
+      #{collection_sendTime,jdbcType=VARCHAR}, #{ringnum,jdbcType=VARCHAR}, #{pigowner,jdbcType=VARCHAR}, 
+      #{pigowner_num,jdbcType=VARCHAR}, #{pigowner_mobile,jdbcType=VARCHAR}, #{pigeon_color,jdbcType=VARCHAR}, 
+      #{pigeon_ext,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, 
+      #{typeName,jdbcType=VARCHAR}, #{batchNumber,jdbcType=BIGINT}, #{sortNumber,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}, 
+      #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsPigeonCollection">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_pigeon_collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collection_id != null">
+        collection_id,
+      </if>
+      <if test="cote_id != null">
+        cote_id,
+      </if>
+      <if test="cote_name != null">
+        cote_name,
+      </if>
+      <if test="collection_senderId != null">
+        collection_senderId,
+      </if>
+      <if test="collection_senderName != null">
+        collection_senderName,
+      </if>
+      <if test="collection_sendTime != null">
+        collection_sendTime,
+      </if>
+      <if test="ringnum != null">
+        ringnum,
+      </if>
+      <if test="pigowner != null">
+        pigowner,
+      </if>
+      <if test="pigowner_num != null">
+        pigowner_num,
+      </if>
+      <if test="pigowner_mobile != null">
+        pigowner_mobile,
+      </if>
+      <if test="pigeon_color != null">
+        pigeon_color,
+      </if>
+      <if test="pigeon_ext != null">
+        pigeon_ext,
+      </if>
+      <if test="fileName != null">
+        fileName,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="typeName != null">
+        typeName,
+      </if>
+      <if test="batchNumber != null">
+        batchNumber,
+      </if>
+      <if test="sortNumber != null">
+        sortNumber,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="modify_time != null">
+        modify_time,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="headimgurl != null">
+        headimgurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collection_id != null">
+        #{collection_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="collection_senderId != null">
+        #{collection_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="collection_senderName != null">
+        #{collection_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="collection_sendTime != null">
+        #{collection_sendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null">
+        #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null">
+        #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner_num != null">
+        #{pigowner_num,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner_mobile != null">
+        #{pigowner_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="pigeon_color != null">
+        #{pigeon_color,jdbcType=VARCHAR},
+      </if>
+      <if test="pigeon_ext != null">
+        #{pigeon_ext,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNumber != null">
+        #{batchNumber,jdbcType=BIGINT},
+      </if>
+      <if test="sortNumber != null">
+        #{sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsPigeonCollection">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_pigeon_collection
+    <set>
+      <if test="cote_id != null">
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="collection_senderId != null">
+        collection_senderId = #{collection_senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="collection_senderName != null">
+        collection_senderName = #{collection_senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="collection_sendTime != null">
+        collection_sendTime = #{collection_sendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ringnum != null">
+        ringnum = #{ringnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null">
+        pigowner = #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner_num != null">
+        pigowner_num = #{pigowner_num,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner_mobile != null">
+        pigowner_mobile = #{pigowner_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="pigeon_color != null">
+        pigeon_color = #{pigeon_color,jdbcType=VARCHAR},
+      </if>
+      <if test="pigeon_ext != null">
+        pigeon_ext = #{pigeon_ext,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        typeName = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNumber != null">
+        batchNumber = #{batchNumber,jdbcType=BIGINT},
+      </if>
+      <if test="sortNumber != null">
+        sortNumber = #{sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where collection_id = #{collection_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsPigeonCollection">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_pigeon_collection
+    set cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      collection_senderId = #{collection_senderId,jdbcType=VARCHAR},
+      collection_senderName = #{collection_senderName,jdbcType=VARCHAR},
+      collection_sendTime = #{collection_sendTime,jdbcType=VARCHAR},
+      ringnum = #{ringnum,jdbcType=VARCHAR},
+      pigowner = #{pigowner,jdbcType=VARCHAR},
+      pigowner_num = #{pigowner_num,jdbcType=VARCHAR},
+      pigowner_mobile = #{pigowner_mobile,jdbcType=VARCHAR},
+      pigeon_color = #{pigeon_color,jdbcType=VARCHAR},
+      pigeon_ext = #{pigeon_ext,jdbcType=VARCHAR},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      typeId = #{typeId,jdbcType=VARCHAR},
+      typeName = #{typeName,jdbcType=VARCHAR},
+      batchNumber = #{batchNumber,jdbcType=BIGINT},
+      sortNumber = #{sortNumber,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      openid = #{openid,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR}
+    where collection_id = #{collection_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

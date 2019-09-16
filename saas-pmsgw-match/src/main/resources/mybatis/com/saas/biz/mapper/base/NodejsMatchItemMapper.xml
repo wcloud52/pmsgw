@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsMatchItemMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsMatchItem">
+    <!--
+    @mbg.generated
+    -->
+    <id column="item_id" jdbcType="VARCHAR" property="item_id" />
+    <result column="parent_item_id" jdbcType="VARCHAR" property="parent_item_id" />
+    <result column="match_id" jdbcType="VARCHAR" property="match_id" />
+    <result column="cote_id" jdbcType="VARCHAR" property="cote_id" />
+    <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
+    <result column="item_type" jdbcType="VARCHAR" property="item_type" />
+    <result column="item_name" jdbcType="VARCHAR" property="item_name" />
+    <result column="item_desc" jdbcType="VARCHAR" property="item_desc" />
+    <result column="item_status" jdbcType="INTEGER" property="item_status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    item_id, parent_item_id, match_id, cote_id, cote_name, item_type, item_name, item_desc,
+    item_status, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from nodejs_match_item
+    where item_id = #{item_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_match_item
+    where item_id = #{item_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsMatchItem">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_match_item (item_id, parent_item_id, match_id,
+      cote_id, cote_name, item_type,
+      item_name, item_desc, item_status,
+      create_time, modify_time)
+    values (#{item_id,jdbcType=VARCHAR}, #{parent_item_id,jdbcType=VARCHAR}, #{match_id,jdbcType=VARCHAR},
+      #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, #{item_type,jdbcType=VARCHAR},
+      #{item_name,jdbcType=VARCHAR}, #{item_desc,jdbcType=VARCHAR}, #{item_status,jdbcType=INTEGER},
+      #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsMatchItem">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_match_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="item_id != null">
+        item_id,
+      </if>
+      <if test="parent_item_id != null">
+        parent_item_id,
+      </if>
+      <if test="match_id != null">
+        match_id,
+      </if>
+      <if test="cote_id != null">
+        cote_id,
+      </if>
+      <if test="cote_name != null">
+        cote_name,
+      </if>
+      <if test="item_type != null">
+        item_type,
+      </if>
+      <if test="item_name != null">
+        item_name,
+      </if>
+      <if test="item_desc != null">
+        item_desc,
+      </if>
+      <if test="item_status != null">
+        item_status,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="modify_time != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="item_id != null">
+        #{item_id,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_item_id != null">
+        #{parent_item_id,jdbcType=VARCHAR},
+      </if>
+      <if test="match_id != null">
+        #{match_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="item_type != null">
+        #{item_type,jdbcType=VARCHAR},
+      </if>
+      <if test="item_name != null">
+        #{item_name,jdbcType=VARCHAR},
+      </if>
+      <if test="item_desc != null">
+        #{item_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="item_status != null">
+        #{item_status,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsMatchItem">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_match_item
+    <set>
+      <if test="parent_item_id != null">
+        parent_item_id = #{parent_item_id,jdbcType=VARCHAR},
+      </if>
+      <if test="match_id != null">
+        match_id = #{match_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null">
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_name != null">
+        cote_name = #{cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="item_type != null">
+        item_type = #{item_type,jdbcType=VARCHAR},
+      </if>
+      <if test="item_name != null">
+        item_name = #{item_name,jdbcType=VARCHAR},
+      </if>
+      <if test="item_desc != null">
+        item_desc = #{item_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="item_status != null">
+        item_status = #{item_status,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null">
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where item_id = #{item_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsMatchItem">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_match_item
+    set parent_item_id = #{parent_item_id,jdbcType=VARCHAR},
+      match_id = #{match_id,jdbcType=VARCHAR},
+      cote_id = #{cote_id,jdbcType=VARCHAR},
+      cote_name = #{cote_name,jdbcType=VARCHAR},
+      item_type = #{item_type,jdbcType=VARCHAR},
+      item_name = #{item_name,jdbcType=VARCHAR},
+      item_desc = #{item_desc,jdbcType=VARCHAR},
+      item_status = #{item_status,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where item_id = #{item_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

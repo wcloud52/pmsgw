@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsCrawlerMapper" >
+   <select id="selectNodejsCrawlerMasterGameListByDynamic" resultMap="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper.Base_Column_List" />
+		from ${queryMap.database}.nodejs_crawler_master_game
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectNodejsCrawlerMasterGameListByDynamicCount" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from ${queryMap.database}.nodejs_crawler_master_game
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+	</select>
+	
+	 <select id="selectNodejsCrawlerMasterGameByPrimaryKey" resultMap="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper.BaseResultMap"
+	  parameterType="Object" >
+    select 
+    <include refid="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper.Base_Column_List" />
+    from ${database}.nodejs_crawler_master_game
+    where master_id = #{master_id,jdbcType=VARCHAR}
+  </select>
+  
+	<select id="selectNodejsCrawlerMasterGameById" resultMap="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper.Base_Column_List" />
+		from ${database}.nodejs_crawler_master_game
+		
+		where master_id = #{master_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectNodejsCrawlerDetailGameListByDynamic" resultMap="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper.BaseResultMap"
+		parameterType="Object">
+		select 
+		<include refid="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper.Base_Column_List" />
+		from ${queryMap.database}.nodejs_crawler_detail_game
+		
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+	<select id="selectNodejsCrawlerDetailGameListByDynamicMatch" resultMap="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper.BaseResultMap"
+		parameterType="Object">
+		select pigowner, cometime,round(speed,1) speed, rank, ringnum, receiver_headimgurl,'${match_id}'master_text,
+		         if(b.pigeon_code is null,1,0) detail_page from
+		(select pigowner, cometime,speed, rank, ringnum,create_time, receiver_headimgurl
+		from ${queryMap.database}.nodejs_crawler_detail_game
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		) as a left join (
+			select pigeon_code from nodejs_match_regist where cote_id=#{cote_id} and match_id=#{match_id}
+		) as b on a.ringnum=b.pigeon_code
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectNodejsCrawlerDetailGameListByDynamicCount" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from ${queryMap.database}.nodejs_crawler_detail_game
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

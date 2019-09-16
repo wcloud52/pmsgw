@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.NodejsWeixinUserCoteExtMapper">
+    <!-- 动态查询列表 -->
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.NodejsWeixinUserCoteMapper.BaseResultMap"
+		parameterType="Object">
+		select <include refid="com.saas.biz.mapper.base.NodejsWeixinUserCoteMapper.Base_Column_List" />
+		from nodejs_weixin_user_cote
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.openid != null">
+              and openid = #{queryMap.openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.nickname != null">
+              and nickname = #{queryMap.nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.headimgurl != null">
+              and headimgurl = #{queryMap.headimgurl,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_website != null">
+              and cote_website = #{queryMap.cote_website,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_state != null">
+              and cote_state = #{queryMap.cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			limit ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+    <!-- 动态查询总数 -->
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from nodejs_weixin_user_cote
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.openid != null">
+              and openid = #{queryMap.openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.nickname != null">
+              and nickname = #{queryMap.nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.headimgurl != null">
+              and headimgurl = #{queryMap.headimgurl,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_website != null">
+              and cote_website = #{queryMap.cote_website,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_state != null">
+              and cote_state = #{queryMap.cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</select>
+	
+	 <!-- 动态删除 -->
+	<delete id="deleteByDynamic" parameterType="Object">
+		delete from nodejs_weixin_user_cote
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+            <if test="queryMap.id != null">
+              and id = #{queryMap.id,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.openid != null">
+              and openid = #{queryMap.openid,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.nickname != null">
+              and nickname = #{queryMap.nickname,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.headimgurl != null">
+              and headimgurl = #{queryMap.headimgurl,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_id != null">
+              and cote_id = #{queryMap.cote_id,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_name != null">
+              and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_website != null">
+              and cote_website = #{queryMap.cote_website,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.cote_state != null">
+              and cote_state = #{queryMap.cote_state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.create_time != null">
+              and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
+			</if>		
+            <if test="queryMap.modify_time != null">
+              and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
+			</if>		
+		</where>
+	</delete>
+	
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="list">
+		insert into nodejs_weixin_user_cote 
+		(
+		id,
+		openid,
+		nickname,
+		headimgurl,
+		cote_id,
+		cote_name,
+		cote_website,
+		cote_state,
+		create_time,
+		modify_time
+		)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(
+			    #{item.id,jdbcType=BIGINT},
+			    #{item.openid,jdbcType=VARCHAR},
+			    #{item.nickname,jdbcType=VARCHAR},
+			    #{item.headimgurl,jdbcType=VARCHAR},
+			    #{item.cote_id,jdbcType=VARCHAR},
+			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.cote_website,jdbcType=VARCHAR},
+			    #{item.cote_state,jdbcType=VARCHAR},
+			    #{item.create_time,jdbcType=TIMESTAMP},
+			    #{item.modify_time,jdbcType=TIMESTAMP}
+			)
+		</foreach>
+	</insert>
+    
+    <!-- 批量更新 -->
+    <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			 update nodejs_weixin_user_cote 
+			<set>
+                <if test="item.openid != null">
+                  and openid = #{item.openid,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.nickname != null">
+                  and nickname = #{item.nickname,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.headimgurl != null">
+                  and headimgurl = #{item.headimgurl,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_id != null">
+                  and cote_id = #{item.cote_id,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_name != null">
+                  and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_website != null">
+                  and cote_website = #{item.cote_website,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.cote_state != null">
+                  and cote_state = #{item.cote_state,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.create_time != null">
+                  and create_time = #{item.create_time,jdbcType=TIMESTAMP}			
+			     </if>		
+                <if test="item.modify_time != null">
+                  and modify_time = #{item.modify_time,jdbcType=TIMESTAMP}			
+			     </if>		
+			</set>
+			where
+		      id=#{item.id,jdbcType=BIGINT}
+		</foreach>
+	</update>
+	
+</mapper>

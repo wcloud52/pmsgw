@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Weui</title>
+
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        body{
+            background-color: rgba(242, 242, 242, 1);
+            /*padding:0 2%;*/
+        }
+    </style>
+
+</head>
+<body>
+    <div class="weui-panel weui-panel_access bgColorHui">
+        <div class="weui-panel__hd"><h3>单位</h3></div>
+        <div class="weui-panel__hd">
+            <input class="weui-input inputH36bgW" id="unitId" type="text" readonly value="">
+        </div>
+    </div>
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/vue.js"></script>
+
+    <script>
+        
+
+
+        var Collect = {
+            init:function(){
+                this.initSelect();
+            },
+            initSelect:function(){
+
+                var items = [
+                        {
+                            title:'厦门',
+                            value:'001'
+                        },{
+                            title:'赤湖',
+                            value:'002'
+                        },{
+                            title:'单位1',
+                            value:'003'
+                        },{
+                            title:'单位2',
+                            value:'004'
+                        },{
+                            title:'单位3',
+                            value:'005'
+                        }
+                    ];
+
+                $('#unitId').select({
+                    title:'选择单位',
+                    items:items,
+                    input:items[0].title,
+                    onClose:function(e){
+                        console.log(e);
+                        console.log('弹出关闭'); 
+                        $.toast("弹出层关闭", "text");
+                        //内容修改后的操作可以在这里操作
+                    },
+                    beforeClose:function(){
+                        console.log('弹层关闭前。。。');
+                        //内容修改后 也 可以在这里操作
+                    }
+                });
+            }
+        };
+        $(function(){
+            Collect.init();
+        });
+
+    </script>
+
+</body>
+</html>

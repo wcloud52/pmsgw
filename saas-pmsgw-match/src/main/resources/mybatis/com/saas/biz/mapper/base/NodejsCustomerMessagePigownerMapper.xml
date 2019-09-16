@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saas.biz.mapper.base.NodejsCustomerMessagePigownerMapper">
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.NodejsCustomerMessagePigowner">
+    <!--
+    @mbg.generated
+    -->
+    <id column="openid_coteid" jdbcType="VARCHAR" property="openid_coteid" />
+    <result column="game_cote_id" jdbcType="VARCHAR" property="game_cote_id" />
+    <result column="game_cote_name" jdbcType="VARCHAR" property="game_cote_name" />
+    <result column="game_cote_state" jdbcType="VARCHAR" property="game_cote_state" />
+    <result column="game_pigowner" jdbcType="VARCHAR" property="game_pigowner" />
+    <result column="game_rank_top" jdbcType="INTEGER" property="game_rank_top" />
+    <result column="game_master_id_count" jdbcType="INTEGER" property="game_master_id_count" />
+    <result column="game_ringnum_count" jdbcType="INTEGER" property="game_ringnum_count" />
+    <result column="game_receiver_openid" jdbcType="VARCHAR" property="game_receiver_openid" />
+    <result column="game_receiver_nickname" jdbcType="VARCHAR" property="game_receiver_nickname" />
+    <result column="game_receiver_headimgurl" jdbcType="VARCHAR" property="game_receiver_headimgurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+    -->
+    openid_coteid, game_cote_id, game_cote_name, game_cote_state, game_pigowner, game_rank_top, 
+    game_master_id_count, game_ringnum_count, game_receiver_openid, game_receiver_nickname, 
+    game_receiver_headimgurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from nodejs_customer_message_pigowner
+    where openid_coteid = #{openid_coteid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+    @mbg.generated
+    -->
+    delete from nodejs_customer_message_pigowner
+    where openid_coteid = #{openid_coteid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.NodejsCustomerMessagePigowner">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_customer_message_pigowner (openid_coteid, game_cote_id, game_cote_name, 
+      game_cote_state, game_pigowner, game_rank_top, 
+      game_master_id_count, game_ringnum_count, 
+      game_receiver_openid, game_receiver_nickname, 
+      game_receiver_headimgurl)
+    values (#{openid_coteid,jdbcType=VARCHAR}, #{game_cote_id,jdbcType=VARCHAR}, #{game_cote_name,jdbcType=VARCHAR}, 
+      #{game_cote_state,jdbcType=VARCHAR}, #{game_pigowner,jdbcType=VARCHAR}, #{game_rank_top,jdbcType=INTEGER}, 
+      #{game_master_id_count,jdbcType=INTEGER}, #{game_ringnum_count,jdbcType=INTEGER}, 
+      #{game_receiver_openid,jdbcType=VARCHAR}, #{game_receiver_nickname,jdbcType=VARCHAR}, 
+      #{game_receiver_headimgurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsCustomerMessagePigowner">
+    <!--
+    @mbg.generated
+    -->
+    insert into nodejs_customer_message_pigowner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="openid_coteid != null">
+        openid_coteid,
+      </if>
+      <if test="game_cote_id != null">
+        game_cote_id,
+      </if>
+      <if test="game_cote_name != null">
+        game_cote_name,
+      </if>
+      <if test="game_cote_state != null">
+        game_cote_state,
+      </if>
+      <if test="game_pigowner != null">
+        game_pigowner,
+      </if>
+      <if test="game_rank_top != null">
+        game_rank_top,
+      </if>
+      <if test="game_master_id_count != null">
+        game_master_id_count,
+      </if>
+      <if test="game_ringnum_count != null">
+        game_ringnum_count,
+      </if>
+      <if test="game_receiver_openid != null">
+        game_receiver_openid,
+      </if>
+      <if test="game_receiver_nickname != null">
+        game_receiver_nickname,
+      </if>
+      <if test="game_receiver_headimgurl != null">
+        game_receiver_headimgurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="openid_coteid != null">
+        #{openid_coteid,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_id != null">
+        #{game_cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_name != null">
+        #{game_cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_state != null">
+        #{game_cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="game_pigowner != null">
+        #{game_pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="game_rank_top != null">
+        #{game_rank_top,jdbcType=INTEGER},
+      </if>
+      <if test="game_master_id_count != null">
+        #{game_master_id_count,jdbcType=INTEGER},
+      </if>
+      <if test="game_ringnum_count != null">
+        #{game_ringnum_count,jdbcType=INTEGER},
+      </if>
+      <if test="game_receiver_openid != null">
+        #{game_receiver_openid,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_nickname != null">
+        #{game_receiver_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_headimgurl != null">
+        #{game_receiver_headimgurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.NodejsCustomerMessagePigowner">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_customer_message_pigowner
+    <set>
+      <if test="game_cote_id != null">
+        game_cote_id = #{game_cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_name != null">
+        game_cote_name = #{game_cote_name,jdbcType=VARCHAR},
+      </if>
+      <if test="game_cote_state != null">
+        game_cote_state = #{game_cote_state,jdbcType=VARCHAR},
+      </if>
+      <if test="game_pigowner != null">
+        game_pigowner = #{game_pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="game_rank_top != null">
+        game_rank_top = #{game_rank_top,jdbcType=INTEGER},
+      </if>
+      <if test="game_master_id_count != null">
+        game_master_id_count = #{game_master_id_count,jdbcType=INTEGER},
+      </if>
+      <if test="game_ringnum_count != null">
+        game_ringnum_count = #{game_ringnum_count,jdbcType=INTEGER},
+      </if>
+      <if test="game_receiver_openid != null">
+        game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_nickname != null">
+        game_receiver_nickname = #{game_receiver_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="game_receiver_headimgurl != null">
+        game_receiver_headimgurl = #{game_receiver_headimgurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where openid_coteid = #{openid_coteid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.NodejsCustomerMessagePigowner">
+    <!--
+    @mbg.generated
+    -->
+    update nodejs_customer_message_pigowner
+    set game_cote_id = #{game_cote_id,jdbcType=VARCHAR},
+      game_cote_name = #{game_cote_name,jdbcType=VARCHAR},
+      game_cote_state = #{game_cote_state,jdbcType=VARCHAR},
+      game_pigowner = #{game_pigowner,jdbcType=VARCHAR},
+      game_rank_top = #{game_rank_top,jdbcType=INTEGER},
+      game_master_id_count = #{game_master_id_count,jdbcType=INTEGER},
+      game_ringnum_count = #{game_ringnum_count,jdbcType=INTEGER},
+      game_receiver_openid = #{game_receiver_openid,jdbcType=VARCHAR},
+      game_receiver_nickname = #{game_receiver_nickname,jdbcType=VARCHAR},
+      game_receiver_headimgurl = #{game_receiver_headimgurl,jdbcType=VARCHAR}
+    where openid_coteid = #{openid_coteid,jdbcType=VARCHAR}
+  </update>
+</mapper>
