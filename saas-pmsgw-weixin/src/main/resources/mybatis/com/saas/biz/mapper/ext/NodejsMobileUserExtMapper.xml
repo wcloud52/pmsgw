@@ -26,6 +26,21 @@
             <if test="queryMap.cote_name != null">
               and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
 			</if>		
+            <if test="queryMap.short_cote_name != null">
+              and short_cote_name = #{queryMap.short_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.state != null">
+              and state = #{queryMap.state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.fileName != null">
+              and fileName = #{queryMap.fileName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.batchNumber != null">
+              and batchNumber = #{queryMap.batchNumber,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.sortNumber != null">
+              and sortNumber = #{queryMap.sortNumber,jdbcType=INTEGER }			
+			</if>		
             <if test="queryMap.create_time != null">
               and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
 			</if>		
@@ -65,6 +80,21 @@
             <if test="queryMap.cote_name != null">
               and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
 			</if>		
+            <if test="queryMap.short_cote_name != null">
+              and short_cote_name = #{queryMap.short_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.state != null">
+              and state = #{queryMap.state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.fileName != null">
+              and fileName = #{queryMap.fileName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.batchNumber != null">
+              and batchNumber = #{queryMap.batchNumber,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.sortNumber != null">
+              and sortNumber = #{queryMap.sortNumber,jdbcType=INTEGER }			
+			</if>		
             <if test="queryMap.create_time != null">
               and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
 			</if>		
@@ -96,6 +126,21 @@
             <if test="queryMap.cote_name != null">
               and cote_name = #{queryMap.cote_name,jdbcType=VARCHAR }			
 			</if>		
+            <if test="queryMap.short_cote_name != null">
+              and short_cote_name = #{queryMap.short_cote_name,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.state != null">
+              and state = #{queryMap.state,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.fileName != null">
+              and fileName = #{queryMap.fileName,jdbcType=VARCHAR }			
+			</if>		
+            <if test="queryMap.batchNumber != null">
+              and batchNumber = #{queryMap.batchNumber,jdbcType=BIGINT }			
+			</if>		
+            <if test="queryMap.sortNumber != null">
+              and sortNumber = #{queryMap.sortNumber,jdbcType=INTEGER }			
+			</if>		
             <if test="queryMap.create_time != null">
               and create_time = #{queryMap.create_time,jdbcType=TIMESTAMP }			
 			</if>		
@@ -114,6 +159,11 @@
 		mobile,
 		cote_id,
 		cote_name,
+		short_cote_name,
+		state,
+		fileName,
+		batchNumber,
+		sortNumber,
 		create_time,
 		modify_time
 		)
@@ -126,6 +176,11 @@
 			    #{item.mobile,jdbcType=VARCHAR},
 			    #{item.cote_id,jdbcType=VARCHAR},
 			    #{item.cote_name,jdbcType=VARCHAR},
+			    #{item.short_cote_name,jdbcType=VARCHAR},
+			    #{item.state,jdbcType=VARCHAR},
+			    #{item.fileName,jdbcType=VARCHAR},
+			    #{item.batchNumber,jdbcType=BIGINT},
+			    #{item.sortNumber,jdbcType=INTEGER},
 			    #{item.create_time,jdbcType=TIMESTAMP},
 			    #{item.modify_time,jdbcType=TIMESTAMP}
 			)
@@ -149,6 +204,21 @@
 			     </if>		
                 <if test="item.cote_name != null">
                   and cote_name = #{item.cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.short_cote_name != null">
+                  and short_cote_name = #{item.short_cote_name,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.state != null">
+                  and state = #{item.state,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.fileName != null">
+                  and fileName = #{item.fileName,jdbcType=VARCHAR}			
+			     </if>		
+                <if test="item.batchNumber != null">
+                  and batchNumber = #{item.batchNumber,jdbcType=BIGINT}			
+			     </if>		
+                <if test="item.sortNumber != null">
+                  and sortNumber = #{item.sortNumber,jdbcType=INTEGER}			
 			     </if>		
                 <if test="item.create_time != null">
                   and create_time = #{item.create_time,jdbcType=TIMESTAMP}			

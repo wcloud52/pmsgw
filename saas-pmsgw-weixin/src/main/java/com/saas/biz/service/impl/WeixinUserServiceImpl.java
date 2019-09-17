@@ -58,6 +58,55 @@ public class WeixinUserServiceImpl implements WeixinUserService {
     }
 
     //公棚
+    @Cacheable(cacheNames = "weixin_user", key = "'weixin_user_selectAllWithMapByLoftMobile'", sync = true)
+    @Override
+    public Map <String, List <WeixinUser>> selectAllWithMapByLoftMobile() {
+        List <WeixinUser> listAll = selectAll ();
+
+        List <WeixinUser> newList = new ArrayList <> ();
+        for (WeixinUser user : listAll) {
+            if (StringUtils.isNotBlank (user.getBind_tel())) {
+                String tel = user.getBind_tel().trim ();
+
+                // 包含,即多tel
+                if (tel.indexOf (",") != -1) {
+                    String[] arrays = tel.split (",");
+                    for (String str : arrays) {
+                        if (StringUtils.isNotBlank (str)) {
+                            WeixinUser newUser = new WeixinUser ();
+                            BeanUtils.copyProperties (user,newUser);
+                            newUser.setBind_tel (str);
+                            newList.add (newUser);
+                        }
+
+                    }
+                } else {
+                    WeixinUser newUser = new WeixinUser ();
+                    BeanUtils.copyProperties (user,newUser);
+                    newList.add (newUser);
+                }
+            }
+        }
+
+        Map <String, List <WeixinUser>> map = new HashMap <> ();
+        for (WeixinUser user : newList) {
+            String tel = user.getBind_tel ();
+            if (StringUtils.isNotBlank (tel)) {
+                if (map.containsKey (tel)) {
+                    List <WeixinUser> lst = map.get (tel);
+                    lst.add (user);
+                } else {
+                    List <WeixinUser> lst = new ArrayList <> ();
+                    lst.add (user);
+                    map.put (tel, lst);
+                }
+            }
+
+        }
+        return map;
+    }
+
+    //公棚
     @Cacheable(cacheNames = "weixin_user", key = "'weixin_user_selectAllWithMapByLoft'", sync = true)
     @Override
     public Map <String, List <WeixinUser>> selectAllWithMapByLoft() {

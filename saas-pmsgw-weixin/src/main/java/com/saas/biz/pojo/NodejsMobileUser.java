@@ -62,6 +62,30 @@ public class NodejsMobileUser {
     /**
      * <pre>
      * 
+     * 表字段 : nodejs_mobile_user.fileName
+     * </pre>
+     */
+    private String fileName;
+
+    /**
+     * <pre>
+     * 批次号
+     * 表字段 : nodejs_mobile_user.batchNumber
+     * </pre>
+     */
+    private Long batchNumber;
+
+    /**
+     * <pre>
+     * 当前批次序号
+     * 表字段 : nodejs_mobile_user.sortNumber
+     * </pre>
+     */
+    private Integer sortNumber;
+
+    /**
+     * <pre>
+     * 
      * 表字段 : nodejs_mobile_user.create_time
      * </pre>
      */
@@ -248,6 +272,81 @@ public class NodejsMobileUser {
      */
     public void setState(String state) {
         this.state = state;
+    }
+
+    /**
+     * <pre>
+     * 获取：
+     * 表字段：nodejs_mobile_user.fileName
+     * </pre>
+     *
+     * @return nodejs_mobile_user.fileName：
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
+     * <pre>
+     * 设置：
+     * 表字段：nodejs_mobile_user.fileName
+     * </pre>
+     *
+     * @param fileName
+     *            nodejs_mobile_user.fileName：
+     */
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    /**
+     * <pre>
+     * 获取：批次号
+     * 表字段：nodejs_mobile_user.batchNumber
+     * </pre>
+     *
+     * @return nodejs_mobile_user.batchNumber：批次号
+     */
+    public Long getBatchNumber() {
+        return batchNumber;
+    }
+
+    /**
+     * <pre>
+     * 设置：批次号
+     * 表字段：nodejs_mobile_user.batchNumber
+     * </pre>
+     *
+     * @param batchNumber
+     *            nodejs_mobile_user.batchNumber：批次号
+     */
+    public void setBatchNumber(Long batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+
+    /**
+     * <pre>
+     * 获取：当前批次序号
+     * 表字段：nodejs_mobile_user.sortNumber
+     * </pre>
+     *
+     * @return nodejs_mobile_user.sortNumber：当前批次序号
+     */
+    public Integer getSortNumber() {
+        return sortNumber;
+    }
+
+    /**
+     * <pre>
+     * 设置：当前批次序号
+     * 表字段：nodejs_mobile_user.sortNumber
+     * </pre>
+     *
+     * @param sortNumber
+     *            nodejs_mobile_user.sortNumber：当前批次序号
+     */
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
     }
 
     /**

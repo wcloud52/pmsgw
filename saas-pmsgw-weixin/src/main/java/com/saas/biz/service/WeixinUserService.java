@@ -12,6 +12,10 @@ public interface WeixinUserService {
 	int update(WeixinUser record);
 
 
+    //公棚
+    @Cacheable(cacheNames = "weixin_user", key = "'weixin_user_selectAllWithMapByLoftMobile'", sync = true)
+    Map <String, List <WeixinUser>> selectAllWithMapByLoftMobile();
+
     Map<String,List<WeixinUser>> selectAllWithMapByLoft();
 
 

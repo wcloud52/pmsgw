@@ -12,6 +12,9 @@
     <result column="cote_name" jdbcType="VARCHAR" property="cote_name" />
     <result column="short_cote_name" jdbcType="VARCHAR" property="short_cote_name" />
     <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="fileName" jdbcType="VARCHAR" property="fileName" />
+    <result column="batchNumber" jdbcType="BIGINT" property="batchNumber" />
+    <result column="sortNumber" jdbcType="INTEGER" property="sortNumber" />
     <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
   </resultMap>
@@ -19,7 +22,8 @@
     <!--
     @mbg.generated
     -->
-    id, pigowner, mobile, cote_id, cote_name, short_cote_name, state, create_time, modify_time
+    id, pigowner, mobile, cote_id, cote_name, short_cote_name, state, fileName, batchNumber, 
+    sortNumber, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
@@ -43,11 +47,13 @@
     -->
     insert into nodejs_mobile_user (id, pigowner, mobile, 
       cote_id, cote_name, short_cote_name, 
-      state, create_time, modify_time
+      state, fileName, batchNumber, 
+      sortNumber, create_time, modify_time
       )
     values (#{id,jdbcType=VARCHAR}, #{pigowner,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, #{short_cote_name,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
+      #{state,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{batchNumber,jdbcType=BIGINT}, 
+      #{sortNumber,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsMobileUser">
@@ -77,6 +83,15 @@
       <if test="state != null">
         state,
       </if>
+      <if test="fileName != null">
+        fileName,
+      </if>
+      <if test="batchNumber != null">
+        batchNumber,
+      </if>
+      <if test="sortNumber != null">
+        sortNumber,
+      </if>
       <if test="create_time != null">
         create_time,
       </if>
@@ -105,6 +120,15 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNumber != null">
+        #{batchNumber,jdbcType=BIGINT},
+      </if>
+      <if test="sortNumber != null">
+        #{sortNumber,jdbcType=INTEGER},
       </if>
       <if test="create_time != null">
         #{create_time,jdbcType=TIMESTAMP},
@@ -138,6 +162,15 @@
       <if test="state != null">
         state = #{state,jdbcType=VARCHAR},
       </if>
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNumber != null">
+        batchNumber = #{batchNumber,jdbcType=BIGINT},
+      </if>
+      <if test="sortNumber != null">
+        sortNumber = #{sortNumber,jdbcType=INTEGER},
+      </if>
       <if test="create_time != null">
         create_time = #{create_time,jdbcType=TIMESTAMP},
       </if>
@@ -158,6 +191,9 @@
       cote_name = #{cote_name,jdbcType=VARCHAR},
       short_cote_name = #{short_cote_name,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      batchNumber = #{batchNumber,jdbcType=BIGINT},
+      sortNumber = #{sortNumber,jdbcType=INTEGER},
       create_time = #{create_time,jdbcType=TIMESTAMP},
       modify_time = #{modify_time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}

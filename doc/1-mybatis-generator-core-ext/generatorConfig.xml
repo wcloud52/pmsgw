@@ -151,8 +151,16 @@
 			
 			<property name="useActualColumnNames" value="true"/>
 		</table>
+		
+			<table tableName="nodejs_crawler_detail_game" domainObjectName="NodejsCrawlerDetailGame" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		
+		
+		
 		-->
-		<table tableName="nodejs_mobile_user" domainObjectName="NodejsMobileUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+	<table tableName="nodejs_mobile_user" domainObjectName="NodejsMobileUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 			
 			<property name="useActualColumnNames" value="true"/>
 		</table>

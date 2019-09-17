@@ -65,6 +65,26 @@ public class SendMessageAsyncTask {
 		return rt;
 	}
 
+	private List<CustomerUser> getOpenIdWithLoftByMobile(Map <String,List<WeixinUser>> map, String mobile) {
+
+		String newMobile= mobile.trim();
+		String key =newMobile;
+		List<WeixinUser> retList=map.get (key);
+		List<CustomerUser> rt = new ArrayList<CustomerUser>();
+		if(retList!=null&&retList.size ()>0)
+		{
+			for (WeixinUser user : retList) {
+				String game_pigowner= user.getBind_game ();
+				String game_receiver_openid= user.getOpenid();
+				String game_receiver_nickname= user.getNickname();
+				String game_receiver_headimgurl=user.getHeadimgurl();
+				CustomerUser customerUser=new CustomerUser( game_pigowner,  game_receiver_openid,  game_receiver_nickname,  game_receiver_headimgurl);
+
+				rt.add(customerUser);
+			}
+		}
+		return rt;
+	}
 	/*
 	 * 俱乐部
 	 */
@@ -96,16 +116,28 @@ public class SendMessageAsyncTask {
 
 		Map <String,List<WeixinUser>> retClubMap=weixinUserService.selectAllWithMapByClub ();
 
+		Map <String,List<WeixinUser>> retMobileMap=weixinUserService.selectAllWithMapByLoftMobile ();
+
 		String resultTemplateId = info.getResultTemplateId();
 		for (NodejsCrawlerDetailGame pmsgwGameDetail : pmsgwGameDetailList) {
 			if (pmsgwGameDetail != null) {
 				String name = pmsgwGameDetail.getPigowner();
 				String loft = pmsgwGameDetail.getCotenum();
 				String type = pmsgwGameDetail.getMaster_type();
+				String mobile=pmsgwGameDetail.getWeixin_mobile();
+
 
 				List<CustomerUser> openidList = new ArrayList<CustomerUser>();
 				if ("loft".equals(type)) {
-					openidList = getOpenIdWithLoft(retLoftMap, name);
+					if (StringUtils.isNotBlank (mobile))
+					{
+						openidList=getOpenIdWithLoftByMobile(retMobileMap,mobile);
+					}
+					if(openidList==null||openidList.size()==0)
+					{
+						openidList = getOpenIdWithLoft(retLoftMap, name);
+					}
+
 				} else {
 					openidList = getOpenIdWithClub(retClubMap, name, loft);
 				}
