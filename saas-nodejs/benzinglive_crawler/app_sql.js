@@ -50,7 +50,7 @@ let sqltext = {
         'VALUES ? '
     ].join(' '),
     queryGameDetail: [
-        'SELECT detail_id,master_id,master_type,master_website,master_href,cote_id,cote_name,cote_state,master_text,detail_page,detail_page_index,detail_state,distence,ringnum,pigowner,cometime,cotenum,speed,rank,create_time,modify_time FROM nodejs_crawler_detail_game',
+        'SELECT detail_id,master_id,master_type,master_website,master_href,cote_id,cote_name,cote_state,master_text,detail_page,detail_page_index,detail_state,distence,ringnum,pigowner,cometime,cotenum,speed,rank,create_time,modify_time,weixin_pigowner,weixin_mobile FROM nodejs_crawler_detail_game',
         'WHERE detail_state=\'0\'  and cote_state=\'1\'  ORDER BY master_id,rank'
     ].join(' '),
     changeGameDetailState: 'update nodejs_crawler_detail_game set detail_state = ? where detail_id in(?) ; ',
