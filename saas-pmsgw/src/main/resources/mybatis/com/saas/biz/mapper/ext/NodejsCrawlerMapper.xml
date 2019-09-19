@@ -66,6 +66,27 @@
 			LIMIT ${page.offset},${page.pageSize}
 		</if>
 	</select>
+	<select id="selectNodejsCrawlerDetailGameListByDynamicMatch" resultMap="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper.BaseResultMap"
+		parameterType="Object">
+		select pigowner, cometime,round(speed,1) speed, rank, ringnum, receiver_headimgurl,'${match_id}'master_text,
+		         if(b.pigeon_code is null,1,0) detail_page from
+		(select pigowner, cometime,speed, rank, ringnum,create_time, receiver_headimgurl
+		from ${queryMap.database}.nodejs_crawler_detail_game
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		) as a left join (
+			select pigeon_code from nodejs_match_regist where cote_id=#{cote_id} and match_id=#{match_id}
+		) as b on a.ringnum=b.pigeon_code
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
 
 	<select id="selectNodejsCrawlerDetailGameListByDynamicCount" resultType="long"
 		parameterType="Object">

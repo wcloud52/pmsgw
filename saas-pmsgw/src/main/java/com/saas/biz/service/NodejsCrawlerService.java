@@ -19,4 +19,9 @@ public interface NodejsCrawlerService {
 	List<NodejsCrawlerDetailGame> selectNodejsCrawlerDetailGameListByMasterId(String database, String masterId);
 	
 	List<NodejsCrawlerDetailGame> selectNodejsCrawlerDetailGameListByMasterId(String database, String pigowner, String masterId, int pageIndex, int pageSize);
+
+	List<NodejsCrawlerMasterGame> selectTop50NodejsCrawlerMasterGameListByCoteId(String database, String cote_id);
+
+	List<NodejsCrawlerDetailGame> selectNodejsCrawlerDetailGameListByDynamicMatch(String database, String masterId,String cote_id);
+
 }

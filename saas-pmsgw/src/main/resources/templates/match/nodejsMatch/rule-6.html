@@ -1,0 +1,74 @@
+<style type="text/css">
+    .rule-table{
+        display: table-cell;
+        border:0px;
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 0px
+    }
+    .rule-table tr{
+        border:1px solid black;
+    }
+    .rule-table td{
+        display: inline-block;
+        width:80px;
+        height: 25px;
+        padding: 5px;
+    }
+    .rule-table input{
+        display: inline-block;
+        width:50px;
+        margin:0px;
+        padding: 0px;
+    }
+    .rule-table .desc{
+        width: 100px;
+    }
+    .rule-table .border-top{
+        border-top:1px solid black;
+    }
+    .rule-table .border-bottom{
+        border-bottom:1px solid black;
+    }
+    .rule-table .border-left{
+        border-left:1px solid black;
+    }
+    .rule-table .border-right{
+        border-right:1px solid black;
+    }
+
+</style>
+<!--汽车页面-->
+<div style="margin: 15px;">
+    <form class="layui-form">
+        <table id="rule-5" class="rule-table">
+            <tr>
+                <td class="desc"></td>
+                <td>1&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>2&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>3&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="desc">羽数</td>
+                <td><input type="text" name="rank">&nbsp;取1</td>
+                <td><input type="text" name="rank">&nbsp;取1</td>
+                <td><input type="text" name="rank">&nbsp;取1</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="desc">档次金额</td>
+                <td style="text-align: left"><input type="text" name="grade_money"></td>
+                <td style="text-align: left"><input type="text" name="grade_money"></td>
+                <td style="text-align: left"><input type="text" name="grade_money"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="desc">说明</td>
+                <td colspan="4" style="width: 360px;height: 100px;">
+                    <textarea name="desc" rows="5" cols="47"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

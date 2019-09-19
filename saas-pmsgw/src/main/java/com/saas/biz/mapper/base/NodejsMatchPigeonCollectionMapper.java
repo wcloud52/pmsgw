@@ -2,6 +2,9 @@ package com.saas.biz.mapper.base;
 
 import com.saas.biz.pojo.NodejsMatchPigeonCollection;
 
+import java.util.List;
+import java.util.Map;
+
 public interface NodejsMatchPigeonCollectionMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,6 @@ public interface NodejsMatchPigeonCollectionMapper {
      * @param record
      */
     int updateByPrimaryKey(NodejsMatchPigeonCollection record);
+
+
 }

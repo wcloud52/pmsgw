@@ -1,0 +1,81 @@
+
+<div style="margin: 15px;">
+    <form class="layui-form">
+        <table class="layui-table" id="sign_up_table">
+            <colgroup>
+            </colgroup>
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <input type="hidden" name="rule">
+        <button lay-filter="edit"  style="display: none;" id="sign_up_submit"></button>
+        <datalist id="cars">
+            <option value="BMW">
+            <option value="Ford">
+            <option value="Volvo">
+        </datalist>
+    </form>
+</div>
+<style>
+    #sign_up_table td,#sign_up_table th{
+        text-align: center;
+    }
+    #sign_up_table input[type=text]{
+        width: 150px;
+        padding: 2px;
+        display: inline-block;
+    }
+</style>
+<script type="text/javascript">
+    layui.use(['upload', 'form','formSelects', 'table', 'laydate','yutons_sug'], function () {
+        var $ = layui.$,
+            upload = layui.upload,
+            form = layui.form,
+            formSelects = layui.formSelects,
+            table = layui.table,
+            laydate = layui.laydate,
+            layer = layui.layer,
+            yutons_sug = layui.yutons_sug;
+
+        var rule=JSON.parse(tableRowData.rule)
+        var colgroup='<col width="150"><col width="150"><col width="150">',
+            thead1='<th rowspan="2">会员编号</th><th rowspan="2">鸽主姓名</th><th rowspan="2">参赛鸽环号</th>',
+            thead2='',tbody='';
+        tbody='<td><input type="hidden" name="regist"><input type="hidden" name="match_id" value="'+match_id+'"><input type="text" id="pigowner_num" name="member_code" autocomplete="off"></td><td><input type="text" id="pigowner" name="member_name" autocomplete="off"></td><td><input type="text" name="pigeon_code" autocomplete="off"></td>';
+        for (var i = 0; i < rule.length; i++) {
+            thead1+='<th colspan="'+rule[i]['rule']['grade_money'].length+'">'+rule[i]['name']+'</th>';
+            for (var j = 0; j < rule[i]['rule']['grade_money'].length; j++) {
+                colgroup+='<col width="150">';
+                thead2+='<th>'+rule[i]['rule']['grade_money'][j]+'</th>';
+                tbody+='<td ><input type="checkbox" name="'+'field-'+rule[i]['value']+'-'+rule[i]['rule']['grade_money'][j]+'" value="'+rule[i]['rule']['grade_money'][j]+'" lay-skin="primary"></td>';
+            }
+        }
+        $('#sign_up_table colgroup').append(colgroup);
+        $('#sign_up_table thead').append('<tr>'+thead1+'</tr>');
+        $('#sign_up_table thead').append('<tr>'+thead2+'</tr>');
+        $('#sign_up_table tbody').append('<tr id="temp">'+tbody+'</tr>');
+        form.render();
+        yutons_sug.render({
+            id: "pigowner", //设置容器唯一id
+            type: 'sug', //设置输入框提示类型：sug-下拉框，sugTable-下拉表格
+            url: '/NodejsMatchPigeonCollection/selectGrpupByPigownerNum?match_id='+match_id + "&param="//设置异步数据接口,url为必填项,params为字段名
+        });
+        yutons_sug.render({
+            id: "pigowner_num", //设置容器唯一id
+            type: 'sug', //设置输入框提示类型：sug-下拉框，sugTable-下拉表格
+            url: '/NodejsMatchPigeonCollection/selectGrpupByPigownerNum?match_id='+match_id + "&param="//设置异步数据接口,url为必填项,params为字段名
+        });
+
+        function flashTable() {
+            fuzzyQuery.clearQuery();
+            var search_member_name = $("#search_member_name").val();
+            if (search_member_name.length > 0)
+                fuzzyQuery.addLike("member_name", search_member_name);
+            fuzzyQuery.addEqual('match_id',match_id)
+            var fuzzyQueryJson = fuzzyQuery.getQuery();
+            baseOperation.flashTable(JSON.stringify(fuzzyQueryJson), 'signUpListTable', layui);
+        }
+    })
+</script>

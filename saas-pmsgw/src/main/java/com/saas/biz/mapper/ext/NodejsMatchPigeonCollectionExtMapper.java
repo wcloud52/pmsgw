@@ -37,4 +37,12 @@ public interface NodejsMatchPigeonCollectionExtMapper extends NodejsMatchPigeonC
 	 * @return
 	 */
 	int deleteByDynamic(Map<Object, Object> paraMap);
+
+	/**
+	 * 查询某比赛上传的集鸽，根据会员编号分组
+	 * @param map
+	 * @return
+	 */
+	List<NodejsMatchPigeonCollection> selectListGroupByPigownerNum(Map<String, Object> map);
+
 }

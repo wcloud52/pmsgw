@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.saas.biz.mapper.impl.NodejsMatchImplMapper;
+import com.saas.biz.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.saas.biz.mapper.base.NodejsCrawlerMasterGameMapper;
 import com.saas.biz.mapper.ext.NodejsCrawlerMapper;
-import com.saas.biz.pojo.NodejsCrawlerDetailGame;
-import com.saas.biz.pojo.NodejsCrawlerMasterGame;
-import com.saas.biz.pojo.PmsgwGameDetail;
-import com.saas.biz.pojo.PmsgwGameMaster;
 import com.saas.biz.service.NodejsCrawlerService;
 import com.saas.common.BaseResponse;
 import com.saas.common.JsonResult;
@@ -32,6 +30,9 @@ public class NodejsCrawlerServiceImpl implements NodejsCrawlerService {
 	
 	@Autowired
 	private NodejsCrawlerMasterGameMapper nodejsCrawlerMasterGameMapper;
+
+	@Autowired
+	private NodejsMatchImplMapper nodejsMatchImplMapper;
 
 	@Override
 	public int insertNodejsCrawlerMasterGame(NodejsCrawlerMasterGame record)
@@ -166,6 +167,78 @@ public class NodejsCrawlerServiceImpl implements NodejsCrawlerService {
 			@Override
 			public long queryCount(Map<Object, Object> map) {
 				return nodejsCrawlerMapper.selectNodejsCrawlerDetailGameListByDynamicCount(map);
+			}
+		});
+		return restult.getData().getList();
+	}
+
+	@Override
+	public List<NodejsCrawlerMasterGame> selectTop50NodejsCrawlerMasterGameListByCoteId(String database,String cote_id) {
+		List<QueryNode> nodes = new ArrayList<QueryNode>();
+		nodes.add(new QueryNode("database",OpEnum.EQUALS.getName(),PrependEnum.NONE.getName(),database,SignEnum.NONE.getName()));
+		//nodes.add(new QueryNode("LEFT(master_id, 8)",OpEnum.EQUALS.getName(),PrependEnum.AND.getName(),"DATE_FORMAT(NOW(), '%Y%m%d')",SignEnum.NONE.getName()));
+		nodes.add(new QueryNode("cote_id",OpEnum.EQUALS.getName(),PrependEnum.AND.getName(),cote_id));
+		List<QueryNodes> listNodes = QueryNodes.createQueryNodesList(nodes, "and");
+
+		QueryObject query = new QueryObject();
+		query.setPageIndex(1);
+		query.setPageSize(500);
+		query.setSort("cote_state DESC,create_time desc");
+		query.setFuzzyQuery(listNodes);
+
+		BaseResponse<JsonResult<List<NodejsCrawlerMasterGame>, Object>> restult= PagingAndSortingRepository.find(query, new PageSpecification<NodejsCrawlerMasterGame>() {
+
+			@Override
+			public List<NodejsCrawlerMasterGame> query(Map<Object, Object> map) {
+
+				return nodejsCrawlerMapper.selectNodejsCrawlerMasterGameListByDynamic(map);
+			}
+
+			@Override
+			public Object queryExt(Map<Object, Object> map) {
+				return null;
+			}
+
+			@Override
+			public long queryCount(Map<Object, Object> map) {
+				return 1;
+			}
+		});
+		return restult.getData().getList();
+	}
+
+	@Override
+	public List<NodejsCrawlerDetailGame> selectNodejsCrawlerDetailGameListByDynamicMatch(String database,String masterId,String cote_id) {
+		List<QueryNode> nodes = new ArrayList<QueryNode>();
+		nodes.add(new QueryNode("master_id",OpEnum.EQUALS.getName(),PrependEnum.AND.getName(),masterId,SignEnum.YES.getName()));
+		nodes.add(new QueryNode("database",OpEnum.EQUALS.getName(),PrependEnum.NONE.getName(),database,SignEnum.NONE.getName()));
+		List<QueryNodes> queryNodes = QueryNodes.createQueryNodesList(nodes,"and");
+
+		QueryObject query = new QueryObject();
+		query.setPageIndex(1);
+		query.setPageSize(10000);
+		query.setSort(" rank asc,create_time asc ");
+		query.setFuzzyQuery(queryNodes);
+
+		NodejsMatch match=nodejsMatchImplMapper.selectNewMatchByCoteId(cote_id);
+
+		BaseResponse<JsonResult<List<NodejsCrawlerDetailGame>, Object>> restult= PagingAndSortingRepository.find(query, new PageSpecification<NodejsCrawlerDetailGame>() {
+
+			@Override
+			public List<NodejsCrawlerDetailGame> query(Map<Object, Object> map) {
+				map.put("match_id",match.getMatch_id());
+				map.put("cote_id",cote_id);
+				return nodejsCrawlerMapper.selectNodejsCrawlerDetailGameListByDynamicMatch(map);
+			}
+
+			@Override
+			public Object queryExt(Map<Object, Object> map) {
+				return null;
+			}
+
+			@Override
+			public long queryCount(Map<Object, Object> map) {
+				return 10000;
 			}
 		});
 		return restult.getData().getList();

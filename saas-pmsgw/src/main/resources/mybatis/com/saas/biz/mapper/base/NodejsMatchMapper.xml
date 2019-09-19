@@ -20,6 +20,9 @@
     <result column="item_count" jdbcType="INTEGER" property="item_count" />
     <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modify_time" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="start_time" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="end_time" />
+    <result column="rule" jdbcType="CLOB" property="rule" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -27,7 +30,7 @@
     -->
     match_id, cote_id, cote_name, match_senderId, match_senderName, match_sendTime, match_type, 
     match_title, match_desc, match_text, match_status, collection_count, item_count, 
-    create_time, modify_time
+    create_time, modify_time ,start_time ,end_time ,rule
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
@@ -53,13 +56,14 @@
       match_senderId, match_senderName, match_sendTime, 
       match_type, match_title, match_desc, 
       match_text, match_status, collection_count, 
-      item_count, create_time, modify_time
+      item_count, create_time, modify_time,start_time,end_time,rule
       )
     values (#{match_id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{cote_name,jdbcType=VARCHAR}, 
       #{match_senderId,jdbcType=VARCHAR}, #{match_senderName,jdbcType=VARCHAR}, #{match_sendTime,jdbcType=TIMESTAMP}, 
       #{match_type,jdbcType=VARCHAR}, #{match_title,jdbcType=VARCHAR}, #{match_desc,jdbcType=VARCHAR}, 
       #{match_text,jdbcType=VARCHAR}, #{match_status,jdbcType=INTEGER}, #{collection_count,jdbcType=INTEGER}, 
-      #{item_count,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}
+      #{item_count,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP},
+      #{start_time,jdbcType=TIMESTAMP}, #{end_time,jdbcType=TIMESTAMP}, #{rule,jdbcType=CLOB}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.saas.biz.pojo.NodejsMatch">
@@ -113,6 +117,15 @@
       <if test="modify_time != null">
         modify_time,
       </if>
+      <if test="start_time != null">
+        start_time,
+      </if>
+      <if test="end_time != null">
+        end_time,
+      </if>
+      <if test="rule != null">
+        rule,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="match_id != null">
@@ -159,6 +172,15 @@
       </if>
       <if test="modify_time != null">
         #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="start_time != null">
+        #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null">
+        #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rule != null">
+        #{rule,jdbcType=CLOB},
       </if>
     </trim>
   </insert>
@@ -210,6 +232,15 @@
       <if test="modify_time != null">
         modify_time = #{modify_time,jdbcType=TIMESTAMP},
       </if>
+      <if test="start_time != null">
+        start_time = #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null">
+        end_time = #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rule != null">
+        rule = #{rule,jdbcType=CLOB},
+      </if>
     </set>
     where match_id = #{match_id,jdbcType=VARCHAR}
   </update>
@@ -231,7 +262,10 @@
       collection_count = #{collection_count,jdbcType=INTEGER},
       item_count = #{item_count,jdbcType=INTEGER},
       create_time = #{create_time,jdbcType=TIMESTAMP},
-      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      start_time = #{start_time,jdbcType=TIMESTAMP},
+      end_time = #{end_time,jdbcType=TIMESTAMP},
+      rule = #{rule,jdbcType=CLOB}
     where match_id = #{match_id,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -123,6 +123,13 @@ public class NodejsMatch {
      */
     private Date modify_time;
 
+    private Date start_time;
+    private Date end_time;
+
+    /**
+     * 指定规则
+     */
+    private  String rule;
     /**
      * <pre>
      * 获取：指定比赛id
@@ -496,5 +503,29 @@ public class NodejsMatch {
      */
     public void setModify_time(Date modify_time) {
         this.modify_time = modify_time;
+    }
+
+    public String getRule() {
+        return rule;
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
+    }
+
+    public Date getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Date start_time) {
+        this.start_time = start_time;
+    }
+
+    public Date getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Date end_time) {
+        this.end_time = end_time;
     }
 }

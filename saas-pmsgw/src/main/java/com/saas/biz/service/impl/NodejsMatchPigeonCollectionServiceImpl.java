@@ -141,4 +141,9 @@ public class NodejsMatchPigeonCollectionServiceImpl implements NodejsMatchPigeon
 	{
 		return implMapper.updateBatch(list);
 	}
+
+	@Override
+	public List<NodejsMatchPigeonCollection> selectListGroupByPigownerNum(Map<String, Object> map) {
+		return implMapper.selectListGroupByPigownerNum(map);
+	}
 }

@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+    <title>比赛成绩列表</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/dist/css/jquery-weui.min.css"/>
+
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/reset.css"/>
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/flex.css"/>
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/style.css"/>
+<style type="text/css">
+    .btn_a{
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        padding: 0 3px;
+        background-color: #009688;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+    }
+    .desc img {
+        width: 48px;
+        height: 48px;
+        float: left;
+        display: inline-block;
+    }
+    .desc span{
+        font-size: 17px;
+        display: inline-block;height: 48px;line-height: 22px;padding-left: 3px;
+    }
+    .desc i.pigowner{
+        font-size: 17px;
+        width: 150px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .desc i.cometime{
+        color: orange;
+    }
+</style>
+</head>
+<body>
+
+<section class="wrap">
+
+    <section class="top-fixed">
+
+        <div class="flex-box flex-between fs13 p8 top-search" style="background-color: #efeff4">
+            <!--<a href="javascript :history.back(-1);" class="flex-box header_left"> <img src="/plugins/jquery-weui/images/header-img1.png"
+                                                                  alt="" class="block header_back"
+                                                                  style="height: 22px; margin-right: 4px;"> <img
+                    src="/plugins/jquery-weui/images/header-img1.png" alt="" class="block header_options"
+                    style="height: 22px; margin-right: 4px;">
+            </a>-->
+            <div class="search-btn-wrap flex-grow-1 pointer">
+                <i class="ico-search"></i> <input type="text" class="" placeholder="搜索您需要的成绩" id="searchInput">
+            </div>
+        </div>
+    </section>
+    <div class="p10 flex-box flex-between member-head" style="padding-top: 55px;">
+        <div class="colf tc fs14 flex-box info">
+            <p class="mr5">${master.master_text}</p>
+        </div>
+    </div>
+    <section class="main" style="padding-top: 2px;">
+            <#list item as item>
+        <ul class="list">
+            <li>
+                <span class="p5 bgf flex-box flex-col-start ">
+                <div class="p5 flex-grow-0">
+                    <span class="fs20 red">${item_index+1}</span>
+                </div>
+                <div class="pl10 flex-self-stretch flex-box flex-col flex-between flex-col-stretch hidden" style="width: 100%;">
+                    <div class="desc">
+                            <img src="${item.receiver_headimgurl!'/images/headPortrait.gif'}"/>
+                        <span><i class="pigowner">${item.pigowner}</i>
+                            <br>
+                            <#if item.ringnum?index_of("2019")==0 || item.ringnum?index_of("2018")==0>
+                                环号:${item.ringnum?substring(4)}
+                            <#else>环号:${item.ringnum!}
+                            </#if>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <br><i class="cometime">${item.cometime?substring(5)}&nbsp;&nbsp;&nbsp;&nbsp;分速: ${item.speed}</i>
+                            </span>
+
+                            <#if item.detail_page==0>
+                        <a class="btn_a" href= "/wap/page/resultOne?match_id=${item.master_text}&pigeon_code=${item.ringnum}&pigowner=${item.pigowner}">指定</a>
+                            </#if>
+                    </div>
+                </div>
+            </span>
+            </li>
+        </ul>
+        </#list>
+        <!--  -->
+    </section>
+</section>
+
+<script src="/static/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+<script src="/static/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+<script src="/static/plugins/jquery-weui/dist/js/city-picker.min.js"></script>
+<script src="/static/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+<script>
+
+    $(function () {
+        function click_encodeLink(master_text, ringnum,pigowner){
+            location.href = "/wap/page/resultOne?match_id="+encodeURI(master_text)+"&pigeon_code="+encodeURI(ringnum)+"&pigowner="+encodeURI(pigowner)
+        }
+        $('#searchInput').bind('input propertychange', function () {
+            var text = $("#searchInput").val();
+            var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+            if (reg.test(text)) {
+                $('.list').each(function () {
+                    var $self = $(this);
+                    var flag = $self.text().search(text)
+                    if (flag > -1) {
+                        $self.css("display", "");
+
+                    } else {
+                        $self.css("display", "none");
+
+                    }
+                });
+            } else {
+                $('.list').css("display", "")
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

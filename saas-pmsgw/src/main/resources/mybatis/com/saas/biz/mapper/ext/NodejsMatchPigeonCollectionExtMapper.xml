@@ -301,5 +301,17 @@
 		      collection_id=#{item.collection_id,jdbcType=VARCHAR}
 		</foreach>
 	</update>
-	
+	<select id="selectListGroupByPigownerNum" resultMap="com.saas.biz.mapper.base.NodejsMatchPigeonCollectionMapper.BaseResultMap" parameterType="Map">
+		select pigowner,pigowner_num,GROUP_CONCAT(ringnum) ringnum
+		from nodejs_match_pigeon_collection
+		WHERE match_id= #{match_id}
+		<if test="param !=null">
+			and (pigowner like concat('%',#{param},'')
+			or pigowner_num like concat('%',#{param},''))
+		</if>
+		GROUP BY pigowner_num
+		<if test="limt !=null and offset !=null">
+			limit ${offset},${limit}
+		</if>
+	</select>
 </mapper>

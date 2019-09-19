@@ -55,7 +55,13 @@
 			</if>		
             <if test="queryMap.modify_time != null">
               and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
-			</if>		
+			</if>
+            <if test="queryMap.start_time != null">
+              and start_time = #{queryMap.start_time,jdbcType=TIMESTAMP }
+			</if>
+            <if test="queryMap.end_time != null">
+              and end_time = #{queryMap.end_time,jdbcType=TIMESTAMP }
+			</if>
 		</where>
 		<if test="sort != null and sort != '' ">
 			order by ${sort}
@@ -118,7 +124,13 @@
 			</if>		
             <if test="queryMap.modify_time != null">
               and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
-			</if>		
+			</if>
+            <if test="queryMap.start_time != null">
+              and start_time = #{queryMap.start_time,jdbcType=TIMESTAMP }
+			</if>
+            <if test="queryMap.end_time != null">
+              and end_time = #{queryMap.end_time,jdbcType=TIMESTAMP }
+			</if>
 		</where>
 	</select>
 	
@@ -173,7 +185,13 @@
 			</if>		
             <if test="queryMap.modify_time != null">
               and modify_time = #{queryMap.modify_time,jdbcType=TIMESTAMP }			
-			</if>		
+			</if>
+            <if test="start_time.modify_time != null">
+              and start_time = #{queryMap.start_time,jdbcType=TIMESTAMP }
+			</if>
+            <if test="queryMap.end_time != null">
+              and end_time = #{queryMap.end_time,jdbcType=TIMESTAMP }
+			</if>
 		</where>
 	</delete>
 	
@@ -195,7 +213,10 @@
 		collection_count,
 		item_count,
 		create_time,
-		modify_time
+		modify_time,
+		rule,
+		start_time,
+		end_time
 		)
 		values
 		<foreach item="item" index="index" collection="list" open=""
@@ -215,7 +236,10 @@
 			    #{item.collection_count,jdbcType=INTEGER},
 			    #{item.item_count,jdbcType=INTEGER},
 			    #{item.create_time,jdbcType=TIMESTAMP},
-			    #{item.modify_time,jdbcType=TIMESTAMP}
+			    #{item.modify_time,jdbcType=TIMESTAMP},
+			    #{item.rule,jdbcType=VARCHAR},
+			    #{item.start_time,jdbcType=TIMESTAMP},
+			    #{item.end_time,jdbcType=TIMESTAMP}
 			)
 		</foreach>
 	</insert>
@@ -267,7 +291,16 @@
 			     </if>		
                 <if test="item.modify_time != null">
                   and modify_time = #{item.modify_time,jdbcType=TIMESTAMP}			
-			     </if>		
+			     </if>
+                <if test="item.modify_time != null">
+                  and rule = #{item.rule,jdbcType=VARCHAR}
+			     </if>
+                <if test="item.modify_time != null">
+                  and start_time = #{item.start_time,jdbcType=TIMESTAMP}
+			     </if>
+                <if test="item.modify_time != null">
+                  and end_time = #{item.end_time,jdbcType=TIMESTAMP}
+			     </if>
 			</set>
 			where
 		      match_id=#{item.match_id,jdbcType=VARCHAR}

@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.math.BigDecimal;
 
+import com.baomidou.kisso.SSOHelper;
+import com.baomidou.kisso.security.token.SSOToken;
+import com.saas.biz.pojo.NodejsMatchPigeonCollection;
+import com.saas.biz.pojo.NodejsSysUser;
+import com.saas.biz.util.SnGenerator;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +33,9 @@ import com.saas.common.QueryObject;
 import com.saas.common.Specification;
 import com.saas.biz.pojo.NodejsMatchPigeonCollection;
 import com.saas.biz.service.NodejsMatchPigeonCollectionService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/NodejsMatchPigeonCollection")
@@ -382,5 +391,44 @@ public class NodejsMatchPigeonCollectionController {
 
 		int result = sv.deleteByIds(ids);
 		return BaseResponse.ToJsonResult(result);
+	}
+
+	@RequestMapping(value = "/insertBatch", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResponse<Integer> insertBatcOperation(@RequestBody List<NodejsMatchPigeonCollection> list, HttpServletRequest request, HttpServletResponse response) {
+		if (log.isDebugEnabled())
+			log.debug(NodejsMatchPigeonCollectionController.class + "/insertBatch->" + JSON.toJSONString(list));
+		SSOToken ssoToken = SSOHelper.getSSOToken(request);
+
+		if (ssoToken != null) {
+			NodejsSysUser nodejsSysUser = JSON.parseObject(JSON.toJSONString(ssoToken.getClaims().get("nodejsSysUser")), NodejsSysUser.class);
+
+			for (NodejsMatchPigeonCollection item : list) {
+				String collection_id = SnGenerator.getLongRandSn("MP");
+				item.setCollection_id(collection_id);
+				item.setCote_id(nodejsSysUser.getCote_id());
+				item.setCote_name(nodejsSysUser.getCote_name());
+				item.setCollection_senderId(nodejsSysUser.getId());
+				item.setCollection_senderName(nodejsSysUser.getUserName());
+				item.setCreate_time(new Date());
+				item.setModify_time(new Date());
+			}
+		}
+
+		int result = sv.insertBatch(list);
+
+		return BaseResponse.ToJsonResult(result);
+	}
+
+	@RequestMapping(value = "/selectGrpupByPigownerNum")
+	@ResponseBody
+	public BaseResponse<List<NodejsMatchPigeonCollection>> selectListGroupByPigownerNum (String match_id,String param){
+		Map<String,Object> map=new HashedMap();
+		map.put("match_id",match_id);
+		map.put("param",param);
+		map.put("limit",0);
+		map.put("offset",10);
+		List<NodejsMatchPigeonCollection> list = sv.selectListGroupByPigownerNum(map);
+		return BaseResponse.ToJsonResult(list);
 	}
 }

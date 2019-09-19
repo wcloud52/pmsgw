@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <title>比赛列表</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/dist/css/jquery-weui.min.css"/>
+
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/reset.css"/>
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/flex.css"/>
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/style.css"/>
+<style type="text/css">
+    .cote_title{
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        padding: 10px;
+    }
+</style>
+</head>
+<body>
+
+<section class="wrap">
+
+
+
+    <p class="main">
+    <p class="cote_title" >
+        <a href="${item.cote_web_url}" style="border-bottom: 1px solid black;"> ${item.cote_short_name} </a>
+    </p>
+        <#list list as item>
+        <ul class="list">
+            <li>
+                <a href="racedetaillist3?masterId=${item.master_id}" class="p10 bgf flex-box flex-col-start arrowR">
+                    <div class="pl10 flex-self-stretch flex-box flex-col flex-between flex-col-stretch hidden">
+                        <div>
+                            <p class="fs14 col0 multi-line">${item.master_text?if_exists}</p>
+                        </div>
+                        <div class="flex-box flex-between fs13 col3">
+                            <p>
+                                <span class="ora">${item.create_time?string('yyyy-MM-dd hh:mm:ss')}</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </#list>
+    <!--  -->
+    </section>
+</section>
+
+<script src="/static/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+<script src="/static/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+<script src="/static/plugins/jquery-weui/dist/js/city-picker.min.js"></script>
+<script src="/static/plugins/jquery-weui/dist/js/swiper.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.aodianyun.com/static/jquery/jquery-1.7.2.min.js"></script>
+
+
+<script>
+    $(function () {
+
+
+        $('#searchInput').bind('input propertychange', function () {
+            var text = $("#searchInput").val();
+            var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+            if (reg.test(text)) {
+                $('.list').each(function () {
+                    var $self = $(this);
+                    var flag = $self.text().search(text)
+                    if (flag > -1) {
+                        $self.css("display", "");
+
+                    } else {
+                        $self.css("display", "none");
+
+                    }
+                });
+            } else {
+                $('.list').css("display", "")
+
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>

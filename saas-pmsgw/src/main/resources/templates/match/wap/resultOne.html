@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>获奖情况</title>
+
+
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/weui/lib/weui.min.css">
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="/plugins/jquery-weui/demo/css/demos.css">
+
+    <link rel="stylesheet" href="/static/plugins/weuiplus/css/weui.css"/>
+    <link rel="stylesheet" href="/static/plugins/weuiplus/css/weuix.css"/>
+
+    <link rel="stylesheet" href="/static/plugins/jquery-weui/css/style.css"/>
+    <script src="/static/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+    <script src="/static/plugins/jquery-weui1.2.1/js/media.js"></script>
+    <script src="/static/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+    <script src="/static/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+    <script src="/static/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+</head>
+<body>
+<div class="weui_grids grids-small">
+    <input type="hidden" id="openid" name="openid" value="${openid?if_exists}"/>
+    <div class="p10 flex-box flex-between member-head">
+        <div class="colf tc fs14 flex-box info">
+            <h3 style="text-align: center">${pigeon_code}获奖情况</h3>
+            <h4 style="text-align: center">鸽主：${pigowner}</h4>
+        </div>
+    </div>
+
+    <table style="margin: 20px auto;width: 80%">
+        <thead><tr><th>规则</th><th>奖金</th></tr></thead>
+        <tbody>
+        <#list result as item>
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.reward}</td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
