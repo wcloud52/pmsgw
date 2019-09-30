@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var app = express();
 var api = require('./api');
 
@@ -9,6 +9,12 @@ const task = require('./task');
 var app_crawler = require('./app_crawler');
 
 app.use('/app_crawler', app_crawler);
+
+
+var app_test = require('./app_test');
+
+app.use('/app_test', app_test);
+
 
 var test = require('./test');
 
@@ -22,8 +28,8 @@ app.listen(api.port, function() {
     console.log('app is listening at port-' + api.port);
 });
 
-// task.startMasterCrawler();
-// task.startDetailCrawlerFirst();
-// task.startDetailCrawlerSecond();
-// task.sendMessage();
+ //task.startMasterCrawler();
+ //task.startDetailCrawlerFirst();
+ //task.startDetailCrawlerSecond();
+ //task.sendMessage();
 // task.validationQuery();

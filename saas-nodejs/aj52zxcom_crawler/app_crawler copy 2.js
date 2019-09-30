@@ -76,7 +76,7 @@ function crawlerWeb(type,res)
             callback(null, "/master/loft/club");
         }
     ], function(err, result) {
-        
+        var tasks = result;
     });
 }
 /**
@@ -232,8 +232,6 @@ function crawlerWebLoft(callback) {
  */
 function flashMaster(async,baseMaster)
 {
-    console.time('flashMaster')
-    console.log('----------------------flashMaster->>>>>start->'+baseMaster.length);
         async.waterfall([
             function(callback) {
                 insertCrawlerMasterByMore(async,baseMaster,callback);
@@ -255,8 +253,7 @@ function flashMaster(async,baseMaster)
             }
            
         ], function(err, result) {
-            console.log('----------------------flashMaster->>>>>end');
-            console.timeEnd('flashMaster')
+            
         });
 }
 
@@ -265,22 +262,20 @@ function flashMaster(async,baseMaster)
  */
 function flashDetailPage(fcallback)
 {
-    console.log('nodejs_crawler_detail插入->>>>>start');
+    console.log('插入nodejs_crawler_detail插入->>>>>start');
     async.waterfall([
         function(callback) {
             queryCrawlerMaster(callback);
         },
         function(results, callback) {
-            insertMasterToDetail(async,results,callback);
-            
+            insertMasterToDetail(async,results);
+            callback(null, "insertMasterToDetail");
         }
     ], function(err, result) {
-
-        console.log('nodejs_crawler_detail插入->>>>>end');
-        fcallback(null,null);
-
+        
     });
-  
+    console.log('插入nodejs_crawler_detail插入->>>>>end');
+    fcallback(null,null);
 }
 /**
  * 多条插入nodejs_crawler_master
@@ -308,12 +303,9 @@ function insertCrawlerMasterByMore(async,mapList,fcallback) {
         if (err) {
             console.log('err: ', err);
         }
-
-        console.log('nodejs_crawler_master多条插入->>>>>end');
-        fcallback(null,null);
-
     });
-  
+    console.log('nodejs_crawler_master多条插入->>>>>end');
+    fcallback(null,null);
 }
 /**
  * 多条更新nodejs_crawler_master
@@ -333,18 +325,16 @@ function updateCrawlerMasterMore(async,mapList,fcallback) {
         if (err) {
             console.log('err: ', err);
         }
-
-        console.log('nodejs_crawler_master多条更新->>>>>end');
-        fcallback(null,null);
     }); 
-   
+    console.log('nodejs_crawler_master多条更新->>>>>end');
+    fcallback(null,null);
 }
 /**
  * 单条插入nodejs_crawler_master
  * @param {*} item 
  */
 function insertCrawlerMasterByOne(item,callback) {
-    
+
     connection.query(app_sql.insertCrawlerMaster, item, function(results, fields, err) {
         if (err) {
             console.log(err.message); 
@@ -377,7 +367,7 @@ function insertGameMaster(fcallback) {
         if (error) {
             console.log("error-insertGameMaster>" + error.stack);
         }
-        console.log('nodejs_crawler_master_game插入->>>>>end');
+        console.log('nodejs_crawler_master_game插入->>>>>start');
         fcallback(null,null);
     }); 
 }
@@ -438,7 +428,7 @@ function queryCrawlerMaster(callback) {
  * @param {*} async 
  * @param {*} mapList 
  */
-function insertMasterToDetail(async,mapList,fcallback) {
+function insertMasterToDetail(async,mapList) {
     async.mapSeries(mapList, function(item, callback) {    
             insertMasterToDetailMore(item.master_id, item.master_type, item.master_website, item.cote_id, item.cote_name, item.master_text, item.master_href, 
                 item.detail_crawler_total, item.detail_crawler_href,callback);  
@@ -446,7 +436,6 @@ function insertMasterToDetail(async,mapList,fcallback) {
         if (err) {
             console.log('err: ', err);
         }
-        fcallback(null, null);
     });
 }
 /**
@@ -496,10 +485,10 @@ function insertMasterToDetailMore(master_id, master_type, master_website, cote_i
         if (err) {
             console.log('err: ', err);
         }
-        fcallback(null,null);
+
     });
 
-    
+    fcallback(null,null);
 }
 /**
  * 单条插入nodejs_crawler_detail
@@ -547,32 +536,27 @@ router.get('/detail', function(req, res, next) {
         "data": null,
         "message": ""
     };
+    flashCoteState();
+    // connection.query(app_sql.queryCrawlerDetail, [cote_state],
+    //     function(results, fields) {
+    //         console.log("queryCrawlerDetail-> : " + results.length);
+    //         results.forEach(function(element) {
+    //             crawlerDetail(element.detail_id, element.master_id, element.master_type, element.master_website, element.master_href,
+    //                 element.cote_id, element.cote_name, element.cote_state, element.master_text, element.detail_crawler_page, element.detail_crawler_href);
+    //         });
+
+    //     }
+    // );
     flashDetail();
     res.send(rrtt);
 });
-/*
-router.get('/detailByMasterId', function(req, res, next) {
-    var master_id = req.query.master_id;
-    console.log("master_id-> : " + master_id);
-    var rrtt = {
-        "code": "0",
-        "data": null,
-        "message": ""
-    };
-    operationCrawlerMasteIdOne(null);
-    res.send(rrtt);
-});
-function httpGetDetailByMasterId(master_id) {
-    var uri = api.detailByMasterIdUrl+"?master_id="+master_id;
-    http.get(uri, function(res) {    console.log("httpGetDetailByMasterId: " + res.statusCode);   }).on('error', function(e) {    console.log("httpGetDetailByMasterId error: " + e.message);   });
-}*/
+
+
 /**
  * 本地明细数据
  */
 function flashDetail()
 {
-    console.time('flashDetail')
-    console.log('----------------------flashDetail->>>>>start->');
     async.waterfall([
         function(callback) {
             flashCoteState(callback);
@@ -584,15 +568,13 @@ function flashDetail()
             operationCrawlerMasteIdMore(results,callback);
         }
     ], function(err, result) {
-        console.log('----------------------flashDetail->>>>>end');
-        console.timeEnd('flashDetail')
+        var tasks = result;
     });
 }
 
-
 //master_id列表
 function queryCrawlerMasteIdList(callback) {
-    console.log('nodejs_crawler_master查询->>>>>start');
+
     connection.query(app_sql.queryCrawlerMaster, [], function(results, fields, err) {
         if (err) {
             console.log(err.message); 
@@ -604,29 +586,20 @@ function queryCrawlerMasteIdList(callback) {
         
             ret.push(master_id);
         });
-        console.log('nodejs_crawler_master查询->>>>>end');
         callback(null,ret);
     });
 }
 //插入处理所有
 function operationCrawlerMasteIdMore(ret,fcallback)
 {
-    
     async.mapSeries(ret, function(item, callback) {
-        //同步操作
-        //operationCrawlerMasteIdOne(item,callback);
-
-        //异步操作
-        operationCrawlerMasteIdOne(item,null);
-        callback(null,null);
+        operationCrawlerMasteIdOne(item,callback);
     }, function(err, results) {
         if (err) {
             console.log('err: ', err);
         }
-       
-        fcallback(null,null);
     });
-   
+    fcallback(null,null);
 }
 //插入处理一场比赛
 function operationCrawlerMasteIdOne(master_id,fcallback)
@@ -637,14 +610,13 @@ function operationCrawlerMasteIdOne(master_id,fcallback)
         },
         function(results, callback) {
            
-            crawlerDetailMore(results,callback);
+            crawlerDetailMore(results);
+            callback(null, "crawlerDetailMore");
         }
     ], function(err, result) {
         
-        //fcallback(null,null);
-
     });
-  
+    fcallback(null,null);
 }
 //查询分页信息
 function queryCrawlerDetail(master_id,callback) {
@@ -673,25 +645,20 @@ function queryCrawlerDetail(master_id,callback) {
            
             ret.push(json);
         });
-        callback(null, ret);
+        callback(null, results);
     });
 }
 function crawlerDetailMore(ret,fcallback)
 {
     async.mapSeries(ret, function(item, callback) {
-        //console.log("crawlerDetailMore->"+item.detail_id); 
             crawlerDetailOnePage(item.detail_id, item.master_id, item.master_type, item.master_website, item.master_href, item.cote_id, item.cote_name, item.cote_state,
-                item.master_text, item.detail_crawler_page, item.detail_crawler_href,callback) ;      
-                //console.log("crawlerDetailMore->------------------------------");            
+                item.master_text, item.detail_crawler_page, item.detail_crawler_href,callback) ;                  
     }, function(err, results) {
         if (err) {
             console.log('err: ', err);
         }
-
-        fcallback(null,null);
-
     });
-    
+    fcallback(null,null);
 }
 function crawlerDetailOnePage(detail_id, master_id, master_type, master_website, master_href, cote_id, cote_name, cote_state, master_text, detail_crawler_page, detail_crawler_href,callback) {
     var pageid = detail_crawler_page;
@@ -771,24 +738,18 @@ function crawlerDetailOnePage(detail_id, master_id, master_type, master_website,
                         detail_state:detail_state,
                         detail_crawler_href:detail_crawler_href
                     };
-                    flashGameDetai(async,baseDetail,callback);
+                    flashGameDetai(async,baseDetail);
                 }
-                else 
-                {
-                    callback(null,null);
-                }
-                //callback(null, 'crawlerDetail');   
                
             } catch (err) {
                 console.log("crawlerDetail-> : " + master_id + "->" + pageid + "->" + detail_crawler_href + "->" + err.message);
-                callback(e,null);
             }
 
-            
+            callback(null, 'crawlerDetail');    
         });
 }
 
-function flashGameDetai(async,baseDetail,fcallback)
+function flashGameDetai(async,baseDetail)
 {
     console.log(baseDetail.detail_crawler_href+'->>>>>start');
          async.waterfall([
@@ -814,10 +775,9 @@ function flashGameDetai(async,baseDetail,fcallback)
                 updateCrawlerDetail(baseDetail.detail_state, baseDetail.detailList.length, baseDetail.detail_crawler_href,callback);
             }
         ], function(err, result) {
-            console.log(baseDetail.detail_crawler_href+'->>>>>end');
-            fcallback(null,null);
+           
         });
-        
+        console.log(baseDetail.detail_crawler_href+'->>>>>end');
 }
 
 function deleteGameDetailTemp(master_id,callback) {

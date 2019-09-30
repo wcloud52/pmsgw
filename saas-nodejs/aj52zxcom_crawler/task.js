@@ -1,4 +1,4 @@
-var http = require('http');
+﻿var http = require('http');
 var schedule = require("node-schedule");
 var moment = require('moment');
 var api = require('./api');
@@ -47,14 +47,14 @@ var task = {
     },
     startDetailCrawlerSecond: function() {
         //var cron = "0 */30 5,6,7,15,16,17,18,19,20 * * *";
-        var cron = "*/10 * 5,6,7,8,9,10,11,12,15,16,17,18,19,23 * * *";
+        var cron = "*0 */2 5,6,7,8,9,10,11,12,15,16,17,18,19,23 * * *";
         schedule.scheduleJob(cron, function() {
             console.log("执行任务DetailCrawlerSecond：" + moment().format('YYYY-MM-DD HH:mm:ss'));
             httpGetDetailCrawler('0');
         });
     },
     sendMessage: function() {
-        var cron = "0 */2 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 * * *";
+        var cron = "0 */1 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 * * *";
         schedule.scheduleJob(cron, function() {
             console.log("执行任务sendMessage：" + moment().format('YYYY-MM-DD HH:mm:ss'));
             httpGetSendMessage();

@@ -1,5 +1,5 @@
 let sqltext = {
-    //nodejs_crawler_master
+
     insertCrawlerMaster: [
         'INSERT INTO nodejs_crawler_master',
         '(master_id,cote_id,cote_name,master_text,master_href,master_date,master_type,master_website,create_time,modify_time) ',
@@ -7,10 +7,9 @@ let sqltext = {
         '(SELECT ? master_id,? cote_id,? cote_name,? master_text,? master_href,? master_date,? master_type,? master_website,? create_time,? modify_time)a ',
         'where a.master_href NOT IN (select master_href from nodejs_crawler_master)'
     ].join(' '),
-    updateCrawlerMasterWith: ['update nodejs_crawler_master set detail_href = ?,detail_crawler_total = ?,detail_crawler_href = ?,modify_time = ? where master_href = ? ; ',
-        'select master_id from nodejs_crawler_master where master_href = ?;'
+    updateCrawlerMasterWith: ['update nodejs_crawler_master set detail_href = ?,detail_crawler_total = ?,detail_crawler_href = ?,modify_time = ? where master_href = ? ; '
     ].join(' '),
-    queryCrawlerMaster: "SELECT master_id,master_text,master_href,master_date,master_type,master_website,create_time,modify_time FROM nodejs_crawler_master ",
+    queryCrawlerMaster: "SELECT master_id,cote_id,cote_name,cote_state,master_text,master_href,master_date,master_type,master_website,detail_href,detail_crawler_total,detail_crawler_href,create_time,modify_time FROM nodejs_crawler_master ",
 
     //nodejs_crawler_detail
     insertCrawlerDetail: [
@@ -23,23 +22,16 @@ let sqltext = {
     updateCrawlerDetail: 'update nodejs_crawler_detail set detail_state = ?,detail_josn=?, modify_time = ? where detail_crawler_href = ? ; ',
     queryCrawlerDetail: [
         'SELECT detail_id,master_id,master_type,master_website,cote_id,cote_name,cote_state,master_text,master_href,detail_state,',
-        'detail_crawler_page,detail_crawler_href,create_time,modify_time FROM nodejs_crawler_detail aa  WHERE aa.detail_state=\'0\' and',
-        'exists ',
-        '( ',
-        'select * from  ( ',
-        'SELECT master_id,MIN(detail_crawler_page) detail_crawler_page FROM nodejs_crawler_detail  WHERE detail_state=\'0\' ',
-        'AND cote_state=?  GROUP BY master_id ',
-        ') bb ',
-        'where aa.master_id=bb.master_id and aa.detail_crawler_page=bb.detail_crawler_page ',
-        ')',
+        'detail_crawler_page,detail_crawler_href,create_time,modify_time FROM nodejs_crawler_detail aa  WHERE aa.detail_state=\'0\' and aa.master_id=? order by detail_crawler_page '
     ].join(' '),
 
     //nodejs_crawler_master_game
     insertGameMaster: [
-        'DELETE FROM nodejs_crawler_master_game WHERE master_id IN (SELECT master_id FROM  nodejs_crawler_master);',
+      
+        'DELETE FROM nodejs_crawler_master_game;',
         ' insert into nodejs_crawler_master_game',
         '(master_id,cote_id,cote_name, master_text, master_href, master_date, master_type, master_website, detail_href, detail_crawler_total, detail_crawler_href, create_time, modify_time) ',
-        'select master_id,cote_id,cote_name,master_text,master_href,master_date,master_type,master_website,detail_href,detail_crawler_total,detail_crawler_href,create_time,modify_time from nodejs_crawler_master '
+        'select master_id,cote_id,cote_name,master_text,master_href,master_date,master_type,master_website,detail_href,detail_crawler_total,detail_crawler_href,create_time,modify_time from nodejs_crawler_master; '
 
     ].join(' '),
 
@@ -71,7 +63,7 @@ let sqltext = {
     ].join(' '),
     //存储过程
     flashCoteState: 'call p_nodejs_flash_cote_state() ',
-    validationQuery: 'select 1 '
+    validationQuery: 'SELECT master_id,cote_id,cote_name,cote_state,master_text,master_href,master_date,master_type,master_website,detail_href,detail_crawler_total,detail_crawler_href,create_time,modify_time FROM nodejs_crawler_master '
 };
 
 module.exports = sqltext;
