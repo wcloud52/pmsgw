@@ -36,9 +36,11 @@ public class SendMobileMessageAsyncTask {
 			//excel上传维护
 			String excelBindName = user.getPigowner();
 			String excelBindCoteId=user.getCote_id ();
-			String excelShortBindName=user.getShort_cote_name();
+			String excelShortBindName=user.getCote_name();
 			String excelMobile=user.getMobile();
+			String state=user.getState();
 			if(
+					state.equals("1") &&
 					coteId.equals(excelBindCoteId)	&&
 			(
 					name.equals(excelBindName)||(name.length()>=9&&excelBindName.length()>=9&&name.substring(0,8).equals(excelBindName.substring(0,8)))
