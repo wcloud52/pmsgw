@@ -1,6 +1,8 @@
 package com.saas.biz.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +32,6 @@ public class NodejsCrawlerServiceImpl implements NodejsCrawlerService {
 	
 	@Autowired
 	private NodejsCrawlerMasterGameMapper nodejsCrawlerMasterGameMapper;
-
 	@Autowired
 	private NodejsMatchImplMapper nodejsMatchImplMapper;
 
@@ -110,7 +111,7 @@ public class NodejsCrawlerServiceImpl implements NodejsCrawlerService {
 		
 		QueryObject query = new QueryObject();
 		query.setPageIndex(1);
-		query.setPageSize(10000);
+		query.setPageSize(500);
 		query.setSort(" rank asc,create_time asc ");
 		query.setFuzzyQuery(queryNodes);
 		
@@ -216,17 +217,22 @@ public class NodejsCrawlerServiceImpl implements NodejsCrawlerService {
 
 		QueryObject query = new QueryObject();
 		query.setPageIndex(1);
-		query.setPageSize(10000);
+		query.setPageSize(500);
 		query.setSort(" rank asc,create_time asc ");
 		query.setFuzzyQuery(queryNodes);
-
-		NodejsMatch match=nodejsMatchImplMapper.selectNewMatchByCoteId(cote_id);
+		NodejsCrawlerMasterGame nodejsCrawlerMasterGame = nodejsCrawlerMasterGameMapper.selectByPrimaryKey(masterId);
+		NodejsMatch param=new NodejsMatch();
+		param.setStart_time(nodejsCrawlerMasterGame.getCreate_time());
+		param.setCote_id(cote_id);
+		NodejsMatch match=nodejsMatchImplMapper.selectNewMatchByCoteId(param);
 
 		BaseResponse<JsonResult<List<NodejsCrawlerDetailGame>, Object>> restult= PagingAndSortingRepository.find(query, new PageSpecification<NodejsCrawlerDetailGame>() {
 
 			@Override
 			public List<NodejsCrawlerDetailGame> query(Map<Object, Object> map) {
-				map.put("match_id",match.getMatch_id());
+				if(match!=null&&!match.getMatch_id().equals("")){
+					map.put("match_id",match.getMatch_id());
+				}
 				map.put("cote_id",cote_id);
 				return nodejsCrawlerMapper.selectNodejsCrawlerDetailGameListByDynamicMatch(map);
 			}
@@ -238,7 +244,7 @@ public class NodejsCrawlerServiceImpl implements NodejsCrawlerService {
 
 			@Override
 			public long queryCount(Map<Object, Object> map) {
-				return 10000;
+				return 500;
 			}
 		});
 		return restult.getData().getList();

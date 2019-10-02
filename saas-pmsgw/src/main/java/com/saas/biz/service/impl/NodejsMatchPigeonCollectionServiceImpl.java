@@ -146,4 +146,18 @@ public class NodejsMatchPigeonCollectionServiceImpl implements NodejsMatchPigeon
 	public List<NodejsMatchPigeonCollection> selectListGroupByPigownerNum(Map<String, Object> map) {
 		return implMapper.selectListGroupByPigownerNum(map);
 	}
+	@Override
+	public List<NodejsMatchPigeonCollection> selectGrpupByPigeonCode(Map<String, Object> map) {
+		return implMapper.selectGrpupByPigeonCode(map);
+	}
+	@Override
+	public List<NodejsMatchPigeonCollection> selectListBySign(Map<String, Object> map) {
+		return implMapper.selectListBySign(map);
+	}
+
+	@Override
+	public int deleteByMatchId(String match_id) {
+		return implMapper.deleteByMatchId(match_id);
+	}
+
 }

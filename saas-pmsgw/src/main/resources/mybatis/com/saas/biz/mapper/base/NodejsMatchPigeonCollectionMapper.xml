@@ -17,6 +17,7 @@
     <result column="pigowner_num" jdbcType="VARCHAR" property="pigowner_num" />
     <result column="pigeon_color" jdbcType="VARCHAR" property="pigeon_color" />
     <result column="pigeon_ext" jdbcType="VARCHAR" property="pigeon_ext" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="fileName" jdbcType="VARCHAR" property="fileName" />
     <result column="typeId" jdbcType="VARCHAR" property="typeId" />
     <result column="typeName" jdbcType="VARCHAR" property="typeName" />
@@ -28,7 +29,7 @@
     @mbg.generated
     -->
     collection_id, match_id, cote_id, cote_name, collection_senderId, collection_senderName, 
-    collection_sendTime, ringnum, pigowner, pigowner_num, pigeon_color, pigeon_ext, fileName, 
+    collection_sendTime, ringnum, pigowner, pigowner_num, pigeon_color, pigeon_ext, tel, fileName,
     typeId, typeName, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -54,13 +55,13 @@
     insert into nodejs_match_pigeon_collection (collection_id, match_id, cote_id, 
       cote_name, collection_senderId, collection_senderName, 
       collection_sendTime, ringnum, pigowner, 
-      pigowner_num, pigeon_color, pigeon_ext, 
+      pigowner_num, pigeon_color, pigeon_ext,  tel,
       fileName, typeId, typeName, 
       create_time, modify_time)
     values (#{collection_id,jdbcType=VARCHAR}, #{match_id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, 
       #{cote_name,jdbcType=VARCHAR}, #{collection_senderId,jdbcType=VARCHAR}, #{collection_senderName,jdbcType=VARCHAR}, 
       #{collection_sendTime,jdbcType=VARCHAR}, #{ringnum,jdbcType=VARCHAR}, #{pigowner,jdbcType=VARCHAR}, 
-      #{pigowner_num,jdbcType=VARCHAR}, #{pigeon_color,jdbcType=VARCHAR}, #{pigeon_ext,jdbcType=VARCHAR}, 
+      #{pigowner_num,jdbcType=VARCHAR}, #{pigeon_color,jdbcType=VARCHAR}, #{pigeon_ext,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
       #{fileName,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, 
       #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP})
   </insert>
@@ -105,6 +106,8 @@
       </if>
       <if test="pigeon_ext != null">
         pigeon_ext,
+      </if><if test="tel != null">
+      tel,
       </if>
       <if test="fileName != null">
         fileName,
@@ -158,6 +161,9 @@
       </if>
       <if test="pigeon_ext != null">
         #{pigeon_ext,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
       </if>
       <if test="fileName != null">
         #{fileName,jdbcType=VARCHAR},
@@ -215,6 +221,9 @@
       <if test="pigeon_ext != null">
         pigeon_ext = #{pigeon_ext,jdbcType=VARCHAR},
       </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
       <if test="fileName != null">
         fileName = #{fileName,jdbcType=VARCHAR},
       </if>
@@ -249,6 +258,7 @@
       pigowner_num = #{pigowner_num,jdbcType=VARCHAR},
       pigeon_color = #{pigeon_color,jdbcType=VARCHAR},
       pigeon_ext = #{pigeon_ext,jdbcType=VARCHAR},
+    tel = #{tel,jdbcType=VARCHAR},
       fileName = #{fileName,jdbcType=VARCHAR},
       typeId = #{typeId,jdbcType=VARCHAR},
       typeName = #{typeName,jdbcType=VARCHAR},

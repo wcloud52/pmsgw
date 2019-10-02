@@ -27,10 +27,7 @@ layui.use([ 'element', 'table', 'form', 'fuzzyQuery' ], function() {
 		title : '序号',
 		type : 'numbers',
 		fixed : 'left'
-	},{
-		type : 'checkbox',
-		fixed : 'left'
-	} , {
+	}, {
 		field : 'master_id',
 		width : 180,
 		title : '编号'
@@ -79,29 +76,6 @@ layui.use([ 'element', 'table', 'form', 'fuzzyQuery' ], function() {
 			var url='/nodejsCrawler/detailList.html?master_id=' + master_id+"&database="+search_database;
 			baseOperation.viewForm(url, '比赛数据', layui);
 		} 
-	});
-	
-	$('#btnTogether').on('click', function() {
-		 var layer = layui.layer;
-  	 
-  	  
-		var checkStatus = table.checkStatus('listTable');
-		var data = checkStatus.data;
-		if (data != null && data.length > 0) {
-			var ids=[];
-			for(var ii=0;ii<data.length;ii++)
-			{
-				ids.push(data[ii].collection_id);
-			}
-			var strIds=ids.join(',');
-			var url='/nodejsCrawler/masterEdit.html?ids=' + strIds;
-			var opUrl="/nodejsCrawler/masterInsert";
-			baseOperation.editForm(url, '聚合赛事管理', opUrl, layui, flashTable);
-			
-		} else {
-			layer.alert("请选择一条操作的数据！");
-		}
-
 	});
 	
 	$('#btnCrawlerMaster').on('click', function() {

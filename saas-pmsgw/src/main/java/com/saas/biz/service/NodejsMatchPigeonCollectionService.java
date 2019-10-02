@@ -9,4 +9,9 @@ public interface NodejsMatchPigeonCollectionService extends BaseService<NodejsMa
 
 
     List<NodejsMatchPigeonCollection> selectListGroupByPigownerNum(Map<String, Object> map);
+    List<NodejsMatchPigeonCollection> selectListBySign(Map<String, Object> map);
+
+    int deleteByMatchId(String match_id);
+
+    List<NodejsMatchPigeonCollection> selectGrpupByPigeonCode(Map<String, Object> map);
 }

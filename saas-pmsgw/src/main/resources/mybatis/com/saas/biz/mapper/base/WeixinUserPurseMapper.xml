@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.WeixinUserPurseMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.WeixinUserPurse" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="cote_id" property="cote_id" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="bind_name" property="bind_name" jdbcType="VARCHAR" />
+    <result column="bind_tel" property="bind_tel" jdbcType="VARCHAR" />
+    <result column="pigowner" property="pigowner" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, openid, money, cote_id, create_time, modify_time, state,bind_name,bind_tel,pigowner
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from weixin_user_purse
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from weixin_user_purse
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.WeixinUserPurse" >
+    insert into weixin_user_purse (id, openid, money, 
+      cote_id, create_time, modify_time, 
+      state,bind_name,bind_tel,pigowner)
+    values (#{id,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{cote_id,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=VARCHAR},#{bind_name,jdbcType=VARCHAR},#{bind_tel,jdbcType=VARCHAR},#{pigowner,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.WeixinUserPurse" >
+    insert into weixin_user_purse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="cote_id != null" >
+        cote_id,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="bind_name != null" >
+        bind_name,
+      </if>
+      <if test="bind_tel != null" >
+        bind_tel,
+      </if>
+      <if test="pigowner != null" >
+        pigowner,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="cote_id != null" >
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="bind_name != null" >
+        #{bind_name,jdbcType=VARCHAR},
+      </if>
+      <if test="bind_tel != null" >
+        #{bind_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        #{pigowner,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.WeixinUserPurse" >
+    update weixin_user_purse
+    <set >
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="cote_id != null" >
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="bind_name != null" >
+        bind_name = #{bind_name,jdbcType=VARCHAR},
+      </if>
+      <if test="bind_tel != null" >
+        bind_tel = #{bind_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="pigowner != null" >
+        pigowner = #{pigowner,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.WeixinUserPurse" >
+    update weixin_user_purse
+    set openid = #{openid,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      cote_id = #{cote_id,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=VARCHAR},
+      bind_name = #{bind_name,jdbcType=VARCHAR},
+      bind_tel = #{bind_tel,jdbcType=VARCHAR},
+      pigowner = #{pigowner,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

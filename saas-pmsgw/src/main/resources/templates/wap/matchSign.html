@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+<head>
+    <title>比赛报名</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" href="/plugins/jquery-weui/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/plugins/jquery-weui/dist/css/jquery-weui.min.css"/>
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/plugins/jquery-weui/css/reset.css"/>
+    <link rel="stylesheet" href="/plugins/jquery-weui/css/flex.css"/>
+    <link rel="stylesheet" href="/plugins/jquery-weui/css/style.css"/>
+    <style type="text/css">
+        body{
+            display: flex;
+            justify-content: center;
+        }
+        .weui-tab,#box1{
+            width: 100%;
+        }
+        #box1{
+            padding-bottom: 40px;
+        }
+        #box1>p{
+            margin: 10px auto;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+        ul{
+            margin: 10px;
+            list-style: none;
+            overflow: hidden;
+            border: 1px solid #29aefa;
+            border-radius: 8px;
+        }
+        ul span.m{
+            width: 100%;
+            display: inline-block;
+            padding: 0px 6px;
+            box-sizing: border-box;
+            cursor: pointer;
+            background-color: #29aefa;
+            line-height: 30px;
+            height: 30px;
+            font-size: 17px;
+        }
+        ul span.m b{
+            float: right;
+            font-size: 20px;
+        }
+        ul span.m i{
+
+            background-color: #FFFFFF;
+            width: 20px;
+            display: inline-block;
+            height: 20px;
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            margin: 5px 20px;
+            text-align: center;
+            line-height: 20px;
+
+        }
+        ul span.m span{
+            color: red;
+            background-color: #FFFFFF;
+            padding: 0 5px;
+            display: inline-block;
+            min-width: 20px;
+            border-radius: 25%;
+            -moz-border-radius: 25%;
+            margin: 5px 20px;
+            text-align: center;
+            line-height: 20px;
+        }
+        ul li{
+            display: none;
+            padding: 0px 10px;
+        }
+        .weui-cells {
+            margin-top: 0px;
+            background-color: #efeff4;
+            line-height: 1.47058824;
+            font-size: 17px;
+            overflow: hidden;
+            position: relative;
+        }
+        .weui-cell {
+            padding: 5px 10px;
+            position: relative;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        #box2{
+            bottom: 0;
+            height: 40px;
+            line-height: 40px;
+            color: #FFFFFF;
+            background-color: red;
+            position: fixed;
+            width: 100%;
+            font-size: 17px;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+        #box2 div{
+            display: inline-block;
+
+        }
+        .weui-switch, .weui-switch-cp__box {
+            position: relative;
+            width: 52px;
+            height: 17px;
+            border: 1px solid #dfdfdf;
+            outline: 0;
+            border-radius: 16px;
+            box-sizing: border-box;
+            background-color: #dfdfdf;
+            -webkit-transition: background-color .1s,border .1s;
+            transition: background-color .1s,border .1s;
+        }
+        .weui-switch-cp__box:before, .weui-switch:before {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 15px;
+            border-radius: 15px;
+            background-color: #fdfdfd;
+            -webkit-transition: -webkit-transform .35s cubic-bezier(.45,1,.4,1);
+            transition: -webkit-transform .35s cubic-bezier(.45,1,.4,1);
+            transition: transform .35s cubic-bezier(.45,1,.4,1);
+            transition: transform .35s cubic-bezier(.45,1,.4,1),-webkit-transform .35s cubic-bezier(.45,1,.4,1);
+        }
+        .weui-switch-cp__box:after, .weui-switch:after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 15px;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,.4);
+            -webkit-transition: -webkit-transform .35s cubic-bezier(.4,.4,.25,1.35);
+            transition: -webkit-transform .35s cubic-bezier(.4,.4,.25,1.35);
+            transition: transform .35s cubic-bezier(.4,.4,.25,1.35);
+            transition: transform .35s cubic-bezier(.4,.4,.25,1.35),-webkit-transform .35s cubic-bezier(.4,.4,.25,1.35);
+        }
+    </style>
+</head>
+<body ontouchstart="">
+<!-- 容器 -->
+<div class="weui-tab">
+    <div id="box1">
+        <#if code??>
+        ${code}
+        <#else>
+        <p><strong>${match.match_title?if_exists}</strong></p>
+        <div class="weui-cell weui-cell_switch">
+            <div class="weui-cell__bd">全选幸运</div>
+            <div class="weui-cell__ft">
+                <input class="weui-switch" type="checkbox">
+            </div>
+        </div>
+        <#list list as item>
+        <ul>
+            <span class="m">
+                <#if item.ringnum?index_of("2019")==0 || item.ringnum?index_of("2018")==0|| item.ringnum?index_of("2020")==0>
+                    ${item.ringnum?substring(4)}
+                <#else>
+                    ${item.ringnum!}
+                </#if>
+                <i>0</i>
+                <span>0</span>
+                <b>点击展开</b>
+            </span>
+        <input type="hidden" value="${item.collection_id}" name="id">
+        <input type="hidden" value="" name="regist">
+        <input type="hidden" value="${item.ringnum}" name="pigeon_code">
+        <input type="hidden" value="${match.match_id}" name="match_id">
+        <input type="hidden" value="${item.member_code}" name="member_code">
+        <input type="hidden" value="${item.member_name}" name="member_name">
+        <#list rule as r>
+        <li class="weui-cells weui-cells_checkbox">
+            <label class="weui-cell weui-check__label">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" class="weui-check" name="${r.code?if_exists}"
+                    <#if item.pigeon_ext?index_of(r.code) gt 0 >
+                        checked="checked"
+                    </#if >
+                    >
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>${r.name?if_exists}</p>
+                </div>
+            </label>
+        </li>
+    </#list>
+    </ul>
+        </#list>
+    </div>
+    <div id="box2">
+        <div id="count">
+            共：<span>0</span>羽
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            合计：<span>0</span>元
+        </div>
+        <div id="commit" style="width: 60px;text-align: center;float: right;background-color: orange;">提交</div>
+    </div>
+</#if>
+</div>
+
+<script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+<script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+
+
+
+<script>
+    $(function(){
+        var start=0;
+        FastClick.attach(document.body);
+        // 改进版本的手风琴菜单效果
+        $('#box1 span').click(function(){
+            var curLi=$(this).parent().find('li');              //获得当前点击的菜单的二级菜单
+            var restUl=$(this).parent().siblings('ul');         //获得没有点击的一级菜单
+            // 通过判断二级菜单是否收起，来进行判断是否展开，并更换"+ -"表示
+            if(curLi.css('display') == 'none') {
+                curLi.slideDown();
+                curLi.parent().find('b').text('点击收缩');
+            }
+            else {
+                curLi.slideUp();
+                curLi.parent().find('b').text('点击展开');
+            }
+            // 没有点击的二级菜单全部收起，并将标志全部改为"+"
+            restUl.find('li').slideUp();
+            restUl.find('b').text('点击展开');
+        });
+        $('#box1 span').eq(0).click();
+        $('input[type="checkbox"][name^="field"]').on('change',function(){
+            var ul=$(this).parents('ul');
+            var checkbox=$(ul).find('input[type="checkbox"]:checked');
+            var sum=0;
+            $(ul).find('.m i').text(checkbox.length);
+            for (var i = 0; i < checkbox.length; i++) {
+                try {
+                    sum += parseInt($(checkbox[i]).attr('name').split('-')[2]);
+                }catch (e) {
+
+                }
+            }
+            $(ul).find('.m span').text(sum);
+            sum=0;
+            var span=$('.m span');
+            for (var i = 0; i < span.length; i++) {
+                try {
+                    sum+=parseInt($(span[i]).text());
+                }catch (e) {
+
+                }
+            }
+            var count=0;
+            var is=$('.m i');
+            for (var i = 0; i < is.length; i++) {
+                try {
+                    count+=parseInt($(is[i]).text());
+                }catch (e) {
+
+                }
+            }
+            $('#count span').eq(0).text(count)
+            $('#count span').eq(1).text(sum)
+        })
+        $('.weui-switch').on('change',function () {
+            if ($(this).is(':checked')){
+                $('input[type="checkbox"][name^="field-11-"]').prop("checked","checked").change();
+            }else {
+                $('input[type="checkbox"][name^="field-11-"]').prop("checked","").change();
+            }
+
+        })
+        $("ul").each(function(){
+            $(this).find('input[type="checkbox"][name^="field"]').eq(0).change()
+        })
+        start=$('#count span').eq(1).text();
+        if('${code}'!=''){
+            $.toast("${code}", "text");
+        }
+        $("#commit").on('click',function(){
+            var trs=$('ul');
+            var result=[];
+            for (var i=0;i<trs.length;i++){
+                var regist={};
+                var checkboxs=$(trs).eq(i).find('[type="checkbox"]:checked');
+                for (var j = 0; j < checkboxs.length; j++) {
+                    var key=$(checkboxs).eq(j).attr('name');
+                    var val=$(checkboxs).eq(j).val();
+                    regist[key]=val;
+                }
+                var pigeon_code=$(trs).eq(i).find('[name="pigeon_code"]').val();
+                debugger
+                if ( Object.keys(regist).length>0&&pigeon_code!=undefined&&pigeon_code!='') {
+                    $(trs).eq(i).find('[name="regist"]').val(JSON.stringify(regist));
+                    var row = {
+                        'id': $(trs).eq(i).find('[name="id"]').val(),
+                        'match_id': $(trs).eq(i).find('[name="match_id"]').val(),
+                        'regist': $(trs).eq(i).find('[name="regist"]').val(),
+                        'member_code': $(trs).eq(i).find('[name="member_code"]').val(),
+                        'member_name': $(trs).eq(i).find('[name="member_name"]').val(),
+                        'pigeon_code': $(trs).eq(i).find('[name="pigeon_code"]').val(),
+                    }
+                    result.push(row);
+                }else if($(trs).eq(i).find('[name="id"]').val()!=undefined&&$(trs).eq(i).find('[name="id"]').val()!=''){
+                    var row = {
+                        'id': $(trs).eq(i).find('[name="id"]').val(),
+                        'match_id': $(trs).eq(i).find('[name="match_id"]').val(),
+                    }
+                    result.push(row);
+                }
+            }
+            if (result.length<=0){
+                layer.msg('信息填写不完整',{icon:5});
+                return
+            }else{
+
+                result[0]['rank']=$('#count span').eq(1).text();
+                result[0]['reward']=start;
+            }
+            $.ajax({
+                type : "POST",
+                url :  "/wap/sign_up_insert",
+                contentType : 'application/json',
+                data : JSON.stringify(result),
+                success : function(data) {
+                    if (data.code == 0) {
+                        $.toast("报名成功", "text");
+                    } else {
+                        $.toast("报名失败，请联系管理员！", "text");
+                    }
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>

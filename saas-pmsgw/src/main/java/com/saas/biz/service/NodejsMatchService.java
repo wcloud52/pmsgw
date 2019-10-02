@@ -5,5 +5,5 @@ import com.saas.biz.pojo.NodejsMatch;
 public interface NodejsMatchService extends BaseService<NodejsMatch,String> {
 
 
-    NodejsMatch selectNewMatchByCoteId(String cote_id);
+    NodejsMatch selectNewMatchByCoteId(NodejsMatch match);
 }

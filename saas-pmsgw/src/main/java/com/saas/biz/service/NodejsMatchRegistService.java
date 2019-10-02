@@ -27,5 +27,6 @@ public interface NodejsMatchRegistService extends BaseService<NodejsMatchRegist,
      */
     List<NodejsMatchRegist> selectCrawlerDetailGame(Map<Object, Object> paraMap);
     Map echoResult(JSONObject rule, float money, List<NodejsMatchRegist> rankLst, boolean update);
+    Map echoResultRealTime(JSONObject rule, float money, List<NodejsMatchRegist> rankLst, boolean update);
     Map<String,Object> echoOneResult(JSONObject rule, String key, List<NodejsMatchRegist> rankLst, String pigeon_code);
 }

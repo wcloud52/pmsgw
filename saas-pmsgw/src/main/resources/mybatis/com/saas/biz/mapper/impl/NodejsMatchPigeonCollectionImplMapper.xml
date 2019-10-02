@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.saas.biz.mapper.impl.NodejsMatchPigeonCollectionImplMapper">
-    
+    <select id="selectListGroupByPigownerNum" resultMap="com.saas.biz.mapper.base.NodejsMatchPigeonCollectionMapper.BaseResultMap" parameterType="Map">
+        select pigowner,pigowner_num,GROUP_CONCAT(ringnum) ringnum ,
+        GROUP_CONCAT(if(regist is null or regist ='','',regist) separator '#') pigeon_ext,
+        GROUP_CONCAT(if(b.id is null ,'',b.id) separator '#')  collection_id
+        from
+        (select pigowner,pigowner_num,ringnum
+        from nodejs_match_pigeon_collection
+        WHERE match_id= #{match_id}
+        <if test="param !=null">
+            and (pigowner like concat('%',#{param},'%'))
+        </if>) as a
+        left join
+        (select pigeon_code,regist,id from nodejs_match_regist where match_id =#{match_id}
+        AND (
+        member_name LIKE concat('%' ,#{param}, '%')
+        )
+            ) as b
+        on a.ringnum=b.pigeon_code
+        GROUP BY pigowner_num
+        <if test="limit !=null and offset !=null">
+            limit ${offset},${limit}
+        </if>
+    </select>
+    <select id="selectGrpupByPigeonCode" resultMap="com.saas.biz.mapper.base.NodejsMatchPigeonCollectionMapper.BaseResultMap" parameterType="Map">
+        select pigowner,pigowner_num,GROUP_CONCAT(ringnum) ringnum ,
+        GROUP_CONCAT(if(regist is null or regist ='','',regist) separator '#') pigeon_ext,
+        GROUP_CONCAT(if(b.id is null ,'',b.id) separator '#')  collection_id
+        from
+        (select pigowner,pigowner_num,ringnum
+        from nodejs_match_pigeon_collection
+        WHERE match_id= #{match_id}
+        <if test="param !=null">
+            and ringnum =#{param}
+        </if>) as a
+        left join
+        (select pigeon_code,regist,id from nodejs_match_regist where match_id =#{match_id}
+        AND (
+        pigeon_code =#{param}
+        )
+            ) as b
+        on a.ringnum=b.pigeon_code
+        GROUP BY pigowner_num
+        <if test="limit !=null and offset !=null">
+            limit ${offset},${limit}
+        </if>
+    </select>
+    <select id="selectListBySign" resultMap="com.saas.biz.mapper.base.NodejsMatchPigeonCollectionMapper.BaseResultMap" parameterType="Map">
+        select pigowner,pigowner_num,ringnum,regist pigeon_ext,id collection_id from
+        (
+            select pigowner,pigowner_num,ringnum from nodejs_match_pigeon_collection WHERE match_id= #{match_id}
+            <if test="pigowner !=null and pigowner!=''">
+                and pigowner=#{pigowner}
+            </if>
+        ) as a
+        left join
+        (select pigeon_code,regist,id from nodejs_match_regist where match_id =#{match_id}) as b
+        on a.ringnum=b.pigeon_code
+    </select>
+    <delete id="deleteByMatchId"  parameterType="java.lang.String"  >
+        delete from nodejs_match_pigeon_collection
+        WHERE match_id= #{match_id}
+    </delete>
 </mapper>

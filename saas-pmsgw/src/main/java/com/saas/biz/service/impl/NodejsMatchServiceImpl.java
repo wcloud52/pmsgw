@@ -142,5 +142,5 @@ public class NodejsMatchServiceImpl implements NodejsMatchService {
 		return implMapper.updateBatch(list);
 	}
 	@Override
-	public NodejsMatch selectNewMatchByCoteId(String cote_id){return implMapper.selectNewMatchByCoteId(cote_id);}
+	public NodejsMatch selectNewMatchByCoteId(NodejsMatch match){return implMapper.selectNewMatchByCoteId(match);}
 }

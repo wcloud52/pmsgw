@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>报名表</title>
+
+    <link rel="stylesheet" href="/plugins/jquery-weui/weui/lib/weui.min.css">
+    <link rel="stylesheet" href="/plugins/jquery-weui/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="/plugins/weuiplus/css/weui.css"/>
+    <link rel="stylesheet" href="/plugins/weuiplus/css/weuix.css"/>
+    <link rel="stylesheet" href="/plugins/jquery-weui/css/style.css"/>
+    <script src="/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+    <script src="/plugins/jquery-weui1.2.1/js/media.js"></script>
+    <script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+    <script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+    <script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+    <style type="text/css">
+        table{
+            display: block;
+            table-layout:fixed;
+            margin: 0 auto;
+        }
+        table td{
+            font-size: 11px;
+            padding: 0px;
+            text-align: center;
+            display: table-cell;
+        }
+        h3,h4{
+            text-align: center;
+            line-height: 40px;
+            color: red;
+        }
+        .td0{
+            width: 20px;
+        }
+        .td1{
+            width: 100px;
+        }
+        .td2{
+            width: 40px;
+        }
+        .color1{
+            background-color: green;
+        }
+        .color2{
+            background-color: #ffff80;
+        }
+        .color3{
+            background-color: red;
+        }
+        .color4{
+            background-color: #00ffff;
+        }
+        .color5{
+            background-color: #34c08d;
+        }
+        .color6{
+            background-color: #ff00e0;
+        }
+        .color7{
+            background-color: #ffcfbb;
+        }
+        .color8{
+            background-color: #ff8000;
+        }
+        .color9{
+            background-color: #ff0080;
+        }
+        .color10{
+            background-color: #0000ff;
+        }
+        .color11{
+            background-color: #abd3cd;
+        }
+
+    </style>
+</head>
+<body style="background-color:#FFFFFF">
+<div class="">
+    <input type="hidden" id="openid" name="openid" value="${openid?if_exists}"/>
+    <section class="top-fixed">
+        <div class="flex-box flex-between fs13 p8 top-search" style="background-color: #efeff4">
+            <div class="search-btn-wrap flex-grow-1 pointer">
+                <i class="ico-search"></i>
+                <input type="text" class="" placeholder="搜索您需要的比赛"  id="searchInput"></div></div>
+    </section>
+    <h3>${match.cote_name}</h3>
+    <h4>${match.match_title}</h4>
+    <table style="width: ${width}px;">
+        ${tr0}
+        ${tr1}
+        ${tr2}
+        <#list list as regist>
+        <tr class="list">
+            <td class="td0">${regist_index?if_exists+1}</td>
+            <#list rule as key>
+                <#if key_index lt 3 >
+                    <td class="td1">${regist[key]?if_exists}</td>
+                <#else>
+                    <td class='td2 color${key?substring(6,6+key?substring(6)?index_of("-"))}'>${regist[key]?if_exists}</td>
+                </#if>
+            </#list>
+        </tr>
+    </#list>
+    </table>
+</div>
+<script>
+    $(function(){
+
+
+        $('#searchInput').bind('input propertychange', function() {
+            var text = $("#searchInput").val();
+            //var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+            if (text!='') {
+                $('.list').each(function() {
+                    var $self = $(this);
+                    var flag = $self.find("td:gt(0):lt(3)").text().search(text)
+                    if (flag > -1) {
+                        $self.css("display", "");
+
+                    } else {
+                        $self.css("display", "none");
+
+                    }
+                });
+            } else {
+                $('.list').css("display", "")
+
+            }
+        });
+    });
+    </script>
+</body>
+</html>

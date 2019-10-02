@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>	
+<title>公棚列表</title>
+
+
+<link rel="stylesheet" href="/plugins/jquery-weui/weui/lib/weui.min.css">
+<link rel="stylesheet" href="/plugins/jquery-weui/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="static/plugins/font-awesome/css/font-awesome.min.css">
+
+ <link rel="stylesheet" href="/plugins/weuiplus/css/weui.css"/>
+ <link rel="stylesheet" href="/plugins/weuiplus/css/weuix.css"/>
+    
+<script src="/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+<script src="/plugins/jquery-weui1.2.1/js/media.js"></script>
+	<script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+	<script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+
+	 <script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+</head>
+<body>
+<div class="weui_grids grids-small">
+    <input type="hidden" id="openid" name="openid" value="${openid?if_exists}" />
+    <#list items as item>
+      <a href="/wap/page/racelist3?cote_id=${item.cote_id}"  class="grid">
+        <div class="weui_grid_icon">
+          <img src="/plugins/jquery-weui/weui/demos/images/icon_nav_button.png" alt="">
+        </div>
+        <p class="weui_grid_label"> 
+        ${item.cote_short_name}
+        </p>
+          <p class="weui_grid_label">
+              <span class="weui-badge" style="margin-left: 5px;" svalue="${item.cote_id}">取消</span>
+          </p>
+      </a>
+     </#list>
+    
+      
+    </div>
+<script type="text/javascript">
+    $(".weui-badge").click(
+        function(e){
+            var el=$(this)
+            var data={
+                openid:$("#openid").val(),
+                cote_id:$(this).attr("svalue")};
+            $.ajax({
+                url : "/wap/action/usercotedelete",
+                type : 'POST',
+                dataType : 'json',
+                data : data,
+                success : function(data) {
+                    if (data.code==0) {
+                        $(el).parent().parent().remove();
+                        $.toast("取消成功",'test',function(){
+
+                        })
+
+
+                    } else {
+
+                        $.alert(data.message);
+                    }
+                },
+                error : function() {
+                    $.hideLoading();
+                    $.toast("网络超时，请再次尝试失败后联系管理员", "text");
+
+                }
+            });
+            e.stopPropagation();
+            e.preventDefault();
+
+        });
+</script>
+    
+</body>
+</html>

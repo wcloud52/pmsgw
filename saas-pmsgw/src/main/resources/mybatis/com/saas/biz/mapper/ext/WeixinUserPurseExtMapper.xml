@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.ext.WeixinUserPurseExtMapper">
+	<select id="selectListByDynamic"
+		resultMap="com.saas.biz.mapper.base.WeixinUserPurseMapper.BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="com.saas.biz.mapper.base.WeixinUserPurseMapper.Base_Column_List" />
+		from weixin_user_purse
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+		</where>
+		<if test="sort != null and sort != '' ">
+			order by ${sort}
+		</if>
+		<if test="page != null ">
+			LIMIT ${page.offset},${page.pageSize}
+		</if>
+	</select>
+
+	<select id="selectCountByDynamic" resultType="long"
+		parameterType="Object">
+		SELECT count(*)
+		from weixin_user_purse
+		<where>
+			<if test="customQuerySegment != null and customQuerySegment != '' ">
+				and ${customQuerySegment}
+			</if>
+
+		</where>
+	</select>
+	<insert id="insertByList" parameterType="list">
+		insert into weixin_user_purse
+		    (id, openid, money, cote_id, create_time, modify_time, state, bind_name, bind_tel, pigowner)
+		values
+		<foreach item="item" index="index" collection="list" open=""
+			separator="," close="">
+			(#{itme.id,jdbcType=VARCHAR},
+			#{itme.openid,jdbcType=VARCHAR},
+			#{itme.money,jdbcType=DECIMAL},
+			#{itme.cote_id,jdbcType=VARCHAR},
+			#{itme.create_time,jdbcType=TIMESTAMP},
+			#{itme.modify_time,jdbcType=TIMESTAMP},
+			#{itme.state,jdbcType=VARCHAR}),
+			#{itme.bind_name,jdbcType=VARCHAR}),
+			#{itme.bind_tel,jdbcType=VARCHAR}),
+			#{itme.pigowner,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+	<update id="updateByList" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update weixin_user_purse
+			<set>
+				<if test="item.openid != null" >
+					openid = #{item.openid,jdbcType=VARCHAR},
+				</if>
+				<if test="item.money != null" >
+					money = #{item.money,jdbcType=DECIMAL},
+				</if>
+				<if test="item.cote_id != null" >
+					cote_id = #{item.cote_id,jdbcType=VARCHAR},
+				</if>
+				<if test="item.create_time != null" >
+					create_time = #{item.create_time,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.modify_time != null" >
+					modify_time = #{item.modify_time,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.state != null" >
+					state = #{item.state,jdbcType=VARCHAR},
+				</if>
+				<if test="item.bind_name != null" >
+					bind_name = #{item.bind_name,jdbcType=VARCHAR},
+				</if>
+				<if test="item.bind_tel != null" >
+					bind_tel = #{item.bind_tel,jdbcType=VARCHAR},
+				</if>
+				<if test="item.pigowner != null" >
+					pigowner = #{item.pigowner,jdbcType=VARCHAR},
+				</if>
+			</set>
+			where id = #{item.id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+</mapper>

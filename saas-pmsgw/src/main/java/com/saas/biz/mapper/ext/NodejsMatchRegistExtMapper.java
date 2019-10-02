@@ -52,5 +52,5 @@ public interface NodejsMatchRegistExtMapper extends NodejsMatchRegistMapper {
 	 * @param paraMap
 	 * @return
 	 */
-	List<NodejsMatchRegist> selectCrawlerDetailGame(Map<Object, Object> paraMap);
+	List<NodejsMatchRegist> selectCrawlerDetailGame( Map<Object, Object> paraMap);
 }

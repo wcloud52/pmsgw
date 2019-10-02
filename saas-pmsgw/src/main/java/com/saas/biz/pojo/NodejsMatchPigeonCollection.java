@@ -5,6 +5,7 @@ import java.util.Date;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class NodejsMatchPigeonCollection {
+    private String tel;
     /**
      * <pre>
      * id
@@ -555,6 +556,14 @@ public class NodejsMatchPigeonCollection {
         return modify_time;
     }
 
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
     /**
      * <pre>
      * 设置：
@@ -567,4 +576,6 @@ public class NodejsMatchPigeonCollection {
     public void setModify_time(Date modify_time) {
         this.modify_time = modify_time;
     }
+
+
 }

@@ -85,7 +85,16 @@ public class NodejsMatchRegistController {
                 Map describe = BeanUtils.describe(regist);
                 String registJson = regist.getRegist();
                 Map<String,String> json = JSONObject.parseObject(registJson, Map.class);
+                int sum=0;
+                for(String value : json.values()){
+                    try {
+                        sum+= Integer.parseInt(value);
+                    }catch (Exception e){
+
+                    }
+                }
                 json.entrySet().forEach(item->item.setValue("✔"));
+                json.put("sum",sum+"");
                 describe.putAll(json);
                 mapList.add(describe);
             } catch (IllegalAccessException e) {
@@ -99,11 +108,57 @@ public class NodejsMatchRegistController {
         long count = restult.getData().getTotal();
         int code = restult.getCode();
         String msg = restult.getMessage();
+
+        query.setPageIndex(1);
+        query.setPageSize((int)count+50);
+        BaseResponse<JsonResult<List<NodejsMatchRegist>, Object>> all = PagingAndSortingRepository.find(query, new PageSpecification<NodejsMatchRegist>() {
+            @Override
+            public List<NodejsMatchRegist> query(Map<Object, Object> map) {
+                return sv.selectListByDynamic(map);
+            }
+
+            @Override
+            public Object queryExt(Map<Object, Object> map) {
+                return null;
+            }
+
+            @Override
+            public long queryCount(Map<Object, Object> map) {
+                return sv.selectCountByDynamic(map);
+            }
+        });
+        list = all.getData().getList();
+        Map<String,Integer> desc=new HashedMap();
+        for (NodejsMatchRegist regist :list ) {
+            try {
+                Map describe = BeanUtils.describe(regist);
+                String registJson = regist.getRegist();
+                Map<String,String> json = JSONObject.parseObject(registJson, Map.class);
+                json.entrySet().forEach(item->{
+                    if (desc.get(item.getKey())==null){
+                        desc.put(item.getKey(),1);
+                    }else {
+                        desc.put(item.getKey(),desc.get(item.getKey())+1);
+                    }
+                });
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
         Map<Object, Object> map = new HashMap<Object, Object>();
+        Map<Object, Object> descObj = new HashMap<Object, Object>();
+        descObj.putAll(desc);
+        descObj.put("pigeon_code","总羽数");
+        mapList.add(0,descObj);
         map.put("code", code);
         map.put("msg", msg);
         map.put("count", count);
         map.put("data", mapList);
+        map.put("desc",desc);
         return map;
     }
 
@@ -121,21 +176,31 @@ public class NodejsMatchRegistController {
 
         List<NodejsMatchRegist> item = body;
         SSOToken ssoToken = SSOHelper.getSSOToken(request);
-
+        int result=0;
         if (ssoToken != null) {
             NodejsSysUser nodejsSysUser = JSON.parseObject(JSON.toJSONString(ssoToken.getClaims().get("nodejsSysUser")), NodejsSysUser.class);
             for (NodejsMatchRegist r : item) {
-                String id = SnGenerator.getSn("MR");
-                r.setId(id);
-                r.setCreate_user_id(nodejsSysUser.getId());
-                r.setCote_id(nodejsSysUser.getCote_id());
-                r.setCote_name(nodejsSysUser.getCote_name());
-                r.setCreate_time(new Date());
-                r.setModify_time(new Date());
+                if (r.getId()==null||r.getId().equals("")){
+                    String id = SnGenerator.getSn("MR");
+                    r.setId(id);
+                    r.setCreate_user_id(nodejsSysUser.getId());
+                    r.setCote_id(nodejsSysUser.getCote_id());
+                    r.setCote_name(nodejsSysUser.getCote_name());
+                    r.setCreate_time(new Date());
+                    r.setModify_time(new Date());
+                    result+=sv.insert(r);
+                }else {
+                    if (r.getRegist()!=null&&r.getRegist().length()>7){
+
+                        result+=sv.update(r);
+                    }else {
+                        result+=sv.deleteById(r.getId());
+                    }
+                }
             }
 
         }
-        int result = sv.insertBatch(item);
+        //int result = sv.insertBatch(item);
 
         return BaseResponse.ToJsonResult(result);
     }
@@ -284,7 +349,7 @@ public class NodejsMatchRegistController {
                     }
                 });
                 filterList = filterList.stream().sorted((b1, b2) -> b1.getRank() - b2.getRank()).collect(Collectors.toList());
-                Map echoResult = sv.echoResult(rule, money, filterList, false);
+                Map echoResult = sv.echoResultRealTime(rule, money, filterList, false);
                 if (echoResult.size() > 0) {
                     result.add(echoResult);
                 }
@@ -295,10 +360,85 @@ public class NodejsMatchRegistController {
         model.addAttribute("list", result);
         return "nodejsMatch/match_result";
     }
-    /*@RequestMapping("resultOne")
-    @ResponseBody
-    public BaseResponse<Integer> selectResultOne(String match_id,String pigeon_code){
 
-    }*/
+    @RequestMapping(value = "page/registList",method = RequestMethod.GET)
+    public String registListPage(String match_id,Model model){
+        if (log.isDebugEnabled())
+            log.debug(NodejsMatchRegistController.class + "/match/registList->");
+        Map param=new HashMap();
+        param.put("match_id",match_id);
+        NodejsMatch match = nodejsMatchService.selectOneById(match_id);
+        param.clear();
+        param.put("match_id",match_id);
+        Map queryMap=new HashMap();
+        queryMap.put("queryMap",param);
+        List<NodejsMatchRegist> list=sv.selectListByDynamic(queryMap);
+        Map<String, Integer> desc=new HashedMap();
+        List<Map> mapList = new ArrayList<Map>();
+        for (NodejsMatchRegist regist :list ) {
+            try {
+                Map describe = BeanUtils.describe(regist);
+                String registJson = regist.getRegist();
+                Map<String,String> json = JSONObject.parseObject(registJson, Map.class);
+                describe.putAll(json);
+                json.entrySet().forEach(item->{
+                    if (desc.get(item.getKey())==null){
+                        desc.put(item.getKey(),1);
+                    }else {
+                        desc.put(item.getKey(),desc.get(item.getKey())+1);
+                    }
+                });
+                mapList.add(describe);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
+        Map<Object, Object> descObj = new HashMap<Object, Object>();
+        descObj.putAll(desc);
+        descObj.put("pigeon_code","总羽数");
+        List<String> ruleList=new ArrayList<>();
+        Map titleList=new HashedMap();
+        String match_rule = match.getRule();
+        JSONArray ruleArray = JSONObject.parseArray(match_rule);
+        ruleList.add("member_code");
+        ruleList.add("member_name");
+        ruleList.add("pigeon_code");
+        titleList.put("member_code","会员编号");
+        titleList.put("member_name","鸽主姓名");
+        titleList.put("pigeon_code","足环号");
+        String tr0="<tr><td colspan='4'>总羽数</td>";
+        String tr1="<tr><td rowspan='2'>序号</td><td rowspan='2'>会员编号</td><td rowspan='2'>鸽主姓名</td><td rowspan='2'>足环号</td>";
+        String tr2="<tr>";
+        int width=330;
+        for (int i = 0; i < ruleArray.size(); i++) {
+            JSONObject rule = ruleArray.getJSONObject(i).getJSONObject("rule");
+            JSONArray grade_money = rule.getJSONArray("grade_money");
+            String code=rule.get("code")+"";
+            String name=rule.get("name")+"";
+            tr1+="<td colspan='"+grade_money.size()+"'>"+name+"</td>";
+            for (int j = 0; j < grade_money.size(); j++) {
+                width+=80;
+                ruleList.add("field-"+code+"-"+grade_money.getString(j));
+                titleList.put("field-"+code+"-"+grade_money.getString(j),name+"    "+grade_money.getString(j)+"组");
+                tr0+="<td>"+(desc.get("field-"+code+"-"+grade_money.getString(j))==null?0:desc.get("field-"+code+"-"+grade_money.getString(j)))+"</td>";
+                tr2+="<td>"+grade_money.getString(j)+"</td>";
+            }
+        }
+        tr0+="</tr>";
+        tr1+="</tr>";
+        tr2+="</tr>";
+        model.addAttribute("width",width);
+        model.addAttribute("tr0",tr0);
+        model.addAttribute("tr1",tr1);
+        model.addAttribute("tr2",tr2);
+        model.addAttribute("match",match);
+        model.addAttribute("list",mapList);
+        model.addAttribute("rule",ruleList);
+        return "nodejsMatch/registList2";
+    }
 
 }

@@ -1,0 +1,143 @@
+
+<div style="margin: 5px;" id="signBox">
+    <form class="layui-form">
+        <div class="layui-table-box">
+            <div class="layui-table-header" id="layui-table-header">
+                <table class="layui-table" id="sign_up_thead"></table>
+            </div>
+            <div class="layui-table-body layui-table-main" id="layui-table-body" style="min-height: 200px;">
+                <table class="layui-table" id="sign_up_table">
+                    <colgroup>
+                    </colgroup>
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" name="rule">
+        <button lay-filter="edit" style="display: none;" id="sign_up_submit"></button>
+        <datalist id="cars">
+            <option value="BMW">
+            <option value="Ford">
+            <option value="Volvo">
+        </datalist>
+    </form>
+</div>
+<style>
+    #sign_up_table{
+        margin: 0px;
+    }
+    #sign_up_table td,#sign_up_table th{
+        text-align: center;
+    }
+    #sign_up_table input[type=text]{
+        width: 150px;
+        padding: 2px;
+        display: inline-block;
+    }
+    #sign_up_thead{
+        margin: 0px;
+    }
+    #sign_up_thead th{
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    layui.use(['upload', 'form','formSelects', 'table', 'laydate','yutons_sug'], function () {
+        var $ = layui.$,
+            upload = layui.upload,
+            form = layui.form,
+            formSelects = layui.formSelects,
+            table = layui.table,
+            laydate = layui.laydate,
+            layer = layui.layer,
+            yutons_sug = layui.yutons_sug;
+
+        var rule=JSON.parse(tableRowData.rule)
+        var colgroup='<col width="150px"><col width="150px"><col width="150px">',
+            thead1='<th rowspan="2"><div>会员编号</div></th><th rowspan="2"><div>鸽主姓名</div></th><th rowspan="2"><div>参赛鸽环号</div></th>',
+            thead2='',tbody='';
+        tbody='<td><input type="hidden" name="id"><input type="hidden" name="regist"><input type="hidden" name="match_id" value="'+match_id+'"><input type="text" id="pigowner_num" name="member_code" autocomplete="off"></td><td><input type="text" id="pigowner" name="member_name" autocomplete="off"></td><td><input type="text" name="pigeon_code" id="pigeon_code" autocomplete="off"></td>';
+        var tbody1='<td colspan="3"><div>合计</div></td>';
+        for (var i = 0; i < rule.length; i++) {
+            thead1+='<th colspan="'+rule[i]['rule']['grade_money'].length+'"><div>'+rule[i]['name']+'</div></th>';
+            for (var j = 0; j < rule[i]['rule']['grade_money'].length; j++) {
+                colgroup+='<col width="150px">';
+                thead2+='<th><div class="'+rule[i]['value']+'-'+rule[i]['rule']['grade_money'][j]+'">'+rule[i]['rule']['grade_money'][j]+'</div></th>';
+                tbody+='<td><input type="checkbox" name="'+'field-'+rule[i]['value']+'-'+rule[i]['rule']['grade_money'][j]+'" value="'+rule[i]['rule']['grade_money'][j]+'" lay-skin="primary"></td>';
+                tbody1+='<td class="sum '+'field-'+rule[i]['value']+'-'+rule[i]['rule']['grade_money'][j]+'"><div>0</div></td>';
+            }
+        }
+        thead1+='<th rowspan="2"><div style="width: 50px;">合计</div></th>';
+        tbody+='<td class="sum"><div style="width: 50px;">0</div></td>';
+        tbody1+='<td class="allSum"><div style="width: 50px;">0</div></td>';
+        $('#sign_up_table colgroup').append(colgroup);
+        $('#sign_up_table thead').append('<tr>'+thead1+'</tr>');
+        $('#sign_up_table thead').append('<tr>'+thead2+'</tr>');
+        $('#sign_up_table tbody').append('<tr id="temp">'+tbody+'</tr>');
+        $('#sign_up_table tbody').append('<tr id="tempSum">'+tbody1+'</tr>');
+        var hs=$('#sign_up_table thead').find('div');
+        for (var i = 0; i < hs.length; i++) {
+            $(hs).eq(i).css("width",($(hs).eq(i).width()<25?25:$(hs).eq(i).width()))
+            $('#sign_up_table #tempSum').find('[class*=" field-'+$(hs).eq(i).attr('class')+'"]').children().css("width",$(hs).eq(i).width())
+        }
+        $('#sign_up_thead').css("width",$('#sign_up_table').width());
+        $('#sign_up_table tr').eq(0).append('<th rowspan="2"></th>');
+        $("#sign_up_thead").append($('#sign_up_table thead'))
+        $(".layui-table-body").scroll(function(event){
+            $(".layui-table-header").scrollLeft($(this).scrollLeft());
+        });
+        form.render();
+        form.on('checkbox', function(data){
+            console.log(data.elem); //得到checkbox原始DOM对象
+            console.log(data.elem.checked); //是否被选中，true或者false
+            console.log(data.value); //复选框value值，也可以通过data.elem.value得到
+            console.log(data.othis); //得到美化后的DOM对象
+            var tr=$(data.elem).parent().parent();
+            var checkboxs=$(tr).find('[type="checkbox"]:checked');
+            var sum=0;
+            for (var i = 0; i < checkboxs.length; i++) {
+                sum+=parseInt($(checkboxs[i]).val());
+            }
+            $(tr).find('.sum').text(sum)
+            checkboxs=$('[name="'+$(data.elem).attr('name')+'"]:checked');
+            sum=0;
+            for (var i = 0; i < checkboxs.length; i++) {
+                sum+=parseInt($(checkboxs[i]).val())>0?parseInt($(checkboxs[i]).val()):0;
+            }
+            $('.sum.'+$(data.elem).attr('name')+' div').text(sum);
+            var sums=$('td[class^="sum field"]');
+            sum=0
+            for (var i = 0; i < sums.length; i++) {
+                sum+=parseInt($(sums[i]).text())>0?parseInt($(sums[i]).text()):0;
+            }
+            $('.allSum div').text(sum);
+        });
+        yutons_sug.render({
+            id: "pigowner", //设置容器唯一id
+            type: 'sug', //设置输入框提示类型：sug-下拉框，sugTable-下拉表格
+            url: '/NodejsMatchPigeonCollection/selectGrpupByPigownerNum?match_id='+match_id + "&param="//设置异步数据接口,url为必填项,params为字段名
+        });
+       /* yutons_sug.render({
+            id: "pigowner_num", //设置容器唯一id
+            type: 'sug', //设置输入框提示类型：sug-下拉框，sugTable-下拉表格
+            url: '/NodejsMatchPigeonCollection/selectGrpupByPigownerNum?match_id='+match_id + "&param="//设置异步数据接口,url为必填项,params为字段名
+        });*/
+        yutons_sug.render({
+            id: "pigeon_code", //设置容器唯一id
+            type: 'sug', //设置输入框提示类型：sug-下拉框，sugTable-下拉表格
+            url: '/NodejsMatchPigeonCollection/selectGrpupByPigeonCode?match_id='+match_id + "&param="//设置异步数据接口,url为必填项,params为字段名
+        });
+        function flashTable() {
+            fuzzyQuery.clearQuery();
+            var search_member_name = $("#search_member_name").val();
+            if (search_member_name.length > 0)
+                fuzzyQuery.addLike("member_name", search_member_name);
+            fuzzyQuery.addEqual('match_id',match_id)
+            var fuzzyQueryJson = fuzzyQuery.getQuery();
+            baseOperation.flashTable(JSON.stringify(fuzzyQueryJson), 'signUpListTable', layui);
+        }
+    })
+</script>

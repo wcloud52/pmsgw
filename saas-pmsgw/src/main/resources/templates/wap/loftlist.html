@@ -29,7 +29,7 @@
 <div class="weui_grids grids-small">
 <input type="hidden" id="openid" name="openid" value="${openid?if_exists}" /> 
   <#list items as item>
-      <a href="${item.cote_web_url}"  class="grid">
+      <a href="/wap/page/racelist3?cote_id=${item.cote_id}"  class="grid">
         <div class="weui_grid_icon">
           <img src="/plugins/jquery-weui/weui/demos/images/icon_nav_button.png" alt="">
         </div>
@@ -45,6 +45,7 @@
         </p>
       </a>
      </#list>
+
     
       
     </div>

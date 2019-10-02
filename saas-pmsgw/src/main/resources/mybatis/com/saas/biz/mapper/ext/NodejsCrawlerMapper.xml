@@ -50,8 +50,11 @@
 	
 	<select id="selectNodejsCrawlerDetailGameListByDynamic" resultMap="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper.BaseResultMap"
 		parameterType="Object">
-		select 
-		<include refid="com.saas.biz.mapper.base.NodejsCrawlerDetailGameMapper.Base_Column_List" />
+		select
+		detail_id, cote_id, cote_name, cote_state, master_id, master_text, master_href, master_type,
+		master_website, detail_page, detail_page_index, detail_state, distence, ringnum,
+		pigowner, cometime, cotenum, round(speed,1) speed, rank, receiver_openid, receiver_nickname, receiver_headimgurl,
+		create_time, modify_time, weixin_pigowner, weixin_mobile
 		from ${queryMap.database}.nodejs_crawler_detail_game
 		
 		<where>

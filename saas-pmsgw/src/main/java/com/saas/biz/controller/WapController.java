@@ -1,38 +1,35 @@
 package com.saas.biz.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.kisso.SSOHelper;
+import com.baomidou.kisso.security.token.SSOToken;
+import com.saas.biz.pojo.*;
+import com.saas.biz.service.*;
+import com.saas.biz.util.SnGenerator;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.saas.biz.pojo.NodejsCrawlerCoteExtend;
-import com.saas.biz.pojo.NodejsCrawlerDetailGame;
-import com.saas.biz.pojo.NodejsCrawlerMasterGame;
-import com.saas.biz.pojo.NodejsCustomerMessage;
-import com.saas.biz.pojo.NodejsPigeonCollection;
-import com.saas.biz.pojo.NodejsWeixinUserCoteExtend;
-import com.saas.biz.pojo.WeixinUser;
-import com.saas.biz.service.NodejsCrawlerCoteExtendService;
-import com.saas.biz.service.NodejsCrawlerService;
-import com.saas.biz.service.NodejsCustomerMessageService;
-import com.saas.biz.service.NodejsPigeonCollectionService;
-import com.saas.biz.service.NodejsWeixinUserCoteExtendService;
-import com.saas.biz.service.WeixinUserService;
 import com.saas.biz.util.EmojiFilter;
 import com.saas.common.BaseResponse;
 import com.saas.common.JsonResult;
@@ -73,6 +70,16 @@ public class WapController {
 	private WeixinUserService weixinUserService;
 	@Autowired
 	protected NodejsPigeonCollectionService nodejsPigeonCollectionService;
+	@Autowired
+	protected NodejsMatchRegistService nodejsMatchRegistService;
+	@Autowired
+	protected NodejsMatchService nodejsMatchService;
+	@Autowired
+	protected NodejsCrawlerCoteExtendService nodejsCrawlerCoteExtendService;
+	@Autowired
+	protected NodejsMatchPigeonCollectionService nodejsMatchPigeonCollectionService;
+	@Autowired
+	protected NodejsMobileUserService nodejsMobileUserService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/bindLoft")
 	public ModelAndView bindLoft(HttpServletRequest req) {
@@ -113,8 +120,30 @@ public class WapController {
 	}
 
 	/**
+	 * 微信菜单-比赛页面 http://weixin.pmsgw.com/wap/page/racelist3
+	 * 根据公棚显示比赛列表
+	 * @param model
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/page/racelist3")
+	public String racelist3(ModelMap model,String cote_id, HttpServletRequest req) {
+		List<NodejsCrawlerMasterGame> list=null;
+		if(cote_id==null||cote_id.equals("")){
+			list= nodejsCrawlerService.selectTop50NodejsCrawlerMasterGameList("pmsgw_weixin");
+		}else {
+			list= nodejsCrawlerService.selectTop50NodejsCrawlerMasterGameListByCoteId("pmsgw_weixin",cote_id);
+			NodejsCrawlerCoteExtend item = nodejsCrawlerCoteExtService.selectByCoteId(cote_id);
+			model.put("item",item);
+		}
+		model.put("cote_id",cote_id);
+		model.put("list", list);
+		return "wap/racelist3";
+	}
+
+	/**
 	 * 比赛成绩页面
-	 * 
+	 *
 	 * @param model
 	 * @param masterId
 	 * @param req
@@ -127,6 +156,28 @@ public class WapController {
 		model.put("master", master);
 		model.put("item", item);
 		return "wap/racedetaillist";
+	}
+	/**
+	 * 比赛成绩页面
+	 * 由公棚进去后的比赛成绩页面
+	 * @param model
+	 * @param masterId
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/page/racedetaillist3")
+	public String racedetaillist3(ModelMap model, @RequestParam("masterId") String masterId, HttpServletRequest req) {
+		NodejsCrawlerMasterGame master = nodejsCrawlerService.selectNodejsCrawlerMasterGameById("pmsgw_weixin", masterId);
+		List<NodejsCrawlerDetailGame> item=null;
+		if (master.getCote_id()!=null&&!master.getCote_id().equals("")){
+
+			item= nodejsCrawlerService.selectNodejsCrawlerDetailGameListByDynamicMatch("pmsgw_weixin", masterId,master.getCote_id() );
+		}else {
+			item=nodejsCrawlerService.selectNodejsCrawlerDetailGameListByMasterId("pmsgw_weixin", masterId);
+		}
+		model.put("master", master);
+		model.put("item", item);
+		return "wap/racedetaillist3";
 	}
 
 	/**
@@ -229,12 +280,10 @@ public class WapController {
 	}
 
 	// http://localhost:4000/wap/page/userbind2
-	//http://weixin.pmsgw.com/wap/page/userbind2
 	@RequestMapping(method = RequestMethod.GET, value = "/page/userbind2")
 	public String userInfo2(ModelMap model) throws Exception {
 
-		return "wap/userbind";
-	/*	loger.info(wxMpService.getMenuService().menuGet().toJson());
+		loger.info(wxMpService.getMenuService().menuGet().toJson());
 		String openId = "ocSsDwjRXUH_Kn2hCZQN47z6YpnM";
 		WxMpUser wxMpUser = wxMpService.getUserService().userInfo(openId);
 		if (wxMpUser != null && wxMpUser.getSubscribe()) {
@@ -262,7 +311,7 @@ public class WapController {
 		} else {
 			String redirectURL = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI1NDk4NzYzMw==&scene=126#wechat_redirect";
 			return "redirect:" + redirectURL;
-		}*/
+		}
 	}
 
 	@RequestMapping(value = "/redirectToWeixin", method = RequestMethod.GET)
@@ -369,6 +418,28 @@ public class WapController {
 		return BaseResponse.ToJsonResult(1);
 	}
 
+    @RequestMapping(value = "/action/usercotedelete", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResponse<Integer> usercotedelete(NodejsWeixinUserCoteExtend body) {
+        if (loger.isDebugEnabled())
+            loger.debug(WapController.class + "/action/usercotedelete->" + JSON.toJSONString(body));
+
+        NodejsWeixinUserCoteExtend record = body;
+        NodejsCrawlerCoteExtend nodejsCrawlerCoteExtend = nodejsCrawlerCoteExtService.selectByCoteId(record.getCote_id());
+        if (nodejsCrawlerCoteExtend != null) {
+            record.setCote_name(nodejsCrawlerCoteExtend.getCote_name());
+            record.setCote_short_name(nodejsCrawlerCoteExtend.getCote_short_name());
+            record.setCote_state(nodejsCrawlerCoteExtend.getCote_state());
+            record.setCote_web_url(nodejsCrawlerCoteExtend.getCote_web_url());
+            record.setCote_website(nodejsCrawlerCoteExtend.getCote_website());
+            record.setSort_number(nodejsCrawlerCoteExtend.getSort_number());
+        }
+        nodejsWeixinUserCoteExtendService.deleteByCoteId(record.getCote_id(), record.getOpenid());
+        //nodejsWeixinUserCoteExtendService.insert(record);
+
+        return BaseResponse.ToJsonResult(1);
+    }
+
 	@RequestMapping(value = "/redirectToMyLoftlist", method = RequestMethod.GET)
 	public String redirectToMyLoftlist() {
 
@@ -377,7 +448,7 @@ public class WapController {
 		return "redirect:" + redirectURL;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/page/myloftlist")
+	/*@RequestMapping(method = RequestMethod.GET, value = "/page/myloftlist")
 	public String myloftlist(@RequestParam(name = "code") String code, @RequestParam(name = "state") String returnUrl, ModelMap model) throws Exception {
 		if (loger.isDebugEnabled())
 			loger.debug(WapController.class + "/page/myloftlist->" + code + "->" + returnUrl);
@@ -396,7 +467,28 @@ public class WapController {
 			return "redirect:" + redirectURL;
 		}
 
-	}
+	}*/
+    @RequestMapping(method = RequestMethod.GET, value = "/page/myloftlist")
+    public String myloftlist(@RequestParam(name = "code") String code, @RequestParam(name = "state") String returnUrl, ModelMap model) throws Exception {
+        if (loger.isDebugEnabled())
+            loger.debug(WapController.class + "/page/myloftlist->" + code + "->" + returnUrl);
+
+        WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+
+        String openId = wxMpOAuth2AccessToken.getOpenId();
+        WxMpUser wxMpUser = wxMpService.getUserService().userInfo(openId);
+        if (wxMpUser != null && wxMpUser.getSubscribe()) {
+
+            List<NodejsWeixinUserCoteExtend> list = nodejsWeixinUserCoteExtendService.selectByOpenid(openId);
+            model.put("items", list);
+            model.put("openid", openId);
+            return "wap/myloftlist3";
+        } else {
+            String redirectURL = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI1NDk4NzYzMw==&scene=126#wechat_redirect";
+            return "redirect:" + redirectURL;
+        }
+
+    }
 
 	// 我的收鸽
 	@RequestMapping(value = "/redirectToMypigeoncollectionPage1", method = RequestMethod.GET)

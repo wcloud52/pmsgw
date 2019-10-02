@@ -1,4 +1,27 @@
 var baseOperation = {
+	initTableOption : function(tableId, queryOperationUrl, initSort, sort, fuzzyQuery, cols, layui,option) {
+		var table = layui.table;
+		var $ = layui.$;
+		var _option={
+			elem : "#" + tableId,
+			height : 490,
+			url : queryOperationUrl, // 数据接口
+			page : true, // 开启分页
+			//limit:2,
+			limits:[10,20,50,100,200,500,1000,2000,5000,10000],
+			initSort : initSort,
+			cols : cols,
+			where : {
+				sort : sort,
+				fuzzyQuery : fuzzyQuery
+			},
+			method : 'post',
+			contentType : 'application/json'
+		};
+		_option=$.extend(_option,option);
+		debugger
+		table.render(_option);
+	},
 	initTable : function(tableId, queryOperationUrl, initSort, sort, fuzzyQuery, cols, layui) {
 		var table = layui.table;
 		table.render({
@@ -171,6 +194,7 @@ var baseOperation = {
 					var form = layui.form;
 					form.render();
 					form.on('submit(edit)', function(data) {
+						debugger
 						var curIndex = layer.load(2, {
 							zIndex : 2000
 						});
@@ -202,6 +226,47 @@ var baseOperation = {
 					addBoxIndex = -1;
 				}
 			});
+			layer.full(addBoxIndex);
+		});
+	},
+	editFormOption : function(editPageUrl, title,  layui,option) {
+		var $ = layui.$;
+		var table = layui.table;
+		var layer = layui.layer;
+		var layerTips = parent.layer === undefined ? layui.layer : parent.layer;// 获取父窗口的layer对象
+		$.get(editPageUrl, null, function(form) {
+			var _option={
+				type : 1,
+				title : title,
+				content : form,
+				btn : [ '保存', '取消' ],
+				shade : false,
+				offset : [ '100px', '30%' ],
+				area : [ '600px', '550px' ],
+				zIndex : 1000,
+				maxmin : false,
+				yes : function(index) {
+					$('form.layui-form').find('button[lay-filter=edit]').click();
+				},
+				full : function(elem) {
+					var win = window.top === window.self ? window : parent.window;
+					$(win).on('resize', function() {
+						var $this = $(this);
+						elem.width($this.width()).height($this.height()).css({
+							top : 0,
+							left : 0
+						});
+						elem.children('div.layui-layer-content').height($this.height() - 95);
+					});
+				},
+				success : function(layero, index) {
+
+				},
+				end : function() {
+					addBoxIndex = -1;
+				}};
+			_option=$.extend(_option,option);
+			addBoxIndex = layer.open(_option);
 			layer.full(addBoxIndex);
 		});
 	},

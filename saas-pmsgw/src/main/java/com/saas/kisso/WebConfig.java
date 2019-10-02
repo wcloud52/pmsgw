@@ -64,6 +64,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
        registry.addInterceptor(new SSOSpringInterceptor())
        .addPathPatterns("/**")
        .excludePathPatterns(
+    		   "/wap3/**",
     		   "/wap/**",
     		   "/wap/racedetaillist/**",
     		   "/wapIndex/**",
@@ -71,7 +72,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     		   "/mp/**",   		   
     		   "/storage/**",
     		   "/wx/**",
-    		   
+
+    		   "/nodejsMatch/result",
     		   "/plugins/**",
     		   "/css/**",
     		   "/datas/**",

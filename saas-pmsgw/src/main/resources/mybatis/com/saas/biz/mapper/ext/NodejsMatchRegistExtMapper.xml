@@ -232,15 +232,27 @@
 	</update>
 	<select id="selectCrawlerDetailGame" resultMap="com.saas.biz.mapper.base.NodejsMatchRegistMapper.BaseResultMap"
 			parameterType="Object">
-		SELECT b.rank,a.pigeon_code,a.regist from
-		(select pigeon_code,regist from nodejs_match_regist where match_id=#{match_id}) as a left join
-		${database}.nodejs_crawler_detail_game as b
-		on a.pigeon_code=b.ringnum
-		and
-		b.cote_id = #{cote_id}
-		AND b.cometime BETWEEN #{start_time}
-		AND #{end_time}
-		order by rank
+		SELECT
+			b.rank,
+			a.pigeon_code,
+			a.regist
+		FROM
+			(
+				SELECT
+					pigeon_code,
+					regist
+				FROM
+					nodejs_match_regist
+				WHERE
+					match_id =#{match_id}
+			) AS a
+				LEFT JOIN (
+				select ringnum,rank from ${database}.nodejs_crawler_detail_game  where
+					cote_id =#{cote_id} and detail_id like concat(#{start_time},'%')
+			)
+				AS b ON a.pigeon_code = b.ringnum
+		ORDER BY
+			rank
 	</select>
 	
 </mapper>

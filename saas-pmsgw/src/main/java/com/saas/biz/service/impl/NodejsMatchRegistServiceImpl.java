@@ -283,6 +283,169 @@ public class NodejsMatchRegistServiceImpl implements NodejsMatchRegistService {
 		return result;
 	}
 	@Override
+	public Map echoResultRealTime(JSONObject rule, float money, List<NodejsMatchRegist> rankLst, boolean update) {
+		Map result = new HashedMap();
+		String rule_name = rule.getString("name");
+		String rule_code = rule.getString("code");
+		int count = rankLst.size();
+		List<NodejsMatchRegist> list = new ArrayList<>();
+		List<NodejsMatchRegist> subList=new ArrayList();
+		if (rankLst!=null&&rankLst.size()>0) {
+			try {
+				switch (rule_code) {
+					case "1":
+						float reward = rule.getFloat("reward");
+						if (rankLst.get(0).getRank() != 999999999) {
+							subList = new ArrayList<>(rankLst.subList(0, 1));
+							list = deepCopy(subList);
+							list.get(0).setReward(reward / 100 * count * money);
+						}
+						result.put("list", list);
+						result.put("name", rule_name + (int) money + "组（" + count + "羽 取1名）");
+						break;
+					case "2":
+						JSONArray grades = rule.getJSONArray("grades");
+						int end_rank = 0, end_rank_index = 0;
+						for (int i = 0; i < grades.size(); i++) {
+							try {
+								end_rank = grades.getJSONObject(i).getInteger("end_rank");
+								if (end_rank >= count) {
+									end_rank_index = i;
+									break;
+								}
+							} catch (Exception e) {
+								end_rank_index = i;
+								break;
+							}
+						}
+						JSONArray rewards = grades.getJSONObject(end_rank_index).getJSONArray("reward");
+						List<Float> collect = rewards.stream().map(item ->
+								Float.parseFloat(item + "") / 100
+						).collect(Collectors.toList());
+						result.put("name", rule_name + (int) money + "组（" + count + "羽 取" + collect.size() + "名）");
+						rankLst = new ArrayList<>(rankLst.stream().filter(item -> item.getRank() != 999999999).collect(Collectors.toList()));
+						if (rankLst.size() > 0) {
+							if (collect.size() >= rankLst.size()) {
+								collect = collect.subList(0, rankLst.size());
+							}
+							subList = new ArrayList<>(rankLst.subList(0, collect.size()));
+							list = deepCopy(subList);
+							for (int i = 0; i < list.size(); i++) {
+								list.get(i).setReward(collect.get(i) * money * count);
+							}
+						}
+						result.put("list", list);
+						break;
+					case "3":
+					case "4":
+					case "5":
+					case "6":
+					case "7":
+						int rank = Integer.parseInt(rule_name.split("取")[0]);
+						int top = count / rank;
+						rankLst = new ArrayList<>(rankLst.stream().filter(item -> item.getRank() != 999999999).collect(Collectors.toList()));
+						result.put("name", rule_name + " " + (int) money + "组（" + count + "羽 取" + (count % rank > 0?top+1:top) + "名）");
+						if (rankLst.size() > 0) {
+							if (rankLst.size() < top) {
+								top = rankLst.size();
+							}
+							subList = new ArrayList<>(rankLst.subList(0, top));
+							list = deepCopy(subList);
+							int pow = (int) (rank / Math.pow(10, (rank + "").length() - 1)) * (int) Math.pow(10, (rank + "").length() - 1);
+							list.stream().forEach(item -> item.setReward(money * pow));
+							if (count % rank > 0) {
+								NodejsMatchRegist newRegist = new NodejsMatchRegist();
+								newRegist.setRank(rankLst.get(top).getRank());
+								newRegist.setPigeon_code(rankLst.get(top).getPigeon_code());
+								newRegist.setMember_code(rankLst.get(top).getMember_code());
+								newRegist.setMember_name(rankLst.get(top).getMember_name());
+								newRegist.setReward((count - top * rank) * money * 0.9f);
+								list.add(newRegist);
+								top++;
+							}
+						}
+						result.put("list", list);
+						break;
+					case "8":
+					case "9":
+						JSONArray grade_money = rule.getJSONArray("grade_money");
+						JSONArray ranks = rule.getJSONArray("ranks");
+						int grade_money_index = 0;
+						for (int i = 0; i < grade_money.size(); i++) {
+							if (grade_money.getFloat(i) == (money)) {
+								grade_money_index = i;
+								break;
+							}
+						}
+						rank = ranks.getInteger(grade_money_index);
+						top = count / rank;
+						result.put("name", rule_name + " " + (int) money + "组（" + count + "羽 取" + (count % rank > 0?top+1:top) + "名）");
+						rankLst = new ArrayList<>(rankLst.stream().filter(item -> item.getRank() != 999999999).collect(Collectors.toList()));
+						if (rankLst.size() > 0) {
+							if (rankLst.size() < top) {
+								top = rankLst.size();
+							}
+							subList = new ArrayList<>(rankLst.subList(0, top));
+							list = deepCopy(subList);
+							list.stream().forEach(item -> item.setReward(money * (rank - 1)));
+							if (count % rank > 0) {
+								NodejsMatchRegist newRegist = new NodejsMatchRegist();
+								newRegist.setRank(rankLst.get(top).getRank());
+								newRegist.setPigeon_code(rankLst.get(top).getPigeon_code());
+								newRegist.setMember_code(rankLst.get(top).getMember_code());
+								newRegist.setMember_name(rankLst.get(top).getMember_name());
+								newRegist.setReward((count - top * rank) * money * 0.9f);
+								list.add(newRegist);
+								top++;
+							}
+						}
+						result.put("list", list);
+						break;
+					case "10":
+						rank = rule.getInteger("rank");
+						reward = rule.getFloat("reward");
+						rankLst = new ArrayList<>(rankLst.stream().filter(item -> item.getRank() <= rank).collect(Collectors.toList()));
+						if (rankLst.size()>0) {
+							list = deepCopy(rankLst);
+							int c = list.size();
+							list.stream().forEach(item -> item.setReward(0f + (int) (money * count * reward / 100 / c)));
+						}
+						result.put("list", list);
+						result.put("name", rule_name + " " + (int) money + "组（" + count + "羽 取前" + rank + "名）");
+						break;
+					case "11":
+						rank = rule.getInteger("rank");
+						reward = rule.getFloat("reward");
+						list = new ArrayList<>();
+						rankLst = new ArrayList<>(rankLst.stream().filter(item -> item.getRank() != 999999999).collect(Collectors.toList()));
+						if (rankLst.size() > 0) {
+							for (NodejsMatchRegist r : rankLst) {
+								if (r.getRank() >= rank) {
+									NodejsMatchRegist newRegist = new NodejsMatchRegist();
+									newRegist.setRank(r.getRank());
+									newRegist.setPigeon_code(r.getPigeon_code());
+									newRegist.setMember_code(r.getMember_code());
+									newRegist.setMember_name(r.getMember_name());
+									newRegist.setReward(count * money * 0.85f);
+									list.add(newRegist);
+									break;
+								}
+							}
+						}
+						result.put("list", list);
+						result.put("name", rule_name + (int) money + "组（" + count + "羽 取1名）");
+						break;
+				}
+				if (update) {
+					updateSumReward(list);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	@Override
 	public Map<String,Object> echoOneResult(JSONObject rule,String key, List<NodejsMatchRegist> rankLst,String pigeon_code) {
 		String[] split = key.split("-");
 		int count = rankLst.size();

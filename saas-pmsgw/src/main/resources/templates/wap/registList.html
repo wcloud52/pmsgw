@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>报名表</title>
+
+    <link rel="stylesheet" href="/plugins/jquery-weui/weui/lib/weui.min.css">
+    <link rel="stylesheet" href="/plugins/jquery-weui/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="/plugins/weuiplus/css/weui.css"/>
+    <link rel="stylesheet" href="/plugins/weuiplus/css/weuix.css"/>
+    <link rel="stylesheet" href="/plugins/jquery-weui/css/style.css"/>
+    <script src="/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+    <script src="/plugins/jquery-weui1.2.1/js/media.js"></script>
+    <script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+    <script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+    <script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+    <script type="text/javascript" src="/plugins/layui/layui.js"></script>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all" />
+</head>
+<body>
+<div class="weui_grids grids-small">
+    <input type="hidden" id="openid" name="openid" value="${openid?if_exists}"/>
+    <table id="registList" style="margin: 20px auto;width: 80%">
+    </table>
+</div>
+<script type="text/javascript">
+    layui.config({
+        base: '../js/',
+        version: new Date().getTime()
+    }).extend({ // 模块别名
+    });
+    layui.use(['element', 'table'], function () {
+        var $ = layui.$;
+        var table = layui.table;
+        var cols=[];
+        var one=[{
+                field: 'member_code',
+                rowspan:2,
+                align: 'center',
+                width: 150,
+                title: '会员编号',
+            fixed: 'left',
+            }, {
+                field: 'member_name',
+                rowspan:2,
+                width: 150,
+                align: 'center',
+                title: '鸽主姓名'
+            }, {
+                field: 'pigeon_code',
+                rowspan:2,
+                width: 150,
+                align: 'center',
+                title: '参赛鸽环号'
+            }];
+        var two=[];
+        var rule=JSON.parse('${match.rule?if_exists}');
+        for (var i = 0; i < rule.length; i++) {
+            if (rule[i]['rule']['grade_money'].length>1) {
+                one.push({
+                    field:'rule-'+rule[i]['value'],
+                    colspan:rule[i]['rule']['grade_money'].length,
+                    align: 'center',
+                    title: rule[i]['name']
+                });
+            }else {
+                one.push({
+                    field:'rule-'+rule[i]['value'],
+                    align: 'center',
+                    title: rule[i]['name']
+                });
+            }
+
+            for (var j = 0; j < rule[i]['rule']['grade_money'].length; j++) {
+                two.push({
+                    field: 'field-'+rule[i]['value']+'-'+rule[i]['rule']['grade_money'][j],
+                    width: 80,
+                    align: 'center',
+                    title: rule[i]['rule']['grade_money'][j]
+                })
+            }
+        }
+        cols.push(one);
+        cols.push(two);
+
+        table.render({
+            elem: '#registList', //指定原始表格元素选择器（推荐id选择器）
+            cols:cols, //设置表头
+            url:'/wap/registList',
+            method:'post',
+            done:function(){
+                $('.layui-table-body').find('[data-field^="rule"]').remove()
+            }
+        });
+    });
+</script>
+</body>
+</html>

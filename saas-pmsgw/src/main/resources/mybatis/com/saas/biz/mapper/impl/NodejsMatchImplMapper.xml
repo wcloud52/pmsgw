@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.saas.biz.mapper.impl.NodejsMatchImplMapper">
-    <select id="selectNewMatchByCoteId" resultMap="com.saas.biz.mapper.base.NodejsMatchMapper.BaseResultMap" parameterType="java.lang.String">
-        select * from nodejs_match where cote_id = #{cote_id} ORDER BY start_time desc LIMIT 1
+    <select id="selectNewMatchByCoteId" resultMap="com.saas.biz.mapper.base.NodejsMatchMapper.BaseResultMap" parameterType="com.saas.biz.pojo.NodejsMatch">
+        select * from nodejs_match where cote_id = #{cote_id}
+        and TO_DAYS(start_time)=TO_DAYS(#{start_time})
+        ORDER BY start_time desc LIMIT 1
     </select>
 </mapper>

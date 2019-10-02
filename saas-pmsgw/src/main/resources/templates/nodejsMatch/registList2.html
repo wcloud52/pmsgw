@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>报名表</title>
+    <link rel="stylesheet" href="/plugins/jquery-weui/weui/lib/weui.min.css">
+    <link rel="stylesheet" href="/plugins/jquery-weui/weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="/plugins/weuiplus/css/weui.css"/>
+    <link rel="stylesheet" href="/plugins/weuiplus/css/weuix.css"/>
+    <link rel="stylesheet" href="/plugins/jquery-weui/css/style.css"/>
+    <script src="/plugins/jquery-weui1.2.1/js/zepto.js"></script>
+    <script src="/plugins/jquery-weui1.2.1/js/media.js"></script>
+    <script src="/plugins/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+    <script src="/plugins/jquery-weui/dist/lib/fastclick.js"></script>
+    <script src="/plugins/jquery-weui/dist/js/jquery-weui.js"></script>
+    <script type="text/javascript" src="https://cdn.aodianyun.com/static/jquery/jquery-1.7.2.min.js"></script>
+    <script src="/js/jQuery.print.js"></script>
+    <style type="text/css">
+        table{
+            display: block;
+            table-layout:fixed;
+            margin: 0 auto;
+        }
+        table td{
+            font-size: 15px;
+            padding: 0px;
+            text-align: center;
+            display: table-cell;
+            border: 1px solid black;
+        }
+        h3,h4{
+            text-align: center;
+            line-height: 40px;
+            color: red;
+        }
+        .td0{
+            width: 40px;
+        }
+        .td1{
+            width: 150px;
+        }
+        .td2{
+            width: 60px;
+        }
+
+    </style>
+</head>
+<body style="background-color:#FFFFFF;padding: 40px;">
+<div class="" id="print">
+    <input type="hidden" id="openid" name="openid" value="${openid?if_exists}"/>
+    <h3>${match.cote_name}</h3>
+    <h4>${match.match_title}</h4>
+    <table style="width: ${width}px;">
+        ${tr0}
+        ${tr1}
+        ${tr2}
+        <#list list as regist>
+        <tr>
+            <td class="td0">${regist_index?if_exists+1}</td>
+            <#list rule as key>
+                <#if key_index lt 3 >
+                    <td class="td1">${regist[key]?if_exists}</td>
+                <#else>
+                    <td class='td2'>${regist[key]?if_exists}</td>
+                </#if>
+            </#list>
+        </tr>
+    </#list>
+    </table>
+</div>
+<script type="text/javascript">
+    $(function() {
+        jQuery.print()
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<style type="text/css">
+    .rule-table{
+        display: table-cell;
+        border:0px;
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 0px
+    }
+    .rule-table tr{
+        border:1px solid black;
+    }
+    .rule-table td{
+        display: inline-block;
+        width:60px;
+        height: 25px;
+        padding: 5px;
+    }
+    .rule-table input{
+        display: inline-block;
+        width:43px;
+        margin:0px;
+        padding: 0px;
+    }
+    .rule-table .desc{
+        width: 100px;
+    }
+    .rule-table .border-top{
+        border-top:1px solid black;
+    }
+    .rule-table .border-bottom{
+        border-bottom:1px solid black;
+    }
+    .rule-table .border-left{
+        border-left:1px solid black;
+    }
+    .rule-table .border-right{
+        border-right:1px solid black;
+    }
+
+</style>
+<!--一把抓、大家乐页面-->
+<div style="margin: 15px;">
+    <form class="layui-form" id="rule-1-form">
+        <table id="rule-1" class="rule-table">
+            <tr>
+                <td class="desc"></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="desc">档次金额</td>
+                <td><input type="text" name="grade_money"></td>
+                <td><input type="text" name="grade_money"></td>
+                <td><input type="text" name="grade_money"></td>
+                <td><input type="text" name="grade_money"></td>
+                <td><input type="text" name="grade_money"></td>
+                <td><input type="text" name="grade_money"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="desc">指定名次</td>
+                <td><input type="text" name="rank"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="desc">奖金分配</td>
+                <td><input type="text" name="reward">%</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</div>

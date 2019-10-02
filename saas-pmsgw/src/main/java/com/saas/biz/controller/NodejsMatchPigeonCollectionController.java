@@ -1,5 +1,6 @@
 package com.saas.biz.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import com.baomidou.kisso.security.token.SSOToken;
 import com.saas.biz.pojo.NodejsMatchPigeonCollection;
 import com.saas.biz.pojo.NodejsSysUser;
 import com.saas.biz.util.SnGenerator;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -414,7 +416,9 @@ public class NodejsMatchPigeonCollectionController {
 				item.setModify_time(new Date());
 			}
 		}
-
+		if (list!=null&&list.size()>0){
+			sv.deleteByMatchId(list.get(0).getMatch_id());
+		}
 		int result = sv.insertBatch(list);
 
 		return BaseResponse.ToJsonResult(result);
@@ -426,9 +430,35 @@ public class NodejsMatchPigeonCollectionController {
 		Map<String,Object> map=new HashedMap();
 		map.put("match_id",match_id);
 		map.put("param",param);
-		map.put("limit",0);
-		map.put("offset",10);
+		map.put("limit",10);
+		map.put("offset",0);
 		List<NodejsMatchPigeonCollection> list = sv.selectListGroupByPigownerNum(map);
 		return BaseResponse.ToJsonResult(list);
+	}
+	@RequestMapping(value = "/selectGrpupByPigeonCode")
+	@ResponseBody
+	public BaseResponse<List<Map>> selectGrpupByPigeonCode (String match_id,String param) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+		Map<String,Object> map=new HashedMap();
+		map.put("match_id",match_id);
+		map.put("param",param);
+		map.put("limit",10);
+		map.put("offset",0);
+		List<Map> result =new ArrayList<>();
+		List<NodejsMatchPigeonCollection> list = sv.selectGrpupByPigeonCode(map);
+		if (list!=null&&list.size()>0){
+			for (NodejsMatchPigeonCollection n : list) {
+				try {
+					Map describe = BeanUtils.describe(n);
+					if (n.getRingnum()!=null){
+						describe.put("pigeon_code",n.getRingnum());
+						result.add(describe);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return BaseResponse.ToJsonResult(result);
 	}
 }

@@ -212,23 +212,45 @@ layui.define(['jquery', 'table'], function (exports) {
 	//点击选中事件，获取选中内容并回显到输入框
 	window.getCon = function (obj) {
         var data=$(obj).data('info')
+		debugger
         if(data.ringnum!=''){
+        	debugger
             var split=data.ringnum.split(',');
+            var pigeon_ext=data.pigeon_ext.split('#');
+            var collection_id=data.collection_id.split('#');
             $('#temp [name="member_name"]').val(data.pigowner);
             $('#temp [name="member_code"]').val(data.pigowner_num);
             $('#temp [name="pigeon_code"]').val(split[0]);
-            $('#temp').nextAll().remove();
+            $('#temp [name="id"]').val(collection_id[0]);
+            $('#temp').nextAll('[id!="tempSum"]').remove();
             for (var i = 1; i < split.length; i++) {
-                var temp=$('#temp').clone().removeAttr('id');
+                var temp=$('#temp').clone(true).removeAttr('id');
+				$(temp).find('[type="checkbox"]').prop('checked','');
                 $(temp).find('[id="sugItem"]').remove();
                 $(temp).find('[id="pigowner_num"]').removeAttr('id');
                 $(temp).find('[id="pigowner"]').removeAttr('id');
                 $(temp).find('[name="member_name"]').val(data.pigowner);
                 $(temp).find('[name="member_code"]').val(data.pigowner_num);
                 $(temp).find('[name="pigeon_code"]').val(split[i]);
-                $('#temp').parent().append(temp);
+                $(temp).find('[name="id"]').val(collection_id[i]);
+				$('#temp').after(temp);
+				layui.form.render()
+                if (pigeon_ext[i]!=''){
+					var json=JSON.parse(pigeon_ext[i]);
+					for(var p in json){
+						$('#temp').next().eq(0).find('[name="'+p+'"]').next().eq(0).click()
+					}
+				}
+
             }
-            layui.form.render()
+			if (pigeon_ext[0]!=''){
+				var json=JSON.parse(pigeon_ext[0]);
+				for(var p in json){
+					$('#temp').find('[name="'+p+'"]').next().eq(0).click()
+				}
+			}
+			layui.form.render()
+			$(".layui-table-body").css('max-height',$("#signBox").parent().height()-130);
         }
 		let value = $(obj).text();
 		//如果未定义idField，则不添加idField字段
