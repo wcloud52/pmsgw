@@ -168,6 +168,27 @@ layui.use(['element', 'laydate', 'table', 'form', 'fuzzyQuery', 'layedit'], func
             },
             cancel:function(){
                 flashTable();
+            },full : function(elem) {
+                var win = window.top === window.self ? window : parent.window;
+                $(win).on('resize', function() {
+                    var $this = $(this);
+                    elem.width($this.width()).height($this.height()).css({
+                        top : 0,
+                        left : 0
+                    });
+                    elem.children('div.layui-layer-content').height($this.height() - 95);
+                });
+                var hs=$('#sign_up_table thead').find('div');
+                for (var i = 0; i < hs.length; i++) {
+                    $(hs).eq(i).css("width",($(hs).eq(i).width()<25?25:$(hs).eq(i).width()))
+                    $('#sign_up_table #tempSum').find('[class*=" field-'+$(hs).eq(i).attr('class')+'"]').children().css("width",$(hs).eq(i).width())
+                }
+                $('#sign_up_thead').css("width",$('#sign_up_table').width());
+                $('#sign_up_table tr').eq(0).append('<th rowspan="2"></th>');
+                $("#sign_up_thead").append($('#sign_up_table thead'))
+                $(".layui-table-body").scroll(function(event){
+                    $(".layui-table-header").scrollLeft($(this).scrollLeft());
+                });
             },
             success :function(){
                 $('.layui-layer-btn.layui-layer-btn-').find('.layui-layer-btn1').hide();

@@ -108,6 +108,7 @@
                     <td class='td2 color${key?substring(6,6+key?substring(6)?index_of("-"))}'>${regist[key]?if_exists}</td>
                 </#if>
             </#list>
+            <td class="td0">${regist.sum?if_exists}</td>
         </tr>
     </#list>
     </table>

@@ -173,7 +173,6 @@ public class NodejsMatchRegistController {
     public BaseResponse<Integer> insertOperation(@RequestBody List<NodejsMatchRegist> body, HttpServletRequest request, HttpServletResponse response) {
         if (log.isDebugEnabled())
             log.debug(NodejsMatchRegistController.class + "/insert->" + JSON.toJSONString(body));
-
         List<NodejsMatchRegist> item = body;
         SSOToken ssoToken = SSOHelper.getSSOToken(request);
         int result=0;
@@ -200,8 +199,7 @@ public class NodejsMatchRegistController {
             }
 
         }
-        //int result = sv.insertBatch(item);
-
+        sv.sendMessage(body);
         return BaseResponse.ToJsonResult(result);
     }
 
@@ -362,16 +360,23 @@ public class NodejsMatchRegistController {
     }
 
     @RequestMapping(value = "page/registList",method = RequestMethod.GET)
-    public String registListPage(String match_id,Model model){
+    public String registListPage(NodejsMatchRegist nodejsMatchRegist,Model model){
         if (log.isDebugEnabled())
             log.debug(NodejsMatchRegistController.class + "/match/registList->");
         Map param=new HashMap();
-        param.put("match_id",match_id);
-        NodejsMatch match = nodejsMatchService.selectOneById(match_id);
+        param.put("match_id",nodejsMatchRegist.getMatch_id());
+        NodejsMatch match = nodejsMatchService.selectOneById(nodejsMatchRegist.getMatch_id());
         param.clear();
-        param.put("match_id",match_id);
+        param.put("match_id",nodejsMatchRegist.getMatch_id());
+        if(nodejsMatchRegist.getCreate_user_id()!=null&&!nodejsMatchRegist.getCreate_user_id().equals("")){
+            param.put("create_user_id",nodejsMatchRegist.getCreate_user_id());
+        }
+        if (nodejsMatchRegist.getMember_name()!=null&&!nodejsMatchRegist.getMember_name().equals("")){
+            param.put("member_name",nodejsMatchRegist.getMember_name());
+        }
         Map queryMap=new HashMap();
         queryMap.put("queryMap",param);
+
         List<NodejsMatchRegist> list=sv.selectListByDynamic(queryMap);
         Map<String, Integer> desc=new HashedMap();
         List<Map> mapList = new ArrayList<Map>();

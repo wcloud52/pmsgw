@@ -12,9 +12,10 @@
     <result column="bind_name" property="bind_name" jdbcType="VARCHAR" />
     <result column="bind_tel" property="bind_tel" jdbcType="VARCHAR" />
     <result column="pigowner" property="pigowner" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, openid, money, cote_id, create_time, modify_time, state,bind_name,bind_tel,pigowner
+    id, openid, money, cote_id, create_time, modify_time, state,bind_name,bind_tel,pigowner,nickname
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -29,10 +30,10 @@
   <insert id="insert" parameterType="com.saas.biz.pojo.WeixinUserPurse" >
     insert into weixin_user_purse (id, openid, money, 
       cote_id, create_time, modify_time, 
-      state,bind_name,bind_tel,pigowner)
+      state,bind_name,bind_tel,pigowner,nickname)
     values (#{id,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
       #{cote_id,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{modify_time,jdbcType=TIMESTAMP}, 
-      #{state,jdbcType=VARCHAR},#{bind_name,jdbcType=VARCHAR},#{bind_tel,jdbcType=VARCHAR},#{pigowner,jdbcType=VARCHAR})
+      #{state,jdbcType=VARCHAR},#{bind_name,jdbcType=VARCHAR},#{bind_tel,jdbcType=VARCHAR},#{pigowner,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.saas.biz.pojo.WeixinUserPurse" >
     insert into weixin_user_purse
@@ -67,6 +68,9 @@
       <if test="pigowner != null" >
         pigowner,
       </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -98,6 +102,9 @@
       </if>
       <if test="pigowner != null" >
         #{pigowner,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -131,6 +138,9 @@
       <if test="pigowner != null" >
         pigowner = #{pigowner,jdbcType=VARCHAR},
       </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -144,7 +154,8 @@
       state = #{state,jdbcType=VARCHAR},
       bind_name = #{bind_name,jdbcType=VARCHAR},
       bind_tel = #{bind_tel,jdbcType=VARCHAR},
-      pigowner = #{pigowner,jdbcType=VARCHAR}
+      pigowner = #{pigowner,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

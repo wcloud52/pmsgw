@@ -84,7 +84,11 @@ public class WeixinUserPurseServiceImpl implements WeixinUserPurseService {
 	}
 
 	@Override
-	public List<WeixinUserPurse> selectByJoin(WeixinUserPurse weixinUserPurse) {
-		return implMapper.selectByJoin(weixinUserPurse);
+	public List<Map> selectByJoin(Map map) {
+		return implMapper.selectByJoin(map);
+	}
+	@Override
+	public long selectCountByJoin(Map map) {
+		return implMapper.selectCountByJoin(map);
 	}
 }

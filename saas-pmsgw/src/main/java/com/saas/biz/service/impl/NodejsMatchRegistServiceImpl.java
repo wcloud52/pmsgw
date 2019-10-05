@@ -1,27 +1,41 @@
 package com.saas.biz.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.saas.biz.mapper.impl.NodejsMatchRegistImplMapper;
-import com.saas.biz.pojo.NodejsMatchRegist;
+import com.saas.biz.pojo.*;
+import com.saas.biz.service.NodejsCustomerTextMessageService;
 import com.saas.biz.service.NodejsMatchRegistService;
+import com.saas.biz.service.NodejsMatchService;
 import com.saas.common.*;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.apache.commons.collections.map.HashedMap;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
 public class NodejsMatchRegistServiceImpl implements NodejsMatchRegistService {
 	@Autowired
 	private NodejsMatchRegistImplMapper implMapper;
-
+	@Autowired
+	private WxMpService wxMpService;
+	@Autowired
+	private NodejsCustomerTextMessageService nodejsCustomerTextMessageService;
+	@Autowired
+	private NodejsMatchService nodejsMatchService;
+	@Autowired
+	private WeixinUserServiceImpl weixinUserService;
     /**
 	 * 插入
 	 * @param record
@@ -594,6 +608,93 @@ public class NodejsMatchRegistServiceImpl implements NodejsMatchRegistService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public int sendMessage(List<NodejsMatchRegist> registlist) {
+		Map<String, List<NodejsMatchRegist>> groupBy = registlist.stream().collect(Collectors.groupingBy(NodejsMatchRegist::getMember_name));
+		if (registlist==null||registlist.size()<=0){
+			return 0;
+		}
+		String match_id = registlist.get(0).getMatch_id();
+		NodejsMatch match = nodejsMatchService.selectOneById(match_id);
+		groupBy.values().forEach(list -> {
+			AtomicInteger sum = new AtomicInteger(0);
+			AtomicInteger count = new AtomicInteger(0);
+			List<Map<String,String>> openIdList=new ArrayList<>();
+			list.stream().forEach(item -> {
+				Map<String, String> json = JSONObject.parseObject(item.getRegist(), Map.class);
+				json.values().forEach(val -> {
+					try {
+						sum.addAndGet(Integer.parseInt(val));
+						count.addAndGet(1);
+					} catch (Exception e) {
+
+					}
+				});
+			});
+			if (list.get(0).getCreate_user_id()!=null&&!list.get(0).getCreate_user_id().equals("")){
+				Map<String,String> map=new HashedMap();
+				map.put("openId",list.get(0).getCreate_user_id());
+				map.put("create_user_id",list.get(0).getCreate_user_id());
+				map.put("member_name","");
+				openIdList.add(map);
+			}else {
+				Map param=new HashMap();
+				param.put("customQuerySegment"," bind_name='"+list.get(0).getMember_name()+"'");
+				List<WeixinUser> weixinUserList = weixinUserService.selectListByDynamic(param);
+				weixinUserList.stream().forEach(item->{
+					if(item.getOpenid()!=null&&!item.getOpenid().equals("")){
+						Map<String,String> map=new HashedMap();
+						map.put("openId",item.getOpenid());
+						map.put("create_user_id","");
+						map.put("member_name",item.getBind_name());
+						openIdList.add(map);
+					}
+				});
+			}
+			if (openIdList.size()>0){
+				String data = DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
+				for (Map<String,String> map:openIdList) {
+				String first = "平民赛鸽网提供";
+				String keyword1 = "【"+match.getCote_name()+"】"+match.getMatch_title();
+				String keyword2 = "共【"+count.get()+"】项，【"+sum.get()+"】元";
+				String keyword3 = data;
+				String remark ="点此处查看详情";
+
+				WxMpTemplateMessage wxMpTemplateMessage = new WxMpTemplateMessage();
+				wxMpTemplateMessage.setTemplateId("XhUEgJmjXFG2mPXZ2NSTYbrFMg7ZLi7GvImkW-skWPU");
+				wxMpTemplateMessage.setToUser(map.get("openId"));
+				List<WxMpTemplateData> listWx = Arrays.asList(new WxMpTemplateData("first", first, "#000000"),
+						new WxMpTemplateData("keyword1", keyword1, "#000000"),
+						new WxMpTemplateData("keyword2", keyword2, "#000000"),
+						new WxMpTemplateData("keyword3", keyword3, "#000000"),
+						new WxMpTemplateData("remark",remark, "#000000"));
+				// 放进模板对象。准备发送
+				wxMpTemplateMessage.setData(listWx);
+				wxMpTemplateMessage.setUrl("http://weixin.pmsgw.com/wap/page/registList?match_id="+match_id+"&create_user_id="+map.get("create_user_id")+"&member_name="+map.get("member_name"));
+				String text="";
+				try {
+					wxMpService.getTemplateMsgService().sendTemplateMsg(wxMpTemplateMessage);
+					text= JSON.toJSONString(wxMpTemplateMessage);
+				} catch (WxErrorException e) {
+					text=e.getMessage();
+					e.printStackTrace();
+				}
+
+				NodejsCustomerTextMessage record = new NodejsCustomerTextMessage();
+				record.setMessage_id(UUID.randomUUID().toString());
+				record.setMessage_receiverId(map.get("openId"));
+				record.setMessage_receiverName("");
+				record.setMessage_title(keyword1);
+				record.setMessage_text(text);
+				record.setMessage_type("text");
+				record.setMessage_create_time(new Date());
+				record.setMessage_modify_time(new Date());
+				nodejsCustomerTextMessageService.insert(record);
+			}}
+		});
+		return 0;
 	}
 
 	public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {

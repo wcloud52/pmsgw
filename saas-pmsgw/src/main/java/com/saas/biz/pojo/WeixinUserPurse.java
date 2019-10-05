@@ -1,5 +1,6 @@
 package com.saas.biz.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class WeixinUserPurse {
@@ -7,7 +8,7 @@ public class WeixinUserPurse {
 
     private String openid;
 
-    private Integer money;
+    private BigDecimal money;
 
     private String cote_id;
 
@@ -19,6 +20,7 @@ public class WeixinUserPurse {
     private String bind_name;
     private String bind_tel;
     private String pigowner;
+    private String nickname;
 
     public String getId() {
         return id;
@@ -36,11 +38,11 @@ public class WeixinUserPurse {
         this.openid = openid == null ? null : openid.trim();
     }
 
-    public Integer getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 
@@ -98,5 +100,13 @@ public class WeixinUserPurse {
 
     public void setPigowner(String pigowner) {
         this.pigowner = pigowner;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

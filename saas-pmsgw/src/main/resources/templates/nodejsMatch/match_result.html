@@ -106,6 +106,7 @@
             <td class=xl1073130 style='border-left:none'>足环号</td>
             <td class=xl1063130 style='border-left:none'>奖金</td>
         </tr>
+        <#if res.list??>
         <#list res.list as list>
             <tr height=26 style='height:19.5pt'>
                 <td height=26 class=xl1063130 style='height:19.5pt;border-top:none'>${list_index+1}</td>
@@ -116,7 +117,9 @@
                 <td class=xl1063130 style='border-top:none;border-left:none'>${list.reward}</td>
             </tr>
             </#list>
+</#if>
         </#list>
+
     </table>
 
 </div>

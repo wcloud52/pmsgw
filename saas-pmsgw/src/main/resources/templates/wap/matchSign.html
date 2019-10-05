@@ -164,7 +164,12 @@
 <body ontouchstart="">
 <!-- 容器 -->
 <div class="weui-tab">
+    <input id="openid" type="hidden" value="${openid?if_exists}">
+    <input id="cote_id" type="hidden" value="${match.cote_id?if_exists}">
     <div id="box1">
+        <#if money??>
+        <p>当前余额：<span id="money" style="color: red">${money?if_exists}</span>元</p>
+        </#if>
         <#if code??>
         ${code}
         <#else>
@@ -187,19 +192,21 @@
                 <span>0</span>
                 <b>点击展开</b>
             </span>
-        <input type="hidden" value="${item.collection_id}" name="id">
+        <input type="hidden" value="${item.collection_id?if_exists}" name="id">
         <input type="hidden" value="" name="regist">
-        <input type="hidden" value="${item.ringnum}" name="pigeon_code">
-        <input type="hidden" value="${match.match_id}" name="match_id">
-        <input type="hidden" value="${item.member_code}" name="member_code">
-        <input type="hidden" value="${item.member_name}" name="member_name">
+        <input type="hidden" value="${item.ringnum?if_exists}" name="pigeon_code">
+        <input type="hidden" value="${match.match_id?if_exists}" name="match_id">
+        <input type="hidden" value="${item.pigowner_code?if_exists}" name="member_code">
+        <input type="hidden" value="${item.pigowner?if_exists}" name="member_name">
         <#list rule as r>
         <li class="weui-cells weui-cells_checkbox">
             <label class="weui-cell weui-check__label">
                 <div class="weui-cell__hd">
                     <input type="checkbox" class="weui-check" name="${r.code?if_exists}"
-                    <#if item.pigeon_ext?index_of(r.code) gt 0 >
-                        checked="checked"
+                    <#if item.pigeon_ext??>
+                        <#if item.pigeon_ext?index_of(r.code) gt 0 >
+                            checked="checked"
+                        </#if >
                     </#if >
                     >
                     <i class="weui-icon-checked"></i>
@@ -215,7 +222,7 @@
     </div>
     <div id="box2">
         <div id="count">
-            共：<span>0</span>羽
+            共：<span>0</span>项
             &nbsp;&nbsp;&nbsp;&nbsp;
             合计：<span>0</span>元
         </div>
@@ -234,6 +241,7 @@
 <script>
     $(function(){
         var start=0;
+        var money=999999;
         FastClick.attach(document.body);
         // 改进版本的手风琴菜单效果
         $('#box1 span').click(function(){
@@ -257,6 +265,19 @@
             var ul=$(this).parents('ul');
             var checkbox=$(ul).find('input[type="checkbox"]:checked');
             var sum=0;
+            if ($(this).is(':checked')){
+                if (money>=parseInt($(this).attr('name').split('-')[2])){
+                    money-=parseInt($(this).attr('name').split('-')[2]);
+                    $('#money').text(money)
+                }else{
+                    $(this).prop("checked","")
+                    $.toast("余额不足，请充值！", "text");
+                    return ;
+                }
+            }else{
+                money+=parseInt($(this).attr('name').split('-')[2]);
+                $('#money').text(money)
+            }
             $(ul).find('.m i').text(checkbox.length);
             for (var i = 0; i < checkbox.length; i++) {
                 try {
@@ -288,10 +309,23 @@
             $('#count span').eq(1).text(sum)
         })
         $('.weui-switch').on('change',function () {
+            var field11=$('input[type="checkbox"][name^="field-11-"]');
             if ($(this).is(':checked')){
-                $('input[type="checkbox"][name^="field-11-"]').prop("checked","checked").change();
+                for(var i=0;i<field11.length;i++){
+                    if (money>=parseInt($(field11[i]).attr('name').split('-')[2])){
+                        $(field11[i]).prop("checked","checked").change();
+                    }else{
+                        $.toast("余额不足，请充值！", "text");
+                        return ;
+                    }
+
+                }
             }else {
-                $('input[type="checkbox"][name^="field-11-"]').prop("checked","").change();
+                for(var i=0;i<field11.length;i++){
+                    if ($(field11[i]).is(':checked')){
+                        $(field11[i]).prop("checked","").change();
+                    }
+                }
             }
 
         })
@@ -299,9 +333,11 @@
             $(this).find('input[type="checkbox"][name^="field"]').eq(0).change()
         })
         start=$('#count span').eq(1).text();
-        if('${code}'!=''){
-            $.toast("${code}", "text");
+        if('${code?if_exists}'!=''){
+            $.toast("${code?if_exists}", "text");
         }
+        money=${money}
+        $('#money').text(${money?if_exists})
         $("#commit").on('click',function(){
             var trs=$('ul');
             var result=[];
@@ -311,10 +347,9 @@
                 for (var j = 0; j < checkboxs.length; j++) {
                     var key=$(checkboxs).eq(j).attr('name');
                     var val=$(checkboxs).eq(j).val();
-                    regist[key]=val;
+                    regist[key]=key.split('-')[2];
                 }
                 var pigeon_code=$(trs).eq(i).find('[name="pigeon_code"]').val();
-                debugger
                 if ( Object.keys(regist).length>0&&pigeon_code!=undefined&&pigeon_code!='') {
                     $(trs).eq(i).find('[name="regist"]').val(JSON.stringify(regist));
                     var row = {
@@ -335,13 +370,15 @@
                 }
             }
             if (result.length<=0){
-                layer.msg('信息填写不完整',{icon:5});
                 return
-            }else{
-
-                result[0]['rank']=$('#count span').eq(1).text();
-                result[0]['reward']=start;
             }
+            if (money<0){
+                $.toast("余额不足，请充值！", "text");
+                return ;
+            }
+            result[0].cote_id=$('#cote_id').val();
+            result[0].cote_name=$('#openid').val();
+            result[0].reward=money;
             $.ajax({
                 type : "POST",
                 url :  "/wap/sign_up_insert",

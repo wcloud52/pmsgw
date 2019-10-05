@@ -53,7 +53,17 @@ var navs = [
 		"title": "指定赛管理",
 		"icon": "&#xe63c;",
 		"href": "/nodejsMatch/list.html"
-	}
+	},
+		{
+			"title": "用户充值",
+			"icon": "&#xe63c;",
+			"href": "/weixinuserpurse/list.html"
+		},
+		{
+			"title": "二维码管理",
+			"icon": "&#xe63c;",
+			"href": "/paymentCode/edit.html"
+		}
 	]
 },
 
