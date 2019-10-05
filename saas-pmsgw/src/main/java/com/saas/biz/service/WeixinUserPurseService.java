@@ -6,5 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface WeixinUserPurseService extends BaseService<WeixinUserPurse,String> {
-    List<WeixinUserPurse> selectByJoin(WeixinUserPurse weixinUserPurse);
+    List<Map> selectByJoin(Map map);
+
+    long selectCountByJoin(Map<Object, Object> map);
 }

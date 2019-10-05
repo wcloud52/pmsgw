@@ -4,7 +4,10 @@ import com.saas.biz.mapper.ext.WeixinUserPurseExtMapper;
 import com.saas.biz.pojo.WeixinUserPurse;
 
 import java.util.List;
+import java.util.Map;
 
 public interface WeixinUserPurseImplMapper extends WeixinUserPurseExtMapper {
-    List<WeixinUserPurse> selectByJoin(WeixinUserPurse weixinUserPurse);
+    List<Map> selectByJoin(Map map);
+
+    long selectCountByJoin(Map map);
 }

@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>二维码管理</title>
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/table.css"/>
+    <style>
+        .layui-upload-img {
+            width: 80%;
+            margin: 0 10px 10px 0;
+        }
+
+        .layui-upload {
+            float: left;
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="admin-main">
+    <form id="form1">
+        <#if item??>
+        <input type="hidden" id="id"  name="id" value="${item.id?if_exists}">
+        <input type="hidden" id="z_id"  name="z_id" value="${item.z_id?if_exists}">
+        <input type="hidden" id="z_storageKey"  name="z_storageKey" value="${item.z_storageKey?if_exists}">
+        <input type="hidden" id="z_url"  name="z_url" value="${item.z_url?if_exists}">
+        <input type="hidden" id="z_storageType"  name="z_storageType" value="${item.z_storageType?if_exists}">
+        <input type="hidden" id="w_id"  name="w_id" value="${item.w_id?if_exists}">
+        <input type="hidden" id="w_storageKey"  name="w_storageKey" value="${item.w_storageKey?if_exists}">
+        <input type="hidden" id="w_url"  name="w_url" value="${item.w_url?if_exists}">
+        <input type="hidden" id="w_storageType"  name="w_storageType" value="${item.w_storageType?if_exists}">
+    <#else>
+    <input type="hidden" id="id"  name="id" >
+    <input type="hidden" id="z_id"  name="z_id" >
+    <input type="hidden" id="z_storageKey"  name="z_storageKey" >
+    <input type="hidden" id="z_url"  name="z_url" >
+    <input type="hidden" id="z_storageType"  name="z_storageType" >
+    <input type="hidden" id="w_id"  name="w_id" >
+    <input type="hidden" id="w_storageKey"  name="w_storageKey" >
+    <input type="hidden" id="w_url"  name="w_url" >
+    <input type="hidden" id="w_storageType"  name="w_storageType" >
+</#if>
+    </form>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test1">支付宝收款码</button>
+        <div class="layui-upload-list">
+            <#if item??>
+            <img class="layui-upload-img" id="demo1" src="${item.z_url?if_exists}">
+            <#else>
+            <img class="layui-upload-img" id="demo1" src="">
+            </#if>
+            <p id="demoText1"></p>
+        </div>
+    </div>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test2">微信收款码</button>
+        <div class="layui-upload-list">
+            <#if item??>
+            <img class="layui-upload-img" id="demo1" src="${item.w_url?if_exists}">
+            <#else>
+            <img class="layui-upload-img" id="demo1" src="">
+        </#if>
+            <p id="demoText2"></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['upload'], function () {
+        var $ = layui.$, upload = layui.upload;
+
+        var uploadInst1 = upload.render({
+            elem: '#test1',
+            url: '/storage/create/',
+            accept: 'file',
+			exts:'jpg|png|bmp|jpeg',
+            before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            },
+            done: function (res) {
+                //如果上传失败
+                if (res.code == 0) {
+                    $('#z_id').val(res.data.id);
+                    $('#z_storageKey').val(res.data.storageKey);
+                    $('#z_url').val(res.data.url);
+                    $('#z_storageType').val(res.data.storageType);
+                    update();
+                    deleteFile('z')
+                } else {
+                    return layer.msg('上传失败');
+                }
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var pImgText = $('#pImgText');
+                pImgText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                pImgText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        var uploadInst2 = upload.render({
+            elem: '#test2',
+            url: '/storage/create/',
+            accept: 'file',
+			exts:'jpg|png|bmp|jpeg',
+            before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').attr('src', result); //图片链接（base64）
+                });
+            },
+            done: function (res) {
+                //如果上传失败
+                if (res.code == 0) {
+                    $('#w_id').val(res.data.id);
+                    $('#w_storageKey').val(res.data.storageKey);
+                    $('#w_url').val(res.data.url);
+                    $('#w_storageType').val(res.data.storageType);
+                    update();
+                    deleteFile('w');
+                } else {
+                    return layer.msg('上传失败');
+                }
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var pImgText = $('#pImgText');
+                pImgText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                pImgText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        function update() {
+            $.ajax({
+                url: "/paymentCode/update",
+                type: "post",
+                dataType: "json",
+                async: true,
+                data: $('#form1').serialize(),
+                success: function (res) {
+                    if (res.data > 0) {
+                        layer.msg('上传成功');
+                    } else {
+                        layer.msg('上传失败');
+                    }
+
+                }
+            });
+        }
+
+        function deleteFile(type) {
+            $.ajax({
+                url: "/storage/create/",
+                type: "post",
+                dataType: "json",
+                async: true,
+                data: {id: $('#' + type + '_id').val(), storageKey: $('#' + type + '_storageKey').val()},
+                success: function (res) {
+
+
+                }
+            });
+        }
+    })
+</script>
+</body>
+</html>

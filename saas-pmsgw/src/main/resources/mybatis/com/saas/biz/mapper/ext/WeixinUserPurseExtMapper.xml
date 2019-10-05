@@ -33,7 +33,7 @@
 	</select>
 	<insert id="insertByList" parameterType="list">
 		insert into weixin_user_purse
-		    (id, openid, money, cote_id, create_time, modify_time, state, bind_name, bind_tel, pigowner)
+		    (id, openid, money, cote_id, create_time, modify_time, state, bind_name, bind_tel, pigowner, nickname)
 		values
 		<foreach item="item" index="index" collection="list" open=""
 			separator="," close="">
@@ -46,7 +46,8 @@
 			#{itme.state,jdbcType=VARCHAR}),
 			#{itme.bind_name,jdbcType=VARCHAR}),
 			#{itme.bind_tel,jdbcType=VARCHAR}),
-			#{itme.pigowner,jdbcType=VARCHAR})
+			#{itme.pigowner,jdbcType=VARCHAR}),
+			#{itme.nickname,jdbcType=VARCHAR})
 		</foreach>
 	</insert>
 	<update id="updateByList" parameterType="list">
@@ -80,6 +81,9 @@
 				</if>
 				<if test="item.pigowner != null" >
 					pigowner = #{item.pigowner,jdbcType=VARCHAR},
+				</if>
+				<if test="item.nickname != null" >
+					nickname = #{item.nickname,jdbcType=VARCHAR},
 				</if>
 			</set>
 			where id = #{item.id,jdbcType=VARCHAR}

@@ -3,20 +3,16 @@ package com.saas.biz.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.kisso.SSOHelper;
-import com.baomidou.kisso.security.token.SSOToken;
 import com.saas.biz.pojo.*;
 import com.saas.biz.service.*;
-import com.saas.biz.util.EmojiFilter;
 import com.saas.biz.util.SnGenerator;
 import com.saas.common.*;
-import me.chanjar.weixin.common.api.WxConsts;
+import javassist.runtime.Desc;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +20,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.map.HashedMap;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 移动端相关操作
@@ -69,6 +64,10 @@ public class WapMatchController {
     protected NodejsMatchPigeonCollectionService nodejsMatchPigeonCollectionService;
     @Autowired
     protected NodejsMobileUserService nodejsMobileUserService;
+    @Autowired
+    protected WeixinUserPurseService weixinUserPurseService;
+    @Autowired
+    protected PaymentCodeService paymentCodeService;
 
     @RequestMapping(value = "page/resultOne",method = RequestMethod.GET)
     public String resultOne(Model model,@RequestParam("match_id") String match_id, @RequestParam("pigeon_code") String pigeon_code,@RequestParam("pigowner") String pigowner){
@@ -138,13 +137,16 @@ public class WapMatchController {
                 String registJson = regist.getRegist();
                 Map<String,String> json = JSONObject.parseObject(registJson, Map.class);
                 describe.putAll(json);
+                AtomicInteger sum= new AtomicInteger(0);
                 json.entrySet().forEach(item->{
+                    sum.addAndGet(Integer.parseInt(item.getValue()));
                     if (desc.get(item.getKey())==null){
                         desc.put(item.getKey(),1);
                     }else {
                         desc.put(item.getKey(),desc.get(item.getKey())+1);
                     }
                 });
+                describe.put("sum",sum);
                 mapList.add(describe);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -185,7 +187,7 @@ public class WapMatchController {
                 tr2+="<td class='color"+code+"'>"+grade_money.getString(j)+"</td>";
             }
         }
-        tr0+="</tr>";
+        tr0+="<td rowspan='3'>合计</td</tr>";
         tr1+="</tr>";
         tr2+="</tr>";
         model.addAttribute("width",width);
@@ -255,7 +257,9 @@ public class WapMatchController {
         if (matchList!=null&&matchList.size()>0){
             model.put("match", matchList.get(0));
         }
+        PaymentCode img = paymentCodeService.selectOneById(cote.getCote_id());
         model.put("cote", cote);
+        model.put("img", img);
         return "wap/match";
     }
     @RequestMapping(method = RequestMethod.GET, value = "/page/matchSign")
@@ -280,6 +284,14 @@ public class WapMatchController {
 
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
         String openId = wxMpOAuth2AccessToken.getOpenId();
+        Map customQuerySegment=new HashMap();
+        customQuerySegment.put("customQuerySegment"," openid ='"+openId+"'");
+        List<WeixinUserPurse> weixinUserPurseList = weixinUserPurseService.selectListByDynamic(customQuerySegment);
+        if (weixinUserPurseList!=null&&weixinUserPurseList.size()>0&&weixinUserPurseList.get(0).getMoney()!=null){
+            model.addAttribute("money",weixinUserPurseList.get(0).getMoney());
+        }else {
+            model.addAttribute("money",0);
+        }
         WxMpUser wxMpUser = wxMpService.getUserService().userInfo(openId);
         if (wxMpUser != null && wxMpUser.getSubscribe()) {
             WeixinUser weixinUser = weixinUserService.selectOneById(openId);
@@ -305,6 +317,7 @@ public class WapMatchController {
             model.addAttribute("list",pigeonList);
             model.addAttribute("match",match);
             model.addAttribute("rule",rule);
+            model.addAttribute("openid",openId);
         } else {
             String redirectURL = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI1NDk4NzYzMw==&scene=126#wechat_redirect";
             return "redirect:" + redirectURL;
@@ -324,35 +337,46 @@ public class WapMatchController {
             loger.debug(NodejsMatchRegistController.class + "/insert->" + JSON.toJSONString(body));
 
         List<NodejsMatchRegist> item = body;
-        SSOToken ssoToken = SSOHelper.getSSOToken(request);
-        int startMoney=0,endMoney=0;
-        if(body!=null&&body.size()>0){
-            startMoney+=body.get(0).getReward();
-            endMoney+=body.get(0).getRank();
+        int startMoney = 0, endMoney = 0;
+        int result = 0;
+        String openId = "", cote_id = "";
+        BigDecimal money = new BigDecimal(0);
+        if (body != null && body.size() > 0) {
+            money = new BigDecimal(body.get(0).getReward());
+            openId = body.get(0).getCote_name() + "";
+            cote_id = body.get(0).getCote_id() + "";
+            body.get(0).setReward(0);
+            body.get(0).setCote_name("");
         }
-        int result=0;
-        if (ssoToken != null) {
-            NodejsSysUser nodejsSysUser = JSON.parseObject(JSON.toJSONString(ssoToken.getClaims().get("nodejsSysUser")), NodejsSysUser.class);
-            for (NodejsMatchRegist r : item) {
-                if (r.getId()==null||r.getId().equals("")){
-                    String id = SnGenerator.getSn("MR");
-                    r.setId(id);
-                    r.setCreate_user_id(nodejsSysUser.getId());
-                    r.setCote_id(nodejsSysUser.getCote_id());
-                    r.setCote_name(nodejsSysUser.getCote_name());
-                    r.setCreate_time(new Date());
-                    r.setModify_time(new Date());
-                    result+=nodejsMatchRegistService.insert(r);
-                }else {
-                    if (r.getRegist()!=null&&r.getRegist().length()>7){
+        Map customQuerySegment = new HashMap();
+        customQuerySegment.put("customQuerySegment", " openid ='" + openId + "'");
+        List<WeixinUserPurse> list = weixinUserPurseService.selectListByDynamic(customQuerySegment);
+        if (list != null && list.size() > 0) {
+            list.get(0).setMoney(money);
+            weixinUserPurseService.update(list.get(0));
+        } else {
+            return BaseResponse.ToJsonResult(result);
+        }
 
-                        result+=nodejsMatchRegistService.update(r);
-                    }else {
-                        result+=nodejsMatchRegistService.deleteById(r.getId());
-                    }
+        for (NodejsMatchRegist r : item) {
+            r.setCreate_user_id(openId);
+            if (r.getId() == null || r.getId().equals("")) {
+                String id = SnGenerator.getSn("MR");
+                r.setId(id);
+                r.setCote_id(cote_id);
+                r.setCreate_time(new Date());
+                r.setModify_time(new Date());
+                result += nodejsMatchRegistService.insert(r);
+            } else {
+                if (r.getRegist() != null && r.getRegist().length() > 7) {
+
+                    result += nodejsMatchRegistService.update(r);
+                } else {
+                    result += nodejsMatchRegistService.deleteById(r.getId());
                 }
             }
         }
+        nodejsMatchRegistService.sendMessage(item);
         return BaseResponse.ToJsonResult(result);
     }
     @RequestMapping("resultRealTime")

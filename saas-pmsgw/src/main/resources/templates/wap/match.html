@@ -24,6 +24,13 @@
             font-size: 20px;
             padding: 10px;
         }
+        #imgDiv{
+            text-align: center;
+            padding-top: 30px ;
+        }
+        #imgDiv img{
+            width: 80%;
+        }
     </style>
 </head>
 <body>
@@ -42,6 +49,9 @@
         <#if match??>
         <li>
             <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6fe226626254fab1&redirect_uri=http://weixin.pmsgw.com/wap/page/matchSign?match_id=${match.match_id}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" class="p10 bgf flex-box flex-col-start arrowR">
+<!--
+            <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3acf38bc8ef7ef93&redirect_uri=http://wx.wcloud.top/wap/page/matchSign?match_id=${match.match_id}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" class="p10 bgf flex-box flex-col-start arrowR">
+-->
                 <div class="pl10 flex-self-stretch flex-box flex-col flex-between flex-col-stretch hidden">
                     <p class="fs14 col0 multi-line">
                         <i class="fa fa-hand-o-right"></i>
@@ -72,6 +82,20 @@
         </li>
     </#if>
     </ul>
+    <#if img??>
+    <div id="imgDiv">
+        <p style="color: red">扫描二维码进行充值，可长按识别图中二维码</p>
+    <#if img.z_url??>
+        <p>支付宝收款码</p>
+        <img src="${img.z_url?if_exists}">
+    </#if>
+        <#if img.w_url??>
+    <p>微信收款码</p>
+    <img src="${img.w_url?if_exists}">
+    </#if>
+
+</div>
+    </#if>
 
     <!--  -->
 </section>

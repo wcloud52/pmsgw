@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.biz.mapper.base.PaymentCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.saas.biz.pojo.PaymentCode" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="cote_id" property="cote_id" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creat_time" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+    <result column="z_storageKey" property="z_storageKey" jdbcType="VARCHAR" />
+    <result column="z_url" property="z_url" jdbcType="VARCHAR" />
+    <result column="z_storageType" property="z_storageType" jdbcType="VARCHAR" />
+    <result column="w_storageKey" property="w_storageKey" jdbcType="VARCHAR" />
+    <result column="w_url" property="w_url" jdbcType="VARCHAR" />
+    <result column="w_storageType" property="w_storageType" jdbcType="VARCHAR" />
+    <result column="z_id" property="z_id" jdbcType="INTEGER" />
+    <result column="w_id" property="w_id" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cote_id, creat_time, modify_time, z_storageKey, z_url, z_storageType, w_storageKey, 
+    w_url, w_storageType, z_id, w_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from payment_code
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from payment_code
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.saas.biz.pojo.PaymentCode" >
+    insert into payment_code (id, cote_id, creat_time, 
+      modify_time, z_storageKey, z_url, 
+      z_storageType, w_storageKey, w_url, 
+      w_storageType, z_id, w_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{cote_id,jdbcType=VARCHAR}, #{creat_time,jdbcType=TIMESTAMP}, 
+      #{modify_time,jdbcType=TIMESTAMP}, #{z_storageKey,jdbcType=VARCHAR}, #{z_url,jdbcType=VARCHAR}, 
+      #{z_storageType,jdbcType=VARCHAR}, #{w_storageKey,jdbcType=VARCHAR}, #{w_url,jdbcType=VARCHAR}, 
+      #{w_storageType,jdbcType=VARCHAR}, #{z_id,jdbcType=INTEGER}, #{w_id,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.biz.pojo.PaymentCode" >
+    insert into payment_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cote_id != null" >
+        cote_id,
+      </if>
+      <if test="creat_time != null" >
+        creat_time,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+      <if test="z_storageKey != null" >
+        z_storageKey,
+      </if>
+      <if test="z_url != null" >
+        z_url,
+      </if>
+      <if test="z_storageType != null" >
+        z_storageType,
+      </if>
+      <if test="w_storageKey != null" >
+        w_storageKey,
+      </if>
+      <if test="w_url != null" >
+        w_url,
+      </if>
+      <if test="w_storageType != null" >
+        w_storageType,
+      </if>
+      <if test="z_id != null" >
+        z_id,
+      </if>
+      <if test="w_id != null" >
+        w_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cote_id != null" >
+        #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="creat_time != null" >
+        #{creat_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="z_storageKey != null" >
+        #{z_storageKey,jdbcType=VARCHAR},
+      </if>
+      <if test="z_url != null" >
+        #{z_url,jdbcType=VARCHAR},
+      </if>
+      <if test="z_storageType != null" >
+        #{z_storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="w_storageKey != null" >
+        #{w_storageKey,jdbcType=VARCHAR},
+      </if>
+      <if test="w_url != null" >
+        #{w_url,jdbcType=VARCHAR},
+      </if>
+      <if test="w_storageType != null" >
+        #{w_storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="z_id != null" >
+        #{z_id,jdbcType=INTEGER},
+      </if>
+      <if test="w_id != null" >
+        #{w_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.biz.pojo.PaymentCode" >
+    update payment_code
+    <set >
+      <if test="cote_id != null" >
+        cote_id = #{cote_id,jdbcType=VARCHAR},
+      </if>
+      <if test="creat_time != null" >
+        creat_time = #{creat_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="z_storageKey != null" >
+        z_storageKey = #{z_storageKey,jdbcType=VARCHAR},
+      </if>
+      <if test="z_url != null" >
+        z_url = #{z_url,jdbcType=VARCHAR},
+      </if>
+      <if test="z_storageType != null" >
+        z_storageType = #{z_storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="w_storageKey != null" >
+        w_storageKey = #{w_storageKey,jdbcType=VARCHAR},
+      </if>
+      <if test="w_url != null" >
+        w_url = #{w_url,jdbcType=VARCHAR},
+      </if>
+      <if test="w_storageType != null" >
+        w_storageType = #{w_storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="z_id != null" >
+        z_id = #{z_id,jdbcType=INTEGER},
+      </if>
+      <if test="w_id != null" >
+        w_id = #{w_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.biz.pojo.PaymentCode" >
+    update payment_code
+    set cote_id = #{cote_id,jdbcType=VARCHAR},
+      creat_time = #{creat_time,jdbcType=TIMESTAMP},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      z_storageKey = #{z_storageKey,jdbcType=VARCHAR},
+      z_url = #{z_url,jdbcType=VARCHAR},
+      z_storageType = #{z_storageType,jdbcType=VARCHAR},
+      w_storageKey = #{w_storageKey,jdbcType=VARCHAR},
+      w_url = #{w_url,jdbcType=VARCHAR},
+      w_storageType = #{w_storageType,jdbcType=VARCHAR},
+      z_id = #{z_id,jdbcType=INTEGER},
+      w_id = #{w_id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

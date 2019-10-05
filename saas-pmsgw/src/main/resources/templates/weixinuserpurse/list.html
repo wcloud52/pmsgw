@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户管理</title>
+<link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="../css/global.css?v=${.now?string('yyyyMMddHHmmss')}" media="all">
+<link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/table.css" />
+</head>
+<body>
+	<div class="admin-main">
+		<div class="content-search">
+			<div class="layui-form layui-form-pane">
+				<div class="layui-inline">
+					<label class="layui-form-label">鸽主名称</label>
+					<div class="layui-input-inline">
+						<input id="search_pigowner" class="layui-input" type="text" style="width: 150px;"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">绑定名称</label>
+					<div class="layui-input-inline">
+						<input id="search_bind_name" class="layui-input" type="text" style="width: 150px;"/>
+					</div>
+				</div>
+
+				<div class="layui-inline">
+					<label class="layui-form-label">绑定手机</label>
+					<div class="layui-input-inline">
+						<input id="search_bind_tel" class="layui-input" type="text" style="width: 150px;"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">关注状态</label>
+					<div class="layui-input-inline">
+						<div class="layui-input-inline" style="width: 100px;">
+                            <select name="type" id="search_state" lay-search="" class="layui-input">
+                                <option value="">所有类型</option>
+                                <option value="1" >已关注</option>
+                                <option value="0" >未关注</option>
+                            </select>
+                        </div>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<button id="btnSearch" class="layui-btn">查询</button>
+				</div>
+
+			</div>
+		</div>
+		<!--<blockquote class="layui-elem-quote" style="margin-bottom: 0px;">
+			<button class="layui-btn" id="btnSynchronize">同步</button>
+			<button class="layui-btn" id="btnUpdate">修改</button>
+			<button class="layui-btn" id="btnSendGameMessage">发送比赛通知</button>
+			<button class="layui-btn" id="btnSendResultMessage">发送比赛成绩</button>
+		</blockquote>-->
+		<div class="layui-form layui-form-pane">
+			<table id="listTable" lay-filter="test"></table>
+		</div>
+	</div>
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../pagejs/base.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/javascript" src="../pagejs/weixinuserpurse/list.js?v=${.now?string('yyyyMMddHHmmss')}"></script>
+	<script type="text/html" id="toolBarTpl">
+</script>
+<script type="text/html" id="headimgurlBarTpl">
+ <img src="{{ d.headimgurl }}" style=" width: 48px;height: 48px; "/>
+</script>
+	<script type="text/html" id="stateTpl">
+		{{#  if(d.state ==0 ){ }}
+		未关注
+		{{#  } else { }}
+		已关注
+		{{#  } }}
+	</script>
+	<script type="text/html" id="moneyTpl">
+		{{#  if(d.money ==null||d.money=='' ){ }}
+		0
+		{{#  } else { }}
+		{{d.money}}
+		{{#  } }}
+	</script>
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-xs" lay-event="deposit">充值</a>
+	</script>
+</body>
+
+</html>
