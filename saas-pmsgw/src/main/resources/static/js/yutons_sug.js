@@ -250,7 +250,7 @@ layui.define(['jquery', 'table'], function (exports) {
 				}
 			}
 			layui.form.render()
-			$(".layui-table-body").css('max-height',$("#signBox").parent().height()-130);
+			$(".layui-table-body").css('max-height',$("#signBox").parent().height()-120);
         }
 		let value = $(obj).text();
 		//如果未定义idField，则不添加idField字段
